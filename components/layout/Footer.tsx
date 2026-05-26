@@ -42,19 +42,18 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="site-footer" className="bg-sky-50 pb-8 pt-8" role="contentinfo">
-      <Container>
-        <div className="bg-[#031b4e] text-white rounded-[2rem] overflow-hidden shadow-2xl relative">
-          
-          {/* Subtle dotted background pattern on left side */}
-          <div className="absolute top-0 left-0 bottom-0 w-1/3 opacity-[0.03] pointer-events-none overflow-hidden">
-            <svg width="100%" height="100%">
-              <pattern id="pattern-circles" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1.5" fill="white"></circle>
-              </pattern>
-              <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)"></rect>
-            </svg>
-          </div>
+    <footer id="site-footer" className="bg-[#031b4e] text-white relative overflow-hidden" role="contentinfo">
+      {/* Subtle dotted background pattern on left side */}
+      <div className="absolute top-0 left-0 bottom-0 w-1/3 opacity-[0.03] pointer-events-none overflow-hidden">
+        <svg width="100%" height="100%">
+          <pattern id="pattern-circles" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1.5" fill="white"></circle>
+          </pattern>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)"></rect>
+        </svg>
+      </div>
+
+      <Container className="relative z-10 px-0">
 
           <div className="relative z-10 px-8 md:px-12 lg:px-16 py-12 lg:py-16">
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-8">
@@ -204,7 +203,6 @@ export default function Footer() {
             </div>
           </div>
           
-        </div>
       </Container>
     </footer>
   );

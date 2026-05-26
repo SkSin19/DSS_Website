@@ -1,19 +1,25 @@
 import HeroSlider from "@/components/sections/HeroSlider";
-import TrustBar from "@/components/sections/TrustBar";
+import DiscoverBrands from "@/components/sections/DiscoverBrands";
 import BrandMarquee from "@/components/sections/BrandMarquee";
 import ProductCategories from "@/components/sections/ProductCategories";
-import DiscoverBrands from "@/components/sections/DiscoverBrands";
 import SmarterSecurity from "@/components/sections/SmarterSecurity";
+import Bestsellers from "@/components/sections/Bestsellers";
+import PremiumDesign from "@/components/sections/PremiumDesign";
+import FeaturedProducts from "@/components/sections/FeaturedProducts";
+import WhyChooseUs from "@/components/sections/WhyChooseUs";
 
 export default function Home() {
   return (
     <>
       <HeroSlider />
-      <TrustBar />
+      <DiscoverBrands />
       <BrandMarquee />
       <ProductCategories />
-      <DiscoverBrands />
       <SmarterSecurity />
+      <Bestsellers />
+      <PremiumDesign />
+      <FeaturedProducts />
+      <WhyChooseUs />
     </>
   );
 }

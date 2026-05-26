@@ -68,3 +68,32 @@ export interface ContactInfo {
   value: string;
   href?: string;
 }
+
+/** Bestseller product */
+export interface ProductCard {
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  hasOffer?: boolean;
+  href: string;
+}
+
+/** Featured Product */
+export interface FeaturedProduct {
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  icon?: string;
+  hasOffer?: boolean;
+  href: string;
+}
+
+/** Why Choose Us Feature */
+export interface WhyChooseUsFeature {
+  title: string;
+  description: string;
+  imageSrc?: string;
+  imageAlt?: string;
+}

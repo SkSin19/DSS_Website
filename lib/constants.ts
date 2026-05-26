@@ -89,26 +89,31 @@ export const BRANDS: Brand[] = [
     name: "Hikvision",
     tagline: "First Choice for Security",
     color: "var(--brand-hikvision)",
+    productImageSrc: "/images/banners/hikvision_banner.png",
   },
   {
     name: "Dahua",
     tagline: "Enabling a Safer Society",
     color: "var(--brand-dahua)",
+    productImageSrc: "/images/banners/alhua_banner.png",
   },
   {
     name: "CP Plus",
     tagline: "Uparwala Sab Dekh Raha Hai",
     color: "var(--brand-cpplus)",
+    productImageSrc: "/images/banners/cpplus_banner.png",
   },
   {
     name: "Godrej",
     tagline: "Smart Security Solutions",
     color: "var(--brand-godrej)",
+    productImageSrc: "/images/banners/godrej_banner.png",
   },
   {
     name: "Bosch",
     tagline: "Invented for Life",
     color: "var(--brand-bosch)",
+    productImageSrc: "/images/banners/bosch_banner.png",
   },
 ];
 
@@ -218,5 +223,136 @@ export const CONTACT_INFO: ContactInfo[] = [
     icon: "location",
     label: "Address",
     value: "",
+  },
+];
+
+/* ─────────────────────────────────────────────
+   New Sections Data
+   ───────────────────────────────────────────── */
+
+export const BESTSELLERS = [
+  {
+    title: "Smart PTZ Camera",
+    description: "360° surveillance with smart tracking, night vision and real-time alerts for total peace of mind.",
+    imageSrc: "/images/products/ptz-camera.png",
+    imageAlt: "Smart PTZ Camera",
+    hasOffer: true,
+    href: "/products/ptz-camera",
+  },
+  {
+    title: "Video Door Phone",
+    description: "See, speak and unlock from anywhere. Secure your entrance with smart connectivity.",
+    imageSrc: "/images/products/video-door-phone.png",
+    imageAlt: "Video Door Phone",
+    hasOffer: true,
+    href: "/products/video-door-phone",
+  },
+  {
+    title: "Access Control System",
+    description: "Advanced access solutions with PIN, card and biometric options for every need.",
+    imageSrc: "/images/products/access-control.png",
+    imageAlt: "Access Control System",
+    hasOffer: true,
+    href: "/products/access-control",
+  },
+  {
+    title: "Wireless Alarm Kit",
+    description: "Easy to install, always connected and built to protect what matters most—24/7.",
+    imageSrc: "/images/products/wireless-alarm.png",
+    imageAlt: "Wireless Alarm Kit",
+    hasOffer: true,
+    href: "/products/wireless-alarm",
+  },
+];
+
+export const FEATURED_PRODUCTS = [
+  {
+    id: "home-automation",
+    title: "Home Automation",
+    description: "Control your lights, appliances, security and more from anywhere.",
+    imageSrc: "/images/products/home-automation.png",
+    imageAlt: "Home Automation",
+    icon: "home",
+    hasOffer: true,
+    href: "/products/home-automation",
+  },
+  {
+    id: "biometric",
+    title: "Biometric Attendance",
+    description: "Accurate identification for secure access and attendance.",
+    imageSrc: "/images/products/biometric.png",
+    imageAlt: "Biometric Attendance",
+    icon: "fingerprint",
+    hasOffer: true,
+    href: "/products/biometric",
+  },
+  {
+    id: "fire-alarm",
+    title: "Fire Alarm",
+    description: "Early detection and instant alerts for maximum safety.",
+    imageSrc: "/images/products/fire-alarm.png",
+    imageAlt: "Fire Alarm",
+    icon: "fire",
+    hasOffer: true,
+    href: "/products/fire-alarm",
+  },
+  {
+    id: "gate-automation",
+    title: "Gate Automation",
+    description: "Automate your gates for seamless, secure and convenient access.",
+    imageSrc: "/images/products/gate-automation.png",
+    imageAlt: "Gate Automation",
+    icon: "gate",
+    hasOffer: true,
+    href: "/products/gate-automation",
+  },
+  {
+    id: "intrusion-alarm",
+    title: "Intrusion Alarm",
+    description: "Smart detection, instant alerts and reliable protection.",
+    imageSrc: "/images/products/intrusion.png",
+    imageAlt: "Intrusion Alarm",
+    icon: "shield",
+    hasOffer: true,
+    href: "/products/intrusion-alarm",
+  },
+];
+
+export const WHY_CHOOSE_US = [
+  {
+    id: "advanced-tech",
+    title: "Advanced Technology",
+    description: "Cutting-edge security solutions with state-of-the-art technology.",
+    imageSrc: "/images/features/tech.png",
+  },
+  {
+    id: "reliable",
+    title: "Reliable Performance",
+    description: "High-quality products tested for consistent and dependable performance.",
+    imageSrc: "/images/features/performance.png",
+  },
+  {
+    id: "innovation",
+    title: "Innovation & Expertise",
+    description: "Pioneering security solutions designed by industry experts.",
+    imageSrc: "/images/features/innovation.png",
+  },
+  {
+    id: "comprehensive",
+    title: "Comprehensive Features",
+    description: "Full range of features for complete, customizable security coverage.",
+    imageSrc: "/images/features/features.png",
+  },
+  {
+    id: "support",
+    title: "24/7 Support",
+    description: "Dedicated 24/7 customer support for all your security needs.",
+    imageSrc: "/images/features/support.png",
+  },
+  {
+    id: "trusted",
+    title: "Trusted & Proven",
+    description: "A proven track record and trusted name in the security industry.",
+    imageSrc: "/images/features/trusted.png",
   },
 ];

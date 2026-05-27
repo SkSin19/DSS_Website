@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/purity */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
@@ -501,15 +502,46 @@ export default function HeroSlider() {
           <div ref={ctaRef} className="flex flex-wrap items-center gap-3">
             <Link
               href={slide.ctaPrimaryHref}
-              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-sky-500 px-6 py-3 text-[13px] font-bold text-white shadow-lg shadow-sky-500/25 transition-all duration-300 hover:bg-sky-400 hover:shadow-sky-400/35 hover:-translate-y-px"
+              className="enquiry-btn group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-sky-400/20 bg-black px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-[2px]"
             >
-              {slide.ctaPrimaryLabel}
-            </Link>
-            <Link
-              href={slide.ctaSecondaryHref}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-[13px] font-semibold text-slate-300 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-white hover:-translate-y-px"
-            >
-              {slide.ctaSecondaryLabel}
+              {/* liquid fill */}
+              <span className="liquid-fill absolute inset-0 z-0" />
+              {/* glow */}
+              <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-sky-400/30" />
+              {/* shine sweep */}
+              <span className="shine absolute inset-0 z-[1]" />
+              {/* particles */}
+              <span className="particles">
+  {[...Array(40)].map((_, i) => {
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 60 + Math.random() * 90;
+
+    return (
+      <span
+        key={i}
+        className="particle"
+        style={
+          {
+            "--x": `${20 + Math.random() * 60}%`,
+            "--y": `${20 + Math.random() * 60}%`,
+
+            "--dx": `${Math.cos(angle) * distance}px`,
+            "--dy": `${Math.sin(angle) * distance}px`,
+
+            "--delay": `${Math.random() * 1.2}s`,
+            "--duration": `${0.8 + Math.random() * 1.4}s`,
+
+            "--size": `${2 + Math.random() * 4}px`,
+          } as React.CSSProperties
+        }
+      />
+    );
+  })}
+</span>
+              {/* text */}
+              <span className="relative z-[5] text-white">
+                Request an Enquiry
+              </span>{" "}
             </Link>
           </div>
 
@@ -535,6 +567,117 @@ export default function HeroSlider() {
           0%, 100% { opacity: 1; transform: scale(1); }
           50%       { opacity: 0.5; transform: scale(0.75); }
         }
+          
+        .enquiry-btn {
+  box-shadow:
+    0 0 0 rgba(56, 189, 248, 0),
+    inset 0 0 0 rgba(255,255,255,0);
+  backdrop-filter: blur(10px);
+}
+
+.enquiry-btn:hover {
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow:
+    0 0 25px rgba(56, 189, 248, 0.35),
+    0 0 60px rgba(56, 189, 248, 0.18),
+    inset 0 0 30px rgba(56,189,248,0.12);
+}
+
+.liquid-fill {
+  background:
+    radial-gradient(circle at 50% 120%, rgba(56,189,248,0.55), transparent 65%);
+  transform: translateY(100%);
+  transition:
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s ease;
+  opacity: 0.9;
+}
+
+.enquiry-btn:hover .liquid-fill {
+  transform: translateY(0%);
+}
+
+.shine {
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255,255,255,0.18) 48%,
+    transparent 75%
+  );
+  transform: translateX(-160%);
+}
+
+.enquiry-btn:hover .shine {
+  transition: transform 1s ease;
+  transform: translateX(160%);
+}
+
+.particles {
+  position: absolute;
+  inset: -40px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.particle {
+  position: absolute;
+
+  width: var(--size);
+  height: var(--size);
+
+  left: var(--x);
+  top: var(--y);
+
+  border-radius: 999px;
+
+  background:
+    radial-gradient(circle,
+      rgba(125,211,252,1) 0%,
+      rgba(56,189,248,1) 45%,
+      rgba(56,189,248,0.2) 72%,
+      transparent 100%);
+
+  opacity: 0;
+
+  filter:
+    blur(0.4px)
+    drop-shadow(0 0 10px rgba(56,189,248,0.95))
+    drop-shadow(0 0 20px rgba(56,189,248,0.45));
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.2);
+}
+
+.enquiry-btn:hover .particle {
+  animation: particle-burst var(--duration) linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes particle-burst {
+
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      translate(0px, 0px)
+      scale(0.2);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      translate(var(--dx), var(--dy))
+      scale(1);
+  }
+}
       `}</style>
     </section>
   );

@@ -85,7 +85,7 @@ export default function SmarterSecurity() {
               <Button 
                 variant="outline" 
                 href="/products" 
-                className="bg-white text-gray-900 border-white hover:bg-gray-100 hover:text-gray-900 shadow-xl shadow-sky-900/20"
+                className="!bg-white !text-black border-white hover:!bg-black hover:!text-white shadow-xl shadow-sky-900/20"
               >
                 Browse products <span>→</span>
               </Button>

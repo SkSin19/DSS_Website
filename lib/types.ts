@@ -25,6 +25,12 @@ export interface NavLink {
   href: string;
 }
 
+/** Marquee brand entry */
+export interface MarqueeBrand {
+  name: string;
+  logoSrc: string;
+}
+
 /** Brand entry */
 export interface Brand {
   name: string;

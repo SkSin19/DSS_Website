@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)https://www.godrej.com/ -->
+<html>
+
+<head>
+    
+<meta http-equiv="Content-Security-Policy"
+  content="
+    default-src 'self' 'unsafe-inline';
+
+    worker-src 'self' blob: data: *.clarity.ms *.bing.com cdn.ampproject.org;
+
+    media-src 'self'  res.cloudinary.com;
+
+    child-src 'self' blob: gap: www.google.com td.doubleclick.net;
+
+    connect-src 'self' *.ingest.us.sentry.io  /  api.haptikapi.com analytics.google.com www.google.com https://api64.ipify.org js.sentry-cdn.com geolocation-db.com res.cloudinary.com maps.googleapis.com jsonip.com www.gstatic.com www.google-analytics.com adservice.google.com apps.8thwall.com logs.8thwall.com nominatim.openstreetmap.org *.clarity.ms *.bing.com cdn.ampproject.org careeropportunities.godrejenterprises.com stats.g.doubleclick.net blob: data: img.youtube.com i.ytimg.com wss: mqtt-emqx.haptik.me;
+
+    img-src 'self' 'unsafe-inline'   toolassets.haptikapi.com haptikappimg.haptikapi.com analytics.google.com streetviewpixels-pa.googleapis.com lh3.ggpht.com cdn.ckeditor.com adservice.google.com secure.adnxs.com ad.doubleclick.net www.googletagmanager.com www.google.co.in www.google.com www.facebook.com cdn.8thwall.com www.google-analytics.com maps.gstatic.com maps.googleapis.com khms0.googleapis.com khms1.googleapis.com blob: data: *.clarity.ms *.bing.com cdn.ampproject.org googleads.g.doubleclick.net img.youtube.com i.ytimg.com;
+
+    script-src-elem 'self' 'unsafe-eval' 'unsafe-inline'  toolassets.haptikapi.com api.haptikapi.com analytics.google.com www.youtube.com unpkg.com maps.googleapis.com www.google.com www.gstatic.com cdn.ckeditor.com ajax.googleapis.com apps.8thwall.com googleads.g.doubleclick.net connect.facebook.net cdn.8thwall.com cdn.jsdelivr.net www.googletagmanager.com www.google-analytics.com code.jquery.com cdn.datatables.net www.clarity.ms cdnjs.cloudflare.com cdn.ampproject.org;
+
+    script-src 'self' 'unsafe-eval' 'nonce-28fd72d4bb5a79bb70f7f614a071cdbb675f96fbff2e8f4e6186318b22aad932' analytics.google.com jsonip.com cdnjs.cloudflare.com cdn.jsdelivr.net cdn.8thwall.com apps.8thwall.com  www.googletagmanager.com googletagmanager.com cdn.datatables.net code.jquery.com unpkg.com d3js.org;
+
+    style-src 'self' 'unsafe-inline' toolassets.haptikapi.com cdn.ckeditor.com cdnjs.cloudflare.com ajax.googleapis.com fonts.googleapis.com fonts.gstatic.com fonts.googleapis.com maxcdn.bootstrapcdn.com cdn.datatables.net cdn.jsdelivr.net;
+
+    font-src 'self' 'nonce-28fd72d4bb5a79bb70f7f614a071cdbb675f96fbff2e8f4e6186318b22aad932' 'unsafe-inline' toolassets.haptikapi.com cdnjs.cloudflare.com  cdn.8thwall.com fonts.googleapis.com fonts.gstatic.com fonts.googleapis.com maxcdn.bootstrapcdn.com cdn.scaleflex.it;
+
+    object-src 'none';
+
+    frame-src 'self'  www.googletagmanager.com *.doubleclick.net www.youtube.com www.youtube-nocookie.com;">    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Godrej</title>
+    <meta property="og:title" content="Welcome to the Godrej">
+    <meta name="description" content="Established in 1897, we have our origins in India&#39;s independence and its subsequent journey of self-reliance. Today, our businesses serve over 1.1 billion consumers globally across a wide mix of industries.">
+    <link rel="canonical" href="https://www.godrejenterprises.com/">
+    <link rel="preconnect" nonce="28fd72d4bb5a79bb70f7f614a071cdbb675f96fbff2e8f4e6186318b22aad932" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" nonce="28fd72d4bb5a79bb70f7f614a071cdbb675f96fbff2e8f4e6186318b22aad932" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" nonce="28fd72d4bb5a79bb70f7f614a071cdbb675f96fbff2e8f4e6186318b22aad932" rel="stylesheet">
+    <link rel="stylesheet" nonce="28fd72d4bb5a79bb70f7f614a071cdbb675f96fbff2e8f4e6186318b22aad932" type="text/css" href="./resources/style.css">
+    <!-- Google tag (gtag.js) -->
+    <script nonce="28fd72d4bb5a79bb70f7f614a071cdbb675f96fbff2e8f4e6186318b22aad932" async="" src="https://www.googletagmanager.com/gtag/js?id=G-WWMGZ1SM2G"></script>
+    <script nonce="28fd72d4bb5a79bb70f7f614a071cdbb675f96fbff2e8f4e6186318b22aad932">
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-WWMGZ1SM2G');
+    </script>
+</head>
+
+<body>
+    <div class="mainpage">
+        <div class="centermain">
+            <div class="centermainsub">
+                <div class="header">
+                    <div class="container">
+                        <div class="logo">
+                            <img src="./resources/logo.png">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mainbox">
+                    <div class="container">
+                        <div class="godrejtext">
+                            <p>Established in 1897, we have our origins in India's independence and its subsequent journey of self-reliance. <br> Today, our businesses serve over 1.1 billion consumers globally across a wide mix of industries.</p>
+                            <p>From July 2024, we are owned, operated, and managed as two distinct business groups: the Godrej Enterprises Group and the Godrej Industries Group.</p>
+                        </div>
+                        <div class="godrejboxs">
+                            <div class="godrejbox leftbox">
+                                <div>
+                                    <h3>Godrej Enterprises Group</h3>
+                                    <p>Godrej Enterprises Group (comprising Godrej &amp; Boyce and its subsidiaries) has a significant presence across diverse consumer and industrial businesses spanning Aerospace, Aviation, Defence, Engines and Motors, Energy, Locks &amp; Security Solutions, Building Materials, Green Building Consulting, Construction and EPC Services, Heavy Engineering, Intralogistics, Tooling, Healthcare Equipment, Consumer Durables, Furniture, Interior Design, Architectural Fittings, IT solutions and Vending Machines.</p>
+                                </div>
+                                <div>
+                                    <h6 class="bottomenq">For media and enquires: <a href="mailto:info@godrej.com">info@godrej.com</a></h6>
+                                    <a href="https://www.godrejenterprises.com/" class="rightArrowBtn explorelink">Explore <img src="./resources/bluearrow.png"></a>
+                                </div>
+                            </div>
+                            <div class="godrejbox rightbox">
+                                <div>
+                                    <h3>Godrej Industries Group</h3>
+                                    <p>Godrej Industries Group comprises the listed companies Godrej Industries, Godrej Consumer Products, Godrej Properties, Godrej Agrovet and Astec Lifesciences. Its businesses have a presence in Fast Moving Consumer Goods (FMCG), Real Estate, Real Estate Private Equity, Financial Services, Oleochemicals, Animal Feed, Crop Protection, Oil Palm, Dairy, Poultry and Processed Food, and Facilities Management Services.</p>
+                                </div>
+                                <div>
+                                    <h6 class="bottomenq">For media and enquires: <a href="mailto:GIGinfo@godrejinds.com">GIGinfo@godrejinds.com</a></h6>
+                                    <a href="https://www.godrejindustries.com/" class="rightArrowBtn explorelink">Explore <img src="./resources/bluearrow.png"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./resources/jquery-3.6.0.min.js" nonce="28fd72d4bb5a79bb70f7f614a071cdbb675f96fbff2e8f4e6186318b22aad932"></script>
+    <script src="./resources/tracking.js" nonce="28fd72d4bb5a79bb70f7f614a071cdbb675f96fbff2e8f4e6186318b22aad932"></script>
+
+</body>
+
+</html>

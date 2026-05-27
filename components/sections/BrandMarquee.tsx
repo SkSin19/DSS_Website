@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { MARQUEE_BRANDS } from "@/lib/constants";
 
 export default function BrandMarquee() {
@@ -10,11 +11,18 @@ export default function BrandMarquee() {
         {marqueeItems.map((brand, index) => (
           <div 
             key={index} 
-            className="flex items-center justify-center px-8 md:px-12 w-[150px] md:w-[200px]"
+            className="flex items-center justify-center px-8 md:px-12 w-37.5 md:w-50"
           >
-            <span className="text-xl md:text-2xl font-black text-gray-300 uppercase tracking-widest hover:text-gray-400 transition-colors duration-300">
-              {brand}
-            </span>
+            <div className="flex items-center justify-center h-12 w-full opacity-75 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+              <Image
+                src={brand.logoSrc}
+                alt={`${brand.name} logo`}
+                width={80}
+                height={26}
+                className="h-5 w-auto object-contain"
+                unoptimized
+              />
+            </div>
           </div>
         ))}
       </div>

@@ -28,9 +28,10 @@ export default function Navbar() {
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md transition-shadow duration-300 ${
+      className={`sticky top-0 z-50 w-full bg-black/95 text-white backdrop-blur-md transition-all duration-300 border-b border-white/10 ${
         isScrolled ? "navbar-scrolled" : ""
       }`}
+      suppressHydrationWarning
       role="banner"
     >
       <nav
@@ -41,12 +42,12 @@ export default function Navbar() {
         <Link
           href="/"
           id="nav-logo"
-          className="flex items-center gap-2.5 flex-shrink-0 focus-ring rounded-lg"
+          className="flex items-center gap-2.5 shrink-0 focus-ring rounded-lg"
           aria-label={`${SITE_NAME} — Home`}
           onClick={closeMobileMenu}
         >
           <Image
-            src="/images/logo/digital-security-solutions-logo.svg"
+            src="/images/logo/dss_logo.png"
             alt="Digital Security Solutions logo"
             width={40}
             height={40}
@@ -54,10 +55,10 @@ export default function Navbar() {
             priority
           />
           <span className="hidden sm:flex flex-col leading-tight">
-            <span className="text-sm md:text-base font-bold text-gray-900 tracking-tight">
+            <span className="text-sm md:text-base font-bold text-white tracking-tight">
               DIGITAL SECURITY
             </span>
-            <span className="text-[10px] md:text-xs font-semibold text-gray-500 tracking-widest uppercase">
+            <span className="text-[10px] md:text-xs font-semibold text-zinc-400 tracking-widest uppercase">
               SOLUTIONS
             </span>
           </span>
@@ -70,7 +71,7 @@ export default function Navbar() {
               <Link
                 href={link.href}
                 id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-lg transition-colors duration-200 focus-ring"
+                className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white rounded-lg transition-colors duration-200 focus-ring"
               >
                 {link.label}
               </Link>
@@ -86,12 +87,12 @@ export default function Navbar() {
               id="nav-search"
               placeholder="Search"
               aria-label="Search products and solutions"
-              className="w-44 lg:w-56 h-10 pl-4 pr-10 text-sm bg-gray-50 border border-gray-200 rounded-full text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all duration-200"
+              className="w-44 lg:w-56 h-10 pl-4 pr-10 text-sm bg-white/5 border border-white/10 rounded-full text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all duration-200"
             />
             <button
               type="button"
               aria-label="Submit search"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +115,7 @@ export default function Navbar() {
         <button
           type="button"
           id="mobile-menu-toggle"
-          className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors focus-ring"
+          className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg text-zinc-300 hover:bg-white/10 hover:text-white transition-colors focus-ring"
           onClick={toggleMobileMenu}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
@@ -136,7 +137,7 @@ export default function Navbar() {
       <div
         id="mobile-menu"
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen ? "max-h-96 border-t border-gray-100" : "max-h-0"
+          isMobileMenuOpen ? "max-h-96 border-t border-white/10 bg-black" : "max-h-0"
         }`}
         role="region"
         aria-label="Mobile navigation"
@@ -146,7 +147,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 rounded-xl transition-colors"
+              className="block px-4 py-3 text-base font-medium text-zinc-300 hover:bg-white/5 hover:text-white rounded-xl transition-colors"
               onClick={closeMobileMenu}
             >
               {link.label}
@@ -158,7 +159,7 @@ export default function Navbar() {
               type="search"
               placeholder="Search products..."
               aria-label="Search products"
-              className="w-full h-11 px-4 text-sm bg-gray-50 border border-gray-200 rounded-full text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
+              className="w-full h-11 px-4 text-sm bg-white/5 border border-white/10 rounded-full text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
             />
           </div>
         </div>

@@ -66,7 +66,7 @@ export default function Footer() {
                 <Link href="/" className="flex items-center gap-3 focus-ring rounded-lg mb-8" aria-label={`${SITE_NAME} — Home`}>
                   <div className="bg-white rounded-full p-1 shadow-sm">
                     <Image
-                      src="/images/logo/digital-security-solutions-logo.svg"
+                      src="/images/logo/dss_logo.png"
                       alt="Digital Security Solutions logo"
                       width={56}
                       height={56}

@@ -86,7 +86,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": SITE_NAME,
-    "image": `${SITE_URL}/images/logo/digital-security-solutions-logo.svg`,
+    "image": `${SITE_URL}/images/logo/dss_logo.png`,
     "@id": SITE_URL,
     "url": SITE_URL,
     "telephone": "+919876543210",
@@ -107,7 +107,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-white text-gray-900 overflow-x-hidden selection:bg-sky-200 selection:text-sky-900">
+      <body
+        className="min-h-screen flex flex-col bg-white text-gray-900 overflow-x-hidden selection:bg-sky-200 selection:text-sky-900"
+        suppressHydrationWarning
+      >
         <Navbar />
         <main className="flex-1 flex flex-col relative w-full" id="main-content">
           {children}

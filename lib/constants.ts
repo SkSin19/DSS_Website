@@ -1,6 +1,7 @@
 import type {
   HeroSlide,
   NavLink,
+  MarqueeBrand,
   Brand,
   ProductCategory,
   TrustBadge,
@@ -117,18 +118,48 @@ export const BRANDS: Brand[] = [
   },
 ];
 
-/** Brand names used in the scrolling marquee */
-export const MARQUEE_BRANDS: string[] = [
-  "Godrej",
-  "Bosch",
-  "Honeywell",
-  "Panasonic",
-  "Hikvision",
-  "CP Plus",
-  "Dahua",
-  "Matrix",
-  "Zicom",
-  "Seagate",
+/** Brand logos used in the scrolling marquee */
+export const MARQUEE_BRANDS: MarqueeBrand[] = [
+  {
+    name: "Godrej",
+    logoSrc: "https://www.godrej.com/resources/logo.png",
+  },
+  {
+    name: "Bosch",
+    logoSrc: "https://cdn.simpleicons.org/bosch",
+  },
+  {
+    name: "Honeywell",
+    logoSrc: "https://commons.wikimedia.org/wiki/Special:FilePath/Honeywell_logo.svg",
+  },
+  {
+    name: "Panasonic",
+    logoSrc: "https://cdn.simpleicons.org/panasonic",
+  },
+  {
+    name: "Hikvision",
+    logoSrc: "https://commons.wikimedia.org/wiki/Special:FilePath/Hikvision_logo.svg",
+  },
+  {
+    name: "CP Plus",
+    logoSrc: "https://cpplusworld.com/assets/img/logo-footer.png",
+  },
+  {
+    name: "Dahua",
+    logoSrc: "https://www.dahuasecurity.com/assets/img/logo.png",
+  },
+  {
+    name: "Matrix",
+    logoSrc: "https://cdn.simpleicons.org/matrix",
+  },
+  {
+    name: "Zicom",
+    logoSrc: "https://cdn.simpleicons.org/bosch",
+  },
+  {
+    name: "Seagate",
+    logoSrc: "https://cdn.simpleicons.org/seagate",
+  },
 ];
 
 /* ─────────────────────────────────────────────
@@ -234,7 +265,7 @@ export const BESTSELLERS = [
   {
     title: "Smart PTZ Camera",
     description: "360° surveillance with smart tracking, night vision and real-time alerts for total peace of mind.",
-    imageSrc: "/images/products/ptz-camera.png",
+    imageSrc: "/images/hero/cctv-cameras-surveillance-systems-slide-1.png",
     imageAlt: "Smart PTZ Camera",
     hasOffer: true,
     href: "/products/ptz-camera",
@@ -242,7 +273,7 @@ export const BESTSELLERS = [
   {
     title: "Video Door Phone",
     description: "See, speak and unlock from anywhere. Secure your entrance with smart connectivity.",
-    imageSrc: "/images/products/video-door-phone.png",
+    imageSrc: "/images/categories/intercom-communication-solutions.png",
     imageAlt: "Video Door Phone",
     hasOffer: true,
     href: "/products/video-door-phone",
@@ -250,7 +281,7 @@ export const BESTSELLERS = [
   {
     title: "Access Control System",
     description: "Advanced access solutions with PIN, card and biometric options for every need.",
-    imageSrc: "/images/products/access-control.png",
+    imageSrc: "/images/categories/access-control-smart-entry.png",
     imageAlt: "Access Control System",
     hasOffer: true,
     href: "/products/access-control",
@@ -258,7 +289,7 @@ export const BESTSELLERS = [
   {
     title: "Wireless Alarm Kit",
     description: "Easy to install, always connected and built to protect what matters most—24/7.",
-    imageSrc: "/images/products/wireless-alarm.png",
+    imageSrc: "/images/categories/intrusion-alarm-detection.png",
     imageAlt: "Wireless Alarm Kit",
     hasOffer: true,
     href: "/products/wireless-alarm",
@@ -270,7 +301,7 @@ export const FEATURED_PRODUCTS = [
     id: "home-automation",
     title: "Home Automation",
     description: "Control your lights, appliances, security and more from anywhere.",
-    imageSrc: "/images/products/home-automation.png",
+    imageSrc: "/images/hero/advanced-digital-security-cameras-slide-2.png",
     imageAlt: "Home Automation",
     icon: "home",
     hasOffer: true,
@@ -280,7 +311,7 @@ export const FEATURED_PRODUCTS = [
     id: "biometric",
     title: "Biometric Attendance",
     description: "Accurate identification for secure access and attendance.",
-    imageSrc: "/images/products/biometric.png",
+    imageSrc: "/images/categories/access-control-smart-entry.png",
     imageAlt: "Biometric Attendance",
     icon: "fingerprint",
     hasOffer: true,
@@ -290,7 +321,7 @@ export const FEATURED_PRODUCTS = [
     id: "fire-alarm",
     title: "Fire Alarm",
     description: "Early detection and instant alerts for maximum safety.",
-    imageSrc: "/images/products/fire-alarm.png",
+    imageSrc: "/images/categories/intrusion-alarm-detection.png",
     imageAlt: "Fire Alarm",
     icon: "fire",
     hasOffer: true,
@@ -300,7 +331,7 @@ export const FEATURED_PRODUCTS = [
     id: "gate-automation",
     title: "Gate Automation",
     description: "Automate your gates for seamless, secure and convenient access.",
-    imageSrc: "/images/products/gate-automation.png",
+    imageSrc: "/images/banners/godrej_banner.png",
     imageAlt: "Gate Automation",
     icon: "gate",
     hasOffer: true,
@@ -310,7 +341,7 @@ export const FEATURED_PRODUCTS = [
     id: "intrusion-alarm",
     title: "Intrusion Alarm",
     description: "Smart detection, instant alerts and reliable protection.",
-    imageSrc: "/images/products/intrusion.png",
+    imageSrc: "/images/categories/intrusion-alarm-detection.png",
     imageAlt: "Intrusion Alarm",
     icon: "shield",
     hasOffer: true,
@@ -323,36 +354,36 @@ export const WHY_CHOOSE_US = [
     id: "advanced-tech",
     title: "Advanced Technology",
     description: "Cutting-edge security solutions with state-of-the-art technology.",
-    imageSrc: "/images/features/tech.png",
+    imageSrc: "/images/hero/advanced-digital-security-cameras-slide-2.png",
   },
   {
     id: "reliable",
     title: "Reliable Performance",
     description: "High-quality products tested for consistent and dependable performance.",
-    imageSrc: "/images/features/performance.png",
+    imageSrc: "/images/hero/cctv-cameras-surveillance-systems-slide-1.png",
   },
   {
     id: "innovation",
     title: "Innovation & Expertise",
     description: "Pioneering security solutions designed by industry experts.",
-    imageSrc: "/images/features/innovation.png",
+    imageSrc: "/images/categories/video-security-cctv-systems.png",
   },
   {
     id: "comprehensive",
     title: "Comprehensive Features",
     description: "Full range of features for complete, customizable security coverage.",
-    imageSrc: "/images/features/features.png",
+    imageSrc: "/images/categories/access-control-smart-entry.png",
   },
   {
     id: "support",
     title: "24/7 Support",
     description: "Dedicated 24/7 customer support for all your security needs.",
-    imageSrc: "/images/features/support.png",
+    imageSrc: "/images/banners/cpplus_banner.png",
   },
   {
     id: "trusted",
     title: "Trusted & Proven",
     description: "A proven track record and trusted name in the security industry.",
-    imageSrc: "/images/features/trusted.png",
+    imageSrc: "/images/banners/hikvision_banner.png",
   },
 ];

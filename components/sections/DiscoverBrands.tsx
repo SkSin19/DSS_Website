@@ -16,45 +16,52 @@ export default async function DiscoverBrands() {
           light
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-5 mt-10 sm:mt-12 lg:mt-16">
+        <div className="mt-10 sm:mt-12 lg:mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
           {BRANDS.map((brand, index) => (
             <Link
               key={brand.name}
               href={`/products?company=${encodeURIComponent(brand.name)}`}
-              className="group relative h-64 sm:h-72 md:h-80 lg:h-112.5 w-full rounded-3xl overflow-hidden block animate-fade-in-up"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="group relative aspect-[2/3] w-full rounded-2xl overflow-hidden block animate-fade-in-up"
+              style={{ animationDelay: `${index * 80}ms` }}
             >
-              {/* If we have the image banner, render it */}
               {brand.productImageSrc ? (
-                <div className="w-full h-full relative group-hover:scale-105 transition-transform duration-700">
-                  <Image 
-                    src={brand.productImageSrc}
-                    alt={`${brand.name} Banner`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 20vw"
-                    className="object-cover"
-                  />
-                  {/* Subtle overlay on hover */}
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500"></div>
-                </div>
-              ) : (
-                /* Fallback colored card just in case image is missing */
-                <div 
-                  className="w-full h-full flex flex-col p-6 text-white group-hover:scale-105 transition-transform duration-700 relative"
-                  style={{ backgroundColor: brand.color }}
-                >
-                  <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/10 z-0"></div>
-                  <div className="relative z-10 flex-1">
-                    <h3 className="text-2xl font-black italic tracking-tighter mb-4 opacity-90 drop-shadow-sm">
-                      {brand.name.toUpperCase()}
-                    </h3>
-                    <div className="w-8 h-0.5 bg-white/50 mb-4 rounded-full"></div>
-                    <p className="text-sm font-medium leading-tight max-w-37.5 opacity-90 drop-shadow-sm">
-                      {brand.tagline}
-                    </p>
+                <>
+                  <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105">
+                    <Image
+                      src={brand.productImageSrc}
+                      alt={`${brand.name} Banner`}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                      className="object-cover object-center"
+                    />
                   </div>
-                </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-black/5" />
+                  <div className="absolute inset-0 bg-sky-500/0 group-hover:bg-sky-500/8 transition-colors duration-500" />
+                </>
+              ) : (
+                <>
+                  <div
+                    className="absolute inset-0"
+                    style={{ backgroundColor: brand.color }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+                </>
               )}
+
+              {/* Bottom label */}
+              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                <p className="text-white font-bold text-sm sm:text-[15px] leading-tight drop-shadow-sm">
+                  {brand.name}
+                </p>
+                {brand.tagline && (
+                  <p className="text-white/60 text-[10px] sm:text-[11px] mt-0.5 leading-snug line-clamp-2 font-medium">
+                    {brand.tagline}
+                  </p>
+                )}
+                <span className="mt-2 inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold text-sky-300 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                  Browse products <span className="group-hover:translate-x-0.5 transition-transform inline-block">→</span>
+                </span>
+              </div>
             </Link>
           ))}
         </div>

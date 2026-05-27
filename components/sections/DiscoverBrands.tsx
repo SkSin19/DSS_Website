@@ -3,22 +3,8 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { BRANDS } from "@/lib/constants";
-import { getProductsFromApi } from "@/lib/products-api";
 
 export default async function DiscoverBrands() {
-  const brandDestinations = await Promise.all(
-    BRANDS.map(async (brand) => {
-      const [product] = await getProductsFromApi({ company: brand.name, limit: 1 }).catch(() => []);
-
-      return {
-        name: brand.name,
-        href: product ? `/products/${product.slug}` : `/products?company=${encodeURIComponent(brand.name)}`,
-      };
-    }),
-  );
-
-  const brandHrefMap = new Map(brandDestinations.map((item) => [item.name, item.href]));
-
   return (
     <section className="bg-gray-950 section-padding pb-24" id="brands">
       <Container>
@@ -34,8 +20,8 @@ export default async function DiscoverBrands() {
           {BRANDS.map((brand, index) => (
             <Link
               key={brand.name}
-              href={brandHrefMap.get(brand.name) || `/products?company=${encodeURIComponent(brand.name)}`}
-              className="group relative h-[360px] md:h-[400px] lg:h-[450px] w-full rounded-3xl overflow-hidden block animate-fade-in-up"
+              href={`/products?company=${encodeURIComponent(brand.name)}`}
+              className="group relative h-90 md:h-100 lg:h-112.5 w-full rounded-3xl overflow-hidden block animate-fade-in-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* If we have the image banner, render it */}
@@ -57,13 +43,13 @@ export default async function DiscoverBrands() {
                   className="w-full h-full flex flex-col p-6 text-white group-hover:scale-105 transition-transform duration-700 relative"
                   style={{ backgroundColor: brand.color }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/10 z-0"></div>
+                  <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/10 z-0"></div>
                   <div className="relative z-10 flex-1">
                     <h3 className="text-2xl font-black italic tracking-tighter mb-4 opacity-90 drop-shadow-sm">
                       {brand.name.toUpperCase()}
                     </h3>
                     <div className="w-8 h-0.5 bg-white/50 mb-4 rounded-full"></div>
-                    <p className="text-sm font-medium leading-tight max-w-[150px] opacity-90 drop-shadow-sm">
+                    <p className="text-sm font-medium leading-tight max-w-37.5 opacity-90 drop-shadow-sm">
                       {brand.tagline}
                     </p>
                   </div>

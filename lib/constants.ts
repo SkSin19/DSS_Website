@@ -171,7 +171,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "Video Security",
     description:
       "Advanced CCTV Systems for Complete Surveillance and Peace of Mind",
-    href: "/products/video-security",
+    href: "/products?category=Surveillance%20Systems",
     imageSrc: "/images/categories/video-security-cctv-systems.png",
     imageAlt: "Video security CCTV cameras and surveillance systems",
   },
@@ -179,7 +179,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "Access Control",
     description:
       "Smart Access Solutions for Seamless and Secure Entry",
-    href: "/products/access-control",
+    href: "/products?category=Access%20Control",
     imageSrc: "/images/categories/access-control-smart-entry.png",
     imageAlt: "Access control smart lock and biometric entry systems",
   },
@@ -187,7 +187,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "Intrusion Alarm",
     description:
       "Reliable Alarm Systems that Detect, Deter and Protect",
-    href: "/products/intrusion-alarm",
+    href: "/products?category=Intrusion%20Alarm",
     imageSrc: "/images/categories/intrusion-alarm-detection.png",
     imageAlt: "Intrusion alarm detection and motion sensor systems",
   },
@@ -195,7 +195,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "Intercom Solutions",
     description:
       "Smart Intercoms for Clear Communication and Enhanced Security",
-    href: "/products/intercom-solutions",
+    href: "/products?category=Intercom%20Solutions",
     imageSrc: "/images/categories/intercom-communication-solutions.png",
     imageAlt: "Video intercom communication and door phone solutions",
   },

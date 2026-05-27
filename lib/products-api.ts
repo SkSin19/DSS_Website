@@ -96,11 +96,11 @@ export async function getProductsFromApi(params: ProductQueryParams = {}) {
       return;
     }
 
-    appendMultiValue("category", params.category);
     query.set(key, value);
   };
 
   appendMultiValue("company", params?.company);
+  appendMultiValue("category", params?.category);
   appendMultiValue("subCategory", params?.subCategory);
 
   const response = await apiGet<ProductsResponse>(

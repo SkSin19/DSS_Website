@@ -53,10 +53,10 @@ export default function Footer() {
         </svg>
       </div>
 
-      <Container className="relative z-10 px-0">
+      <Container className="relative z-10 px-0 overflow-x-clip">
 
-          <div className="relative z-10 px-8 md:px-12 lg:px-16 py-12 lg:py-16">
-            <div className="flex flex-col lg:flex-row gap-12 lg:gap-8">
+          <div className="relative z-10 px-4 py-10 sm:px-6 md:px-12 lg:px-16 lg:py-16">
+            <div className="flex flex-col gap-10 lg:flex-row lg:gap-8">
               
               {/* Column 1: Brand and Bio */}
               <div className="w-full lg:w-[35%] flex flex-col items-start pr-0 lg:pr-12 relative">
@@ -105,9 +105,9 @@ export default function Footer() {
               </div>
 
               {/* Columns 2 & 3: Links */}
-              <div className="w-full lg:w-[35%] flex justify-between gap-8 sm:gap-16 lg:pl-6">
+              <div className="w-full lg:w-[35%] flex flex-col gap-8 sm:flex-row sm:justify-between sm:gap-10 lg:flex-row lg:pl-6">
                 {FOOTER_LINK_GROUPS.map((group) => (
-                  <div key={group.title} className="flex-1">
+                  <div key={group.title} className="min-w-0 flex-1">
                     <div className="mb-6 relative">
                       <h3 className="text-[13px] font-bold text-sky-400 tracking-wider">
                         {group.title}
@@ -119,7 +119,7 @@ export default function Footer() {
                         <li key={link.href}>
                           <Link
                             href={link.href}
-                            className="text-[15px] font-medium text-gray-200 hover:text-white transition-colors duration-200 flex items-center justify-between group"
+                            className="text-[15px] font-medium text-gray-200 hover:text-white transition-colors duration-200 flex items-center justify-between gap-3 group"
                           >
                             <span>{link.label}</span>
                             <span className="text-gray-500 group-hover:text-sky-400 transition-colors text-xs font-mono ml-4">
@@ -175,13 +175,13 @@ export default function Footer() {
           </div>
 
           {/* ── Bottom bar inside the card ── */}
-          <div className="relative z-10 px-8 md:px-12 lg:px-16 pb-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="relative z-10 px-4 md:px-12 lg:px-16 pb-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 sm:px-6 lg:gap-6">
             <p className="text-sm font-medium text-gray-400">
               &copy; {currentYear} {SITE_NAME}. All rights reserved.
             </p>
             
             {/* Payment Icons */}
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-15">
                 {/* SVG placeholder for PayPal */}
                 <svg viewBox="0 0 100 26" className="h-4 fill-[#003087]">

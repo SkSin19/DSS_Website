@@ -36,8 +36,16 @@ export default function ProductImageGallery({ images, alt = "product image", int
 
   return (
     <div onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
-      <div className="relative mt-6 aspect-square rounded-[1.5rem] bg-gradient-to-br from-slate-50 to-slate-100 p-8 overflow-hidden">
-        <Image src={mainImage} alt={alt} fill className="object-contain drop-shadow-2xl" priority />
+      <div className="relative mt-6 aspect-square rounded-3xl bg-linear-to-br from-slate-50 to-slate-100 p-8 overflow-hidden">
+        <Image
+          src={mainImage}
+          alt={alt}
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          quality={70}
+          className="object-contain drop-shadow-2xl"
+          priority
+        />
       </div>
 
       <div className="mt-4 grid grid-cols-3 gap-3">
@@ -48,9 +56,16 @@ export default function ProductImageGallery({ images, alt = "product image", int
             className={`rounded-2xl overflow-hidden focus:outline-none transition-transform ${i === index ? "scale-[1.02] ring-2 ring-sky-300" : ""}`}
             aria-label={`Show image ${i + 1}`}
           >
-            <div className="rounded-2xl bg-gradient-to-b from-white to-slate-100 p-3">
+            <div className="rounded-2xl bg-linear-to-b from-white to-slate-100 p-3">
               <div className="relative aspect-square">
-                <Image src={src} alt={`${alt} ${i + 1}`} fill className="object-contain" />
+                <Image
+                  src={src}
+                  alt={`${alt} ${i + 1}`}
+                  fill
+                  sizes="(max-width: 1024px) 33vw, 12vw"
+                  quality={55}
+                  className="object-contain"
+                />
               </div>
             </div>
           </button>
@@ -78,7 +93,14 @@ export default function ProductImageGallery({ images, alt = "product image", int
               {images.map((src, i) => (
                 <button key={i} onClick={() => { goTo(i); setShowAll(false); }} className="rounded-md overflow-hidden">
                   <div className="relative aspect-square">
-                    <Image src={src} alt={`${alt} ${i + 1}`} fill className="object-contain" />
+                    <Image
+                      src={src}
+                      alt={`${alt} ${i + 1}`}
+                      fill
+                      sizes="(max-width: 768px) 33vw, 25vw"
+                      quality={60}
+                      className="object-contain"
+                    />
                   </div>
                 </button>
               ))}

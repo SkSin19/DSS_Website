@@ -19,11 +19,8 @@ const getProductImage = (product: BackendProduct) =>
 const getProductHref = (product: BackendProduct) => product.url || `/products/${product.slug}`;
 
 const getGalleryImages = (product: BackendProduct) => {
-  const galleryFromImages = product.images?.map((image) => image.url) || [];
-  const fallbackImages = product.galleryImages || [];
-  const mergedImages = [...galleryFromImages, ...fallbackImages, getProductImage(product)];
-
-  return Array.from(new Set(mergedImages)).slice(0, 4);
+  const mainImage = getProductImage(product);
+  return mainImage ? [mainImage] : [];
 };
 
 const formatSpecItems = (value: string) =>
@@ -98,7 +95,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                   </div>
                 ) : null}
               </div>
-              <ProductImageGallery images={[getProductImage(product), ...galleryImages]} />
+              <ProductImageGallery images={galleryImages.length ? galleryImages : [getProductImage(product)]} />
             </div>
 
             <div className="text-white">
@@ -255,7 +252,14 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
               <Link key={item._id} href={getProductHref(item)} className="group rounded-4xl overflow-hidden bg-[#f4f7fb] hover:shadow-2xl transition-all duration-300">
                 <div className="relative aspect-4/3 p-6 bg-linear-to-b from-white to-slate-100">
                   <div className="relative h-full w-full group-hover:scale-[1.03] transition-transform duration-500">
-                    <Image src={item.featuredImage || item.images?.[0]?.url || "https://picsum.photos/seed/related-fallback/1200/900"} alt={item.images?.[0]?.alt || item.name} fill className="object-contain drop-shadow-xl" />
+                    <Image
+                      src={item.featuredImage || item.images?.[0]?.url || "https://picsum.photos/seed/related-fallback/1200/900"}
+                      alt={item.images?.[0]?.alt || item.name}
+                      fill
+                      sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
+                      quality={60}
+                      className="object-contain drop-shadow-xl"
+                    />
                   </div>
                 </div>
                 <div className="p-6">

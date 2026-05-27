@@ -112,7 +112,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Navbar />
-        <main className="flex-1 flex flex-col relative w-full" id="main-content">
+        <main className="flex-1 flex flex-col relative w-full overflow-x-clip" id="main-content">
           {children}
         </main>
         <Footer />

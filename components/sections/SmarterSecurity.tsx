@@ -45,35 +45,32 @@ const icons = {
 
 export default function SmarterSecurity() {
   return (
-    <section className="bg-gray-950 pb-20 pt-10" id="solutions">
+    <section className="bg-gray-950 pb-14 sm:pb-20 pt-8 sm:pt-10" id="solutions">
       <Container>
-        <div className="rounded-[2.5rem] bg-linear-to-br from-[#1e3a8a] to-[#0f172a] overflow-hidden flex flex-col lg:flex-row relative">
-          
-          {/* Subtle background glow effect */}
+        <div className="rounded-[2rem] sm:rounded-[2.5rem] bg-linear-to-br from-[#1e3a8a] to-[#0f172a] overflow-hidden flex flex-col lg:flex-row relative">
           <div className="absolute top-0 right-0 w-200 h-200 bg-sky-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
           <div className="absolute bottom-0 left-0 w-125 h-125 bg-blue-600/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3"></div>
 
-          {/* Left Text Content */}
-          <div className="flex-1 p-10 md:p-16 lg:p-20 relative z-10 flex flex-col justify-center text-white">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
+          <div className="flex-1 p-6 sm:p-10 md:p-16 lg:p-20 relative z-10 flex flex-col justify-center text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-4 sm:mb-6">
               Smarter Security.<br />
               <span className="text-sky-300">Stronger Protection.</span>
             </h2>
-            <p className="text-sky-100/80 text-lg mb-12 max-w-md leading-relaxed">
+            <p className="text-sky-100/80 text-base sm:text-lg mb-8 sm:mb-12 max-w-md leading-relaxed">
               Advanced digital security solutions designed to safeguard what matters most.
             </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6 mb-8 sm:mb-12">
               {FEATURES.map((feature) => {
-                const IconComponent = icons[feature.icon];
+                const IconComponent = icons[feature.icon as keyof typeof icons];
                 return (
-                  <div key={feature.label} className="flex flex-col items-center sm:items-start text-center sm:text-left gap-3">
-                    <div className="w-16 h-16 rounded-2xl border border-sky-400/30 bg-sky-900/30 flex items-center justify-center text-sky-400 backdrop-blur-sm">
+                  <div key={feature.label} className="flex flex-col items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl border border-sky-400/30 bg-sky-900/30 flex items-center justify-center text-sky-400 backdrop-blur-sm">
                       <IconComponent />
                     </div>
-                    <span className="text-sm font-medium text-sky-100/90 leading-tight">
-                      {feature.label.split(' ').map((word, i) => (
-                        <span key={i} className="block">{word}</span>
+                    <span className="text-[11px] sm:text-sm font-medium text-sky-100/90 leading-tight">
+                      {feature.label.split(" ").map((word, index) => (
+                        <span key={index} className="block">{word}</span>
                       ))}
                     </span>
                   </div>
@@ -82,42 +79,39 @@ export default function SmarterSecurity() {
             </div>
 
             <div>
-              <Button 
-                variant="outline" 
-                href="/products" 
-                className="bg-white! text-black! border-white hover:bg-black! hover:text-white! shadow-xl shadow-sky-900/20"
+              <Button
+                variant="outline"
+                href="/products"
+                className="w-full sm:w-auto bg-white! text-black! border-white hover:bg-black! hover:text-white! shadow-xl shadow-sky-900/20"
               >
                 Browse products <span>→</span>
               </Button>
             </div>
           </div>
 
-          {/* Right Image Content */}
-          <div className="flex-1 relative min-h-100 lg:min-h-150 flex items-center justify-center p-8 lg:p-0">
-            {/* Dark curved line accent */}
+          <div className="flex-1 relative min-h-[22rem] sm:min-h-100 lg:min-h-150 flex items-center justify-center p-4 sm:p-8 lg:p-0">
             <div className="absolute inset-0 z-0 hidden lg:block">
               <svg viewBox="0 0 100 100" className="w-full h-full text-sky-500/20 absolute -right-20 top-1/2 -translate-y-1/2">
                 <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="0.5" />
                 <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="0.2" />
               </svg>
             </div>
-            
-            {/* The showcase composite image generated earlier would go here. We'll use a placeholder structure for now based on the screenshots */}
-            <div className="relative z-10 w-full max-w-lg h-full min-h-100 flex items-center justify-center">
-               <div className="relative w-full h-125 rounded-2xl bg-linear-to-t from-gray-900 to-transparent flex items-end justify-center pb-8 border border-white/10 shadow-2xl overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-sky-900/20 via-gray-900/80 to-gray-950/90 -z-10"></div>
-                  
-                  <Image 
-                    src="/images/hero/cctv-cameras-surveillance-systems-slide-1.png"
-                    alt="Security showcase"
-                    fill
-                    className="object-contain p-8 drop-shadow-2xl opacity-90 scale-125"
-                  />
-                  
-                  <div className="absolute bottom-6 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sm font-semibold tracking-wider">
-                    COMPLETE SURVEILLANCE
-                  </div>
-               </div>
+
+            <div className="relative z-10 w-full max-w-lg h-full min-h-[18rem] sm:min-h-100 flex items-center justify-center">
+              <div className="relative w-full h-[22rem] sm:h-125 rounded-2xl bg-linear-to-t from-gray-900 to-transparent flex items-end justify-center pb-6 sm:pb-8 border border-white/10 shadow-2xl overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-sky-900/20 via-gray-900/80 to-gray-950/90 -z-10"></div>
+
+                <Image
+                  src="/images/hero/cctv-cameras-surveillance-systems-slide-1.png"
+                  alt="Security showcase"
+                  fill
+                  className="object-contain p-4 sm:p-8 drop-shadow-2xl opacity-90 scale-110 sm:scale-125"
+                />
+
+                <div className="absolute bottom-4 sm:bottom-6 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[11px] sm:text-sm font-semibold tracking-wider text-center">
+                  COMPLETE SURVEILLANCE
+                </div>
+              </div>
             </div>
           </div>
         </div>

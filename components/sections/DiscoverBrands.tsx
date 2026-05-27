@@ -6,7 +6,7 @@ import { BRANDS } from "@/lib/constants";
 
 export default async function DiscoverBrands() {
   return (
-    <section className="bg-gray-950 section-padding pb-24" id="brands">
+    <section className="bg-gray-950 section-padding pb-16 sm:pb-20 md:pb-24" id="brands">
       <Container>
         <SectionHeading
           badge="TRUSTED SECURITY PARTNERS"
@@ -16,12 +16,12 @@ export default async function DiscoverBrands() {
           light
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5 mt-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-5 mt-10 sm:mt-12 lg:mt-16">
           {BRANDS.map((brand, index) => (
             <Link
               key={brand.name}
               href={`/products?company=${encodeURIComponent(brand.name)}`}
-              className="group relative h-90 md:h-100 lg:h-112.5 w-full rounded-3xl overflow-hidden block animate-fade-in-up"
+              className="group relative h-64 sm:h-72 md:h-80 lg:h-112.5 w-full rounded-3xl overflow-hidden block animate-fade-in-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* If we have the image banner, render it */}

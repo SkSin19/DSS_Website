@@ -6,7 +6,6 @@ import { useState } from "react";
 import Container from "@/components/ui/Container";
 import { FEATURED_PRODUCTS } from "@/lib/constants";
 
-// Simple SVG Icons for the features
 function ShippingIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -44,48 +43,46 @@ export default function FeaturedProducts() {
   const visibleProducts = showAll ? FEATURED_PRODUCTS : FEATURED_PRODUCTS.slice(0, 6);
 
   return (
-    <section className="bg-gray-950 pt-10 pb-20" id="featured">
+    <section className="bg-gray-950 pt-8 sm:pt-10 pb-16 sm:pb-20" id="featured">
       <Container>
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 sm:mb-10 gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <ShieldCheckIcon />
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
                 Featured Security Products
               </h2>
             </div>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-sm max-w-xl">
               Smart solutions for a safer, smarter tomorrow.
             </p>
           </div>
-          <Link 
-            href="/products" 
-            className="text-sm font-medium text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-2 group"
+          <Link
+            href="/products"
+            className="w-full sm:w-auto text-sm font-medium text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-2 group"
           >
-            Browse all products 
+            Browse all products
             <span className="group-hover:translate-x-1 transition-transform">→</span>
           </Link>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
           {visibleProducts.map((product) => (
             <Link
               key={product.id}
               href={product.href}
-              className="group flex flex-col bg-white rounded-[1.75rem] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full"
+              className="group flex flex-col bg-white rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full"
             >
               {product.hasOffer && (
-                <div className="absolute top-4 left-4 z-10">
+                <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
                   <span className="inline-block px-3 py-1 bg-sky-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
                     Offer
                   </span>
                 </div>
               )}
 
-              <div className="bg-[#f4f7fb] p-4 flex items-center justify-center aspect-[4/3] overflow-hidden">
-                <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500">
+              <div className="bg-[#f4f7fb] p-3 sm:p-4 flex items-center justify-center overflow-hidden">
+                <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500" style={{ aspectRatio: "4 / 3" }}>
                   <Image
                     src={product.imageSrc}
                     alt={product.imageAlt}
@@ -95,9 +92,9 @@ export default function FeaturedProducts() {
                 </div>
               </div>
 
-              <div className="p-5 relative flex-1">
+              <div className="p-4 sm:p-5 relative flex-1">
                 <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center text-sky-500 flex-shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center text-sky-500 shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
                   </div>
                   <div>
@@ -113,11 +110,11 @@ export default function FeaturedProducts() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col items-center gap-3">
+        <div className="mt-8 sm:mt-10 flex flex-col items-center gap-3">
           <button
             type="button"
             onClick={() => setShowAll((current) => !current)}
-            className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3 text-sm font-semibold text-black shadow-xl shadow-black/10 transition-colors hover:bg-black hover:text-white"
+            className="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-white px-7 py-3 text-sm font-semibold text-black shadow-xl shadow-black/10 transition-colors hover:bg-black hover:text-white"
           >
             {showAll ? "Show less" : "Show more"}
           </button>
@@ -126,11 +123,9 @@ export default function FeaturedProducts() {
           </p>
         </div>
 
-        {/* Feature Strip (Bottom) */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 border-t border-gray-800 pt-10">
-          
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 flex-shrink-0 shadow-md">
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 border-t border-gray-800 pt-8 sm:pt-10">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 shrink-0 shadow-md">
               <ShippingIcon />
             </div>
             <div>
@@ -139,8 +134,8 @@ export default function FeaturedProducts() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 flex-shrink-0 shadow-md">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 shrink-0 shadow-md">
               <PaymentIcon />
             </div>
             <div>
@@ -149,8 +144,8 @@ export default function FeaturedProducts() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 flex-shrink-0 shadow-md">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 shrink-0 shadow-md">
               <ReturnIcon />
             </div>
             <div>
@@ -158,9 +153,7 @@ export default function FeaturedProducts() {
               <p className="text-gray-400 text-xs">No questions asked</p>
             </div>
           </div>
-
         </div>
-
       </Container>
     </section>
   );

@@ -27,7 +27,7 @@ const getProductHref = (product: BackendProduct) => product.url || `/products/${
 
 const getProductImagePriority = (index: number) => index < 4;
 const FULL_CATALOG_LIMIT = 1000;
-const PRODUCTS_PER_PAGE = 3;
+const PRODUCTS_PER_PAGE = 15;
 
 type ProductsPageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
@@ -112,81 +112,120 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
           {products.length > 0 ? (
             <>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              {products.map((product, index) => (
-                <Link
-                  key={product._id}
-                  href={getProductHref(product)}
-                  className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-400/40 hover:bg-white/[0.07]"
-                >
-                  <div className="relative aspect-4/3 bg-linear-to-b from-white to-slate-100 p-2 sm:p-2.5">
-                    <div className="relative h-full w-full transition-transform duration-500 group-hover:scale-[1.02]">
-                      <Image
-                        src={getProductImage(product)}
-                        alt={getProductAlt(product)}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1279px) 50vw, 33vw"
-                        quality={58}
-                        priority={getProductImagePriority(index)}
-                        className="object-contain drop-shadow-lg"
-                      />
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {products.map((product, index) => (
+                  <Link
+                    key={product._id}
+                    href={getProductHref(product)}
+                    className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-400/40 hover:bg-white/[0.07]"
+                  >
+                    {/* Mobile: horizontal layout — image left, details right */}
+                    <div className="flex sm:hidden items-stretch min-h-[96px]">
+                      <div className="relative w-28 shrink-0 bg-linear-to-b from-white to-slate-100 p-2">
+                        <Image
+                          src={getProductImage(product)}
+                          alt={getProductAlt(product)}
+                          fill
+                          sizes="112px"
+                          quality={58}
+                          priority={getProductImagePriority(index)}
+                          className="object-contain drop-shadow-lg"
+                        />
+                      </div>
+                      <div className="flex flex-col justify-center p-3">
+                        <div className="mb-1.5 flex flex-wrap gap-1">
+                          <span className="inline-flex items-center rounded-full bg-sky-500/10 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-sky-300">
+                            {product.company}
+                          </span>
+                          <span className="inline-flex items-center rounded-full bg-white/10 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-gray-200">
+                            {product.category}
+                          </span>
+                        </div>
+                        <h2 className="text-[13px] font-semibold leading-snug text-white">
+                          {product.name}
+                        </h2>
+                        <p className="mt-0.5 text-[8px] font-medium uppercase tracking-[0.18em] text-sky-400">
+                          Model {product.model}
+                        </p>
+                        <p className="mt-1.5 text-[11px] leading-relaxed text-gray-400 line-clamp-2">
+                          {product.shortDescription || product.description}
+                        </p>
+                        <span className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-sky-300">
+                          Open details <span className="transition-transform group-hover:translate-x-1">→</span>
+                        </span>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="p-3 sm:p-3.5">
-                    <div className="mb-2 flex flex-wrap gap-1.5">
-                      <span className="inline-flex items-center rounded-full bg-sky-500/10 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-sky-300">
-                        {product.company}
-                      </span>
-                      <span className="inline-flex items-center rounded-full bg-white/10 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-gray-200">
-                        {product.category}
-                      </span>
+                    {/* Desktop: vertical card */}
+                    <div className="hidden sm:block">
+                      <div className="relative aspect-4/3 bg-linear-to-b from-white to-slate-100 p-2 sm:p-2.5">
+                        <div className="relative h-full w-full transition-transform duration-500 group-hover:scale-[1.02]">
+                          <Image
+                            src={getProductImage(product)}
+                            alt={getProductAlt(product)}
+                            fill
+                            sizes="(max-width: 1279px) 50vw, 33vw"
+                            quality={58}
+                            priority={getProductImagePriority(index)}
+                            className="object-contain drop-shadow-lg"
+                          />
+                        </div>
+                      </div>
+                      <div className="p-3 sm:p-3.5">
+                        <div className="mb-2 flex flex-wrap gap-1.5">
+                          <span className="inline-flex items-center rounded-full bg-sky-500/10 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-sky-300">
+                            {product.company}
+                          </span>
+                          <span className="inline-flex items-center rounded-full bg-white/10 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-gray-200">
+                            {product.category}
+                          </span>
+                        </div>
+                        <h2 className="text-[14px] font-semibold leading-snug text-white sm:text-[15px]">
+                          {product.name}
+                        </h2>
+                        <p className="mt-1 text-[8px] font-medium uppercase tracking-[0.18em] text-sky-400 sm:text-[9px]">
+                          Model {product.model}
+                        </p>
+                        <p className="mt-2 text-[11px] leading-relaxed text-gray-400 line-clamp-2 sm:text-[12px]">
+                          {product.shortDescription || product.description}
+                        </p>
+                        <span className="mt-3 inline-flex items-center gap-2 text-[11px] font-semibold text-sky-300">
+                          Open details <span className="transition-transform group-hover:translate-x-1">→</span>
+                        </span>
+                      </div>
                     </div>
-                    <h2 className="text-[14px] font-semibold leading-snug text-white sm:text-[15px]">
-                      {product.name}
-                    </h2>
-                    <p className="mt-1 text-[8px] font-medium uppercase tracking-[0.18em] text-sky-400 sm:text-[9px]">
-                      Model {product.model}
-                    </p>
-                    <p className="mt-2 text-[11px] leading-relaxed text-gray-400 line-clamp-2 sm:text-[12px]">
-                      {product.shortDescription || product.description}
-                    </p>
-
-                    <span className="mt-3 inline-flex items-center gap-2 text-[11px] font-semibold text-sky-300">
-                      Open details <span className="transition-transform group-hover:translate-x-1">→</span>
-                    </span>
-                  </div>
-                </Link>
+                  </Link>
                 ))}
-            </div>
-            {pagination?.totalPages && pagination.totalPages > 1 ? (
-              <div className="mt-7 flex flex-wrap justify-center gap-1.5 sm:gap-2">
-                {Array.from({ length: pagination.totalPages }, (_, index) => {
-                  const pageNumber = index + 1;
-                  const isActive = pageNumber === (pagination.currentPage || requestedPage);
-                  const query = new URLSearchParams();
-
-                  if (initialName) query.set("name", initialName);
-                  if (initialModel) query.set("model", initialModel);
-                  selectedCompanies.forEach((company) => query.append("company", company));
-                  selectedCategories.forEach((category) => query.append("category", category));
-                  selectedSubCategories.forEach((subCategory) => query.append("subCategory", subCategory));
-                  query.set("page", String(pageNumber));
-
-                  return (
-                    <Link
-                      key={pageNumber}
-                      href={`/products?${query.toString()}`}
-                      aria-label={`Page ${pageNumber}`}
-                      style={{ color: "#ffffff" }}
-                      className={`inline-flex h-7 w-7 items-center justify-center rounded-sm border text-[11px] font-semibold transition-colors sm:h-8 sm:w-8 sm:text-xs ${isActive ? "border-sky-500 bg-sky-500 text-white" : "border-white/10 bg-white/5 text-gray-400 hover:border-sky-400 hover:bg-white/10"}`}
-                    >
-                      {pageNumber}
-                    </Link>
-                  );
-                })}
               </div>
-            ) : null}
+
+              {pagination?.totalPages && pagination.totalPages > 1 ? (
+                <div className="mt-7 flex flex-wrap justify-center gap-1.5 sm:gap-2">
+                  {Array.from({ length: pagination.totalPages }, (_, index) => {
+                    const pageNumber = index + 1;
+                    const isActive = pageNumber === (pagination.currentPage || requestedPage);
+                    const query = new URLSearchParams();
+
+                    if (initialName) query.set("name", initialName);
+                    if (initialModel) query.set("model", initialModel);
+                    selectedCompanies.forEach((company) => query.append("company", company));
+                    selectedCategories.forEach((category) => query.append("category", category));
+                    selectedSubCategories.forEach((subCategory) => query.append("subCategory", subCategory));
+                    query.set("page", String(pageNumber));
+
+                    return (
+                      <Link
+                        key={pageNumber}
+                        href={`/products?${query.toString()}`}
+                        aria-label={`Page ${pageNumber}`}
+                        style={{ color: "#ffffff" }}
+                        className={`inline-flex h-7 w-7 items-center justify-center rounded-sm border text-[11px] font-semibold transition-colors sm:h-8 sm:w-8 sm:text-xs ${isActive ? "border-sky-500 bg-sky-500 text-white" : "border-white/10 bg-white/5 text-gray-400 hover:border-sky-400 hover:bg-white/10"}`}
+                      >
+                        {pageNumber}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : null}
             </>
           ) : (
             <div className="rounded-4xl border border-white/10 bg-white/5 p-8 text-gray-300">

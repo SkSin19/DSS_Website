@@ -24,7 +24,7 @@ export default function HeroSlider() {
   }, [nextSlide]);
 
   return (
-    <section className="relative w-full h-[600px] md:h-[700px] lg:h-[750px] overflow-hidden bg-white">
+    <section className="relative w-full h-130 sm:h-150 md:h-175 lg:h-187.5 overflow-hidden bg-white">
       {/* ── Slider Container ── */}
       <div 
         className="hero-slider flex w-full h-full"
@@ -33,24 +33,24 @@ export default function HeroSlider() {
         {HERO_SLIDES.map((slide) => (
           <div 
             key={slide.id} 
-            className={`w-full h-full flex-shrink-0 flex items-center ${
+            className={`w-full h-full shrink-0 flex items-center ${
               slide.theme === "blue" 
-                ? "bg-gradient-to-br from-sky-50 via-blue-100 to-sky-200" 
-                : "bg-gradient-to-br from-gray-50 via-white to-red-50/30"
+                ? "bg-linear-to-br from-sky-50 via-blue-100 to-sky-200" 
+                : "bg-linear-to-br from-gray-50 via-white to-red-50/30"
             }`}
           >
             <Container className="h-full flex items-center">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 w-full">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-8 w-full">
                 
                 {/* Text Content */}
-                <div className={`flex flex-col justify-center space-y-6 md:space-y-8 ${slide.id === currentSlideIndex + 1 ? 'animate-slide-in-left' : 'opacity-0'}`}>
+                <div className={`flex flex-col justify-center space-y-4 sm:space-y-6 md:space-y-8 ${slide.id === currentSlideIndex + 1 ? 'animate-slide-in-left' : 'opacity-0'}`}>
                   {slide.badge && (
                     <div className="flex">
                       <Badge variant="default" className="shadow-sm">{slide.badge}</Badge>
                     </div>
                   )}
                   
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.1]">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.1]">
                     {slide.headingLine1} <br className="hidden sm:block" />
                     <span 
                       style={{ color: slide.headingAccentColor || "inherit" }}
@@ -60,15 +60,16 @@ export default function HeroSlider() {
                     </span>
                   </h1>
                   
-                  <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-xl leading-relaxed">
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-xl leading-relaxed">
                     {slide.description}
                   </p>
                   
-                  <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                     <Button 
                       variant={slide.theme === "blue" ? "primary" : "danger"} 
                       size="lg"
                       href={slide.ctaPrimaryHref}
+                      className="w-full sm:w-auto"
                     >
                       {slide.ctaPrimaryLabel} <span className="ml-1">→</span>
                     </Button>
@@ -76,7 +77,7 @@ export default function HeroSlider() {
                       variant="outline" 
                       size="lg"
                       href={slide.ctaSecondaryHref}
-                      className="bg-white/50 backdrop-blur-sm hover:bg-white"
+                      className="w-full sm:w-auto bg-white/50 backdrop-blur-sm hover:bg-white"
                     >
                       {slide.ctaSecondaryLabel}
                     </Button>
@@ -101,9 +102,9 @@ export default function HeroSlider() {
                 </div>
 
                 {/* Image Content */}
-                <div className={`relative h-64 sm:h-80 md:h-[400px] lg:h-auto flex items-center justify-center ${slide.id === currentSlideIndex + 1 ? 'animate-slide-in-right' : 'opacity-0'}`}>
+                <div className={`relative h-52 sm:h-80 md:h-100 lg:h-auto flex items-center justify-center ${slide.id === currentSlideIndex + 1 ? 'animate-slide-in-right' : 'opacity-0'}`}>
                   {/* Decorative blur blob */}
-                  <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 rounded-full blur-[80px] opacity-40 mix-blend-multiply ${slide.theme === "blue" ? "bg-sky-300" : "bg-red-200"}`}></div>
+                  <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 rounded-full blur-[80px] opacity-40 mix-blend-multiply ${slide.theme === "blue" ? "bg-sky-300" : "bg-red-200"}`}></div>
                   
                   <Image
                     src={slide.imageSrc}
@@ -111,7 +112,7 @@ export default function HeroSlider() {
                     width={800}
                     height={600}
                     priority={slide.id === 1}
-                    className="relative z-10 w-full max-w-[500px] lg:max-w-none h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
+                    className="relative z-10 w-full max-w-[420px] sm:max-w-125 lg:max-w-none h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
                   />
                 </div>
               </div>

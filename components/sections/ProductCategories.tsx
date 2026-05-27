@@ -7,19 +7,19 @@ export default function ProductCategories() {
   return (
     <section className="bg-gray-950 section-padding" id="categories">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {PRODUCT_CATEGORIES.map((category, index) => (
             <Link
               key={category.title}
               href={category.href}
-              className="category-card group relative flex min-h-100 flex-col justify-between overflow-hidden rounded-4xl bg-white p-8 sm:min-h-112.5 sm:p-10 animate-fade-in-up"
+              className="category-card group relative flex min-h-[19rem] flex-col justify-between overflow-hidden rounded-4xl bg-white p-6 sm:min-h-112.5 sm:p-8 md:p-10 animate-fade-in-up"
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="relative z-10 max-w-sm">
-                <h3 className="text-3xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">
                   {category.title}
                 </h3>
-                <p className="text-gray-500 mb-6 text-sm sm:text-base leading-relaxed">
+                <p className="text-gray-500 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
                   {category.description}
                 </p>
                 <span className="inline-flex items-center text-sm font-semibold text-gray-900 group-hover:text-sky-600 transition-colors">
@@ -28,11 +28,11 @@ export default function ProductCategories() {
                 </span>
 
                 {category.subCategories?.length ? (
-                  <div className="mt-6 flex flex-wrap gap-2">
+                  <div className="mt-4 sm:mt-6 flex flex-wrap gap-2">
                     {category.subCategories.map((subCategory) => (
                       <span
                         key={subCategory}
-                        className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-[11px] font-medium text-gray-700"
+                        className="rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 text-[10px] sm:text-[11px] font-medium text-gray-700"
                       >
                         {subCategory}
                       </span>
@@ -41,7 +41,7 @@ export default function ProductCategories() {
                 ) : null}
               </div>
 
-              <div className="absolute right-0 bottom-0 w-3/4 sm:w-2/3 max-w-87.5 transform translate-x-10 translate-y-10 group-hover:scale-105 group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-500">
+              <div className="absolute right-0 bottom-0 w-2/3 sm:w-2/3 max-w-87.5 transform translate-x-4 translate-y-4 sm:translate-x-10 sm:translate-y-10 group-hover:scale-105 group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-500">
                 <Image
                   src={category.imageSrc}
                   alt={category.imageAlt}

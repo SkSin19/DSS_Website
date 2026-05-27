@@ -48,6 +48,7 @@ export interface ProductCategory {
   href: string;
   imageSrc: string;
   imageAlt: string;
+  subCategories?: string[];
 }
 
 /** Trust badge item */

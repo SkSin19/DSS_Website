@@ -168,36 +168,40 @@ export const MARQUEE_BRANDS: MarqueeBrand[] = [
 
 export const PRODUCT_CATEGORIES: ProductCategory[] = [
   {
-    title: "Video Security",
+    title: "Biometric & Identity",
     description:
-      "Advanced CCTV Systems for Complete Surveillance and Peace of Mind",
-    href: "/products?category=Surveillance%20Systems",
+      "Fingerprint and face recognition devices for identity verification.",
+    href: "/products?category=Biometric%20%26%20Identity",
     imageSrc: "/images/categories/video-security-cctv-systems.png",
-    imageAlt: "Video security CCTV cameras and surveillance systems",
+    imageAlt: "Biometric and identity verification products",
+    subCategories: ["Fingerprint Recognition", "Face Recognition", "Aadhar Authentication"],
   },
   {
     title: "Access Control",
     description:
-      "Smart Access Solutions for Seamless and Secure Entry",
+      "Boom barriers, turnstiles and controllers for secure entry management.",
     href: "/products?category=Access%20Control",
     imageSrc: "/images/categories/access-control-smart-entry.png",
-    imageAlt: "Access control smart lock and biometric entry systems",
+    imageAlt: "Access control hardware and entry systems",
+    subCategories: ["Boom Barrier", "Turnstile Tripod", "Door Controllers", "Electromagnetic Locks"],
   },
   {
-    title: "Intrusion Alarm",
+    title: "IT & Network",
     description:
-      "Reliable Alarm Systems that Detect, Deter and Protect",
-    href: "/products?category=Intrusion%20Alarm",
+      "Supporting network hardware and accessories for connected security systems.",
+    href: "/products?category=IT%20%26%20Network",
     imageSrc: "/images/categories/intrusion-alarm-detection.png",
-    imageAlt: "Intrusion alarm detection and motion sensor systems",
+    imageAlt: "IT and network infrastructure products",
+    subCategories: ["Metal Enclosures"],
   },
   {
-    title: "Intercom Solutions",
+    title: "Power & Energy",
     description:
-      "Smart Intercoms for Clear Communication and Enhanced Security",
-    href: "/products?category=Intercom%20Solutions",
+      "UPS and backup energy systems that keep critical devices online.",
+    href: "/products?category=Power%20%26%20Energy",
     imageSrc: "/images/categories/intercom-communication-solutions.png",
-    imageAlt: "Video intercom communication and door phone solutions",
+    imageAlt: "Power backup and UPS products",
+    subCategories: ["UPS"],
   },
 ];
 

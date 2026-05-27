@@ -23,14 +23,18 @@ export interface ProductDownloads {
 
 export interface BackendProduct {
   _id: string;
+  productName?: string;
   name: string;
+  modelName?: string;
   model: string;
   slug: string;
+  url?: string;
   company: string;
   brand?: string;
   description: string;
   shortDescription?: string;
   category: string;
+  subCategory?: string;
   subCategories?: string[];
   subCategory_1?: string;
   subCategory_2?: string;
@@ -40,6 +44,7 @@ export interface BackendProduct {
   highlights?: string[];
   features?: ProductFeature[];
   specs?: ProductSpec[];
+  specifications?: Record<string, string[]>;
   applications?: string[];
   benefits?: string[];
   downloads?: ProductDownloads;

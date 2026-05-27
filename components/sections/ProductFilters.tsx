@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface ProductFiltersProps {
@@ -35,16 +34,6 @@ export default function ProductFilters({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const activeCount = useMemo(() => {
-    let count = 0;
-
-    if (initialName.trim()) count += 1;
-    if (initialModel.trim()) count += 1;
-    count += selectedCompanies.length + selectedCategories.length + selectedSubCategories.length;
-
-    return count;
-  }, [initialModel, initialName, selectedCategories.length, selectedCompanies.length, selectedSubCategories.length]);
-
   const updateQuery = (formData: FormData, shouldClear = false) => {
     const params = new URLSearchParams(shouldClear ? "" : searchParams.toString());
 
@@ -77,18 +66,12 @@ export default function ProductFilters({
 
   return (
     <aside className="lg:sticky lg:top-6 text-white">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-sky-400">Filter Products</p>
-          <h2 className="mt-2 text-xl font-bold">Find exactly what you need</h2>
-          <p className="mt-2 text-sm leading-relaxed text-gray-400 max-w-sm">
-            Filter by name, model, company and category.
-          </p>
-        </div>
-        <div className="text-right">
-          <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Active</p>
-          <p className="mt-1 text-lg font-bold text-sky-300">{activeCount}</p>
-        </div>
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-sky-400">Filter Products</p>
+        <h2 className="mt-2 text-xl font-bold">Find exactly what you need</h2>
+        <p className="mt-2 text-sm leading-relaxed text-gray-400 max-w-sm">
+          Filter by name, model, company, category and sub-category.
+        </p>
       </div>
 
       <form action={updateQuery} className="mt-5 space-y-4">
@@ -168,7 +151,7 @@ export default function ProductFilters({
 
         <div>
           <div className="mb-2 flex items-center justify-between gap-3">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-300">Type</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-300">Sub-category</h3>
           </div>
           <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
             {subCategories.map((subCategory) => (
@@ -199,9 +182,22 @@ export default function ProductFilters({
           <button
             type="button"
             onClick={() => updateQuery(new FormData(), true)}
-            className="inline-flex flex-1 items-center justify-center rounded-full border border-white/10 bg-transparent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/5"
+            aria-label="Reset filters"
+            className="inline-flex flex-1 items-center justify-center rounded-full bg-red-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-500 sm:flex-none"
           >
-            Clear all
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-3.5 w-3.5"
+            >
+              <path d="M3 12a9 9 0 1 0 3-6.7" />
+              <path d="M3 4v5h5" />
+            </svg>
           </button>
         </div>
       </form>

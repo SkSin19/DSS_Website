@@ -12,7 +12,7 @@ export default function ProductCategories() {
             <Link
               key={category.title}
               href={category.href}
-              className={`category-card group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-white p-8 sm:p-10 min-h-[400px] sm:min-h-[450px] animate-fade-in-up`}
+              className="category-card group relative flex min-h-100 flex-col justify-between overflow-hidden rounded-4xl bg-white p-8 sm:min-h-112.5 sm:p-10 animate-fade-in-up"
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="relative z-10 max-w-sm">
@@ -23,12 +23,25 @@ export default function ProductCategories() {
                   {category.description}
                 </p>
                 <span className="inline-flex items-center text-sm font-semibold text-gray-900 group-hover:text-sky-600 transition-colors">
-                  Explore category 
+                  Explore category
                   <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </span>
+
+                {category.subCategories?.length ? (
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {category.subCategories.map((subCategory) => (
+                      <span
+                        key={subCategory}
+                        className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-[11px] font-medium text-gray-700"
+                      >
+                        {subCategory}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
               </div>
-              
-              <div className="absolute right-0 bottom-0 w-3/4 sm:w-2/3 max-w-[350px] transform translate-x-10 translate-y-10 group-hover:scale-105 group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-500">
+
+              <div className="absolute right-0 bottom-0 w-3/4 sm:w-2/3 max-w-87.5 transform translate-x-10 translate-y-10 group-hover:scale-105 group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-500">
                 <Image
                   src={category.imageSrc}
                   alt={category.imageAlt}

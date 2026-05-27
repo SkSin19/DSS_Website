@@ -18,6 +18,8 @@ const getProductImage = (product: BackendProduct) =>
 const getProductAlt = (product: BackendProduct) =>
   product.images?.[0]?.alt || `${product.name} image`;
 
+const getProductHref = (product: BackendProduct) => product.url || `/products/${product.slug}`;
+
 type ProductsPageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
@@ -90,10 +92,10 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                 {products.map((product) => (
                   <Link
                     key={product._id}
-                    href={`/products/${product.slug}`}
-                    className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-all duration-300 hover:border-sky-400/40 hover:bg-white/[0.07]"
+                    href={getProductHref(product)}
+                    className="group overflow-hidden rounded-4xl border border-white/10 bg-white/5 transition-all duration-300 hover:border-sky-400/40 hover:bg-white/[0.07]"
                   >
-                    <div className="relative aspect-[4/3] bg-gradient-to-b from-white to-slate-100 p-3">
+                    <div className="relative aspect-4/3 bg-linear-to-b from-white to-slate-100 p-3">
                       <div className="relative h-full w-full group-hover:scale-[1.03] transition-transform duration-500">
                         <Image
                           src={getProductImage(product)}
@@ -144,7 +146,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                 ))}
               </div>
             ) : (
-              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 text-gray-300">
+              <div className="rounded-4xl border border-white/10 bg-white/5 p-8 text-gray-300">
                 No products matched the current filters. Adjust the selections or clear them to browse the full catalog.
               </div>
             )}

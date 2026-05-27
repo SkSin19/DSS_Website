@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import PremiumDesign from "@/components/sections/PremiumDesign";
 import { getProductBySlugFromApi, getProductsFromApi, type BackendProduct } from "@/lib/products-api";
-import ImageCarousel from "@/components/ui/ImageCarousel";
 import ProductImageGallery from "@/components/ui/ProductImageGallery";
 
 type ProductPageProps = {
@@ -17,8 +16,7 @@ export const dynamic = "force-dynamic";
 const getProductImage = (product: BackendProduct) =>
   product.featuredImage || product.images?.[0]?.url || "https://picsum.photos/seed/product-detail-fallback/1200/900";
 
-const getProductAlt = (product: BackendProduct) =>
-  product.images?.[0]?.alt || `${product.name} image`;
+const getProductHref = (product: BackendProduct) => product.url || `/products/${product.slug}`;
 
 const getGalleryImages = (product: BackendProduct) => {
   const galleryFromImages = product.images?.map((image) => image.url) || [];
@@ -27,6 +25,12 @@ const getGalleryImages = (product: BackendProduct) => {
 
   return Array.from(new Set(mergedImages)).slice(0, 4);
 };
+
+const formatSpecItems = (value: string) =>
+  value
+    .split("|")
+    .map((item) => item.trim())
+    .filter(Boolean);
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -185,12 +189,18 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
             {(product.specs || []).map((spec, index) => (
-              <div key={`${spec.label}-${index}`} className="rounded-[1.5rem] border border-white/10 bg-[#101a31] p-6 shadow-xl">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-300">{spec.label}</p>
-                <p className="mt-3 text-lg font-semibold text-white">{spec.value}</p>
-                <p className="mt-4 text-sm leading-relaxed text-gray-400">
-                  Placeholder technical description for {spec.label.toLowerCase()}.
-                </p>
+              <div key={`${spec.label}-${index}`} className="rounded-3xl border border-white/10 bg-[#101a31] p-6 shadow-xl">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-sky-300">{spec.label}</p>
+                <ul className="mt-3 space-y-2 text-sm leading-relaxed text-gray-300">
+                  {formatSpecItems(spec.value).map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span className="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-sky-500/15 text-[9px] font-bold text-sky-300">
+                        •
+                      </span>
+                      <span className="text-[13px] leading-relaxed text-gray-300">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -198,7 +208,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
           {(product.applications || product.benefits)?.length ? (
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-5">
               {product.applications?.length ? (
-                <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
                   <p className="text-xs font-semibold uppercase tracking-[0.25em] text-sky-400">Applications</p>
                   <ul className="mt-4 space-y-3 text-sm text-gray-300">
                     {product.applications.map((application) => (
@@ -211,7 +221,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                 </div>
               ) : null}
               {product.benefits?.length ? (
-                <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
                   <p className="text-xs font-semibold uppercase tracking-[0.25em] text-sky-400">Benefits</p>
                   <ul className="mt-4 space-y-3 text-sm text-gray-300">
                     {product.benefits.map((benefit) => (
@@ -242,8 +252,8 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
             {relatedProducts.map((item) => (
-              <Link key={item._id} href={`/products/${item.slug}`} className="group rounded-[2rem] overflow-hidden bg-[#f4f7fb] hover:shadow-2xl transition-all duration-300">
-                <div className="relative aspect-[4/3] p-6 bg-gradient-to-b from-white to-slate-100">
+              <Link key={item._id} href={getProductHref(item)} className="group rounded-4xl overflow-hidden bg-[#f4f7fb] hover:shadow-2xl transition-all duration-300">
+                <div className="relative aspect-4/3 p-6 bg-linear-to-b from-white to-slate-100">
                   <div className="relative h-full w-full group-hover:scale-[1.03] transition-transform duration-500">
                     <Image src={item.featuredImage || item.images?.[0]?.url || "https://picsum.photos/seed/related-fallback/1200/900"} alt={item.images?.[0]?.alt || item.name} fill className="object-contain drop-shadow-xl" />
                   </div>

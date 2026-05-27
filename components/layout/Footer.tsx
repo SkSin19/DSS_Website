@@ -147,7 +147,7 @@ export default function Footer() {
                     const IconComp = contactIcons[item.icon];
                     return (
                       <li key={item.label} className="flex items-start gap-4">
-                        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-600/30 text-sky-400 flex-shrink-0 mt-1">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-600/30 text-sky-400 shrink-0 mt-1">
                           <IconComp />
                         </div>
                         <div className="flex flex-col">
@@ -182,17 +182,17 @@ export default function Footer() {
             
             {/* Payment Icons */}
             <div className="flex items-center gap-3">
-              <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-[60px]">
+              <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-15">
                 {/* SVG placeholder for PayPal */}
                 <svg viewBox="0 0 100 26" className="h-4 fill-[#003087]">
                   <path d="M12.9 22.4l1.8-11.4h5.1c3 0 4.9 1.4 4.5 4.3-.4 2.8-2.5 4.7-5.4 4.7h-1.9l-1 6.4h-3.1zm4.8-13.8l-.8 5.3h1.8c1.6 0 2.8-.7 3-2.1.2-1.3-.6-2.5-2.2-2.5h-2zM33 11l-1.8 11.4h3.1l.6-4h2.7c3 0 4.9-1.4 4.5-4.3-.4-2.8-2.5-4.7-5.4-4.7H33zm3.7 8.5l-.8 5.3h1.8c1.6 0 2.8-.7 3-2.1.2-1.3-.6-2.5-2.2-2.5h-2zM52.3 22.4h-3l2.8-11.4h3l-2.8 11.4zM62.6 11c-2.8 0-5.1 2.2-5.1 5s2.3 5 5.1 5 5.1-2.2 5.1-5-2.2-5-5.1-5zm0 7.8c-1.3 0-2.3-1-2.3-2.3 0-1.3 1-2.3 2.3-2.3 1.3 0 2.3 1 2.3 2.3 0 1.3-1 2.3-2.3 2.3zM73.4 11h-3l-1.8 11.4h3l1.8-11.4z"/>
                 </svg>
               </div>
-              <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-[60px]">
+              <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-15">
                 {/* SVG placeholder for Stripe */}
                 <span className="font-black tracking-tight text-[#635BFF] text-sm leading-none italic">stripe</span>
               </div>
-              <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-[60px]">
+              <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-15">
                 {/* SVG placeholder for Mastercard */}
                 <svg viewBox="0 0 48 30" className="h-5">
                   <circle cx="15" cy="15" r="15" fill="#eb001b"/>

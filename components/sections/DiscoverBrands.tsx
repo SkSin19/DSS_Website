@@ -3,8 +3,22 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { BRANDS } from "@/lib/constants";
+import { getProductsFromApi } from "@/lib/products-api";
 
-export default function DiscoverBrands() {
+export default async function DiscoverBrands() {
+  const brandDestinations = await Promise.all(
+    BRANDS.map(async (brand) => {
+      const [product] = await getProductsFromApi({ company: brand.name, limit: 1 }).catch(() => []);
+
+      return {
+        name: brand.name,
+        href: product ? `/products/${product.slug}` : `/products?company=${encodeURIComponent(brand.name)}`,
+      };
+    }),
+  );
+
+  const brandHrefMap = new Map(brandDestinations.map((item) => [item.name, item.href]));
+
   return (
     <section className="bg-gray-950 section-padding pb-24" id="brands">
       <Container>
@@ -20,7 +34,7 @@ export default function DiscoverBrands() {
           {BRANDS.map((brand, index) => (
             <Link
               key={brand.name}
-              href={`/brands/${brand.name.toLowerCase().replace(/\s+/g, '-')}`}
+              href={brandHrefMap.get(brand.name) || `/products?company=${encodeURIComponent(brand.name)}`}
               className="group relative h-[360px] md:h-[400px] lg:h-[450px] w-full rounded-3xl overflow-hidden block animate-fade-in-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >

@@ -2,24 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 
-function PremiumIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="w-6 h-6 text-sky-500 mb-2"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-      />
-    </svg>
-  );
-}
 
 function DiamondIcon() {
   return (
@@ -103,7 +85,7 @@ export default function PremiumDesign() {
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column (Image) */}
-          <div className="bg-[#2b354e] rounded-[2rem] p-8 min-h-[400px] lg:min-h-[500px] relative overflow-hidden flex items-center justify-center">
+          <div className="bg-[#2b354e] rounded-4xl p-8 min-h-100 lg:min-h-125 relative overflow-hidden flex items-center justify-center">
             {/* Background Shield Outline */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 pointer-events-none">
               <svg
@@ -123,7 +105,7 @@ export default function PremiumDesign() {
             </div>
 
             {/* Product Composition */}
-            <div className="relative z-10 w-full h-[300px] lg:h-[400px]">
+            <div className="relative z-10 w-full h-75 lg:h-100">
               <Image
                 src="/images/hero/cctv-cameras-surveillance-systems-slide-1.png"
                 alt="Premium Security Composition"
@@ -135,7 +117,7 @@ export default function PremiumDesign() {
           </div>
 
           {/* Right Column (Text Content) */}
-          <div className="bg-[#f8f9fc] rounded-[2rem] p-10 md:p-16 flex flex-col justify-center">
+          <div className="bg-[#f8f9fc] rounded-4xl p-10 md:p-16 flex flex-col justify-center">
             <div className="flex items-center gap-2 mb-6">
               <ShieldIcon />
               <span className="text-sky-600 text-xs font-bold tracking-widest uppercase">
@@ -155,7 +137,7 @@ export default function PremiumDesign() {
             </p>
 
             <div className="flex flex-wrap gap-x-8 gap-y-6 mb-12">
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-[80px]">
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-20">
                 <DiamondIcon />
                 <span className="text-xs font-semibold text-gray-800 leading-tight">
                   Premium
@@ -163,7 +145,7 @@ export default function PremiumDesign() {
                   Quality
                 </span>
               </div>
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-[80px]">
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-20">
                 <ShieldIcon />
                 <span className="text-xs font-semibold text-gray-800 leading-tight">
                   Reliable
@@ -171,7 +153,7 @@ export default function PremiumDesign() {
                   Protection
                 </span>
               </div>
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-[80px]">
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-20">
                 <SmartIcon />
                 <span className="text-xs font-semibold text-gray-800 leading-tight">
                   Smart
@@ -179,7 +161,7 @@ export default function PremiumDesign() {
                   Solutions
                 </span>
               </div>
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-[80px]">
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-20">
                 <SupportIcon />
                 <span className="text-xs font-semibold text-gray-800 leading-tight">
                   Dedicated
@@ -192,7 +174,7 @@ export default function PremiumDesign() {
             <div>
               <Link
                 href="/about"
-                className="inline-flex items-center justify-center !bg-white !text-black hover:!bg-black hover:!text-white px-8 py-3.5 rounded-full text-sm font-semibold transition-colors gap-2 group shadow-xl"
+                className="inline-flex items-center justify-center bg-white! text-black! hover:bg-black! hover:text-white! px-8 py-3.5 rounded-full text-sm font-semibold transition-colors gap-2 group shadow-xl"
               >
                 Read our Story
                 <span className="group-hover:translate-x-1 transition-transform">

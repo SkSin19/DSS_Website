@@ -47,11 +47,11 @@ export default function SmarterSecurity() {
   return (
     <section className="bg-gray-950 pb-20 pt-10" id="solutions">
       <Container>
-        <div className="rounded-[2.5rem] bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] overflow-hidden flex flex-col lg:flex-row relative">
+        <div className="rounded-[2.5rem] bg-linear-to-br from-[#1e3a8a] to-[#0f172a] overflow-hidden flex flex-col lg:flex-row relative">
           
           {/* Subtle background glow effect */}
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-sky-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3"></div>
+          <div className="absolute top-0 right-0 w-200 h-200 bg-sky-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-125 h-125 bg-blue-600/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3"></div>
 
           {/* Left Text Content */}
           <div className="flex-1 p-10 md:p-16 lg:p-20 relative z-10 flex flex-col justify-center text-white">
@@ -85,7 +85,7 @@ export default function SmarterSecurity() {
               <Button 
                 variant="outline" 
                 href="/products" 
-                className="!bg-white !text-black border-white hover:!bg-black hover:!text-white shadow-xl shadow-sky-900/20"
+                className="bg-white! text-black! border-white hover:bg-black! hover:text-white! shadow-xl shadow-sky-900/20"
               >
                 Browse products <span>→</span>
               </Button>
@@ -93,7 +93,7 @@ export default function SmarterSecurity() {
           </div>
 
           {/* Right Image Content */}
-          <div className="flex-1 relative min-h-[400px] lg:min-h-[600px] flex items-center justify-center p-8 lg:p-0">
+          <div className="flex-1 relative min-h-100 lg:min-h-150 flex items-center justify-center p-8 lg:p-0">
             {/* Dark curved line accent */}
             <div className="absolute inset-0 z-0 hidden lg:block">
               <svg viewBox="0 0 100 100" className="w-full h-full text-sky-500/20 absolute -right-20 top-1/2 -translate-y-1/2">
@@ -103,9 +103,9 @@ export default function SmarterSecurity() {
             </div>
             
             {/* The showcase composite image generated earlier would go here. We'll use a placeholder structure for now based on the screenshots */}
-            <div className="relative z-10 w-full max-w-lg h-full min-h-[400px] flex items-center justify-center">
-               <div className="relative w-full h-[500px] rounded-2xl bg-gradient-to-t from-gray-900 to-transparent flex items-end justify-center pb-8 border border-white/10 shadow-2xl overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sky-900/20 via-gray-900/80 to-gray-950/90 -z-10"></div>
+            <div className="relative z-10 w-full max-w-lg h-full min-h-100 flex items-center justify-center">
+               <div className="relative w-full h-125 rounded-2xl bg-linear-to-t from-gray-900 to-transparent flex items-end justify-center pb-8 border border-white/10 shadow-2xl overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-sky-900/20 via-gray-900/80 to-gray-950/90 -z-10"></div>
                   
                   <Image 
                     src="/images/hero/cctv-cameras-surveillance-systems-slide-1.png"

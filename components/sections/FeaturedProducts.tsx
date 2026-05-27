@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Container from "@/components/ui/Container";
 import { FEATURED_PRODUCTS } from "@/lib/constants";
 
@@ -37,9 +40,8 @@ function ShieldCheckIcon() {
 }
 
 export default function FeaturedProducts() {
-  // Split products into main (index 0) and grid items (1-4)
-  const mainProduct = FEATURED_PRODUCTS[0];
-  const gridProducts = FEATURED_PRODUCTS.slice(1, 5);
+  const [showAll, setShowAll] = useState(false);
+  const visibleProducts = showAll ? FEATURED_PRODUCTS : FEATURED_PRODUCTS.slice(0, 6);
 
   return (
     <section className="bg-gray-950 pt-10 pb-20" id="featured">
@@ -66,100 +68,62 @@ export default function FeaturedProducts() {
           </Link>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          
-          {/* Main Large Card (Left) */}
-          <div className="lg:col-span-5 relative group h-full">
-            <Link href={mainProduct.href} className="block w-full h-full bg-[#f8f9fc] rounded-[2rem] overflow-hidden hover:shadow-2xl transition-all duration-300">
-              {/* Badge */}
-              {mainProduct.hasOffer && (
-                <div className="absolute top-6 left-6 z-10">
-                  <span className="inline-block px-3 py-1 bg-sky-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-md">
+        {/* Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6">
+          {visibleProducts.map((product) => (
+            <Link
+              key={product.id}
+              href={product.href}
+              className="group flex flex-col bg-white rounded-[1.75rem] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full"
+            >
+              {product.hasOffer && (
+                <div className="absolute top-4 left-4 z-10">
+                  <span className="inline-block px-3 py-1 bg-sky-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
                     Offer
                   </span>
                 </div>
               )}
-              
-              {/* Image Area - taking up most of the card */}
-              <div className="w-full h-[300px] lg:h-[400px] relative bg-gray-100 flex items-center justify-center overflow-hidden">
-                 {/* For the main card, the image is large and central */}
-                 <div className="relative w-[90%] h-[90%] group-hover:scale-105 transition-transform duration-700">
-                    <Image 
-                      src={mainProduct.imageSrc} 
-                      alt={mainProduct.imageAlt}
-                      fill
-                      className="object-contain"
-                    />
-                 </div>
+
+              <div className="bg-[#f4f7fb] p-4 flex items-center justify-center aspect-[4/3] overflow-hidden">
+                <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500">
+                  <Image
+                    src={product.imageSrc}
+                    alt={product.imageAlt}
+                    fill
+                    className="object-contain mix-blend-multiply"
+                  />
+                </div>
               </div>
 
-              {/* Text Area - Bottom */}
-              <div className="p-8 bg-white relative">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center text-sky-500 flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
+              <div className="p-5 relative flex-1">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center text-sky-500 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{mainProduct.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed pr-8">{mainProduct.description}</p>
+                    <h4 className="text-base font-bold text-gray-900 mb-1 line-clamp-1">{product.title}</h4>
+                    <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">{product.description}</p>
                   </div>
                 </div>
-                <div className="absolute right-8 bottom-12 text-gray-400 group-hover:text-sky-500 transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-sky-600">
+                  Learn more <span className="transition-transform group-hover:translate-x-1">→</span>
                 </div>
               </div>
             </Link>
-          </div>
+          ))}
+        </div>
 
-          {/* Grid Cards (Right) */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 h-full">
-            {gridProducts.map((product) => (
-              <Link 
-                key={product.id}
-                href={product.href} 
-                className="group flex flex-col bg-white rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full"
-              >
-                {/* Badge */}
-                {product.hasOffer && (
-                  <div className="absolute top-5 left-5 z-10">
-                    <span className="inline-block px-3 py-1 bg-sky-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
-                      Offer
-                    </span>
-                  </div>
-                )}
-                
-                {/* Image */}
-                <div className="flex-1 bg-[#f4f7fb] p-6 flex items-center justify-center min-h-[200px]">
-                  <div className="relative w-full h-[140px] group-hover:scale-105 transition-transform duration-500">
-                    <Image 
-                      src={product.imageSrc} 
-                      alt={product.imageAlt}
-                      fill
-                      className="object-contain mix-blend-multiply"
-                    />
-                  </div>
-                </div>
-                
-                {/* Content */}
-                <div className="p-6 relative">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center text-sky-500 flex-shrink-0">
-                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-                    </div>
-                    <div>
-                      <h4 className="text-base font-bold text-gray-900 mb-1">{product.title}</h4>
-                      <p className="text-gray-500 text-xs leading-relaxed pr-6 line-clamp-2">{product.description}</p>
-                    </div>
-                  </div>
-                  <div className="absolute right-6 bottom-8 text-gray-300 group-hover:text-sky-500 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          
+        <div className="mt-10 flex flex-col items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setShowAll((current) => !current)}
+            className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3 text-sm font-semibold text-black shadow-xl shadow-black/10 transition-colors hover:bg-black hover:text-white"
+          >
+            {showAll ? "Show less" : "Show more"}
+          </button>
+          <p className="text-xs text-gray-500">
+            {showAll ? "Showing all 12 products" : "Showing 6 of 12 products"}
+          </p>
         </div>
 
         {/* Feature Strip (Bottom) */}

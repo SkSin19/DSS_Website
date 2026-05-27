@@ -1,16 +1,13 @@
 import { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 // Load Inter font with font-display swap for performance
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 // Robust SEO metadata
 export const metadata: Metadata = {
@@ -100,7 +97,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${inter.variable} scroll-smooth antialiased`} suppressHydrationWarning>
+    <html lang="en" className={cn("scroll-smooth", "antialiased", "font-sans", geist.variable)} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

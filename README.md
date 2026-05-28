@@ -1,4 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DSS Frontend
+
+This is the DSS frontend. It consumes the backend API for product data and enquiry submission.
+
+## Environment Variables
+
+Create a `dss/.env` file based on `dss/.env.example`.
+
+Required values:
+
+- `NEXT_PUBLIC_API_BASE_URL`: backend API base URL, for example `http://localhost:3001`
+
+## Product Enquiry Flow
+
+On product detail pages, the enquiry button opens a three-step form:
+
+1. Enter your email to receive a verification code.
+2. Enter the code, then your country code and 10-digit phone number.
+3. Enter your enquiry message and submit.
 
 ## Getting Started
 

@@ -6,6 +6,7 @@ import Container from "@/components/ui/Container";
 import PremiumDesign from "@/components/sections/PremiumDesign";
 import { getProductBySlugFromApi, getProductsFromApi, type BackendProduct } from "@/lib/products-api";
 import ProductImageGallery from "@/components/ui/ProductImageGallery";
+import ProductEnquiryDialog from "@/components/sections/ProductEnquiryDialog";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -164,6 +165,15 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
               ) : null}
 
               <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                <ProductEnquiryDialog
+                  product={{
+                    id: product._id,
+                    name: product.name,
+                    slug: product.slug,
+                    model: product.model,
+                    company: product.company,
+                  }}
+                />
                 <Link
                   href="#specs"
                   className="inline-flex items-center justify-center rounded-full border border-white/20 bg-transparent px-4 py-2 text-sm font-semibold text-white hover:bg-white/5 transition-colors"

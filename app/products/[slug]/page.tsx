@@ -19,8 +19,13 @@ const getProductImage = (product: BackendProduct) =>
 const getProductHref = (product: BackendProduct) => product.url || `/products/${product.slug}`;
 
 const getGalleryImages = (product: BackendProduct) => {
-  const mainImage = getProductImage(product);
-  return mainImage ? [mainImage] : [];
+  const imageUrls = [
+    product.featuredImage,
+    ...(product.images?.map((image) => image.url) || []),
+    ...(product.galleryImages || []),
+  ].filter((url): url is string => Boolean(url));
+
+  return Array.from(new Set(imageUrls));
 };
 
 const formatSpecItems = (value: string) =>
@@ -95,7 +100,10 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                   </div>
                 ) : null}
               </div>
-              <ProductImageGallery images={galleryImages.length ? galleryImages : [getProductImage(product)]} />
+              <ProductImageGallery
+                images={galleryImages.length ? galleryImages : [getProductImage(product)]}
+                alt={product.images?.[0]?.alt || `${product.name} ${product.model}`}
+              />
             </div>
 
             <div className="text-white">

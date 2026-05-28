@@ -121,7 +121,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                   >
                     {/* Mobile: horizontal layout — image left, details right */}
                     <div className="flex sm:hidden items-stretch min-h-[96px]">
-                      <div className="relative w-28 shrink-0 bg-linear-to-b from-white to-slate-100 p-2">
+                      <div className="relative w-28 shrink-0 overflow-hidden bg-linear-to-br from-sky-950 via-slate-900 to-slate-800 p-2 ring-1 ring-white/10">
                         <Image
                           src={getProductImage(product)}
                           alt={getProductAlt(product)}
@@ -158,7 +158,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
                     {/* Desktop: vertical card */}
                     <div className="hidden sm:block">
-                      <div className="relative aspect-4/3 bg-linear-to-b from-white to-slate-100 p-2 sm:p-2.5">
+                      <div className="relative aspect-4/3 overflow-hidden bg-linear-to-br from-sky-950 via-slate-900 to-slate-800 p-2 sm:p-2.5 ring-1 ring-white/10">
                         <div className="relative h-full w-full transition-transform duration-500 group-hover:scale-[1.02]">
                           <Image
                             src={getProductImage(product)}

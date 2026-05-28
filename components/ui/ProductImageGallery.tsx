@@ -36,7 +36,7 @@ export default function ProductImageGallery({ images, alt = "product image", int
 
   return (
     <div onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
-      <div className="relative mt-6 aspect-square rounded-3xl bg-linear-to-br from-slate-50 to-slate-100 p-8 overflow-hidden">
+      <div className="relative mt-6 aspect-square overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-sky-950 via-slate-900 to-slate-800 p-8 shadow-[0_24px_80px_rgba(2,6,23,0.45)]">
         <Image
           src={mainImage}
           alt={alt}
@@ -56,7 +56,7 @@ export default function ProductImageGallery({ images, alt = "product image", int
             className={`rounded-2xl overflow-hidden focus:outline-none transition-transform ${i === index ? "scale-[1.02] ring-2 ring-sky-300" : ""}`}
             aria-label={`Show image ${i + 1}`}
           >
-            <div className="rounded-2xl bg-linear-to-b from-white to-slate-100 p-3">
+              <div className="rounded-2xl border border-white/10 bg-linear-to-b from-sky-950 via-slate-900 to-slate-800 p-3 shadow-lg shadow-slate-950/20">
               <div className="relative aspect-square">
                 <Image
                   src={src}

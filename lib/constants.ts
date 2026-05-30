@@ -250,13 +250,13 @@ export const CONTACT_INFO: ContactInfo[] = [
   {
     icon: "phone",
     label: "Phone",
-    value: "+91 98334238",
-    href: "tel:+9198334238",
+    value: "+91 7394062133",
+    href: "tel:+917394062133",
   },
   {
     icon: "location",
     label: "Address",
-    value: "",
+    value: "Delhi, India",
   },
 ];
 

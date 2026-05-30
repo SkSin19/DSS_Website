@@ -42,7 +42,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="site-footer" className="bg-[#031b4e] text-white relative overflow-hidden" role="contentinfo">
+    <footer id="site-footer" className="bg-[#030617] text-white relative overflow-hidden" role="contentinfo">
       {/* Subtle dotted background pattern on left side */}
       <div className="absolute top-0 left-0 bottom-0 w-1/3 opacity-[0.03] pointer-events-none overflow-hidden">
         <svg width="100%" height="100%">
@@ -63,7 +63,7 @@ export default function Footer() {
                 {/* Subtle vertical separator line (desktop only) */}
                 <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-px bg-blue-500/20"></div>
 
-                <Link href="/" className="flex items-center gap-3 focus-ring rounded-lg mb-8" aria-label={`${SITE_NAME} — Home`}>
+                <Link href="/" className="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-lg mb-8" aria-label={`${SITE_NAME} — Home`}>
                   <div className="bg-white rounded-full p-1 shadow-sm">
                     <Image
                       src="/images/logo/dss_logo.png"
@@ -116,7 +116,7 @@ export default function Footer() {
                     </div>
                     <ul className="space-y-4">
                       {group.links.map((link) => (
-                        <li key={link.href}>
+                        <li key={`${link.href}-${link.label}`}>
                           <Link
                             href={link.href}
                             className="text-[15px] font-medium text-gray-200 hover:text-white transition-colors duration-200 flex items-center justify-between gap-3 group"
@@ -183,10 +183,11 @@ export default function Footer() {
             {/* Payment Icons */}
             <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-15">
-                {/* SVG placeholder for PayPal */}
-                <svg viewBox="0 0 100 26" className="h-4 fill-[#003087]">
-                  <path d="M12.9 22.4l1.8-11.4h5.1c3 0 4.9 1.4 4.5 4.3-.4 2.8-2.5 4.7-5.4 4.7h-1.9l-1 6.4h-3.1zm4.8-13.8l-.8 5.3h1.8c1.6 0 2.8-.7 3-2.1.2-1.3-.6-2.5-2.2-2.5h-2zM33 11l-1.8 11.4h3.1l.6-4h2.7c3 0 4.9-1.4 4.5-4.3-.4-2.8-2.5-4.7-5.4-4.7H33zm3.7 8.5l-.8 5.3h1.8c1.6 0 2.8-.7 3-2.1.2-1.3-.6-2.5-2.2-2.5h-2zM52.3 22.4h-3l2.8-11.4h3l-2.8 11.4zM62.6 11c-2.8 0-5.1 2.2-5.1 5s2.3 5 5.1 5 5.1-2.2 5.1-5-2.2-5-5.1-5zm0 7.8c-1.3 0-2.3-1-2.3-2.3 0-1.3 1-2.3 2.3-2.3 1.3 0 2.3 1 2.3 2.3 0 1.3-1 2.3-2.3 2.3zM73.4 11h-3l-1.8 11.4h3l1.8-11.4z"/>
-                </svg>
+                <span className="sr-only">PayPal</span>
+                <span className="font-extrabold text-sm tracking-tight">
+                  <span className="text-[#003087]">Pay</span>
+                  <span className="text-[#009CDE]">Pal</span>
+                </span>
               </div>
               <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-15">
                 {/* SVG placeholder for Stripe */}

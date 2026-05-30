@@ -81,7 +81,7 @@ function SupportIcon() {
 
 export default function PremiumDesign() {
   return (
-    <section className="bg-gray-950 section-padding" id="premium-design">
+    <section className="select-none bg-gray-950 section-padding" id="premium-design">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column (Image) */}
@@ -105,13 +105,13 @@ export default function PremiumDesign() {
             </div>
 
             {/* Product Composition */}
-            <div className="relative z-10 w-full h-75 lg:h-100">
+            <div className="absolute inset-0 z-0">
               <Image
                 src="/images/hero/cctv-cameras-surveillance-systems-slide-1.png"
                 alt="Premium Security Composition"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
+                className="object-cover opacity-80"
               />
             </div>
           </div>

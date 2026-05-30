@@ -5,19 +5,12 @@ import { BESTSELLERS } from "@/lib/constants";
 
 export default function Bestsellers() {
   return (
-    <section className="bg-gray-950 section-padding" id="bestsellers">
+    <section className="select-none bg-gray-950 section-padding" id="bestsellers">
       <Container>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-4">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
+        <div className="mb-10">
+          <h2 className="w-full text-center text-4xl md:text-5xl font-bold tracking-tight text-white">
             Bestsellers
           </h2>
-          <Link
-            href="/products"
-            className="text-sm font-medium text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-2 group"
-          >
-            Browse all products
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

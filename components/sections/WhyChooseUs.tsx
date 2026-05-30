@@ -4,7 +4,7 @@ import { WHY_CHOOSE_US } from "@/lib/constants";
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-gray-950 section-padding" id="why-us">
+    <section className="select-none bg-gray-950 section-padding" id="why-us">
       <Container>
         {/* Header */}
         <div className="text-center mb-10 sm:mb-16 max-w-2xl mx-auto">

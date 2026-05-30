@@ -1,6 +1,8 @@
 import HeroSlider from "@/components/sections/HeroSlider";
 import DiscoverBrands from "@/components/sections/DiscoverBrands";
 import BrandMarquee from "@/components/sections/BrandMarquee";
+import Container from "@/components/ui/Container";
+import Badge from "@/components/ui/Badge";
 import ProductCategories from "@/components/sections/ProductCategories";
 import SmarterSecurity from "@/components/sections/SmarterSecurity";
 import Bestsellers from "@/components/sections/Bestsellers";
@@ -13,6 +15,15 @@ export default function Home() {
     <>
       <HeroSlider />
       <DiscoverBrands />
+
+      <section className="bg-transparent">
+        <Container>
+          <div className="flex justify-center py-4">
+            <Badge variant="dark">TRUSTED SECURITY PARTNERS</Badge>
+          </div>
+        </Container>
+      </section>
+
       <BrandMarquee />
       <ProductCategories />
       <SmarterSecurity />

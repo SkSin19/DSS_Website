@@ -40,7 +40,7 @@ export const HERO_SLIDES: HeroSlide[] = [
   {
     id: 1,
     badge: "NEXT-GEN SURVEILLANCE",
-    headingLine1: "Advanced Digital",
+    headingLine1: "Digital",
     headingLine2: "Security Solution",
     headingAccentColor: "var(--color-primary)",
     description:
@@ -56,7 +56,7 @@ export const HERO_SLIDES: HeroSlide[] = [
   },
   {
     id: 2,
-    headingLine1: "Advanced Digital",
+    headingLine1: "Digital",
     headingLine2: "Security Solutions",
     description:
       "Reliable CCTV cameras and surveillance systems for homes, shops, offices, and industrial spaces.",
@@ -172,7 +172,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     description:
       "Fingerprint and face recognition devices for identity verification.",
     href: "/products?category=Biometric%20%26%20Identity",
-    imageSrc: "/images/categories/video-security-cctv-systems.png",
+    imageSrc: "/images/categories/access-control-smart-entry.png",
     imageAlt: "Biometric and identity verification products",
     subCategories: ["Fingerprint Recognition", "Face Recognition", "Aadhar Authentication"],
   },
@@ -190,7 +190,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     description:
       "Supporting network hardware and accessories for connected security systems.",
     href: "/products?category=IT%20%26%20Network",
-    imageSrc: "/images/categories/intrusion-alarm-detection.png",
+    imageSrc: "/images/categories/video-security-cctv-systems.png",
     imageAlt: "IT and network infrastructure products",
     subCategories: ["Metal Enclosures"],
   },
@@ -199,7 +199,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     description:
       "UPS and backup energy systems that keep critical devices online.",
     href: "/products?category=Power%20%26%20Energy",
-    imageSrc: "/images/categories/intercom-communication-solutions.png",
+    imageSrc: "/images/categories/intrusion-alarm-detection.png",
     imageAlt: "Power backup and UPS products",
     subCategories: ["UPS"],
   },
@@ -225,18 +225,17 @@ export const FOOTER_LINK_GROUPS: FooterLinkGroup[] = [
     title: "MENU",
     links: [
       { label: "Home", href: "/" },
-      { label: "Store", href: "/store" },
-      { label: "About", href: "/about" },
+      { label: "Products", href: "/products" },
+      { label: "Enquiry", href: "/enquiry" },
       { label: "Brands", href: "/brands" },
     ],
   },
   {
     title: "UTILITY PAGES",
     links: [
-      { label: "Shipping", href: "/shipping" },
-      { label: "Contact", href: "/contact" },
-      { label: "404 Not Found", href: "/404" },
-      { label: "Support", href: "/support" },
+      { label: "Shipping", href: "/products" },
+      { label: "Contact", href: "/enquiry" },
+      { label: "Support", href: "/enquiry" },
     ],
   },
 ];

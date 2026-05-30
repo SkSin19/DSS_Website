@@ -43,27 +43,20 @@ export default function FeaturedProducts() {
   const visibleProducts = showAll ? FEATURED_PRODUCTS : FEATURED_PRODUCTS.slice(0, 6);
 
   return (
-    <section className="bg-gray-950 pt-8 sm:pt-10 pb-16 sm:pb-20" id="featured">
+    <section className="select-none bg-gray-950 pt-8 sm:pt-10 pb-16 sm:pb-20" id="featured">
       <Container>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 sm:mb-10 gap-4">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
+        <div className="flex flex-col items-center justify-center mb-8 sm:mb-10 gap-4">
+          <div className="text-center">
+            <div className="flex items-center gap-3 mb-2 justify-center">
               <ShieldCheckIcon />
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
                 Featured Security Products
               </h2>
             </div>
-            <p className="text-gray-400 text-sm max-w-xl">
+            <p className="text-[#0b6ded] text-sm max-w-xl mx-auto text-center">
               Smart solutions for a safer, smarter tomorrow.
             </p>
           </div>
-          <Link
-            href="/products"
-            className="w-full sm:w-auto text-sm font-medium text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-2 group"
-          >
-            Browse all products
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
@@ -118,12 +111,9 @@ export default function FeaturedProducts() {
           >
             {showAll ? "Show less" : "Show more"}
           </button>
-          <p className="text-xs text-gray-500">
-            {showAll ? "Showing all 12 products" : "Showing 6 of 12 products"}
-          </p>
         </div>
 
-        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 border-t border-gray-800 pt-8 sm:pt-10">
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 border-t border-b border-gray-800 pt-8 sm:pt-10 pb-8 sm:pb-10">
           <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4">
             <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 shrink-0 shadow-md">
               <ShippingIcon />

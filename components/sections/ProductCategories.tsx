@@ -5,14 +5,14 @@ import { PRODUCT_CATEGORIES } from "@/lib/constants";
 
 export default function ProductCategories() {
   return (
-    <section className="bg-gray-950 section-padding" id="categories">
+    <section className="select-none bg-gray-950 section-padding" id="categories">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {PRODUCT_CATEGORIES.map((category, index) => (
             <Link
               key={category.title}
               href={category.href}
-              className="category-card group relative flex min-h-[19rem] flex-col justify-between overflow-hidden rounded-4xl bg-white p-6 sm:min-h-112.5 sm:p-8 md:p-10 animate-fade-in-up"
+              className="category-card group relative flex min-h-76 flex-col justify-between overflow-hidden rounded-4xl bg-white p-6 sm:min-h-112.5 sm:p-8 md:p-10 animate-fade-in-up"
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="relative z-10 max-w-sm">

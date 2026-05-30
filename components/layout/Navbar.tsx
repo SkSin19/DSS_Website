@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
+import { BRANDS, NAV_LINKS, PRODUCT_CATEGORIES, SITE_NAME } from "@/lib/constants";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -66,17 +66,108 @@ export default function Navbar() {
 
         {/* ── Desktop Nav Links ── */}
         <ul className="hidden lg:flex items-center gap-1" role="list">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white rounded-lg transition-colors duration-200 focus-ring"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          {NAV_LINKS.filter((link) => link.label !== "Solutions").map((link) => {
+            if (link.label === "Products") {
+              return (
+                <li key={link.href} className="relative group">
+                  <Link
+                    href={link.href}
+                    id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
+                  >
+                    {link.label}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </Link>
+
+                  <div className="absolute left-1/2 top-full z-50 w-150 -translate-x-1/2 pt-3 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                    <div className="rounded-2xl border border-white/10 bg-[#050a16]/95 backdrop-blur-xl shadow-2xl p-4">
+                      <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-zinc-500">Product Categories</p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {PRODUCT_CATEGORIES.map((category) => (
+                          <Link
+                            key={category.href}
+                            href={category.href}
+                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-white/5 focus-ring"
+                          >
+                            <p className="text-sm font-semibold text-white">{category.title}</p>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              );
+            }
+
+            if (link.label === "Brands") {
+              return (
+                <li key={link.href} className="relative group">
+                  <Link
+                    href={link.href}
+                    id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
+                  >
+                    {link.label}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </Link>
+
+                  <div className="absolute left-1/2 top-full z-50 w-150 -translate-x-1/2 pt-3 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                    <div className="rounded-2xl border border-white/10 bg-[#050a16]/95 backdrop-blur-xl shadow-2xl p-4">
+                      <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-zinc-500">Our Brands</p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {BRANDS.map((brand) => (
+                          <Link
+                            key={brand.name}
+                            href={`/brands?name=${encodeURIComponent(brand.name)}`}
+                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-white/5 focus-ring"
+                          >
+                            <p className="text-sm font-semibold text-white">{brand.name}</p>
+                            <p className="mt-1 text-xs leading-relaxed text-zinc-400">{brand.tagline}</p>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              );
+            }
+
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white rounded-lg transition-colors duration-200 focus-ring"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {/* ── Mobile Menu Button ── */}
@@ -111,7 +202,7 @@ export default function Navbar() {
         aria-label="Mobile navigation"
       >
         <div className="container-main py-4 space-y-1">
-          {NAV_LINKS.map((link) => (
+          {NAV_LINKS.filter((link) => link.label !== "Solutions").map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -121,15 +212,6 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          {/* Mobile search */}
-          <div className="pt-3 px-4">
-            <input
-              type="search"
-              placeholder="Search products..."
-              aria-label="Search products"
-              className="w-full h-11 px-4 text-sm bg-white/5 border border-white/10 rounded-full text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
-            />
-          </div>
         </div>
       </div>
     </header>

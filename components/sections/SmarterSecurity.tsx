@@ -45,7 +45,7 @@ const icons = {
 
 export default function SmarterSecurity() {
   return (
-    <section className="bg-gray-950 pb-14 sm:pb-20 pt-8 sm:pt-10" id="solutions">
+    <section className="select-none bg-gray-950 pb-14 sm:pb-20 pt-8 sm:pt-10" id="solutions">
       <Container>
         <div className="rounded-[2rem] sm:rounded-[2.5rem] bg-linear-to-br from-[#1e3a8a] to-[#0f172a] overflow-hidden flex flex-col lg:flex-row relative">
           <div className="absolute top-0 right-0 w-200 h-200 bg-sky-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>

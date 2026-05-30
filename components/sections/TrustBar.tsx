@@ -3,7 +3,7 @@ import { TRUST_BADGES } from "@/lib/constants";
 
 export default function TrustBar() {
   return (
-    <div className="w-full bg-gray-50 border-b border-gray-100 py-4 overflow-hidden lg:hidden">
+    <div className="select-none w-full bg-gray-50 border-b border-gray-100 py-4 overflow-hidden lg:hidden">
       <Container>
         <div className="flex justify-center gap-4 sm:gap-8 flex-wrap">
           {TRUST_BADGES.map((badge, idx) => (

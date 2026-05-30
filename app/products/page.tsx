@@ -120,7 +120,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                     className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-400/40 hover:bg-white/[0.07]"
                   >
                     {/* Mobile: horizontal layout — image left, details right */}
-                    <div className="flex sm:hidden items-stretch min-h-[96px]">
+                    <div className="flex sm:hidden items-stretch min-h-24">
                       <div className="relative w-28 shrink-0 overflow-hidden bg-linear-to-br from-sky-950 via-slate-900 to-slate-800 p-2 ring-1 ring-white/10">
                         <Image
                           src={getProductImage(product)}

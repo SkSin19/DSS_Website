@@ -327,13 +327,13 @@ export default function HeroSlider() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#020912]"
+      className="select-none relative w-full overflow-hidden bg-[#020912]"
       style={{ minHeight: "100svh" }}
     >
       {/* spotlight */}
       <div
         ref={spotlightRef}
-        className="pointer-events-none absolute z-0 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        className="pointer-events-none absolute z-0 h-130 w-130 -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
           background:
             "radial-gradient(circle, rgba(14,165,233,0.10) 0%, transparent 70%)",
@@ -345,7 +345,7 @@ export default function HeroSlider() {
       {/* scan line */}
       <div
         ref={scanLineRef}
-        className="pointer-events-none absolute inset-x-0 z-10 h-[2px] opacity-20"
+        className="pointer-events-none absolute inset-x-0 z-10 h-0.5 opacity-20"
         style={{
           background:
             "linear-gradient(90deg, transparent, rgba(14,165,233,0.9), transparent)",
@@ -365,9 +365,9 @@ export default function HeroSlider() {
 
       {/* ambient lights */}
       <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute -top-32 left-1/2 h-[480px] w-[700px] -translate-x-1/2 rounded-full bg-sky-600/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-[320px] w-[420px] rounded-full bg-sky-900/20 blur-[100px]" />
-        <div className="absolute bottom-0 left-0 h-[240px] w-[300px] rounded-full bg-indigo-900/15 blur-[90px]" />
+        <div className="absolute -top-32 left-1/2 h-120 w-175 -translate-x-1/2 rounded-full bg-sky-600/10 blur-[120px]" />
+        <div className="absolute bottom-0 right-0 h-80 w-105 rounded-full bg-sky-900/20 blur-[100px]" />
+        <div className="absolute bottom-0 left-0 h-60 w-75 rounded-full bg-indigo-900/15 blur-[90px]" />
       </div>
 
       {/* HUD RINGS */}
@@ -388,7 +388,7 @@ export default function HeroSlider() {
         />
         <div
           ref={ring3Ref}
-          className="absolute rounded-full border border-sky-500/[0.12]"
+          className="absolute rounded-full border border-sky-500/12"
           style={{ width: "min(340px, 60vw)", height: "min(340px, 60vw)" }}
         />
       </div>
@@ -409,7 +409,7 @@ export default function HeroSlider() {
         }}
       >
         <Canvas
-          camera={{ position: [0, 0, 5], fov: 38 }}
+          camera={{ position: [0.2, 1, 5], fov: 38 }}
           style={{ width: "100%", height: "100%" }}
           gl={{ alpha: true }}
         >
@@ -459,7 +459,7 @@ export default function HeroSlider() {
       </div>
 
       {/* MAIN CONTENT */}
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col items-center justify-center px-4 py-24 sm:px-6 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8 lg:py-0">
+      <div className="relative z-10 mx-auto flex min-h-svh w-full max-w-7xl flex-col items-center justify-center px-4 py-24 sm:px-6 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8 lg:py-0">
         {/* LEFT */}
         <div className="flex flex-col items-center gap-5 text-center lg:items-start lg:text-left lg:pr-8">
           <div className="flex items-center gap-2.5 rounded-full border border-sky-500/20 bg-sky-500/[0.07] px-3.5 py-1.5">
@@ -471,7 +471,7 @@ export default function HeroSlider() {
 
           <div
             ref={headlineRef}
-            className="overflow-hidden"
+            className="overflow-hidden -mt-5 md:mt-0"
             style={{ perspective: "600px" }}
           >
             <h1 className="text-[clamp(2.4rem,5.5vw,4rem)] font-black leading-[1.04] tracking-tight text-white">
@@ -494,52 +494,55 @@ export default function HeroSlider() {
 
           <p
             ref={subRef}
-            className="max-w-md text-[15px] leading-relaxed text-slate-400"
+            className="mt-5 md:mt-0 max-w-md text-[15px] leading-relaxed text-slate-400"
           >
             {slide.description}
           </p>
 
-          <div ref={ctaRef} className="flex flex-wrap items-center gap-3">
+          <div
+            ref={ctaRef}
+            className="mt-3 md:mt-0 flex flex-wrap items-center gap-3"
+          >
             <Link
               href={slide.ctaPrimaryHref}
-              className="enquiry-btn group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-sky-400/20 bg-black px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-[2px]"
+              className="enquiry-btn group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-sky-400/20 bg-black px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-0.5"
             >
               {/* liquid fill */}
               <span className="liquid-fill absolute inset-0 z-0" />
               {/* glow */}
               <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-sky-400/30" />
               {/* shine sweep */}
-              <span className="shine absolute inset-0 z-[1]" />
+              <span className="shine absolute inset-0 z-1" />
               {/* particles */}
               <span className="particles">
-  {[...Array(40)].map((_, i) => {
-    const angle = Math.random() * Math.PI * 2;
-    const distance = 60 + Math.random() * 90;
+                {[...Array(40)].map((_, i) => {
+                  const angle = Math.random() * Math.PI * 2;
+                  const distance = 60 + Math.random() * 90;
 
-    return (
-      <span
-        key={i}
-        className="particle"
-        style={
-          {
-            "--x": `${20 + Math.random() * 60}%`,
-            "--y": `${20 + Math.random() * 60}%`,
+                  return (
+                    <span
+                      key={i}
+                      className="particle"
+                      style={
+                        {
+                          "--x": `${20 + Math.random() * 60}%`,
+                          "--y": `${20 + Math.random() * 60}%`,
 
-            "--dx": `${Math.cos(angle) * distance}px`,
-            "--dy": `${Math.sin(angle) * distance}px`,
+                          "--dx": `${Math.cos(angle) * distance}px`,
+                          "--dy": `${Math.sin(angle) * distance}px`,
 
-            "--delay": `${Math.random() * 1.2}s`,
-            "--duration": `${0.8 + Math.random() * 1.4}s`,
+                          "--delay": `${Math.random() * 1.2}s`,
+                          "--duration": `${0.8 + Math.random() * 1.4}s`,
 
-            "--size": `${2 + Math.random() * 4}px`,
-          } as React.CSSProperties
-        }
-      />
-    );
-  })}
-</span>
+                          "--size": `${2 + Math.random() * 4}px`,
+                        } as React.CSSProperties
+                      }
+                    />
+                  );
+                })}
+              </span>
               {/* text */}
-              <span className="relative z-[5] text-white">
+              <span className="relative z-5 text-white">
                 Request an Enquiry
               </span>{" "}
             </Link>
@@ -547,7 +550,7 @@ export default function HeroSlider() {
 
           <div
             ref={badgesRef}
-            className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1"
+            className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 md:pt-1"
           >
             {TRUST_BADGES.map((badge, i) => (
               <div key={i} className="flex items-center gap-1.5">

@@ -68,14 +68,48 @@ export async function requestEmailOtp(payload: EnquiryRequestPayload): Promise<E
   return response.data;
 }
 
+export type GeneralEnquiryOtpRequestPayload = {
+  name?: string;
+  company?: string;
+  email: string;
+  message?: string;
+};
+
+export type GeneralEnquiryOtpRequestResponse = {
+  message: string;
+  enquiryId: string;
+  email: string;
+  expiresAt: string;
+  deliveryMode: string;
+  devOtp?: string;
+};
+
+export async function requestEmailOtpGeneral(payload: GeneralEnquiryOtpRequestPayload): Promise<GeneralEnquiryOtpRequestResponse> {
+  const response = await apiPost<GeneralEnquiryOtpRequestResponse>("/enquiries/general/request-email-otp", payload);
+
+  return response.data;
+}
+
 export async function verifyEmailOtp(payload: VerifyEmailOtpPayload): Promise<VerifyEmailOtpResponse> {
   const response = await apiPost<VerifyEmailOtpResponse>("/enquiries/verify-email-otp", payload);
 
   return response.data;
 }
 
+export async function verifyEmailOtpGeneral(payload: VerifyEmailOtpPayload): Promise<VerifyEmailOtpResponse> {
+  const response = await apiPost<VerifyEmailOtpResponse>("/enquiries/general/verify-email-otp", payload);
+
+  return response.data;
+}
+
 export async function submitEnquiry(payload: SubmitEnquiryPayload): Promise<SubmitEnquiryResponse> {
   const response = await apiPost<SubmitEnquiryResponse>("/enquiries/submit", payload);
+
+  return response.data;
+}
+
+export async function submitGeneralEnquiry(payload: SubmitEnquiryPayload): Promise<SubmitEnquiryResponse> {
+  const response = await apiPost<SubmitEnquiryResponse>("/enquiries/general/submit", payload);
 
   return response.data;
 }

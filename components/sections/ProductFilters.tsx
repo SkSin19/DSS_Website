@@ -143,7 +143,7 @@ export default function ProductFilters({
   );
 
   return (
-    <section className="border-b border-white/10 bg-gray-950 text-white">
+    <section className="select-none border-b border-white/10 bg-gray-950 text-white">
 
       {/* ── MOBILE (hidden sm+) ── */}
       <div className="sm:hidden px-3 py-2">

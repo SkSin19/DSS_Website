@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
@@ -258,11 +259,6 @@ export default function ProductEnquiryDialog({ product }: ProductEnquiryDialogPr
                     />
                   </div>
 
-                  {devOtp ? (
-                    <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
-                      Development code: {devOtp}
-                    </div>
-                  ) : null}
 
                   <div className="flex gap-3">
                     <button

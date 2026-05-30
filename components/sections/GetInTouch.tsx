@@ -377,12 +377,6 @@ const GetInTouch: React.FC = () => {
               </div>
             )}
 
-            {devOtp ? (
-              <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 px-4 py-3 text-sm text-amber-200 mt-3">
-                Development code: {devOtp}
-              </div>
-            ) : null}
-
             {message && <p className="mt-3 text-sm text-sky-200">{message}</p>}
           </div>
         </div>

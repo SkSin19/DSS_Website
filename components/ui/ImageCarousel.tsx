@@ -44,7 +44,7 @@ export default function ImageCarousel({ images, alt = "product image", intervalM
         {images.map((src, i) => (
           <div key={i} className="min-w-full relative">
             <div className="relative w-full aspect-5/4 overflow-hidden bg-linear-to-br from-sky-950 via-slate-900 to-slate-800 p-0 ring-1 ring-white/10">
-              <Image src={src} alt={alt} fill className="object-contain drop-shadow-2xl" />
+              <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain drop-shadow-2xl" />
             </div>
           </div>
         ))}

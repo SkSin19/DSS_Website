@@ -2,8 +2,16 @@
 
 import React from "react";
 import Image from "next/image";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const SecureToday: React.FC = () => {
+  const logoRef      = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 0 });
+  const shieldRef    = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 150 });
+  const headlineRef  = useScrollReveal<HTMLHeadingElement>({ animation: "up", delay: 300 });
+  const subtitleRef  = useScrollReveal<HTMLParagraphElement>({ animation: "up", delay: 450 });
+  const ctaRef       = useScrollReveal<HTMLAnchorElement>({ animation: "up", delay: 600 });
+  const productsRef  = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 750 });
+
   return (
     <section className="select-none relative w-full min-h-screen overflow-hidden flex flex-col" style={{ background: "#030617" }}>
 
@@ -16,10 +24,8 @@ const SecureToday: React.FC = () => {
         }}
       />
 
-      {/* Decorative dashed box removed to eliminate dotted outline around logo */}
-
       {/* ── TOP NAV — Logo ── */}
-      <div className="relative z-20 flex items-center justify-center py-10">
+      <div ref={logoRef} className="relative z-20 flex items-center justify-center py-10">
         <Image
           src="/images/logo/dss_logo.png"
           alt="Digital Security Solutions"
@@ -34,7 +40,7 @@ const SecureToday: React.FC = () => {
       <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 pt-10 pb-0">
 
         {/* Shield icon */}
-        <div className="mb-6">
+        <div ref={shieldRef} className="mb-6">
           <svg width="52" height="58" viewBox="0 0 56 62" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M28 2L4 12V30C4 44.4 14.8 57.8 28 61C41.2 57.8 52 44.4 52 30V12L28 2Z"
@@ -54,13 +60,13 @@ const SecureToday: React.FC = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center leading-tight mb-5">
+        <h1 ref={headlineRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center leading-tight mb-5">
           Secure Today.{" "}
           <span style={{ color: "#3b82f6" }}>Safer Tomorrow.</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="text-center text-base md:text-lg max-w-md mb-8 leading-relaxed" style={{ color: "#8fa3c0" }}>
+        <p ref={subtitleRef} className="text-center text-base md:text-lg max-w-md mb-8 leading-relaxed" style={{ color: "#8fa3c0" }}>
           Advanced digital security solutions to protect your
           <br />
           people, property and peace of mind.
@@ -68,6 +74,7 @@ const SecureToday: React.FC = () => {
 
         {/* CTA link */}
         <a
+          ref={ctaRef}
           href="#"
           className="group inline-flex items-center gap-1 text-sm font-medium mb-12 transition-colors duration-200"
           style={{ color: "#3b82f6" }}
@@ -78,12 +85,17 @@ const SecureToday: React.FC = () => {
           </svg>
         </a>
 
-        {/* ── PRODUCTS ROW — replaced by image (full-width, blending) ── */}
-        <div className="relative flex items-end justify-center bg-black h-[220px] md:h-[300px] lg:h-[360px]" style={{ backgroundColor: "#000", width: '130vw', left: '50%', transform: 'translateX(-46%)' }}>
+        {/* ── PRODUCTS ROW ── */}
+        <div
+          ref={productsRef}
+          className="relative flex items-end justify-center bg-black h-[220px] md:h-[300px] lg:h-[360px]"
+          style={{ backgroundColor: "#000", width: "130vw", left: "50%", transform: "translateX(-46%)" }}
+        >
           <Image
             src="/images/general/products-row.png"
             alt="Products row"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover w-full h-full"
             unoptimized
           />

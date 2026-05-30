@@ -56,7 +56,7 @@ export default function ProductImageGallery({ images, alt = "product image", int
             className={`rounded-2xl overflow-hidden focus:outline-none transition-transform ${i === index ? "scale-[1.02] ring-2 ring-sky-300" : ""}`}
             aria-label={`Show image ${i + 1}`}
           >
-              <div className="rounded-2xl border border-white/10 bg-linear-to-b from-sky-950 via-slate-900 to-slate-800 p-3 shadow-lg shadow-slate-950/20">
+            <div className="rounded-2xl border border-white/10 bg-linear-to-b from-sky-950 via-slate-900 to-slate-800 p-3 shadow-lg shadow-slate-950/20">
               <div className="relative aspect-square">
                 <Image
                   src={src}

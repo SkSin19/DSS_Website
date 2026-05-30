@@ -1,9 +1,14 @@
+"use client";
+
 import Container from "@/components/ui/Container";
 import { TRUST_BADGES } from "@/lib/constants";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function TrustBar() {
+  const ref = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 0 });
+
   return (
-    <div className="select-none w-full bg-gray-50 border-b border-gray-100 py-4 overflow-hidden lg:hidden">
+    <div ref={ref} className="select-none w-full bg-gray-50 border-b border-gray-100 py-4 overflow-hidden lg:hidden">
       <Container>
         <div className="flex justify-center gap-4 sm:gap-8 flex-wrap">
           {TRUST_BADGES.map((badge, idx) => (

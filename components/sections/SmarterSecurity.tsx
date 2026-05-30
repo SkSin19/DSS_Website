@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import { FEATURES } from "@/lib/constants";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 function ShieldIcon() {
   return (
@@ -43,7 +46,30 @@ const icons = {
   eye: EyeIcon,
 };
 
+function FeatureCard({ feature, index }: { feature: (typeof FEATURES)[number]; index: number }) {
+  const ref = useScrollReveal<HTMLDivElement>({ animation: "up", delay: index * 150 });
+  const IconComponent = icons[feature.icon as keyof typeof icons];
+
+  return (
+    <div ref={ref} className="flex flex-col items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl border border-sky-400/30 bg-sky-900/30 flex items-center justify-center text-sky-400 backdrop-blur-sm">
+        <IconComponent />
+      </div>
+      <span className="text-[11px] sm:text-sm font-medium text-sky-100/90 leading-tight">
+        {feature.label.split(" ").map((word, i) => (
+          <span key={i} className="block">{word}</span>
+        ))}
+      </span>
+    </div>
+  );
+}
+
 export default function SmarterSecurity() {
+  // Left text content slides in from left
+  const leftRef  = useScrollReveal<HTMLDivElement>({ animation: "left",  delay: 0 });
+  // Right image panel slides in from right
+  const rightRef = useScrollReveal<HTMLDivElement>({ animation: "right", delay: 250 });
+
   return (
     <section className="select-none bg-gray-950 pb-14 sm:pb-20 pt-8 sm:pt-10" id="solutions">
       <Container>
@@ -51,7 +77,7 @@ export default function SmarterSecurity() {
           <div className="absolute top-0 right-0 w-200 h-200 bg-sky-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
           <div className="absolute bottom-0 left-0 w-125 h-125 bg-blue-600/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3"></div>
 
-          <div className="flex-1 p-6 sm:p-10 md:p-16 lg:p-20 relative z-10 flex flex-col justify-center text-white">
+          <div ref={leftRef} className="flex-1 p-6 sm:p-10 md:p-16 lg:p-20 relative z-10 flex flex-col justify-center text-white">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-4 sm:mb-6">
               Smarter Security.<br />
               <span className="text-sky-300">Stronger Protection.</span>
@@ -61,21 +87,9 @@ export default function SmarterSecurity() {
             </p>
 
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6 mb-8 sm:mb-12">
-              {FEATURES.map((feature) => {
-                const IconComponent = icons[feature.icon as keyof typeof icons];
-                return (
-                  <div key={feature.label} className="flex flex-col items-center sm:items-start text-center sm:text-left gap-2 sm:gap-3">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl border border-sky-400/30 bg-sky-900/30 flex items-center justify-center text-sky-400 backdrop-blur-sm">
-                      <IconComponent />
-                    </div>
-                    <span className="text-[11px] sm:text-sm font-medium text-sky-100/90 leading-tight">
-                      {feature.label.split(" ").map((word, index) => (
-                        <span key={index} className="block">{word}</span>
-                      ))}
-                    </span>
-                  </div>
-                );
-              })}
+              {FEATURES.map((feature, index) => (
+                <FeatureCard key={feature.label} feature={feature} index={index} />
+              ))}
             </div>
 
             <div>
@@ -89,7 +103,7 @@ export default function SmarterSecurity() {
             </div>
           </div>
 
-          <div className="flex-1 relative min-h-[22rem] sm:min-h-100 lg:min-h-150 flex items-center justify-center p-4 sm:p-8 lg:p-0">
+          <div ref={rightRef} className="flex-1 relative min-h-[22rem] sm:min-h-100 lg:min-h-150 flex items-center justify-center p-4 sm:p-8 lg:p-0">
             <div className="absolute inset-0 z-0 hidden lg:block">
               <svg viewBox="0 0 100 100" className="w-full h-full text-sky-500/20 absolute -right-20 top-1/2 -translate-y-1/2">
                 <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="0.5" />
@@ -105,6 +119,7 @@ export default function SmarterSecurity() {
                   src="/images/hero/cctv-cameras-surveillance-systems-slide-1.png"
                   alt="Security showcase"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-contain p-4 sm:p-8 drop-shadow-2xl opacity-90 scale-110 sm:scale-125"
                 />
 

@@ -4,8 +4,11 @@
 import React, { useState } from "react";
 import { requestEmailOtpGeneral, verifyEmailOtpGeneral, submitGeneralEnquiry } from "@/lib/enquiry-api";
 import Image from "next/image";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const GetInTouch: React.FC = () => {
+  const formPanelRef  = useScrollReveal<HTMLDivElement>({ animation: "left",  delay: 0 });
+  const rightTextRef  = useScrollReveal<HTMLDivElement>({ animation: "right", delay: 250 });
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -144,6 +147,7 @@ const GetInTouch: React.FC = () => {
             src="/images/general/get-in-touch.png"
             alt="Smart security home"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover object-center"
             unoptimized
           />
@@ -198,7 +202,7 @@ const GetInTouch: React.FC = () => {
       </div>
 
       {/* ─── LEFT PANEL — Get in Touch Form ─── */}
-      <div className="relative z-10 w-full md:w-[45%] flex flex-col justify-center px-8 py-14 lg:px-12">
+      <div ref={formPanelRef} className="relative z-10 w-full md:w-[45%] flex flex-col justify-center px-8 py-14 lg:px-12">
         <div className="w-full rounded-3xl border border-slate-700/50 bg-[#06090f]/80 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-md sm:p-8">
           <h2 className="text-white text-3xl font-bold mb-2">Get in Touch</h2>
           <p className="text-gray-400 text-sm mb-8">
@@ -383,7 +387,7 @@ const GetInTouch: React.FC = () => {
       </div>
 
       {/* ─── RIGHT PANEL — Text overlay on image ─── */}
-      <div className="hidden md:flex relative z-10 flex-1 flex-col justify-end pb-16 px-10">
+      <div ref={rightTextRef} className="hidden md:flex relative z-10 flex-1 flex-col justify-end pb-16 px-10">
         <div>
           <h2 className="text-white text-3xl font-bold leading-tight drop-shadow-lg">
             Smart Security for

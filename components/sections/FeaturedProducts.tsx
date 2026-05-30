@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Container from "@/components/ui/Container";
 import { FEATURED_PRODUCTS } from "@/lib/constants";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 function ShippingIcon() {
   return (
@@ -38,14 +39,100 @@ function ShieldCheckIcon() {
   );
 }
 
+// Product card with alternating left/right scroll-reveal
+function ProductCard({
+  product,
+  index,
+}: {
+  product: (typeof FEATURED_PRODUCTS)[number];
+  index: number;
+}) {
+  const direction = index % 2 === 0 ? "left" : "right";
+  const ref = useScrollReveal<HTMLAnchorElement>({
+    animation: direction,
+    delay: (index % 3) * 150,
+  });
+
+  return (
+    <Link
+      ref={ref}
+      href={product.href}
+      className="group flex flex-col bg-white rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full"
+    >
+      {product.hasOffer && (
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
+          <span className="inline-block px-3 py-1 bg-sky-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
+            Offer
+          </span>
+        </div>
+      )}
+
+      <div className="bg-[#f4f7fb] p-3 sm:p-4 flex items-center justify-center overflow-hidden">
+        <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500" style={{ aspectRatio: "4 / 3" }}>
+          <Image
+            src={product.imageSrc}
+            alt={product.imageAlt}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-contain mix-blend-multiply"
+          />
+        </div>
+      </div>
+
+      <div className="p-4 sm:p-5 relative flex-1">
+        <div className="flex items-start gap-3">
+          <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center text-sky-500 shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+          </div>
+          <div>
+            <h4 className="text-base font-bold text-gray-900 mb-1 line-clamp-1">{product.title}</h4>
+            <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">{product.description}</p>
+          </div>
+        </div>
+        <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-sky-600">
+          Learn more <span className="transition-transform group-hover:translate-x-1">→</span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+// Info bar item slides up individually
+function InfoBarItem({
+  icon,
+  title,
+  subtitle,
+  delay,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  subtitle: string;
+  delay: number;
+}) {
+  const ref = useScrollReveal<HTMLDivElement>({ animation: "up", delay });
+  return (
+    <div ref={ref} className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-3 sm:gap-4">
+      <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 shrink-0 shadow-md">
+        {icon}
+      </div>
+      <div>
+        <h4 className="text-white font-semibold text-sm">{title}</h4>
+        <p className="text-gray-400 text-xs">{subtitle}</p>
+      </div>
+    </div>
+  );
+}
+
 export default function FeaturedProducts() {
   const [showAll, setShowAll] = useState(false);
   const visibleProducts = showAll ? FEATURED_PRODUCTS : FEATURED_PRODUCTS.slice(0, 6);
 
+  const headingRef = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 0 });
+
   return (
     <section className="select-none bg-gray-950 pt-8 sm:pt-10 pb-16 sm:pb-20" id="featured">
       <Container>
-        <div className="flex flex-col items-center justify-center mb-8 sm:mb-10 gap-4">
+        <div ref={headingRef} className="flex flex-col items-center justify-center mb-8 sm:mb-10 gap-4">
           <div className="text-center">
             <div className="flex items-center gap-3 mb-2 justify-center">
               <ShieldCheckIcon />
@@ -60,46 +147,8 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
-          {visibleProducts.map((product) => (
-            <Link
-              key={product.id}
-              href={product.href}
-              className="group flex flex-col bg-white rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full"
-            >
-              {product.hasOffer && (
-                <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
-                  <span className="inline-block px-3 py-1 bg-sky-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
-                    Offer
-                  </span>
-                </div>
-              )}
-
-              <div className="bg-[#f4f7fb] p-3 sm:p-4 flex items-center justify-center overflow-hidden">
-                <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500" style={{ aspectRatio: "4 / 3" }}>
-                  <Image
-                    src={product.imageSrc}
-                    alt={product.imageAlt}
-                    fill
-                    className="object-contain mix-blend-multiply"
-                  />
-                </div>
-              </div>
-
-              <div className="p-4 sm:p-5 relative flex-1">
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center text-sky-500 shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-                  </div>
-                  <div>
-                    <h4 className="text-base font-bold text-gray-900 mb-1 line-clamp-1">{product.title}</h4>
-                    <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">{product.description}</p>
-                  </div>
-                </div>
-                <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-sky-600">
-                  Learn more <span className="transition-transform group-hover:translate-x-1">→</span>
-                </div>
-              </div>
-            </Link>
+          {visibleProducts.map((product, index) => (
+            <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
 
@@ -113,36 +162,25 @@ export default function FeaturedProducts() {
           </button>
         </div>
 
-        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 border-t border-b border-gray-800 pt-8 sm:pt-10 pb-8 sm:pb-10">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 shrink-0 shadow-md">
-              <ShippingIcon />
-            </div>
-            <div>
-              <h4 className="text-white font-semibold text-sm">Free Shipping</h4>
-              <p className="text-gray-400 text-xs">Hassle free home delivery</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 shrink-0 shadow-md">
-              <PaymentIcon />
-            </div>
-            <div>
-              <h4 className="text-white font-semibold text-sm">Secure Payments</h4>
-              <p className="text-gray-400 text-xs">Request enquiry for your orders</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 shrink-0 shadow-md">
-              <ReturnIcon />
-            </div>
-            <div>
-              <h4 className="text-white font-semibold text-sm">15 days free return</h4>
-              <p className="text-gray-400 text-xs">No questions asked</p>
-            </div>
-          </div>
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 justify-items-center border-t border-b border-gray-800 pt-8 sm:pt-10 pb-8 sm:pb-10">
+          <InfoBarItem
+            icon={<ShippingIcon />}
+            title="Free Shipping"
+            subtitle="Hassle free home delivery"
+            delay={0}
+          />
+          <InfoBarItem
+            icon={<PaymentIcon />}
+            title="Secure Payments"
+            subtitle="Request enquiry for your orders"
+            delay={200}
+          />
+          <InfoBarItem
+            icon={<ReturnIcon />}
+            title="15 days free return"
+            subtitle="No questions asked"
+            delay={400}
+          />
         </div>
       </Container>
     </section>

@@ -15,15 +15,6 @@ export default function Home() {
     <>
       <HeroSlider />
       <DiscoverBrands />
-
-      <section className="bg-transparent">
-        <Container>
-          <div className="flex justify-center py-4">
-            <Badge variant="dark">TRUSTED SECURITY PARTNERS</Badge>
-          </div>
-        </Container>
-      </section>
-
       <BrandMarquee />
       <ProductCategories />
       <SmarterSecurity />

@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable react-hooks/purity */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { HERO_SLIDES, TRUST_BADGES } from "@/lib/constants";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -142,6 +143,11 @@ useGLTF.preload("/models/cctv.glb");
    HERO SECTION
 ───────────────────────────────────────────────────────────────────────────── */
 export default function HeroSlider() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const sectionRef = useRef<HTMLElement>(null);
   const bgGridRef = useRef<HTMLDivElement>(null);
   const ring1Ref = useRef<HTMLDivElement>(null);
@@ -154,7 +160,6 @@ export default function HeroSlider() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const badgesRef = useRef<HTMLDivElement>(null);
   const scanLineRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef<boolean>(false);
 
   const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -240,12 +245,6 @@ export default function HeroSlider() {
           { y: 16, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.7 },
           1.15,
-        );
-        entry.fromTo(
-          statsRef.current,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7 },
-          1.1,
         );
 
         gsap.fromTo(
@@ -462,7 +461,7 @@ export default function HeroSlider() {
       <div className="relative z-10 mx-auto flex min-h-svh w-full max-w-7xl flex-col items-center justify-center px-4 py-24 sm:px-6 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8 lg:py-0">
         {/* LEFT */}
         <div className="flex flex-col items-center gap-5 text-center lg:items-start lg:text-left lg:pr-8">
-          <div className="flex items-center gap-2.5 rounded-full border border-sky-500/20 bg-sky-500/[0.07] px-3.5 py-1.5">
+          <div className="flex mb-5 items-center gap-2.5 rounded-full border border-sky-500/20 bg-sky-500/[0.07] px-3.5 py-1.5">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-sky-400" />
             <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-300">
               {slide.badge ?? "Next-Gen Surveillance"}
@@ -501,51 +500,58 @@ export default function HeroSlider() {
 
           <div
             ref={ctaRef}
-            className="mt-3 md:mt-0 flex flex-wrap items-center gap-3"
+            className="mt-3 md:mt-0 flex flex-wrap items-center gap-3 relative"
           >
-            <Link
-              href={slide.ctaPrimaryHref}
-              className="enquiry-btn group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-sky-400/20 bg-black px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-0.5"
-            >
-              {/* liquid fill */}
-              <span className="liquid-fill absolute inset-0 z-0" />
-              {/* glow */}
-              <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-sky-400/30" />
-              {/* shine sweep */}
-              <span className="shine absolute inset-0 z-1" />
-              {/* particles */}
-              <span className="particles">
-                {[...Array(40)].map((_, i) => {
-                  const angle = Math.random() * Math.PI * 2;
-                  const distance = 60 + Math.random() * 90;
+            <div className="relative inline-flex group-cta">
+              {/* Fog Border Element */}
+              <div className="fog-animated-border pointer-events-none" />
 
-                  return (
-                    <span
-                      key={i}
-                      className="particle"
-                      style={
-                        {
-                          "--x": `${20 + Math.random() * 60}%`,
-                          "--y": `${20 + Math.random() * 60}%`,
+              <Link
+                href={slide.ctaPrimaryHref}
+                className="enquiry-btn relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full border border-sky-400/20 bg-black px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-0.5"
+              >
+                {/* liquid fill */}
+                <span className="liquid-fill absolute inset-0 z-0" />
+                {/* glow */}
+                <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-sky-400/30" />
+                {/* shine sweep */}
+                <span className="shine absolute inset-0 z-1" />
+                {/* particles */}
+                {mounted && (
+                  <span className="particles">
+                    {[...Array(40)].map((_, i) => {
+                      const angle = Math.random() * Math.PI * 2;
+                      const distance = 60 + Math.random() * 90;
 
-                          "--dx": `${Math.cos(angle) * distance}px`,
-                          "--dy": `${Math.sin(angle) * distance}px`,
+                      return (
+                        <span
+                          key={i}
+                          className="particle"
+                          style={
+                            {
+                              "--x": `${20 + Math.random() * 60}%`,
+                              "--y": `${20 + Math.random() * 60}%`,
 
-                          "--delay": `${Math.random() * 1.2}s`,
-                          "--duration": `${0.8 + Math.random() * 1.4}s`,
+                              "--dx": `${Math.cos(angle) * distance}px`,
+                              "--dy": `${Math.sin(angle) * distance}px`,
 
-                          "--size": `${2 + Math.random() * 4}px`,
-                        } as React.CSSProperties
-                      }
-                    />
-                  );
-                })}
-              </span>
-              {/* text */}
-              <span className="relative z-5 text-white">
-                Request an Enquiry
-              </span>{" "}
-            </Link>
+                              "--delay": `${Math.random() * 1.2}s`,
+                              "--duration": `${0.8 + Math.random() * 1.4}s`,
+
+                              "--size": `${2 + Math.random() * 4}px`,
+                            } as React.CSSProperties
+                          }
+                        />
+                      );
+                    })}
+                  </span>
+                )}
+                {/* text */}
+                <span className="relative z-5 text-white">
+                  Request an Enquiry
+                </span>{" "}
+              </Link>
+            </div>
           </div>
 
           <div
@@ -569,6 +575,30 @@ export default function HeroSlider() {
         @keyframes pulse-dot {
           0%, 100% { opacity: 1; transform: scale(1); }
           50%       { opacity: 0.5; transform: scale(0.75); }
+        }
+
+        @keyframes fog {
+          0% { background-position: 0% 50%; opacity: 0.7; transform: scale(1); }
+          50% { background-position: 100% 50%; opacity: 1; transform: scale(1.02); }
+          100% { background-position: 0% 50%; opacity: 0.7; transform: scale(1); }
+        }
+
+        .fog-animated-border {
+          position: absolute;
+          inset: -3px;
+          border-radius: 9999px;
+          background: linear-gradient(90deg, #0ea5e9, #2563eb, #06b6d4, #0ea5e9);
+          background-size: 300% 300%;
+          filter: blur(8px);
+          animation: fog 4s ease infinite;
+          z-index: 0;
+          transition: all 0.5s ease;
+        }
+
+        .group-cta:hover .fog-animated-border {
+          filter: blur(12px);
+          inset: -5px;
+          opacity: 1;
         }
           
         .enquiry-btn {

@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 
 function DiamondIcon() {
@@ -80,12 +83,17 @@ function SupportIcon() {
 }
 
 export default function PremiumDesign() {
+  // Left image panel slides in from the left
+  const leftRef = useScrollReveal<HTMLDivElement>({ animation: "left", delay: 0 });
+  // Right content panel slides in from the right
+  const rightRef = useScrollReveal<HTMLDivElement>({ animation: "right", delay: 250 });
+
   return (
     <section className="select-none bg-gray-950 section-padding" id="premium-design">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column (Image) */}
-          <div className="bg-[#2b354e] rounded-4xl p-8 min-h-100 lg:min-h-125 relative overflow-hidden flex items-center justify-center">
+          <div ref={leftRef} className="bg-[#2b354e] rounded-4xl p-8 min-h-100 lg:min-h-125 relative overflow-hidden flex items-center justify-center">
             {/* Background Shield Outline */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 pointer-events-none">
               <svg
@@ -117,7 +125,7 @@ export default function PremiumDesign() {
           </div>
 
           {/* Right Column (Text Content) */}
-          <div className="bg-[#f8f9fc] rounded-4xl p-10 md:p-16 flex flex-col justify-center">
+          <div ref={rightRef} className="bg-[#f8f9fc] rounded-4xl p-10 md:p-16 flex flex-col justify-center">
             <div className="flex items-center gap-2 mb-6">
               <ShieldIcon />
               <span className="text-sky-600 text-xs font-bold tracking-widest uppercase">
@@ -131,7 +139,7 @@ export default function PremiumDesign() {
             </h2>
 
             <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-10 max-w-md">
-              Born out of a shared love of good design & quality products, we
+              Born out of a shared love of good design &amp; quality products, we
               create considered solutions fit for the modern lifestyle. Always
               driven by passion, we work to empower others to live the same way.
             </p>

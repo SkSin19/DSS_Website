@@ -12,7 +12,7 @@ import WhyChooseUs from "@/components/sections/WhyChooseUs";
 
 export default function Home() {
   return (
-    <>
+    <div className="select-none">
       <HeroSlider />
       <DiscoverBrands />
       <BrandMarquee />
@@ -22,6 +22,6 @@ export default function Home() {
       <PremiumDesign />
       <FeaturedProducts />
       <WhyChooseUs />
-    </>
+    </div>
   );
 }

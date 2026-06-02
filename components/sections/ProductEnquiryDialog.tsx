@@ -184,28 +184,28 @@ export default function ProductEnquiryDialog({ product }: ProductEnquiryDialogPr
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center justify-center rounded-full bg-sky-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-sky-400"
+        className="inline-flex items-center justify-center rounded-full bg-red-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-700"
       >
         Enquire now
       </button>
 
       {isOpen ? (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/70 p-4 backdrop-blur-sm sm:items-center sm:p-6">
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/70 p-4 backdrop-blur-sm sm:items-center sm:p-6 select-none">
           <div className="w-full max-w-2xl overflow-hidden rounded-[28px] border border-gray-200 text-gray-900 shadow-[0_30px_90px_rgba(2,6,23,0.25)]" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
-            <div className="border-b border-gray-200 px-5 py-4 sm:px-6" style={{ backgroundColor: THEME_COLORS.shadowGrey100 }}>
+            <div className="border-b border-gray-200 px-5 py-4 sm:px-6 select-none" style={{ backgroundColor: THEME_COLORS.shadowGrey100 }}>
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-red-600">Product enquiry</p>
-                  <h3 className="mt-2 text-xl font-semibold sm:text-2xl">{enquiryTitle}</h3>
-                  <p className="mt-1 text-sm text-gray-600">Verify your email, enter the code, then add your phone and enquiry details.</p>
+                  <h3 className="mt-2 text-xl font-semibold sm:text-2xl select-none">{enquiryTitle.split(" ")[0]}</h3>
+                  <p className="mt-1 text-sm text-gray-600">We verify your email, so make sure to enter the correct email address.</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="rounded-full border border-gray-200 px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                  className="border-gray-500 px-3 py-1.5 text-sm text-gray-800 transition-colors hover:text-red-900 md:text-xl"
                   aria-label="Close enquiry dialog"
                 >
-                  Close
+                  X
                 </button>
               </div>
             </div>

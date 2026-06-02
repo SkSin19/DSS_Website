@@ -219,7 +219,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                         key={pageNumber}
                         href={`/products?${query.toString()}`}
                         aria-label={`Page ${pageNumber}`}
-                        style={{ color: "#ffffff" }}
+                        style={{ color: 'black' }}
                         className={`inline-flex h-7 w-7 items-center justify-center rounded-sm border text-[11px] font-semibold transition-colors sm:h-8 sm:w-8 sm:text-xs ${isActive ? "border-red-600 bg-red-600 text-white" : "border-gray-300 bg-gray-100 text-gray-700 hover:border-red-300 hover:bg-gray-200"}`}
                       >
                         {pageNumber}

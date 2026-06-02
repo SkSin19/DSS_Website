@@ -84,7 +84,7 @@ function ProductCard({
           </div>
         </div>
         <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-red-600">
-          Learn more <span className="transition-transform group-hover:translate-x-1">→</span>
+          Click to learn more
         </div>
       </div>
     </Link>

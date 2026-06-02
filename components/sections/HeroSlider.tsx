@@ -155,7 +155,6 @@ export default function HeroSlider() {
   const ring2Ref = useRef<HTMLDivElement>(null);
   const ring3Ref = useRef<HTMLDivElement>(null);
   const productRef = useRef<HTMLDivElement>(null);
-  const spotlightRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -294,32 +293,7 @@ export default function HeroSlider() {
     };
   }, []);
 
-  /* ── SPOTLIGHT ─────────────────────────────────────────────────────────── */
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    let raf: number;
-
-    const onMove = (e: MouseEvent) => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(async () => {
-        const { gsap } = await import("gsap");
-        const { left, top } = section.getBoundingClientRect();
-        gsap.to(spotlightRef.current, {
-          x: e.clientX - left,
-          y: e.clientY - top,
-          duration: 0.6,
-          ease: "power2.out",
-        });
-      });
-    };
-
-    section.addEventListener("mousemove", onMove);
-    return () => {
-      section.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
+  
 
   const headline = `${slide.headingLine1} ${slide.headingLine2}`;
   const accentStart = slide.headingLine1.split(" ").length;
@@ -330,17 +304,7 @@ export default function HeroSlider() {
       className="select-none relative w-full overflow-hidden bg-white"
       style={{ minHeight: "100svh" }}
     >
-      {/* spotlight */}
-      <div
-        ref={spotlightRef}
-        className="pointer-events-none absolute z-0 h-130 w-130 -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(220,38,38,0.10) 0%, transparent 70%)",
-          top: 0,
-          left: 0,
-        }}
-      />
+      
 
       {/* scan line */}
       <div
@@ -363,12 +327,7 @@ export default function HeroSlider() {
         }}
       />
 
-      {/* ambient lights */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute -top-32 left-1/2 h-120 w-175 -translate-x-1/2 rounded-full bg-red-500/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-80 w-105 rounded-full bg-gray-500/10 blur-[100px]" />
-        <div className="absolute bottom-0 left-0 h-60 w-75 rounded-full bg-gray-400/10 blur-[90px]" />
-      </div>
+    
 
       {/* HUD RINGS */}
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
@@ -379,7 +338,7 @@ export default function HeroSlider() {
         />
         <div
           ref={ring2Ref}
-          className="absolute rounded-full border border-gray-400/[0.10]"
+          className="absolute rounded-full border border-gray-400/10"
           style={{
             width: "min(560px, 85vw)",
             height: "min(560px, 85vw)",

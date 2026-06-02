@@ -6,7 +6,7 @@ export default function BrandMarquee() {
   const marqueeItems = [...MARQUEE_BRANDS, ...MARQUEE_BRANDS, ...MARQUEE_BRANDS];
 
   return (
-    <div className="select-none w-full bg-white border-y border-gray-100 py-4 sm:py-6 overflow-hidden flex" aria-hidden="true">
+    <div className="select-none w-full bg-gray-100 border-y md:py-15 border-gray-100 py-10 sm:py-6 overflow-hidden flex" aria-hidden="true">
       <div className="flex animate-marquee w-max">
         {marqueeItems.map((brand, index) => (
           <div 

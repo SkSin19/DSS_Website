@@ -98,19 +98,12 @@ export default function SmarterSecurity() {
                 href="/products"
                 className="w-full sm:w-auto bg-white! text-gray-900! border-gray-200 hover:bg-red-600! hover:text-white! shadow-xl shadow-gray-900/10"
               >
-                Browse products <span>→</span>
+                Browse products
               </Button>
             </div>
           </div>
 
           <div ref={rightRef} className="flex-1 relative min-h-88 sm:min-h-100 lg:min-h-150 flex items-center justify-center p-4 sm:p-8 lg:p-0">
-            <div className="absolute inset-0 z-0 hidden lg:block">
-              <svg viewBox="0 0 100 100" className="w-full h-full text-sky-500/20 absolute -right-20 top-1/2 -translate-y-1/2">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="0.2" />
-              </svg>
-            </div>
-
             <div className="relative z-10 w-full max-w-lg h-full min-h-72 sm:min-h-100 flex items-center justify-center">
               <div className="relative w-full h-88 sm:h-125 rounded-2xl bg-linear-to-t from-white to-transparent flex items-end justify-center pb-6 sm:pb-8 border border-gray-200 shadow-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-red-100 via-gray-50 to-gray-100 -z-10"></div>

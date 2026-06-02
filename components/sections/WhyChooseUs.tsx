@@ -28,7 +28,7 @@ export default function WhyChooseUs() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
             Why Choose Us?
           </h2>
-          <p className="text-gray-600 text-sm md:text-base leading-relaxed px-2 sm:px-0">
+          <p className="text-red-600 text-sm md:text-base leading-relaxed px-2 sm:px-0">
             We deliver enterprise-grade security infrastructure with unmatched service and reliability.
           </p>
         </div>

@@ -57,10 +57,9 @@ function BestsellerCard({
         </p>
         <Link
           href={product.href}
-          className="text-sm font-semibold text-sky-600 hover:text-sky-700 transition-colors flex items-center gap-1 group/link"
+          className="text-sm font-semibold text-red-600 hover:text-sky-700 transition-colors flex items-center gap-1 group/link"
         >
           Learn more
-          <span className="group-hover/link:translate-x-1 transition-transform">→</span>
         </Link>
       </div>
     </div>
@@ -78,7 +77,7 @@ export default function Bestsellers() {
             Bestselling Products
           </h2>
           <h3 className=" pt-3 w-full text-center text-1xl md:text-2xl text-red-600/80">
-            Bestselling Products
+            Others love them, so will you
           </h3>
         </div>
 

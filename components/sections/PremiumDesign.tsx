@@ -186,9 +186,6 @@ export default function PremiumDesign() {
                 className="inline-flex items-center justify-center bg-red-600! text-white! hover:bg-red-700! px-8 py-3.5 rounded-full text-sm font-semibold transition-colors gap-2 group shadow-xl"
               >
                 Read our Story
-                <span className="group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
               </Link>
             </div>
           </div>

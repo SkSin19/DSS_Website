@@ -42,7 +42,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="site-footer" className="bg-white text-gray-900 relative overflow-hidden border-t border-gray-200" role="contentinfo">
+    <footer id="site-footer" className="bg-gray-200/95 text-gray-900 relative overflow-hidden border-t border-gray-200" role="contentinfo">
       {/* Subtle dotted background pattern on left side */}
       <div className="absolute top-0 left-0 bottom-0 w-1/3 opacity-[0.05] pointer-events-none overflow-hidden">
         <svg width="100%" height="100%">

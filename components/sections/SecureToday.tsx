@@ -13,14 +13,14 @@ const SecureToday: React.FC = () => {
   const productsRef  = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 750 });
 
   return (
-    <section className="select-none relative w-full min-h-screen overflow-hidden flex flex-col" style={{ background: "#030617" }}>
+    <section className="select-none relative w-full min-h-screen overflow-hidden flex flex-col bg-white">
 
       {/* ── BACKGROUND: subtle radial blue glow in center ── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 70%, rgba(20,50,120,0.18) 0%, rgba(3,6,12,1) 80%)",
+            "radial-gradient(ellipse 80% 60% at 50% 70%, rgba(220,38,38,0.08) 0%, rgba(255,255,255,1) 80%)",
         }}
       />
 
@@ -45,13 +45,13 @@ const SecureToday: React.FC = () => {
             <path
               d="M28 2L4 12V30C4 44.4 14.8 57.8 28 61C41.2 57.8 52 44.4 52 30V12L28 2Z"
               fill="none"
-              stroke="#2563eb"
+              stroke="#dc2626"
               strokeWidth="2.5"
               strokeLinejoin="round"
             />
             <path
               d="M18 31L24 37L38 23"
-              stroke="#2563eb"
+              stroke="#dc2626"
               strokeWidth="3"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -60,13 +60,13 @@ const SecureToday: React.FC = () => {
         </div>
 
         {/* Headline */}
-        <h1 ref={headlineRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center leading-tight mb-5">
+        <h1 ref={headlineRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 text-center leading-tight mb-5">
           Secure Today.{" "}
-          <span style={{ color: "#3b82f6" }}>Safer Tomorrow.</span>
+          <span style={{ color: "#dc2626" }}>Safer Tomorrow.</span>
         </h1>
 
         {/* Subheadline */}
-        <p ref={subtitleRef} className="text-center text-base md:text-lg max-w-md mb-8 leading-relaxed" style={{ color: "#8fa3c0" }}>
+        <p ref={subtitleRef} className="text-center text-base md:text-lg max-w-md mb-8 leading-relaxed text-gray-600">
           Advanced digital security solutions to protect your
           <br />
           people, property and peace of mind.
@@ -76,8 +76,7 @@ const SecureToday: React.FC = () => {
         <a
           ref={ctaRef}
           href="#"
-          className="group inline-flex items-center gap-1 text-sm font-medium mb-12 transition-colors duration-200"
-          style={{ color: "#3b82f6" }}
+          className="group inline-flex items-center gap-1 text-sm font-medium mb-12 transition-colors duration-200 text-red-600"
         >
           <span>Explore our security solutions</span>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="transition-transform duration-200 group-hover:translate-x-0.5">
@@ -88,8 +87,8 @@ const SecureToday: React.FC = () => {
         {/* ── PRODUCTS ROW ── */}
         <div
           ref={productsRef}
-          className="relative flex items-end justify-center bg-black h-[220px] md:h-[300px] lg:h-[360px]"
-          style={{ backgroundColor: "#000", width: "130vw", left: "50%", transform: "translateX(-46%)" }}
+          className="relative flex items-end justify-center bg-gray-50 h-55 md:h-75 lg:h-90 border-t border-gray-200"
+          style={{ width: "130vw", left: "50%", transform: "translateX(-46%)" }}
         >
           <Image
             src="/images/general/products-row.png"
@@ -104,7 +103,7 @@ const SecureToday: React.FC = () => {
             className="absolute left-0 right-0 top-0 pointer-events-none"
             style={{
               height: "6rem",
-              background: "linear-gradient(to bottom, #030617 0%, rgba(3,6,23,0) 100%)",
+              background: "linear-gradient(to bottom, #ffffff 0%, rgba(255,255,255,0) 100%)",
               zIndex: 30,
             }}
           />
@@ -114,7 +113,7 @@ const SecureToday: React.FC = () => {
       {/* Global bottom dark gradient */}
       <div
         className="absolute bottom-0 left-0 right-0 h-56 pointer-events-none z-20"
-        style={{ background: "linear-gradient(to top, #070d1c 30%, rgba(7,13,28,0.7) 70%, transparent)" }}
+        style={{ background: "linear-gradient(to top, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.6) 70%, transparent)" }}
       />
 
       {/* Ambient glow behind products */}
@@ -123,7 +122,7 @@ const SecureToday: React.FC = () => {
         style={{
           width: "700px",
           height: "300px",
-          background: "radial-gradient(ellipse at center bottom, rgba(37,99,235,0.18) 0%, transparent 65%)",
+          background: "radial-gradient(ellipse at center bottom, rgba(220,38,38,0.12) 0%, transparent 65%)",
           zIndex: 5,
         }}
       />

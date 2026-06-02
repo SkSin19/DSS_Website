@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-50 w-full bg-black/95 text-white backdrop-blur-md transition-all duration-300 border-b border-white/10 ${
+      className={`sticky top-0 z-50 w-full bg-gray-200/95 text-gray-900 backdrop-blur-md transition-all duration-300 border-b border-gray-300 ${
         isScrolled ? "navbar-scrolled" : ""
       }`}
       suppressHydrationWarning
@@ -55,10 +55,10 @@ export default function Navbar() {
             priority
           />
           <span className="hidden sm:flex flex-col leading-tight">
-            <span className="text-sm md:text-base font-bold text-white tracking-tight">
+            <span className="text-sm md:text-base font-bold text-gray-900 tracking-tight">
               DIGITAL SECURITY
             </span>
-            <span className="text-[10px] md:text-xs font-semibold text-zinc-400 tracking-widest uppercase">
+            <span className="text-[10px] md:text-xs font-semibold text-gray-500 tracking-widest uppercase">
               SOLUTIONS
             </span>
           </span>
@@ -73,7 +73,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
+                    className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-red-600 rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
                   >
                     {link.label}
                     <svg
@@ -92,16 +92,16 @@ export default function Navbar() {
                   </Link>
 
                   <div className="absolute left-1/2 top-full z-50 w-150 -translate-x-1/2 pt-3 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
-                    <div className="rounded-2xl border border-white/10 bg-[#050a16]/95 backdrop-blur-xl shadow-2xl p-4">
-                      <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-zinc-500">Product Categories</p>
+                    <div className="rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-4">
+                      <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">Product Categories</p>
                       <div className="grid grid-cols-2 gap-2">
                         {PRODUCT_CATEGORIES.map((category) => (
                           <Link
                             key={category.href}
                             href={category.href}
-                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-white/5 focus-ring"
+                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-gray-100 focus-ring"
                           >
-                            <p className="text-sm font-semibold text-white">{category.title}</p>
+                            <p className="text-sm font-semibold text-gray-900">{category.title}</p>
                           </Link>
                         ))}
                       </div>
@@ -117,7 +117,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
+                    className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-red-600 rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
                   >
                     {link.label}
                     <svg
@@ -136,17 +136,17 @@ export default function Navbar() {
                   </Link>
 
                   <div className="absolute left-1/2 top-full z-50 w-150 -translate-x-1/2 pt-3 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
-                    <div className="rounded-2xl border border-white/10 bg-[#050a16]/95 backdrop-blur-xl shadow-2xl p-4">
-                      <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-zinc-500">Our Brands</p>
+                    <div className="rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-4">
+                      <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">Our Brands</p>
                       <div className="grid grid-cols-2 gap-2">
                         {BRANDS.map((brand) => (
                           <Link
                             key={brand.name}
                             href={`/brands?name=${encodeURIComponent(brand.name)}`}
-                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-white/5 focus-ring"
+                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-gray-100 focus-ring"
                           >
-                            <p className="text-sm font-semibold text-white">{brand.name}</p>
-                            <p className="mt-1 text-xs leading-relaxed text-zinc-400">{brand.tagline}</p>
+                            <p className="text-sm font-semibold text-gray-900">{brand.name}</p>
+                            <p className="mt-1 text-xs leading-relaxed text-gray-500">{brand.tagline}</p>
                           </Link>
                         ))}
                       </div>
@@ -161,7 +161,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                  className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white rounded-lg transition-colors duration-200 focus-ring"
+                  className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-red-600 rounded-lg transition-colors duration-200 focus-ring"
                 >
                   {link.label}
                 </Link>
@@ -174,7 +174,7 @@ export default function Navbar() {
         <button
           type="button"
           id="mobile-menu-toggle"
-          className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg text-zinc-300 hover:bg-white/10 hover:text-white transition-colors focus-ring"
+          className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg text-gray-600 hover:bg-gray-200 hover:text-red-600 transition-colors focus-ring"
           onClick={toggleMobileMenu}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
@@ -196,7 +196,7 @@ export default function Navbar() {
       <div
         id="mobile-menu"
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen ? "max-h-96 border-t border-white/10 bg-black" : "max-h-0"
+          isMobileMenuOpen ? "max-h-96 border-t border-gray-300 bg-gray-50" : "max-h-0"
         }`}
         role="region"
         aria-label="Mobile navigation"
@@ -206,7 +206,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="block px-4 py-3 text-base font-medium text-zinc-300 hover:bg-white/5 hover:text-white rounded-xl transition-colors"
+              className="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-red-600 rounded-xl transition-colors"
               onClick={closeMobileMenu}
             >
               {link.label}

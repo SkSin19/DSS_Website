@@ -1,0 +1,25 @@
+export const THEME_COLORS = {
+  white: "#ffffff",
+  red: "#dc2626",
+  redSoft: "#ef4444",
+  redDark: "#b91c1c",
+  shadowGrey50: "#f9fafb",
+  shadowGrey100: "#f3f4f6",
+  shadowGrey200: "#e5e7eb",
+  shadowGrey300: "#d1d5db",
+  shadowGrey400: "#9ca3af",
+  shadowGrey500: "#6b7280",
+  shadowGrey600: "#4b5563",
+  shadowGrey700: "#374151",
+  shadowGrey800: "#1f2937",
+  shadowGrey900: "#111827",
+  shadowGrey950: "#030712",
+  border: "#e5e7eb",
+  text: "#111827",
+  textMuted: "#6b7280",
+  surface: "#ffffff",
+  surfaceMuted: "#f9fafb",
+  surfaceAlt: "#f3f4f6",
+} as const;
+
+export type ThemeColorKey = keyof typeof THEME_COLORS;

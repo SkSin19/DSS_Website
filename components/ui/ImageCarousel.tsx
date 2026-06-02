@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { THEME_COLORS } from "@/themes/colors";
 
 interface ImageCarouselProps {
   images: string[];
@@ -43,7 +44,7 @@ export default function ImageCarousel({ images, alt = "product image", intervalM
       >
         {images.map((src, i) => (
           <div key={i} className="min-w-full relative">
-            <div className="relative w-full aspect-5/4 overflow-hidden bg-linear-to-br from-sky-950 via-slate-900 to-slate-800 p-0 ring-1 ring-white/10">
+            <div className="relative w-full aspect-5/4 overflow-hidden p-0 ring-1 ring-gray-200" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
               <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain drop-shadow-2xl" />
             </div>
           </div>
@@ -56,7 +57,7 @@ export default function ImageCarousel({ images, alt = "product image", intervalM
             key={i}
             aria-label={`Go to image ${i + 1}`}
             onClick={() => goTo(i)}
-            className={`h-2 w-8 rounded-full transition-all duration-300 ${i === index ? "bg-white" : "bg-white/30"}`}
+            className={`h-2 w-8 rounded-full transition-all duration-300 ${i === index ? "bg-red-600" : "bg-gray-300"}`}
           />
         ))}
       </div>

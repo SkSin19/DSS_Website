@@ -6,6 +6,7 @@ import { useState } from "react";
 import Container from "@/components/ui/Container";
 import { FEATURED_PRODUCTS } from "@/lib/constants";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { THEME_COLORS } from "@/themes/colors";
 
 function ShippingIcon() {
   return (
@@ -49,17 +50,18 @@ function ProductCard({
     <Link
       ref={ref}
       href={product.href}
-      className="group flex flex-col bg-white rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full"
+      className="group flex flex-col rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full border border-gray-200"
+      style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}
     >
       {product.hasOffer && (
         <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
-          <span className="inline-block px-3 py-1 bg-sky-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
+          <span className="inline-block px-3 py-1 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
             Offer
           </span>
         </div>
       )}
 
-      <div className="bg-[#f4f7fb] p-3 sm:p-4 flex items-center justify-center overflow-hidden">
+      <div className="bg-gray-50 p-3 sm:p-4 flex items-center justify-center overflow-hidden">
         <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500" style={{ aspectRatio: "4 / 3" }}>
           <Image
             src={product.imageSrc}
@@ -73,7 +75,7 @@ function ProductCard({
 
       <div className="p-4 sm:p-5 relative flex-1">
         <div className="flex items-start gap-3">
-          <div className="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center text-sky-500 shrink-0">
+          <div className="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-red-600 shrink-0 border border-red-100">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
           </div>
           <div>
@@ -81,7 +83,7 @@ function ProductCard({
             <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">{product.description}</p>
           </div>
         </div>
-        <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-sky-600">
+        <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-red-600">
           Learn more <span className="transition-transform group-hover:translate-x-1">→</span>
         </div>
       </div>
@@ -104,12 +106,12 @@ function InfoBarItem({
   const ref = useScrollReveal<HTMLDivElement>({ animation: "up", delay });
   return (
     <div ref={ref} className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-3 sm:gap-4">
-      <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-gray-800 shrink-0 shadow-md">
+      <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-gray-800 shrink-0 shadow-md border border-gray-200" style={{ backgroundColor: THEME_COLORS.shadowGrey100 }}>
         {icon}
       </div>
       <div>
-        <h4 className="text-white font-semibold text-sm">{title}</h4>
-        <p className="text-gray-400 text-xs">{subtitle}</p>
+        <h4 className="text-gray-900 font-semibold text-sm">{title}</h4>
+        <p className="text-gray-500 text-xs">{subtitle}</p>
       </div>
     </div>
   );
@@ -122,16 +124,16 @@ export default function FeaturedProducts() {
   const headingRef = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 0 });
 
   return (
-    <section className="select-none bg-gray-950 pt-8 sm:pt-10 pb-16 sm:pb-20" id="featured">
+    <section className="select-none bg-gray-50 pt-8 sm:pt-10 pb-16 sm:pb-20" id="featured">
       <Container>
         <div ref={headingRef} className="flex flex-col items-center justify-center mb-8 sm:mb-10 gap-4">
           <div className="text-center">
             <div className="flex items-center gap-3 mb-2 justify-center">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
                 Featured Security Products
               </h2>
             </div>
-            <p className="text-[#0b6ded] text-sm max-w-xl mx-auto text-center">
+            <p className="text-red-600 text-sm max-w-xl mx-auto text-center">
               Smart solutions for a safer, smarter tomorrow.
             </p>
           </div>
@@ -147,13 +149,13 @@ export default function FeaturedProducts() {
           <button
             type="button"
             onClick={() => setShowAll((current) => !current)}
-            className="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-white px-7 py-3 text-sm font-semibold text-black shadow-xl shadow-black/10 transition-colors hover:bg-black hover:text-white"
+            className="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-red-600 px-7 py-3 text-sm font-semibold text-white shadow-xl shadow-gray-900/10 transition-colors hover:bg-red-700 hover:text-white"
           >
             {showAll ? "Show less" : "Show more"}
           </button>
         </div>
 
-        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 justify-items-center border-t border-b border-gray-800 pt-8 sm:pt-10 pb-8 sm:pb-10">
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 justify-items-center border-t border-b border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-10">
           <InfoBarItem
             icon={<ShippingIcon />}
             title="Free Shipping"

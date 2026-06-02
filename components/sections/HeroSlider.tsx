@@ -9,6 +9,7 @@ import { HERO_SLIDES, TRUST_BADGES } from "@/lib/constants";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
+import { THEME_COLORS } from "@/themes/colors";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    CCTV MODEL — DESKTOP
@@ -326,7 +327,7 @@ export default function HeroSlider() {
   return (
     <section
       ref={sectionRef}
-      className="select-none relative w-full overflow-hidden bg-[#020912]"
+      className="select-none relative w-full overflow-hidden bg-white"
       style={{ minHeight: "100svh" }}
     >
       {/* spotlight */}
@@ -335,7 +336,7 @@ export default function HeroSlider() {
         className="pointer-events-none absolute z-0 h-130 w-130 -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(14,165,233,0.10) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(220,38,38,0.10) 0%, transparent 70%)",
           top: 0,
           left: 0,
         }}
@@ -347,7 +348,7 @@ export default function HeroSlider() {
         className="pointer-events-none absolute inset-x-0 z-10 h-0.5 opacity-20"
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(14,165,233,0.9), transparent)",
+            "linear-gradient(90deg, transparent, rgba(220,38,38,0.9), transparent)",
         }}
       />
 
@@ -357,28 +358,28 @@ export default function HeroSlider() {
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           backgroundImage:
-            "radial-gradient(rgba(148,163,184,0.13) 1px, transparent 1px)",
+            "radial-gradient(rgba(107,114,128,0.14) 1px, transparent 1px)",
           backgroundSize: "36px 36px",
         }}
       />
 
       {/* ambient lights */}
       <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute -top-32 left-1/2 h-120 w-175 -translate-x-1/2 rounded-full bg-sky-600/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-80 w-105 rounded-full bg-sky-900/20 blur-[100px]" />
-        <div className="absolute bottom-0 left-0 h-60 w-75 rounded-full bg-indigo-900/15 blur-[90px]" />
+        <div className="absolute -top-32 left-1/2 h-120 w-175 -translate-x-1/2 rounded-full bg-red-500/10 blur-[120px]" />
+        <div className="absolute bottom-0 right-0 h-80 w-105 rounded-full bg-gray-500/10 blur-[100px]" />
+        <div className="absolute bottom-0 left-0 h-60 w-75 rounded-full bg-gray-400/10 blur-[90px]" />
       </div>
 
       {/* HUD RINGS */}
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
         <div
           ref={ring1Ref}
-          className="absolute rounded-full border border-dashed border-sky-500/10"
+          className="absolute rounded-full border border-dashed border-red-500/10"
           style={{ width: "min(780px, 110vw)", height: "min(780px, 110vw)" }}
         />
         <div
           ref={ring2Ref}
-          className="absolute rounded-full border border-sky-400/[0.07]"
+          className="absolute rounded-full border border-gray-400/[0.10]"
           style={{
             width: "min(560px, 85vw)",
             height: "min(560px, 85vw)",
@@ -387,7 +388,7 @@ export default function HeroSlider() {
         />
         <div
           ref={ring3Ref}
-          className="absolute rounded-full border border-sky-500/12"
+          className="absolute rounded-full border border-red-500/12"
           style={{ width: "min(340px, 60vw)", height: "min(340px, 60vw)" }}
         />
       </div>
@@ -461,9 +462,9 @@ export default function HeroSlider() {
       <div className="relative z-10 mx-auto flex min-h-svh w-full max-w-7xl flex-col items-center justify-center px-4 py-24 sm:px-6 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8 lg:py-0">
         {/* LEFT */}
         <div className="flex flex-col items-center gap-5 text-center lg:items-start lg:text-left lg:pr-8">
-          <div className="flex mb-5 items-center gap-2.5 rounded-full border border-sky-500/20 bg-sky-500/[0.07] px-3.5 py-1.5">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-sky-400" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-300">
+          <div className="flex mb-5 items-center gap-2.5 rounded-full border border-red-500/20 bg-red-50 px-3.5 py-1.5">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-red-700">
               {slide.badge ?? "Next-Gen Surveillance"}
             </span>
           </div>
@@ -473,7 +474,7 @@ export default function HeroSlider() {
             className="overflow-hidden -mt-5 md:mt-0"
             style={{ perspective: "600px" }}
           >
-            <h1 className="text-[clamp(2.4rem,5.5vw,4rem)] font-black leading-[1.04] tracking-tight text-white">
+            <h1 className="text-[clamp(2.4rem,5.5vw,4rem)] font-black leading-[1.04] tracking-tight text-gray-900">
               {headline.split(" ").map((word, i) => (
                 <span
                   key={i}
@@ -481,8 +482,8 @@ export default function HeroSlider() {
                   style={{
                     color:
                       i >= accentStart
-                        ? (slide.headingAccentColor ?? "#38bdf8")
-                        : "white",
+                        ? (slide.headingAccentColor ?? THEME_COLORS.red)
+                        : THEME_COLORS.shadowGrey900,
                   }}
                 >
                   {word}
@@ -493,7 +494,7 @@ export default function HeroSlider() {
 
           <p
             ref={subRef}
-            className="mt-5 md:mt-0 max-w-md text-[15px] leading-relaxed text-slate-400"
+            className="mt-5 md:mt-0 max-w-md text-[15px] leading-relaxed text-gray-600"
           >
             {slide.description}
           </p>
@@ -508,12 +509,12 @@ export default function HeroSlider() {
 
               <Link
                 href={slide.ctaPrimaryHref}
-                className="enquiry-btn relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full border border-sky-400/20 bg-black px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-0.5"
+                className="enquiry-btn relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full border border-red-200 bg-red-600 px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-0.5"
               >
                 {/* liquid fill */}
                 <span className="liquid-fill absolute inset-0 z-0" />
                 {/* glow */}
-                <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-sky-400/30" />
+                <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-red-400/30" />
                 {/* shine sweep */}
                 <span className="shine absolute inset-0 z-1" />
                 {/* particles */}
@@ -560,7 +561,7 @@ export default function HeroSlider() {
           >
             {TRUST_BADGES.map((badge, i) => (
               <div key={i} className="flex items-center gap-1.5">
-                <span className="text-[11px] font-medium text-slate-400">
+                <span className="text-[11px] font-medium text-gray-500">
                   {badge.label}
                 </span>
               </div>
@@ -587,7 +588,7 @@ export default function HeroSlider() {
           position: absolute;
           inset: -3px;
           border-radius: 9999px;
-          background: linear-gradient(90deg, #0ea5e9, #2563eb, #06b6d4, #0ea5e9);
+          background: linear-gradient(90deg, #dc2626, #b91c1c, #6b7280, #dc2626);
           background-size: 300% 300%;
           filter: blur(8px);
           animation: fog 4s ease infinite;
@@ -609,16 +610,16 @@ export default function HeroSlider() {
 }
 
 .enquiry-btn:hover {
-  border-color: rgba(56, 189, 248, 0.6);
+  border-color: rgba(220, 38, 38, 0.6);
   box-shadow:
-    0 0 25px rgba(56, 189, 248, 0.35),
-    0 0 60px rgba(56, 189, 248, 0.18),
-    inset 0 0 30px rgba(56,189,248,0.12);
+    0 0 25px rgba(220, 38, 38, 0.25),
+    0 0 60px rgba(107, 114, 128, 0.12),
+    inset 0 0 30px rgba(220, 38, 38, 0.10);
 }
 
 .liquid-fill {
   background:
-    radial-gradient(circle at 50% 120%, rgba(56,189,248,0.55), transparent 65%);
+    radial-gradient(circle at 50% 120%, rgba(220,38,38,0.55), transparent 65%);
   transform: translateY(100%);
   transition:
     transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
@@ -666,17 +667,17 @@ export default function HeroSlider() {
 
   background:
     radial-gradient(circle,
-      rgba(125,211,252,1) 0%,
-      rgba(56,189,248,1) 45%,
-      rgba(56,189,248,0.2) 72%,
+      rgba(254,202,202,1) 0%,
+      rgba(220,38,38,1) 45%,
+      rgba(220,38,38,0.2) 72%,
       transparent 100%);
 
   opacity: 0;
 
   filter:
     blur(0.4px)
-    drop-shadow(0 0 10px rgba(56,189,248,0.95))
-    drop-shadow(0 0 20px rgba(56,189,248,0.45));
+    drop-shadow(0 0 10px rgba(220,38,38,0.95))
+    drop-shadow(0 0 20px rgba(107,114,128,0.35));
 
   transform:
     translate(-50%, -50%)

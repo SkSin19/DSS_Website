@@ -23,12 +23,12 @@ function BestsellerCard({
   return (
     <div
       ref={ref}
-      className="bg-[#f0f4f8] rounded-3xl p-6 flex flex-col h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+      className="bg-white rounded-3xl p-6 flex flex-col h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group border border-gray-200"
     >
       {/* Top: Offer Badge */}
       <div className="mb-4">
         {product.hasOffer && (
-          <span className="inline-block px-3 py-1 bg-sky-100 text-sky-600 text-[10px] font-bold uppercase tracking-wider rounded-full">
+          <span className="inline-block px-3 py-1 bg-red-50 text-red-600 text-[10px] font-bold uppercase tracking-wider rounded-full border border-red-100">
             Offer
           </span>
         )}
@@ -71,13 +71,13 @@ export default function Bestsellers() {
   const headingRef = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 0 });
 
   return (
-    <section className="select-none bg-gray-950 section-padding" id="bestsellers">
+    <section className="select-none bg-gray-50 section-padding" id="bestsellers">
       <Container>
         <div ref={headingRef} className="mb-10">
-          <h2 className="w-full text-center text-4xl md:text-5xl font-bold tracking-tight text-white">
+          <h2 className="w-full text-center text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
             Bestselling Products
           </h2>
-          <h3 className=" pt-3 w-full text-center text-1xl md:text-2xl text-blue-600/80">
+          <h3 className=" pt-3 w-full text-center text-1xl md:text-2xl text-red-600/80">
             Bestselling Products
           </h3>
         </div>

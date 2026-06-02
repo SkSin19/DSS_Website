@@ -105,7 +105,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="min-h-screen flex flex-col bg-white text-gray-900 overflow-x-hidden selection:bg-sky-200 selection:text-sky-900"
+        className="min-h-screen flex flex-col bg-white text-gray-900 overflow-x-hidden selection:bg-red-100 selection:text-gray-900"
         suppressHydrationWarning
       >
         <Navbar />

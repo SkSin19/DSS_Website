@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { requestEmailOtpGeneral, verifyEmailOtpGeneral, submitGeneralEnquiry } from "@/lib/enquiry-api";
 import Image from "next/image";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { THEME_COLORS } from "@/themes/colors";
 
 const GetInTouch: React.FC = () => {
   const formPanelRef  = useScrollReveal<HTMLDivElement>({ animation: "left",  delay: 0 });
@@ -203,16 +204,16 @@ const GetInTouch: React.FC = () => {
 
       {/* ─── LEFT PANEL — Get in Touch Form ─── */}
       <div ref={formPanelRef} className="relative z-10 w-full md:w-[45%] flex flex-col justify-center px-8 py-14 lg:px-12">
-        <div className="w-full rounded-3xl border border-slate-700/50 bg-[#06090f]/80 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-md sm:p-8">
-          <h2 className="text-white text-3xl font-bold mb-2">Get in Touch</h2>
-          <p className="text-gray-400 text-sm mb-8">
+        <div className="w-full rounded-3xl border border-gray-200 p-6 shadow-[0_20px_60px_rgba(17,24,39,0.12)] backdrop-blur-md sm:p-8" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
+          <h2 className="text-gray-900 text-3xl font-bold mb-2">Get in Touch</h2>
+          <p className="text-gray-600 text-sm mb-8">
             We&apos;re here to help you build a safer and smarter tomorrow.
           </p>
 
           <div className="flex flex-col gap-4">
             {/* Full Name */}
             <div className="flex flex-col gap-1">
-              <label className="text-gray-400 text-xs font-medium tracking-wide uppercase">
+              <label className="text-gray-600 text-xs font-medium tracking-wide uppercase">
                 <span className="text-red-500 mr-1">*</span>Full Name
               </label>
               <input
@@ -222,14 +223,14 @@ const GetInTouch: React.FC = () => {
                 placeholder="Enter your full name"
                 value={formData.fullName}
                 onChange={handleChange}
-                className={`bg-black/30 border rounded-2xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#2563eb] transition-colors ${errors.fullName ? "border-red-500" : "border-[#1e3a5f]/80"}`}
+                className={`bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.fullName ? "border-red-500" : "border-gray-300"}`}
               />
               {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
             </div>
 
             {/* Email Address */}
             <div className="flex flex-col gap-1">
-              <label className="text-gray-400 text-xs font-medium tracking-wide uppercase">
+              <label className="text-gray-600 text-xs font-medium tracking-wide uppercase">
                 <span className="text-red-500 mr-1">*</span>Email Address
               </label>
               <input
@@ -239,20 +240,20 @@ const GetInTouch: React.FC = () => {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`bg-black/30 border rounded-2xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#2563eb] transition-colors ${errors.email ? "border-red-500" : "border-[#1e3a5f]/80"}`}
+                className={`bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.email ? "border-red-500" : "border-gray-300"}`}
               />
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
 
             {/* Phone Number */}
             <div className="flex flex-col gap-1">
-              <label className="text-gray-400 text-xs font-medium tracking-wide uppercase">
+              <label className="text-gray-600 text-xs font-medium tracking-wide uppercase">
                 <span className="text-red-500 mr-1">*</span>Phone Number
               </label>
               <div className="flex gap-2">
-                <div className="flex items-center gap-1 bg-black/30 border border-[#1e3a5f]/80 rounded-2xl px-3 py-2.5 text-white text-sm min-w-[70px]">
+                <div className="flex items-center gap-1 bg-gray-100 border border-gray-300 rounded-2xl px-3 py-2.5 text-gray-900 text-sm" style={{ minWidth: 70 }}>
                   <span className="text-base">🇮🇳</span>
-                  <span className="text-gray-400 text-xs">+91</span>
+                  <span className="text-gray-600 text-xs">+91</span>
                 </div>
                 <input
                   type="tel"
@@ -260,7 +261,7 @@ const GetInTouch: React.FC = () => {
                   placeholder="Enter your phone number"
                   value={formData.phone}
                   onChange={handleChange}
-                className={`bg-black/30 border rounded-2xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#2563eb] transition-colors ${errors.phone ? "border-red-500" : "border-[#1e3a5f]/80"}`}
+                className={`bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.phone ? "border-red-500" : "border-gray-300"}`}
                 />
               </div>
               {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
@@ -268,7 +269,7 @@ const GetInTouch: React.FC = () => {
 
             {/* Enquiry About */}
             <div className="flex flex-col gap-1">
-              <label className="text-gray-400 text-xs font-medium tracking-wide uppercase">
+              <label className="text-gray-600 text-xs font-medium tracking-wide uppercase">
                 <span className="text-red-500 mr-1">*</span>Enquiry About
               </label>
               <div className="relative">
@@ -277,7 +278,7 @@ const GetInTouch: React.FC = () => {
                   aria-required
                   value={formData.enquiryAbout}
                   onChange={handleChange}
-                  className={`w-full bg-black/30 border rounded-2xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#2563eb] transition-colors appearance-none cursor-pointer ${errors.enquiryAbout ? "border-red-500" : "border-[#1e3a5f]/80"}`}
+                  className={`w-full bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-red-400 transition-colors appearance-none cursor-pointer ${errors.enquiryAbout ? "border-red-500" : "border-gray-300"}`}
                 >
                   <option value="" disabled className="text-black">Select an option</option>
                   <option value="cctv" className="text-black">CCTV Systems</option>
@@ -297,7 +298,7 @@ const GetInTouch: React.FC = () => {
 
             {/* City */}
             <div className="flex flex-col gap-1">
-              <label className="text-gray-400 text-xs font-medium tracking-wide uppercase">
+              <label className="text-gray-600 text-xs font-medium tracking-wide uppercase">
                 City
               </label>
               <input
@@ -306,13 +307,13 @@ const GetInTouch: React.FC = () => {
                 placeholder="Enter your city"
                 value={formData.city}
                 onChange={handleChange}
-                className="bg-black/30 border border-[#1e3a5f]/80 rounded-2xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#2563eb] transition-colors"
+                className="bg-white border border-gray-300 rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors"
               />
             </div>
 
             {/* Message */}
             <div className="flex flex-col gap-1">
-              <label className="text-gray-400 text-xs font-medium tracking-wide uppercase">
+              <label className="text-gray-600 text-xs font-medium tracking-wide uppercase">
                 <span className="text-red-500 mr-1">*</span>Message
               </label>
               <textarea
@@ -321,7 +322,7 @@ const GetInTouch: React.FC = () => {
                 value={formData.message}
                 onChange={handleChange}
                 rows={4}
-                className={`bg-black/30 border rounded-2xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#2563eb] transition-colors ${errors.message ? "border-red-500" : "border-[#1e3a5f]/80"}`}
+                className={`bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.message ? "border-red-500" : "border-gray-300"}`}
               />
               {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
             </div>
@@ -331,7 +332,7 @@ const GetInTouch: React.FC = () => {
               <button
                 onClick={handleSubmit}
                 disabled={loading}
-                className={`mt-2 ${loading ? "opacity-70 pointer-events-none" : ""} bg-[#ff251e] hover:bg-[#c91a14] text-white font-semibold text-sm py-4 px-10 rounded-full transition-colors duration-200 self-start`}
+                className={`mt-2 ${loading ? "opacity-70 pointer-events-none" : ""} bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-4 px-10 rounded-full transition-colors duration-200 self-start`}
               >
                 {loading ? "Sending..." : "SEND ENQUIRY →"}
               </button>
@@ -345,7 +346,7 @@ const GetInTouch: React.FC = () => {
                     placeholder="Enter 6-digit code"
                     value={otp}
                     onChange={handleOtpChange}
-                    className="bg-black/30 border border-[#1e3a5f]/80 rounded-2xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#2563eb] transition-colors w-40"
+                    className="bg-white border border-gray-300 rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors w-40"
                   />
                 </div>
 
@@ -353,7 +354,7 @@ const GetInTouch: React.FC = () => {
                   <button
                     onClick={handleVerify}
                     disabled={loading}
-                    className={`bg-[#10b981] hover:bg-[#059669] text-white font-semibold text-sm py-3 px-6 rounded-full transition-colors ${loading ? "opacity-70 pointer-events-none" : ""}`}
+                    className={`bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-3 px-6 rounded-full transition-colors ${loading ? "opacity-70 pointer-events-none" : ""}`}
                   >
                     {loading ? "Verifying..." : "VERIFY & SEND"}
                   </button>
@@ -373,7 +374,7 @@ const GetInTouch: React.FC = () => {
                         .finally(() => setLoading(false));
                     }}
                     disabled={loading}
-                    className="text-sm text-sky-400 hover:text-sky-300 transition-colors"
+                    className="text-sm text-red-600 hover:text-red-700 transition-colors"
                   >
                     Resend
                   </button>
@@ -381,7 +382,7 @@ const GetInTouch: React.FC = () => {
               </div>
             )}
 
-            {message && <p className="mt-3 text-sm text-sky-200">{message}</p>}
+            {message && <p className="mt-3 text-sm text-gray-700">{message}</p>}
           </div>
         </div>
       </div>

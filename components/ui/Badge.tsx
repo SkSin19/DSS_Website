@@ -6,11 +6,11 @@ interface BadgeProps {
 
 const variantStyles: Record<string, string> = {
   default:
-    "bg-sky-100 text-sky-700 border border-sky-200",
+    "bg-red-50 text-red-700 border border-red-200",
   success:
-    "bg-emerald-100 text-emerald-700 border border-emerald-200",
+    "bg-gray-100 text-gray-700 border border-gray-200",
   dark:
-    "bg-gray-800 text-gray-200 border border-gray-700",
+    "bg-gray-100 text-gray-800 border border-gray-200",
 };
 
 export default function Badge({

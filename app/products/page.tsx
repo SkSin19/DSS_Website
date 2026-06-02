@@ -9,6 +9,7 @@ import {
   type ProductQueryParams,
 } from "@/lib/products-api";
 import ProductFilters from "@/components/sections/ProductFilters";
+import { THEME_COLORS } from "@/themes/colors";
 
 export const dynamic = "force-dynamic";
 
@@ -85,7 +86,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   ).sort();
 
   return (
-    <section className="bg-gray-950 py-0 lg:py-0">
+    <section className="bg-white py-0 lg:py-0">
       <ProductFilters
         companies={companies}
         categories={categories}
@@ -100,11 +101,11 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       <Container>
         <div className="py-6 sm:py-8 lg:py-10">
           <div className="mb-4 flex flex-col gap-2 sm:mb-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
-            <p className="text-sm text-gray-500">
-              Showing <span className="font-semibold text-white">{products.length}</span> products
+            <p className="text-sm text-gray-600">
+              Showing <span className="font-semibold text-gray-900">{products.length}</span> products
             </p>
             {(initialName || initialModel || selectedCompanies.length || selectedCategories.length || selectedSubCategories.length) ? (
-              <Link href="/products" className="text-sm font-semibold text-sky-400 transition-colors hover:text-sky-300">
+              <Link href="/products" className="text-sm font-semibold text-red-600 transition-colors hover:text-red-700">
                 Clear filters
               </Link>
             ) : null}
@@ -117,11 +118,12 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                   <Link
                     key={product._id}
                     href={getProductHref(product)}
-                    className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-400/40 hover:bg-white/[0.07]"
+                    className="group overflow-hidden rounded-3xl border border-gray-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-300 hover:bg-gray-100"
+                    style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}
                   >
                     {/* Mobile: horizontal layout — image left, details right */}
                     <div className="flex sm:hidden items-stretch min-h-24">
-                      <div className="relative w-28 shrink-0 overflow-hidden bg-linear-to-br from-sky-950 via-slate-900 to-slate-800 p-2 ring-1 ring-white/10">
+                      <div className="relative w-28 shrink-0 overflow-hidden p-2 ring-1 ring-gray-200" style={{ backgroundColor: THEME_COLORS.shadowGrey100 }}>
                         <Image
                           src={getProductImage(product)}
                           alt={getProductAlt(product)}
@@ -134,23 +136,23 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                       </div>
                       <div className="flex flex-col justify-center p-3">
                         <div className="mb-1.5 flex flex-wrap gap-1">
-                          <span className="inline-flex items-center rounded-full bg-sky-500/10 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-sky-300">
+                          <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-red-700">
                             {product.company}
                           </span>
-                          <span className="inline-flex items-center rounded-full bg-white/10 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-gray-200">
+                          <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-gray-700">
                             {product.category}
                           </span>
                         </div>
-                        <h2 className="text-[13px] font-semibold leading-snug text-white">
+                        <h2 className="text-[13px] font-semibold leading-snug text-gray-900">
                           {product.name}
                         </h2>
-                        <p className="mt-0.5 text-[8px] font-medium uppercase tracking-[0.18em] text-sky-400">
+                        <p className="mt-0.5 text-[8px] font-medium uppercase tracking-[0.18em] text-red-600">
                           Model {product.model}
                         </p>
-                        <p className="mt-1.5 text-[11px] leading-relaxed text-gray-400 line-clamp-2">
+                        <p className="mt-1.5 text-[11px] leading-relaxed text-gray-600 line-clamp-2">
                           {product.shortDescription || product.description}
                         </p>
-                        <span className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-sky-300">
+                        <span className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-red-600">
                           Open details <span className="transition-transform group-hover:translate-x-1">→</span>
                         </span>
                       </div>
@@ -158,7 +160,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
                     {/* Desktop: vertical card */}
                     <div className="hidden sm:block">
-                      <div className="relative aspect-4/3 overflow-hidden bg-linear-to-br from-sky-950 via-slate-900 to-slate-800 p-2 sm:p-2.5 ring-1 ring-white/10">
+                      <div className="relative aspect-4/3 overflow-hidden p-2 sm:p-2.5 ring-1 ring-gray-200" style={{ backgroundColor: THEME_COLORS.shadowGrey100 }}>
                         <div className="relative h-full w-full transition-transform duration-500 group-hover:scale-[1.02]">
                           <Image
                             src={getProductImage(product)}
@@ -173,23 +175,23 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                       </div>
                       <div className="p-3 sm:p-3.5">
                         <div className="mb-2 flex flex-wrap gap-1.5">
-                          <span className="inline-flex items-center rounded-full bg-sky-500/10 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-sky-300">
+                          <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-red-700">
                             {product.company}
                           </span>
-                          <span className="inline-flex items-center rounded-full bg-white/10 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-gray-200">
+                          <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-gray-700">
                             {product.category}
                           </span>
                         </div>
-                        <h2 className="text-[14px] font-semibold leading-snug text-white sm:text-[15px]">
+                        <h2 className="text-[14px] font-semibold leading-snug text-gray-900 sm:text-[15px]">
                           {product.name}
                         </h2>
-                        <p className="mt-1 text-[8px] font-medium uppercase tracking-[0.18em] text-sky-400 sm:text-[9px]">
+                        <p className="mt-1 text-[8px] font-medium uppercase tracking-[0.18em] text-red-600 sm:text-[9px]">
                           Model {product.model}
                         </p>
-                        <p className="mt-2 text-[11px] leading-relaxed text-gray-400 line-clamp-2 sm:text-[12px]">
+                        <p className="mt-2 text-[11px] leading-relaxed text-gray-600 line-clamp-2 sm:text-[12px]">
                           {product.shortDescription || product.description}
                         </p>
-                        <span className="mt-3 inline-flex items-center gap-2 text-[11px] font-semibold text-sky-300">
+                        <span className="mt-3 inline-flex items-center gap-2 text-[11px] font-semibold text-red-600">
                           Open details <span className="transition-transform group-hover:translate-x-1">→</span>
                         </span>
                       </div>
@@ -218,7 +220,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                         href={`/products?${query.toString()}`}
                         aria-label={`Page ${pageNumber}`}
                         style={{ color: "#ffffff" }}
-                        className={`inline-flex h-7 w-7 items-center justify-center rounded-sm border text-[11px] font-semibold transition-colors sm:h-8 sm:w-8 sm:text-xs ${isActive ? "border-sky-500 bg-sky-500 text-white" : "border-white/10 bg-white/5 text-gray-400 hover:border-sky-400 hover:bg-white/10"}`}
+                        className={`inline-flex h-7 w-7 items-center justify-center rounded-sm border text-[11px] font-semibold transition-colors sm:h-8 sm:w-8 sm:text-xs ${isActive ? "border-red-600 bg-red-600 text-white" : "border-gray-300 bg-gray-100 text-gray-700 hover:border-red-300 hover:bg-gray-200"}`}
                       >
                         {pageNumber}
                       </Link>
@@ -228,7 +230,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
               ) : null}
             </>
           ) : (
-            <div className="rounded-4xl border border-white/10 bg-white/5 p-8 text-gray-300">
+            <div className="rounded-4xl border border-gray-200 p-8 text-gray-600" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
               No products matched the current filters. Adjust the selections or clear them to browse the full catalog.
             </div>
           )}

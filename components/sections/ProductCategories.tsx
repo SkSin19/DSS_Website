@@ -5,6 +5,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { PRODUCT_CATEGORIES } from "@/lib/constants";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { THEME_COLORS } from "@/themes/colors";
 
 function CategoryCard({
   category,
@@ -24,16 +25,17 @@ function CategoryCard({
     <Link
       ref={ref}
       href={category.href}
-      className="category-card group relative flex min-h-76 flex-col justify-between overflow-hidden rounded-4xl bg-white p-6 sm:min-h-112.5 sm:p-8 md:p-10"
+      className="category-card group relative flex min-h-76 flex-col justify-between overflow-hidden rounded-4xl p-6 sm:min-h-112.5 sm:p-8 md:p-10 border border-gray-200"
+      style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}
     >
       <div className="relative z-10 max-w-sm">
-        <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">
+        <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
           {category.title}
         </h3>
         <p className="text-gray-500 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
           {category.description}
         </p>
-        <span className="inline-flex items-center text-sm font-semibold text-gray-900 group-hover:text-sky-600 transition-colors">
+        <span className="inline-flex items-center text-sm font-semibold text-gray-900 group-hover:text-red-600 transition-colors">
           Explore category
           <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
         </span>
@@ -67,7 +69,7 @@ function CategoryCard({
 
 export default function ProductCategories() {
   return (
-    <section className="select-none bg-gray-950 section-padding" id="categories">
+    <section className="select-none bg-white section-padding" id="categories">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {PRODUCT_CATEGORIES.map((category, index) => (

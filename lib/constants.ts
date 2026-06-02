@@ -9,6 +9,7 @@ import type {
   FooterLinkGroup,
   ContactInfo,
 } from "./types";
+import { THEME_COLORS } from "@/themes/colors";
 
 /* ─────────────────────────────────────────────
    Site-wide Constants
@@ -42,7 +43,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     badge: "NEXT-GEN SURVEILLANCE",
     headingLine1: "Digital",
     headingLine2: "Security Solution",
-    headingAccentColor: "var(--color-primary)",
+    headingAccentColor: THEME_COLORS.red,
     description:
       "Reliable CCTV cameras and surveillance systems for homes, shops, offices, and industrial spaces. Trusted by businesses across India.",
     ctaPrimaryLabel: "Get a Quote",
@@ -89,31 +90,31 @@ export const BRANDS: Brand[] = [
   {
     name: "Hikvision",
     tagline: "First Choice for Security",
-    color: "var(--brand-hikvision)",
+    color: THEME_COLORS.red,
     productImageSrc: "/images/banners/hikvision_banner.png",
   },
   {
     name: "Dahua",
     tagline: "Enabling a Safer Society",
-    color: "var(--brand-dahua)",
+    color: THEME_COLORS.shadowGrey700,
     productImageSrc: "/images/banners/alhua_banner.png",
   },
   {
     name: "CP Plus",
     tagline: "Uparwala Sab Dekh Raha Hai",
-    color: "var(--brand-cpplus)",
+    color: THEME_COLORS.redDark,
     productImageSrc: "/images/banners/cpplus_banner.png",
   },
   {
     name: "Godrej",
     tagline: "Smart Security Solutions",
-    color: "var(--brand-godrej)",
+    color: THEME_COLORS.shadowGrey500,
     productImageSrc: "/images/banners/godrej_banner.png",
   },
   {
     name: "Bosch",
     tagline: "Invented for Life",
-    color: "var(--brand-bosch)",
+    color: THEME_COLORS.redSoft,
     productImageSrc: "/images/banners/bosch_banner.png",
   },
 ];

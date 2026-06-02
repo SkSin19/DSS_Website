@@ -6,7 +6,7 @@ interface SkeletonProps {
 export function Skeleton({ className = "" }: SkeletonProps) {
   return (
     <div
-      className={`skeleton-shimmer rounded-lg bg-slate-700/30 ${className}`}
+      className={`skeleton-shimmer rounded-lg bg-gray-200 ${className}`}
       aria-hidden="true"
     />
   );
@@ -15,7 +15,7 @@ export function Skeleton({ className = "" }: SkeletonProps) {
 /** Skeleton for the hero section */
 export function SkeletonHero() {
   return (
-    <section className="w-full min-h-[600px] bg-slate-900 flex items-center" aria-hidden="true">
+    <section className="w-full min-h-150 bg-gray-50 flex items-center" aria-hidden="true">
       <div className="container-main flex flex-col lg:flex-row items-center gap-12 py-20">
         <div className="flex-1 space-y-6">
           <Skeleton className="h-7 w-48" />
@@ -44,7 +44,7 @@ export function SkeletonHero() {
 /** Skeleton for a product category card */
 export function SkeletonCategoryCard() {
   return (
-    <div className="bg-slate-800 rounded-2xl p-8 space-y-4" aria-hidden="true">
+    <div className="bg-gray-100 rounded-2xl p-8 space-y-4 border border-gray-200" aria-hidden="true">
       <Skeleton className="h-7 w-40" />
       <Skeleton className="h-4 w-full" />
       <Skeleton className="h-4 w-3/4" />
@@ -66,10 +66,10 @@ export function SkeletonBrandCard() {
 /** Skeleton for the full page */
 export function SkeletonPage() {
   return (
-    <div className="min-h-screen bg-slate-950" aria-label="Loading page content" role="status">
+    <div className="min-h-screen bg-gray-50" aria-label="Loading page content" role="status">
       <span className="sr-only">Loading...</span>
       {/* Navbar skeleton */}
-      <div className="h-16 bg-slate-900 border-b border-slate-800 flex items-center px-6 gap-8">
+      <div className="h-16 bg-gray-100 border-b border-gray-200 flex items-center px-6 gap-8">
         <Skeleton className="h-10 w-10 rounded-full" />
         <Skeleton className="h-5 w-48" />
         <div className="flex-1" />
@@ -87,14 +87,14 @@ export function SkeletonPage() {
       <SkeletonHero />
 
       {/* Marquee skeleton */}
-      <div className="h-20 bg-slate-800 flex items-center justify-center gap-12 px-8 overflow-hidden">
+      <div className="h-20 bg-gray-100 flex items-center justify-center gap-12 px-8 overflow-hidden">
         {Array.from({ length: 8 }).map((_, i) => (
-          <Skeleton key={i} className="h-8 w-28 flex-shrink-0" />
+          <Skeleton key={i} className="h-8 w-28 shrink-0" />
         ))}
       </div>
 
       {/* Categories skeleton */}
-      <div className="bg-slate-950 section-padding">
+      <div className="bg-gray-50 section-padding">
         <div className="container-main">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {Array.from({ length: 4 }).map((_, i) => (

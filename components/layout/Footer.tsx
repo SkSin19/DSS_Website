@@ -42,12 +42,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="site-footer" className="bg-[#030617] text-white relative overflow-hidden" role="contentinfo">
+    <footer id="site-footer" className="bg-white text-gray-900 relative overflow-hidden border-t border-gray-200" role="contentinfo">
       {/* Subtle dotted background pattern on left side */}
-      <div className="absolute top-0 left-0 bottom-0 w-1/3 opacity-[0.03] pointer-events-none overflow-hidden">
+      <div className="absolute top-0 left-0 bottom-0 w-1/3 opacity-[0.05] pointer-events-none overflow-hidden">
         <svg width="100%" height="100%">
           <pattern id="pattern-circles" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="1.5" fill="white"></circle>
+            <circle cx="2" cy="2" r="1.5" fill="#e5e7eb"></circle>
           </pattern>
           <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)"></rect>
         </svg>
@@ -61,10 +61,10 @@ export default function Footer() {
               {/* Column 1: Brand and Bio */}
               <div className="w-full lg:w-[35%] flex flex-col items-start pr-0 lg:pr-12 relative">
                 {/* Subtle vertical separator line (desktop only) */}
-                <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-px bg-blue-500/20"></div>
+                <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-px bg-gray-200"></div>
 
-                <Link href="/" className="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-lg mb-8" aria-label={`${SITE_NAME} — Home`}>
-                  <div className="bg-white rounded-full p-1 shadow-sm">
+                <Link href="/" className="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 rounded-lg mb-8" aria-label={`${SITE_NAME} — Home`}>
+                  <div className="bg-gray-50 rounded-full p-1 shadow-sm border border-gray-200">
                     <Image
                       src="/images/logo/dss_logo.png"
                       alt="Digital Security Solutions logo"
@@ -74,31 +74,31 @@ export default function Footer() {
                     />
                   </div>
                   <span className="flex flex-col leading-tight">
-                    <span className="text-lg md:text-xl font-bold tracking-tight text-white">
+                    <span className="text-lg md:text-xl font-bold tracking-tight text-gray-900">
                       DIGITAL SECURITY
                     </span>
-                    <span className="text-lg md:text-xl font-bold tracking-tight text-sky-400">
+                    <span className="text-lg md:text-xl font-bold tracking-tight text-red-600">
                       SOLUTIONS
                     </span>
                   </span>
                 </Link>
                 
-                <p className="text-gray-300 text-[15px] leading-relaxed mb-10">
+                <p className="text-gray-600 text-[15px] leading-relaxed mb-10">
                   Selling premium products, designed to elevate your everyday experience with advanced security and peace of mind.
                 </p>
 
                 {/* Social icons */}
                 <div className="flex items-center gap-4">
-                  <a href="#" aria-label="Twitter" className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-sky-500 hover:text-white transition-all duration-300">
+                  <a href="#" aria-label="Twitter" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-600 hover:text-white transition-all duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
                   </a>
-                  <a href="#" aria-label="YouTube" className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-red-600 hover:text-white transition-all duration-300">
+                  <a href="#" aria-label="YouTube" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-600 hover:text-white transition-all duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                   </a>
-                  <a href="#" aria-label="Facebook" className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                  <a href="#" aria-label="Facebook" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-600 hover:text-white transition-all duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
                   </a>
-                  <a href="#" aria-label="LinkedIn" className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-blue-700 hover:text-white transition-all duration-300">
+                  <a href="#" aria-label="LinkedIn" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-600 hover:text-white transition-all duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                   </a>
                 </div>
@@ -109,20 +109,20 @@ export default function Footer() {
                 {FOOTER_LINK_GROUPS.map((group) => (
                   <div key={group.title} className="min-w-0 flex-1">
                     <div className="mb-6 relative">
-                      <h3 className="text-[13px] font-bold text-sky-400 tracking-wider">
+                      <h3 className="text-[13px] font-bold text-red-600 tracking-wider">
                         {group.title}
                       </h3>
-                      <div className="absolute -bottom-2 left-0 w-6 h-px bg-sky-500"></div>
+                      <div className="absolute -bottom-2 left-0 w-6 h-px bg-red-600"></div>
                     </div>
                     <ul className="space-y-4">
                       {group.links.map((link) => (
                         <li key={`${link.href}-${link.label}`}>
                           <Link
                             href={link.href}
-                            className="text-[15px] font-medium text-gray-200 hover:text-white transition-colors duration-200 flex items-center justify-between gap-3 group"
+                            className="text-[15px] font-medium text-gray-600 hover:text-red-600 transition-colors duration-200 flex items-center justify-between gap-3 group"
                           >
                             <span>{link.label}</span>
-                            <span className="text-gray-500 group-hover:text-sky-400 transition-colors text-xs font-mono ml-4">
+                            <span className="text-gray-400 group-hover:text-red-600 transition-colors text-xs font-mono ml-4">
                               &gt;
                             </span>
                           </Link>
@@ -136,10 +136,10 @@ export default function Footer() {
               {/* Column 4: Contact Us */}
               <div className="w-full lg:w-[30%] lg:pl-10 relative">
                 <div className="mb-6 relative">
-                  <h3 className="text-[13px] font-bold text-sky-400 tracking-wider uppercase">
+                  <h3 className="text-[13px] font-bold text-red-600 tracking-wider uppercase">
                     Contact Us
                   </h3>
-                  <div className="absolute -bottom-2 left-0 w-6 h-px bg-sky-500"></div>
+                  <div className="absolute -bottom-2 left-0 w-6 h-px bg-red-600"></div>
                 </div>
                 
                 <ul className="space-y-6">
@@ -147,21 +147,21 @@ export default function Footer() {
                     const IconComp = contactIcons[item.icon];
                     return (
                       <li key={item.label} className="flex items-start gap-4">
-                        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-600/30 text-sky-400 shrink-0 mt-1">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 text-red-600 shrink-0 mt-1">
                           <IconComp />
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-[15px] font-semibold text-white mb-0.5">{item.label}</span>
+                          <span className="text-[15px] font-semibold text-gray-900 mb-0.5">{item.label}</span>
                           {item.value && (
                             item.href ? (
                               <a
                                 href={item.href}
-                                className="text-[14px] text-gray-300 hover:text-white transition-colors duration-200"
+                                className="text-[14px] text-gray-600 hover:text-red-600 transition-colors duration-200"
                               >
                                 {item.value}
                               </a>
                             ) : (
-                              <span className="text-[14px] text-gray-300">{item.value}</span>
+                              <span className="text-[14px] text-gray-600">{item.value}</span>
                             )
                           )}
                         </div>
@@ -176,30 +176,21 @@ export default function Footer() {
 
           {/* ── Bottom bar inside the card ── */}
           <div className="relative z-10 px-4 md:px-12 lg:px-16 pb-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 sm:px-6 lg:gap-6">
-            <p className="text-sm font-medium text-gray-400">
+            <p className="text-sm font-medium text-gray-500">
               &copy; {currentYear} {SITE_NAME}. All rights reserved.
             </p>
             
             {/* Payment Icons */}
             <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-              <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-15">
+              <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-gray-200">
                 <span className="sr-only">PayPal</span>
-                <span className="font-extrabold text-sm tracking-tight">
-                  <span className="text-[#003087]">Pay</span>
-                  <span className="text-[#009CDE]">Pal</span>
-                </span>
+                <span className="font-extrabold text-sm tracking-tight text-gray-700">PayPal</span>
               </div>
-              <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-15">
-                {/* SVG placeholder for Stripe */}
-                <span className="font-black tracking-tight text-[#635BFF] text-sm leading-none italic">stripe</span>
+              <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-gray-200">
+                <span className="font-black tracking-tight text-gray-700 text-sm leading-none italic">stripe</span>
               </div>
-              <div className="h-8 bg-white rounded flex items-center justify-center px-3 min-w-15">
-                {/* SVG placeholder for Mastercard */}
-                <svg viewBox="0 0 48 30" className="h-5">
-                  <circle cx="15" cy="15" r="15" fill="#eb001b"/>
-                  <circle cx="33" cy="15" r="15" fill="#f79e1b"/>
-                  <path d="M24 24.7A15 15 0 0029.3 15 15 15 0 0024 5.3 15 15 0 0018.7 15 15 15 0 0024 24.7z" fill="#ff5f00"/>
-                </svg>
+              <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-gray-200">
+                <span className="font-bold text-sm tracking-tight text-red-600">Mastercard</span>
               </div>
             </div>
           </div>

@@ -18,9 +18,9 @@ interface ButtonProps {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-gradient-to-r from-sky-500 to-blue-600 text-white hover:from-sky-600 hover:to-blue-700 btn-hover-lift",
+    "bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 btn-hover-lift",
   outline:
-    "bg-transparent border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white",
+    "bg-transparent border-2 border-gray-700 text-gray-800 hover:bg-gray-800 hover:text-white",
   ghost:
     "bg-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100",
   danger:

@@ -32,8 +32,8 @@ function BrandCard({ brand, index }: { brand: (typeof BRANDS)[number]; index: nu
               className="object-cover object-center"
             />
           </div>
-          <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/15 to-black/5" />
-          <div className="absolute inset-0 bg-sky-500/0 group-hover:bg-sky-500/8 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-linear-to-t from-gray-900/75 via-gray-900/15 to-gray-900/5" />
+          <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/8 transition-colors duration-500" />
         </>
       ) : (
         <>
@@ -41,7 +41,7 @@ function BrandCard({ brand, index }: { brand: (typeof BRANDS)[number]; index: nu
             className="absolute inset-0"
             style={{ backgroundColor: brand.color }}
           />
-          <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/10" />
+          <div className="absolute inset-0 bg-linear-to-t from-gray-900/50 via-transparent to-gray-900/10" />
         </>
       )}
 
@@ -55,7 +55,7 @@ function BrandCard({ brand, index }: { brand: (typeof BRANDS)[number]; index: nu
             {brand.tagline}
           </p>
         )}
-        <span className="mt-2 inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold text-sky-300 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+        <span className="mt-2 inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold text-red-200 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
           Browse products <span className="group-hover:translate-x-0.5 transition-transform inline-block">→</span>
         </span>
       </div>
@@ -67,13 +67,12 @@ export default function DiscoverBrands() {
   const headingRef = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 0 });
 
   return (
-    <section className="select-none bg-gray-950 section-padding pb-16 sm:pb-20 md:pb-24" id="brands">
+    <section className="select-none bg-white section-padding pb-16 sm:pb-20 md:pb-24" id="brands">
       <Container>
         <div ref={headingRef}>
           <SectionHeading
             title="Discover Our Brands"
             subtitle="We work with India's most trusted digital surveillance brands."
-            light
           />
         </div>
 

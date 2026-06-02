@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { THEME_COLORS } from "@/themes/colors";
 
 interface ProductFiltersProps {
   companies: string[];
@@ -27,14 +28,14 @@ function FilterRail({ label, items, name, selectedValues, compact }: FilterRailP
   if (compact) {
     return (
       <div>
-        <p className="mb-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-sky-400">
+        <p className="mb-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-red-600">
           {label}
         </p>
         <div className="flex flex-wrap gap-1.5">
           {items.map((item) => (
             <label key={item} className="shrink-0">
               <input type="checkbox" name={name} value={item} defaultChecked={selectedValues.includes(item)} className="peer sr-only" />
-              <span className="cursor-pointer whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-gray-300 transition-all peer-checked:border-sky-400 peer-checked:bg-sky-500/20 peer-checked:text-sky-300">
+              <span className="cursor-pointer whitespace-nowrap rounded-full border border-gray-300 bg-gray-100 px-2.5 py-1 text-[11px] font-medium text-gray-700 transition-all peer-checked:border-red-400 peer-checked:bg-red-50 peer-checked:text-red-700">
                 {item}
               </span>
             </label>
@@ -47,14 +48,14 @@ function FilterRail({ label, items, name, selectedValues, compact }: FilterRailP
   /* Desktop inline rail — wraps freely, height grows with content */
   return (
     <div className="flex min-w-0 flex-1 items-start gap-2">
-      <span className="shrink-0 pt-1 text-[9px] font-bold uppercase tracking-[0.2em] text-sky-400/80">
+      <span className="shrink-0 pt-1 text-[9px] font-bold uppercase tracking-[0.2em] text-red-600/80">
         {label}
       </span>
       <div className="flex flex-wrap gap-1.5">
         {items.map((item) => (
           <label key={item} className="shrink-0">
             <input type="checkbox" name={name} value={item} defaultChecked={selectedValues.includes(item)} className="peer sr-only" />
-            <span className="cursor-pointer whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] text-gray-400 transition-all hover:border-sky-400/30 hover:text-gray-200 peer-checked:border-sky-400/50 peer-checked:bg-sky-500/15 peer-checked:text-sky-300">
+            <span className="cursor-pointer whitespace-nowrap rounded-full border border-gray-300 bg-gray-100 px-2.5 py-1 text-[11px] text-gray-700 transition-all hover:border-red-400/30 hover:text-gray-900 peer-checked:border-red-400/50 peer-checked:bg-red-50 peer-checked:text-red-700">
               {item}
             </span>
           </label>
@@ -143,7 +144,7 @@ export default function ProductFilters({
   );
 
   return (
-    <section className="select-none border-b border-white/10 bg-gray-950 text-white">
+    <section className="select-none border-b border-gray-200 bg-white text-gray-900">
 
       {/* ── MOBILE (hidden sm+) ── */}
       <div className="sm:hidden px-3 py-2">
@@ -155,19 +156,19 @@ export default function ProductFilters({
               </svg>
               <input
                 type="text" name="name" defaultValue={initialName} placeholder="Search products…"
-                className="h-8 w-full rounded-full border border-white/10 bg-white/5 pl-8 pr-3 text-[12px] text-white placeholder:text-gray-500 outline-none transition-colors focus:border-sky-400/60"
+                className="h-8 w-full rounded-full border border-gray-300 bg-gray-100 pl-8 pr-3 text-[12px] text-gray-900 placeholder:text-gray-500 outline-none transition-colors focus:border-red-400/60"
               />
             </label>
             <button
               type="button" onClick={() => setDrawerOpen((o) => !o)}
-              className="flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-sky-400/30 bg-sky-500/10 px-3 text-[11px] font-semibold text-sky-300 transition-colors"
+              className="flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-gray-300 bg-gray-100 px-3 text-[11px] font-semibold text-gray-700 transition-colors"
             >
               <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                 <path d="M4 6h16M7 12h10M10 18h4" />
               </svg>
               Filters
               {filterCount > 0 && (
-                <span className="flex h-4 w-4 items-center justify-center rounded-full bg-sky-500 text-[9px] font-bold text-white">
+                <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[9px] font-bold text-white">
                   {filterCount}
                 </span>
               )}
@@ -181,12 +182,12 @@ export default function ProductFilters({
           </div>
 
           {drawerOpen && (
-            <div className="mt-2 space-y-3 rounded-2xl border border-white/10 bg-white/[0.04] p-3">
+            <div className="mt-2 space-y-3 rounded-2xl border border-gray-200 bg-gray-50 p-3">
               <div>
-                <p className="mb-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-gray-500">Model</p>
+                <p className="mb-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-gray-600">Model</p>
                 <input
                   type="text" name="model" defaultValue={initialModel} placeholder="Product model…"
-                  className="h-8 w-full rounded-full border border-white/10 bg-white/5 px-3 text-[12px] text-white placeholder:text-gray-500 outline-none transition-colors focus:border-sky-400/60"
+                  className="h-8 w-full rounded-full border border-gray-300 bg-white px-3 text-[12px] text-gray-900 placeholder:text-gray-500 outline-none transition-colors focus:border-red-400/60"
                 />
               </div>
               {companies.length > 0 && <FilterRail label="Company" items={companies} name="company" selectedValues={selectedCompanies} compact />}
@@ -209,7 +210,7 @@ export default function ProductFilters({
       <div className="hidden sm:block">
         <div className="mx-auto w-full max-w-7xl px-4 py-3 lg:px-8">
           <form id="product-filter-form" action={updateQuery}>
-            <div className="flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.03]">
+            <div className="flex flex-col rounded-2xl border border-gray-200 bg-gray-50">
 
               {/* Row 1: searches + company rail + actions */}
               <div className="flex items-start gap-3 px-4 py-3">
@@ -220,7 +221,7 @@ export default function ProductFilters({
                     </svg>
                     <input
                       type="text" name="name" defaultValue={initialName} placeholder="Search by name…"
-                      className="h-8 w-44 rounded-full border border-white/10 bg-white/5 pl-8 pr-3 text-[12px] text-white placeholder:text-gray-500 outline-none transition-colors focus:border-sky-400/60 focus:bg-white/[0.07]"
+                      className="h-8 w-44 rounded-full border border-gray-300 bg-white pl-8 pr-3 text-[12px] text-gray-900 placeholder:text-gray-500 outline-none transition-colors focus:border-red-400/60 focus:bg-white"
                     />
                   </label>
                   <label className="relative flex items-center">
@@ -229,12 +230,12 @@ export default function ProductFilters({
                     </svg>
                     <input
                       type="text" name="model" defaultValue={initialModel} placeholder="Search by model…"
-                      className="h-8 w-44 rounded-full border border-white/10 bg-white/5 pl-8 pr-3 text-[12px] text-white placeholder:text-gray-500 outline-none transition-colors focus:border-sky-400/60 focus:bg-white/[0.07]"
+                      className="h-8 w-44 rounded-full border border-gray-300 bg-white pl-8 pr-3 text-[12px] text-gray-900 placeholder:text-gray-500 outline-none transition-colors focus:border-red-400/60 focus:bg-white"
                     />
                   </label>
                 </div>
 
-                <div className="mt-1.5 h-auto self-stretch w-px shrink-0 bg-white/10" />
+                <div className="mt-1.5 h-auto self-stretch w-px shrink-0 bg-gray-300" />
 
                 {companies.length > 0 && (
                   <div className="flex-1 min-w-0">
@@ -262,7 +263,7 @@ export default function ProductFilters({
 
               {/* Divider */}
               {(categories.length > 0 || subCategories.length > 0) && (
-                <div className="mx-4 h-px bg-white/[0.06]" />
+                <div className="mx-4 h-px bg-gray-200" />
               )}
 
               {/* Row 2: category + subcategory — each wraps freely */}
@@ -272,7 +273,7 @@ export default function ProductFilters({
                     <FilterRail label="Category" items={categories} name="category" selectedValues={selectedCategories} />
                   )}
                   {categories.length > 0 && subCategories.length > 0 && (
-                    <div className="mt-1 h-auto self-stretch w-px shrink-0 bg-white/10" />
+                    <div className="mt-1 h-auto self-stretch w-px shrink-0 bg-gray-300" />
                   )}
                   {subCategories.length > 0 && (
                     <FilterRail label="Sub-cat" items={subCategories} name="subCategory" selectedValues={selectedSubCategories} />

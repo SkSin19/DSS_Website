@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { THEME_COLORS } from "@/themes/colors";
 
 interface Props {
   images: string[];
@@ -36,7 +37,7 @@ export default function ProductImageGallery({ images, alt = "product image", int
 
   return (
     <div onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
-      <div className="relative mt-6 aspect-square overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-sky-950 via-slate-900 to-slate-800 p-8 shadow-[0_24px_80px_rgba(2,6,23,0.45)]">
+      <div className="relative mt-6 aspect-square overflow-hidden rounded-3xl border border-gray-200 p-8 shadow-[0_24px_80px_rgba(17,24,39,0.12)]" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
         <Image
           src={mainImage}
           alt={alt}
@@ -53,10 +54,10 @@ export default function ProductImageGallery({ images, alt = "product image", int
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`rounded-2xl overflow-hidden focus:outline-none transition-transform ${i === index ? "scale-[1.02] ring-2 ring-sky-300" : ""}`}
+            className={`rounded-2xl overflow-hidden focus:outline-none transition-transform ${i === index ? "scale-[1.02] ring-2 ring-red-300" : ""}`}
             aria-label={`Show image ${i + 1}`}
           >
-            <div className="rounded-2xl border border-white/10 bg-linear-to-b from-sky-950 via-slate-900 to-slate-800 p-3 shadow-lg shadow-slate-950/20">
+            <div className="rounded-2xl border border-gray-200 p-3 shadow-lg shadow-gray-900/10" style={{ backgroundColor: THEME_COLORS.shadowGrey100 }}>
               <div className="relative aspect-square">
                 <Image
                   src={src}
@@ -76,7 +77,7 @@ export default function ProductImageGallery({ images, alt = "product image", int
         <div className="mt-3">
           <button
             onClick={() => setShowAll(true)}
-            className="text-sm text-sky-300 hover:text-sky-200"
+            className="text-sm text-red-600 hover:text-red-700"
           >
             Show more
           </button>
@@ -84,10 +85,10 @@ export default function ProductImageGallery({ images, alt = "product image", int
       ) : null}
 
       {showAll ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-6">
-          <div className="max-w-3xl w-full bg-gray-900 rounded-lg p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-6">
+          <div className="max-w-3xl w-full rounded-lg border border-gray-200 p-4" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
             <div className="mb-3 flex justify-end">
-              <button onClick={() => setShowAll(false)} className="text-sm text-gray-300">Close</button>
+              <button onClick={() => setShowAll(false)} className="text-sm text-gray-600">Close</button>
             </div>
             <div className="grid grid-cols-3 gap-3">
               {images.map((src, i) => (

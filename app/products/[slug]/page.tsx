@@ -176,13 +176,13 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                 />
                 <Link
                   href="#specs"
-                  className="inline-flex items-center justify-center rounded-full border border-red-600 bg-transparent px-4 py-2 text-sm font-semibold text-black hover:bg-white/5 transition-colors"
+                  className="inline-flex items-center justify-center rounded-full border border-red-600 bg-transparent px-4 py-2 text-sm font-semibold text-black! hover:bg-red-600 hover:text-white! transition-colors"
                 >
                   View specs
                 </Link>
                 <Link
                   href="#browse-more"
-                  className="inline-flex items-center justify-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-black hover:bg-red-800 transition-colors"
+                  className="inline-flex items-center justify-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white! hover:bg-red-800 transition-colors"
                 >
                   Similar products
                 </Link>
@@ -203,7 +203,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
             {(product.specs || []).map((spec, index) => (
-              <div key={`${spec.label}-${index}`} className="rounded-3xl border border-white/10 bg-gray-100 p-6 shadow-xl">
+              <div key={`${spec.label}-${index}`} className="rounded-3xl border border-white/10 bg-gray-200 p-6 shadow-xl">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-red-600 select-none">{spec.label}</p>
                 <ul className="mt-3 space-y-2 text-sm leading-relaxed text-gray-300 select-none">
                   {formatSpecItems(spec.value).map((item) => (
@@ -211,7 +211,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                       <span className="mt-1 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white">
                         •
                       </span>
-                      <span className="text-[13px] leading-relaxed text-black">{item}</span>
+                      <span className="text-[13px] md:text-[15px] leading-relaxed text-black">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -266,7 +266,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 select-none">
             {relatedProducts.map((item) => (
-              <Link key={item._id} href={getProductHref(item)} className="group rounded-4xl overflow-hidden bg-[#f4f7fb] hover:shadow-2xl transition-all duration-300 select-none">
+              <Link key={item._id} href={getProductHref(item)} className="group rounded-4xl overflow-hidden bg-gray-200 hover:shadow-2xl transition-all duration-300 select-none">
                 <div className="relative aspect-4/3 p-6 bg-linear-to-b from-white to-slate-100 select-none">
                   <div className="relative h-full w-full group-hover:scale-[1.03] transition-transform duration-500 select-none">
                     <Image

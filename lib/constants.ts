@@ -29,7 +29,6 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Products", href: "/products" },
   { label: "Brands", href: "/brands" },
   { label: "Solutions", href: "/solutions" },
-  { label: "Support", href: "/support" },
   { label: "About Us", href: "/about" },
 ];
 
@@ -228,7 +227,7 @@ export const FOOTER_LINK_GROUPS: FooterLinkGroup[] = [
       { label: "Home", href: "/" },
       { label: "Products", href: "/products" },
       { label: "Enquiry", href: "/enquiry" },
-      { label: "Brands", href: "/brands" },
+      { label: "Brands", href: "/#brands" },
     ],
   },
   {
@@ -236,7 +235,6 @@ export const FOOTER_LINK_GROUPS: FooterLinkGroup[] = [
     links: [
       { label: "Products", href: "/products" },
       { label: "Contact", href: "/enquiry" },
-      { label: "Support", href: "/enquiry" },
     ],
   },
 ];

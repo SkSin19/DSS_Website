@@ -102,7 +102,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         <div className="py-6 sm:py-8 lg:py-10">
           <div className="mb-4 flex flex-col gap-2 sm:mb-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
             <p className="text-sm text-gray-600">
-              Showing <span className="font-semibold text-gray-900">{products.length}</span> products
+              Showing <span className="font-semibold text-red-600">{products.length}</span> products
             </p>
             {(initialName || initialModel || selectedCompanies.length || selectedCategories.length || selectedSubCategories.length) ? (
               <Link href="/products" className="text-sm font-semibold text-red-600 transition-colors hover:text-red-700">

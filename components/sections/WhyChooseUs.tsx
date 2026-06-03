@@ -37,7 +37,7 @@ export default function WhyChooseUs() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6">
 
           {/* Top Row: 2 wide cards */}
-          <div ref={card0Ref} className="md:col-span-6 rounded-4xl p-6 sm:p-8 md:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:shadow-xl transition-shadow group overflow-hidden relative min-h-80 sm:min-h-62.5 border border-gray-200" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
+          <div ref={card0Ref} className="md:col-span-6 rounded-4xl p-6 sm:p-8 md:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:shadow-xl transition-shadow group overflow-hidden relative min-h-80 sm:min-h-62.5 border border-gray-200 bg-gray-200">
             <div className="flex-1 relative z-10 w-full">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-3 leading-tight w-full sm:w-3/4">
                 {WHY_CHOOSE_US[0].title}

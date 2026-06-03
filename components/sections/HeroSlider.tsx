@@ -333,7 +333,7 @@ export default function HeroSlider() {
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
         <div
           ref={ring1Ref}
-          className="absolute rounded-full border border-dashed border-red-500/10"
+          className="absolute rounded-full border border-dashed border-red-500/20"
           style={{ width: "min(780px, 110vw)", height: "min(780px, 110vw)" }}
         />
         <div
@@ -347,7 +347,7 @@ export default function HeroSlider() {
         />
         <div
           ref={ring3Ref}
-          className="absolute rounded-full border border-red-500/12"
+          className="absolute rounded-full border border-red-500/20"
           style={{ width: "min(340px, 60vw)", height: "min(340px, 60vw)" }}
         />
       </div>

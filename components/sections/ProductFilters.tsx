@@ -276,7 +276,7 @@ export default function ProductFilters({
                     <div className="mt-1 h-auto self-stretch w-px shrink-0 bg-gray-300" />
                   )}
                   {subCategories.length > 0 && (
-                    <FilterRail label="Sub-cat" items={subCategories} name="subCategory" selectedValues={selectedSubCategories} />
+                    <FilterRail label="Type" items={subCategories} name="subCategory" selectedValues={selectedSubCategories} />
                   )}
                 </div>
               )}

@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import Link from "next/link";
 
 const SecureToday: React.FC = () => {
   const logoRef      = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 0 });
@@ -73,28 +74,27 @@ const SecureToday: React.FC = () => {
         </p>
 
         {/* CTA link */}
-        <a
+        <Link
+          href="/products"
           ref={ctaRef}
-          href="#"
           className="group inline-flex items-center gap-1 text-sm font-medium mb-12 transition-colors duration-200 text-red-600"
         >
           <span>Explore our security solutions</span>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="transition-transform duration-200 group-hover:translate-x-0.5">
             <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </a>
+        </Link>
 
         {/* ── PRODUCTS ROW ── */}
         <div
           ref={productsRef}
           className="relative flex items-end justify-center bg-gray-50 h-55 md:h-75 lg:h-90 border-t border-gray-200"
-          style={{ width: "130vw", left: "50%", transform: "translateX(-46%)" }}
+          style={{ width: "130vw", left: 0, transform: "translateX(-46%)" }}
         >
           <Image
-            src="/images/general/products-row.png"
+            src="/images/general/PUBLIC_NEXT_PRODUCTS_ROW.png"
             alt="Products row"
             fill
-            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover w-full h-full"
             unoptimized
           />
@@ -110,9 +110,9 @@ const SecureToday: React.FC = () => {
         </div>
       </div>
 
-      {/* Global bottom dark gradient */}
+      {/* Global bottom light gradient */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-56 pointer-events-none z-20"
+        className="absolute bottom-0 left-0 right-0 h-30 pointer-events-none z-20"
         style={{ background: "linear-gradient(to top, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.6) 70%, transparent)" }}
       />
 

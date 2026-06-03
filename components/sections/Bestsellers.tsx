@@ -23,7 +23,7 @@ function BestsellerCard({
   return (
     <div
       ref={ref}
-      className="bg-white rounded-3xl p-6 flex flex-col h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group border border-gray-200"
+      className="bg-gray-200 rounded-3xl p-6 flex flex-col h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group border border-gray-200"
     >
       {/* Top: Offer Badge */}
       <div className="mb-4">
@@ -57,9 +57,9 @@ function BestsellerCard({
         </p>
         <Link
           href={product.href}
-          className="text-sm font-semibold text-red-600 hover:text-sky-700 transition-colors flex items-center gap-1 group/link"
+          className="text-sm font-semibold text-red-600 hover:text-red-700 transition-colors flex items-center gap-1 group/link"
         >
-          Learn more
+          Click to Learn more
         </Link>
       </div>
     </div>

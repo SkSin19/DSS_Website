@@ -51,7 +51,7 @@ function ProductCard({
       ref={ref}
       href={product.href}
       className="group flex flex-col rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full border border-gray-200"
-      style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}
+      style={{ backgroundColor: THEME_COLORS.shadowGrey200 }}
     >
       {product.hasOffer && (
         <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
@@ -61,7 +61,7 @@ function ProductCard({
         </div>
       )}
 
-      <div className="bg-gray-50 p-3 sm:p-4 flex items-center justify-center overflow-hidden">
+      <div className="bg-gray-200 p-3 sm:p-4 flex items-center justify-center overflow-hidden">
         <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500" style={{ aspectRatio: "4 / 3" }}>
           <Image
             src={product.imageSrc}
@@ -155,7 +155,7 @@ export default function FeaturedProducts() {
           </button>
         </div>
 
-        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 justify-items-center border-t border-b border-gray-200 pt-8 sm:pt-10 pb-8 sm:pb-10">
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 justify-items-center border-t border-b border-gray-300 pt-8 sm:pt-10 pb-8 sm:pb-10">
           <InfoBarItem
             icon={<ShippingIcon />}
             title="Free Shipping"

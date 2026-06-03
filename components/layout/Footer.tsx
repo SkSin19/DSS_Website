@@ -125,8 +125,7 @@ export default function Footer() {
               </Link>
 
               <p className="text-gray-600 text-[15px] leading-relaxed mb-10">
-                Selling premium products, designed to elevate your everyday
-                experience with advanced security and peace of mind.
+                From purchasing to installation, we have got you covered.
               </p>
 
               {/* Social icons */}
@@ -272,18 +271,18 @@ export default function Footer() {
 
           {/* Payment Icons */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-            <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-gray-200">
+            <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-black/50">
               <span className="sr-only">PayPal</span>
               <span className="font-extrabold text-sm tracking-tight text-gray-700">
                 PayPal
               </span>
             </div>
-            <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-gray-200">
+            <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-black/50">
               <span className="font-black tracking-tight text-gray-700 text-sm leading-none italic">
                 stripe
               </span>
             </div>
-            <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-gray-200">
+            <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-black/50">
               <span className="font-bold text-sm tracking-tight text-red-600">
                 Mastercard
               </span>

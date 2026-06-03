@@ -234,7 +234,7 @@ export const FOOTER_LINK_GROUPS: FooterLinkGroup[] = [
   {
     title: "UTILITY PAGES",
     links: [
-      { label: "Shipping", href: "/products" },
+      { label: "Products", href: "/products" },
       { label: "Contact", href: "/enquiry" },
       { label: "Support", href: "/enquiry" },
     ],

@@ -137,76 +137,37 @@ const GetInTouch: React.FC = () => {
   };
 
   return (
-    <section className="select-none relative w-full min-h-screen bg-[#06090f] overflow-hidden flex">
-
+    <section className="select-none relative w-full min-h-screen bg-[#FFFFFF] overflow-hidden flex">
       {/* ─── RIGHT PANEL — Full-bleed background image ─── */}
-      {/* Sits behind everything, covers the right 55% but bleeds across full width */}
       <div className="absolute inset-0 z-0">
         {/* The house photo fills the entire right side */}
         <div className="absolute right-0 top-0 bottom-0 w-full md:w-[62%]">
           <Image
-            src="/images/general/get-in-touch.png"
+            src="/images/general/PUBLIC_NEXT_GET_IN_TOUCH.png"
             alt="Smart security home"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover object-center"
             unoptimized
           />
-          {/* Dark overlay so image doesn't overpower — keeps the moody night tone */}
-          <div className="absolute inset-0 bg-[#06090f]/30" />
-          {/* Top gradient fade on the image to blend with hero background */}
-          <div
-            className="absolute left-0 right-0 top-0 pointer-events-none"
-            style={{
-              height: "7rem",
-              background: "linear-gradient(to bottom, #06090f 0%, rgba(6,9,15,0) 100%)",
-              zIndex: 5,
-            }}
-          />
+          
         </div>
-
-        {/* Left-side blackout so the form area is fully dark */}
-        <div className="absolute inset-y-0 left-0 w-[45%] bg-[#06090f]" />
-
-        {/* Gradient fade from the black left into the image — seamless blend */}
-        <div
-          className="absolute inset-y-0 left-[38%] w-[22%]"
-          style={{
-            background:
-              "linear-gradient(to right, #06090f 0%, rgba(6,9,15,0.85) 30%, rgba(6,9,15,0.4) 65%, transparent 100%)",
-          }}
-        />
-
-        {/* Top vignette to deepen the sky */}
-        <div
-          className="absolute inset-x-0 top-0 h-40"
-          style={{
-            background: "linear-gradient(to bottom, #06090f 0%, transparent 100%)",
-          }}
-        />
 
         {/* Bottom vignette */}
         <div
-          className="absolute inset-x-0 bottom-0 h-48"
+          className="absolute inset-x-0 bottom-0 h-60 pointer-events-none"
           style={{
-            background: "linear-gradient(to top, #06090f 0%, transparent 100%)",
+            background: "linear-gradient(to top, #FFFFFF 70%, transparent 100%)",
           }}
         />
 
-        {/* Right vignette edge */}
-        <div
-          className="absolute inset-y-0 right-0 w-24"
-          style={{
-            background: "linear-gradient(to left, #06090f 0%, transparent 100%)",
-          }}
-        />
       </div>
 
       {/* ─── LEFT PANEL — Get in Touch Form ─── */}
       <div ref={formPanelRef} className="relative z-10 w-full md:w-[45%] flex flex-col justify-center px-8 py-14 lg:px-12">
         <div className="w-full rounded-3xl border border-gray-200 p-6 shadow-[0_20px_60px_rgba(17,24,39,0.12)] backdrop-blur-md sm:p-8" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
           <h2 className="text-gray-900 text-3xl font-bold mb-2">Get in Touch</h2>
-          <p className="text-gray-600 text-sm mb-8">
+          <p className="text-red-600 text-sm mb-8">
             We&apos;re here to help you build a safer and smarter tomorrow.
           </p>
 
@@ -334,7 +295,7 @@ const GetInTouch: React.FC = () => {
                 disabled={loading}
                 className={`mt-2 ${loading ? "opacity-70 pointer-events-none" : ""} bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-4 px-10 rounded-full transition-colors duration-200 self-start`}
               >
-                {loading ? "Sending..." : "SEND ENQUIRY →"}
+                {loading ? "Submiting..." : "SUBMIT ENQUIRY"}
               </button>
             ) : (
               <div className="flex flex-col sm:flex-row items-start gap-3">
@@ -390,18 +351,17 @@ const GetInTouch: React.FC = () => {
       {/* ─── RIGHT PANEL — Text overlay on image ─── */}
       <div ref={rightTextRef} className="hidden md:flex relative z-10 flex-1 flex-col justify-end pb-16 px-10">
         <div>
-          <h2 className="text-white text-3xl font-bold leading-tight drop-shadow-lg">
+          <h2 className="text-black text-3xl font-bold leading-tight drop-shadow-lg">
             Smart Security for
           </h2>
-          <h2 className="text-[#f97316] text-3xl font-bold leading-tight mb-3 drop-shadow-lg">
+          <h2 className="text-red-600 text-3xl font-bold leading-tight mb-3 drop-shadow-lg">
             Every Home.
           </h2>
-          <p className="text-gray-300 text-sm max-w-sm drop-shadow-md">
+          <p className="text-black/70 text-sm max-w-sm drop-shadow-md">
             Intelligent security solutions that protect what matters most.
           </p>
         </div>
       </div>
-
     </section>
   );
 };

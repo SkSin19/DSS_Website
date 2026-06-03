@@ -66,7 +66,7 @@ export default function Navbar() {
 
         {/* ── Desktop Nav Links ── */}
         <ul className="hidden lg:flex items-center gap-1" role="list">
-          {NAV_LINKS.filter((link) => link.label !== "Solutions").map((link) => {
+          {NAV_LINKS.map((link) => {
             if (link.label === "Products") {
               return (
                 <li key={link.href} className="relative group">

@@ -181,7 +181,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     description:
       "Boom barriers, turnstiles and controllers for secure entry management.",
     href: "/products?category=Access%20Control",
-    imageSrc: "/images/categories/access-control-smart-entry.png",
+    imageSrc: "/images/categories/PUBLIC_NEXT_PRODUCT_CATOGORY-2.webp",
     imageAlt: "Access control hardware and entry systems",
     subCategories: ["Boom Barrier", "Turnstile Tripod", "Door Controllers", "Electromagnetic Locks"],
   },

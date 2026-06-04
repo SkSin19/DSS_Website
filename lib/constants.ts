@@ -18,7 +18,7 @@ import { THEME_COLORS } from "@/themes/colors";
 export const SITE_NAME = "Digital Security Solutions";
 export const SITE_TAGLINE = "Advanced Digital Security Solutions";
 export const SITE_DESCRIPTION =
-  "Reliable CCTV cameras and surveillance systems for homes, shops, offices, and industrial spaces. Trusted by businesses across India.";
+  "Surety of Security";
 export const SITE_URL = "https://digitalsecuritysolutions.in";
 
 /* ─────────────────────────────────────────────
@@ -41,10 +41,10 @@ export const HERO_SLIDES: HeroSlide[] = [
     id: 1,
     badge: "NEXT-GEN SURVEILLANCE",
     headingLine1: "Digital",
-    headingLine2: "Security Solution",
+    headingLine2: "Security Solutions",
     headingAccentColor: THEME_COLORS.red,
     description:
-      "Reliable CCTV cameras and surveillance systems for homes, shops, offices, and industrial spaces. Trusted by businesses across India.",
+      "Surety of Security",
     ctaPrimaryLabel: "Get a Quote",
     ctaPrimaryHref: "/enquiry",
     ctaSecondaryLabel: "Request Enquiry",
@@ -59,7 +59,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     headingLine1: "Digital",
     headingLine2: "Security Solutions",
     description:
-      "Reliable CCTV cameras and surveillance systems for homes, shops, offices, and industrial spaces.",
+      "Surety of Security",
     ctaPrimaryLabel: "Get a Quote",
     ctaPrimaryHref: "/enquiry",
     ctaSecondaryLabel: "Request Enquiry",
@@ -234,14 +234,14 @@ export const CONTACT_INFO: ContactInfo[] = [
   {
     icon: "email",
     label: "Email",
-    value: "contact@dss.com",
-    href: "mailto:contact@dss.com",
+    value: "info@digitalsecurityindia.com",
+    href: "mailto:info@digitalsecurityindia.com",
   },
   {
     icon: "phone",
     label: "Phone",
-    value: "+91 7394062133",
-    href: "tel:+917394062133",
+    value: "+91 9999605550",
+    href: "tel:+919999605550",
   },
   {
     icon: "location",

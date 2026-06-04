@@ -453,7 +453,7 @@ export default function HeroSlider() {
 
           <p
             ref={subRef}
-            className="mt-5 md:mt-0 max-w-md text-[15px] leading-relaxed text-gray-600"
+            className="mt-5 md:pl-2 md:mt-0 max-w-md text-[25px] leading-relaxed text-gray-600"
           >
             {slide.description}
           </p>

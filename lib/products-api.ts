@@ -1,4 +1,5 @@
 import { apiGet } from "@/utils/api";
+import { ReactNode } from "react";
 
 export interface ProductImage {
   url: string;
@@ -61,6 +62,7 @@ interface ProductsResponse {
   message: string;
   products: BackendProduct[];
   pagination?: {
+    [x: string]: ReactNode;
     totalProducts: number;
     currentPage: number;
     totalPages: number;

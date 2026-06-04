@@ -21,11 +21,13 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'golchhacomputer.com' },       // PRAMA
       { protocol: 'https', hostname: 'static.wixstatic.com' },     // PRAMA + Honeywell
       { protocol: 'https', hostname: 'api.thruroute.com' },        // Honeywell
-      { protocol: 'https', hostname: 'innxeon.com' }, 
+      { protocol: 'https', hostname: 'www.thruroute.com' },
+      { protocol: 'https', hostname: 'innxeon.com' },
+      { protocol: 'https', hostname: 'www.innxeon.com' }, 
       { protocol: 'https', hostname: 'www.betechlock.com' }, 
       { protocol: 'https', hostname: 'www.prama-asia.com' },  
       { protocol: 'https', hostname: 'www.honeywell.com' },  
-      { protocol: 'https', hostname: 'cdn.adorama.com' },  
+      { protocol: 'https', hostname: 'www.adorama.com' },  
     ],
   },
 };

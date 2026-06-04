@@ -18,9 +18,33 @@ export const metadata: Metadata = {
   description: "Browse the available digital security product catalog.",
 };
 
-const getProductImage = (product: BackendProduct) =>
-  product.featuredImage || product.images?.[0]?.url || "https://picsum.photos/seed/product-fallback/1200/900";
+const isValidImage = (value?: string | null) => {
+  if (!value) return false;
 
+  const normalized = value.trim().toLowerCase();
+
+  return (
+    normalized !== "null" &&
+    normalized !== "undefined" &&
+    normalized !== ""
+  );
+};
+
+const getProductImage = (product: BackendProduct) => {
+  if (isValidImage(product.featuredImage)) {
+    return product.featuredImage!;
+  }
+
+  const firstImage = product.images?.find((img) =>
+    isValidImage(img?.url)
+  );
+
+  if (firstImage?.url) {
+    return firstImage.url;
+  }
+
+  return "https://picsum.photos/seed/product-fallback/1200/900";
+};
 const getProductAlt = (product: BackendProduct) =>
   product.images?.[0]?.alt || `${product.name} image`;
 
@@ -130,7 +154,6 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                           fill
                           sizes="112px"
                           quality={58}
-                          unoptimized={product.brand === 'PRAMA' || product.brand === 'Impact by Honeywell'}
                           priority={getProductImagePriority(index)}
                           className="object-contain drop-shadow-lg"
                         />

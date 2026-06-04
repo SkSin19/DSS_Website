@@ -13,7 +13,7 @@ export default function BrandMarquee() {
             key={index} 
             className="flex items-center justify-center px-4 sm:px-8 md:px-12 w-28 sm:w-37.5 md:w-50"
           >
-            <div className="flex items-center justify-center h-10 sm:h-12 w-full opacity-75 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+            <div className="flex items-center justify-center h-10 sm:h-12 w-full opacity-75 hover:opacity-100 transition-all duration-300">
               <Image
                 src={brand.logoSrc}
                 alt={`${brand.name} logo`}

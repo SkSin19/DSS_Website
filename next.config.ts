@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'golchhacomputer.com' },       // PRAMA
       { protocol: 'https', hostname: 'static.wixstatic.com' },     // PRAMA + Honeywell
       { protocol: 'https', hostname: 'api.thruroute.com' },        // Honeywell
+      { protocol: 'https', hostname: 'innxeon.com' },  // ← NEW
     ],
   },
 };

@@ -130,6 +130,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                           fill
                           sizes="112px"
                           quality={58}
+                          unoptimized={product.brand === 'PRAMA' || product.brand === 'Impact by Honeywell'}
                           priority={getProductImagePriority(index)}
                           className="object-contain drop-shadow-lg"
                         />

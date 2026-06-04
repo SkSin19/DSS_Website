@@ -275,6 +275,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                       fill
                       sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
                       quality={60}
+                      unoptimized={product.brand === 'PRAMA' || product.brand === 'Impact by Honeywell'}
                       className="object-contain drop-shadow-xl"
                     />  
                   </div>

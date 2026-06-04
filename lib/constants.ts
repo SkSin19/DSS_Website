@@ -186,13 +186,22 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     subCategories: ["Boom Barrier", "Turnstile Tripod", "Door Controllers", "Electromagnetic Locks"],
   },
   {
-    title: "Power & Energy",
+    title: "Surveillance Systems",
     description:
-      "UPS and backup energy systems that keep critical devices online.",
-    href: "/products?category=Power%20%26%20Energy",
-    imageSrc: "/images/categories/intrusion-alarm-detection.png",
-    imageAlt: "Power backup and UPS products",
-    subCategories: ["UPS"],
+      "CCTV cameras, DVRs and NVRs for comprehensive security monitoring.",
+    href: "/products?category=Surveillance%20Systems",
+    imageSrc: "/images/categories/surveillance-systems.png",
+    imageAlt: "Surveillance systems products",
+    subCategories: ["CCTV Cameras", "DVRs", "NVRs", "PTZ Cameras"],
+  },
+  {
+    title: "PA Systems and AV",
+    description:
+      "CCTV cameras, DVRs and NVRs for comprehensive security monitoring.",
+    href: "/products?category=Surveillance%20Systems",
+    imageSrc: "/images/categories/surveillance-systems.png",
+    imageAlt: "Surveillance systems products",
+    subCategories: ["CCTV Cameras", "DVRs", "NVRs", "PTZ Cameras"],
   },
 ];
 

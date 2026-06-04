@@ -67,16 +67,16 @@ export default function DiscoverBrands() {
   const headingRef = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 0 });
 
   return (
-    <section className="select-none bg-white section-padding pb-16 sm:pb-20 md:pb-24" id="brands">
+    <section className="select-none bg-white section-padding pb-12 sm:pb-20 md:pb-24" id="brands">
       <Container>
         <div ref={headingRef}>
           <SectionHeading
-            title="Discover Our Brands"
+            title="Our Partners"
             subtitle="We work with India's most trusted digital surveillance brands."
           />
         </div>
 
-        <div className="mt-10 sm:mt-12 lg:mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+        <div className="mt-8 sm:mt-12 lg:mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
           {BRANDS.map((brand, index) => (
             <BrandCard key={brand.name} brand={brand} index={index} />
           ))}

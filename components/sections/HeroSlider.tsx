@@ -293,8 +293,6 @@ export default function HeroSlider() {
     };
   }, []);
 
-  
-
   const headline = `${slide.headingLine1} ${slide.headingLine2}`;
   const accentStart = slide.headingLine1.split(" ").length;
 
@@ -304,8 +302,6 @@ export default function HeroSlider() {
       className="select-none relative w-full overflow-hidden bg-white"
       style={{ minHeight: "100svh" }}
     >
-      
-
       {/* scan line */}
       <div
         ref={scanLineRef}
@@ -326,8 +322,6 @@ export default function HeroSlider() {
           backgroundSize: "36px 36px",
         }}
       />
-
-    
 
       {/* HUD RINGS */}
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
@@ -385,21 +379,16 @@ export default function HeroSlider() {
       </div>
 
       {/* ── CCTV CANVAS — MOBILE (hidden on desktop) ──────────────────────── */}
-      {/*
-          Fixed to top-right corner, smaller, autonomous spring patrol.
-          Half the canvas hangs off the right edge so the mount/body is
-          flush with the screen edge — only the lens peeks into view.
-      */}
       <div
         className="pointer-events-none block md:hidden"
         style={{
           position: "absolute",
-          right: "-40px" /* shift right so body is off-screen */,
-          top: "14%" /* top-right corner feel */,
+          right: "-40px",
+          top: "14%",
           width: "220px",
           height: "220px",
           zIndex: 20,
-          clipPath: "inset(0 0 0 10%)" /* clip only a sliver on left */,
+          clipPath: "inset(0 0 0 10%)",
         }}
       >
         <Canvas
@@ -420,111 +409,117 @@ export default function HeroSlider() {
       {/* MAIN CONTENT */}
       <div className="relative z-10 mx-auto flex min-h-svh w-full max-w-7xl flex-col items-center justify-center px-4 py-24 sm:px-6 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8 lg:py-0">
         {/* LEFT */}
-        <div className="flex flex-col items-center gap-5 text-center lg:items-start lg:text-left lg:pr-8">
-          <div className="flex mb-5 items-center gap-2.5 rounded-full border border-red-500/20 bg-red-50 px-3.5 py-1.5">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-red-700">
-              {slide.badge ?? "Next-Gen Surveillance"}
-            </span>
-          </div>
-
-          <div
-            ref={headlineRef}
-            className="overflow-hidden -mt-5 md:mt-0"
-            style={{ perspective: "600px" }}
-          >
-            <h1 className="text-[clamp(2.4rem,5.5vw,4rem)] font-black leading-[1.04] tracking-tight text-gray-900">
-              {headline.split(" ").map((word, i) => (
-                <span
-                  key={i}
-                  className="word mr-[0.25em] inline-block last:mr-0"
-                  style={{
-                    color:
-                      i >= accentStart
-                        ? (slide.headingAccentColor ?? THEME_COLORS.red)
-                        : THEME_COLORS.shadowGrey900,
-                  }}
-                >
-                  {word}
-                </span>
-              ))}
-            </h1>
-          </div>
-
-          <p
-            ref={subRef}
-            className="mt-5 md:pl-2 md:mt-0 max-w-md text-[25px] leading-relaxed text-gray-600"
-          >
-            {slide.description}
-          </p>
-
-          <div
-            ref={ctaRef}
-            className="mt-3 md:mt-0 flex flex-wrap items-center gap-3 relative"
-          >
-            <div className="relative inline-flex group-cta">
-              {/* Fog Border Element */}
-              <div className="fog-animated-border pointer-events-none" />
-
-              <Link
-                href={slide.ctaPrimaryHref}
-                className="enquiry-btn relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full border border-red-200 bg-red-600 px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-0.5"
-              >
-                {/* liquid fill */}
-                <span className="liquid-fill absolute inset-0 z-0" />
-                {/* glow */}
-                <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-red-400/30" />
-                {/* shine sweep */}
-                <span className="shine absolute inset-0 z-1" />
-                {/* particles */}
-                {mounted && (
-                  <span className="particles">
-                    {[...Array(40)].map((_, i) => {
-                      const angle = Math.random() * Math.PI * 2;
-                      const distance = 60 + Math.random() * 90;
-
-                      return (
-                        <span
-                          key={i}
-                          className="particle"
-                          style={
-                            {
-                              "--x": `${20 + Math.random() * 60}%`,
-                              "--y": `${20 + Math.random() * 60}%`,
-
-                              "--dx": `${Math.cos(angle) * distance}px`,
-                              "--dy": `${Math.sin(angle) * distance}px`,
-
-                              "--delay": `${Math.random() * 1.2}s`,
-                              "--duration": `${0.8 + Math.random() * 1.4}s`,
-
-                              "--size": `${2 + Math.random() * 4}px`,
-                            } as React.CSSProperties
-                          }
-                        />
-                      );
-                    })}
-                  </span>
-                )}
-                {/* text */}
-                <span className="relative z-5 text-white">
-                  Request an Enquiry
-                </span>{" "}
-              </Link>
+        <div
+          className="flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-8 lg:gap-5 lg:justify-normal justify-between"
+          style={{ minHeight: "clamp(400px, 72svh, 600px)" }}
+        >
+          {/* ── TOP CLUSTER: badge + headline + subtitle ── */}
+          <div className="flex flex-col items-center gap-5 lg:items-start mt-8 lg:mt-0">
+            <div className="flex mb-5 items-center gap-2.5 rounded-full border border-red-500/20 bg-red-50 px-3.5 py-1.5">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-red-700">
+                {slide.badge ?? "Next-Gen Surveillance"}
+              </span>
             </div>
+
+            <div
+              ref={headlineRef}
+              className="overflow-hidden -mt-5 md:mt-0"
+              style={{ perspective: "600px" }}
+            >
+              <h1 className="text-[clamp(2.4rem,5.5vw,4rem)] font-black leading-[1.04] tracking-tight text-gray-900">
+                {headline.split(" ").map((word, i) => (
+                  <span
+                    key={i}
+                    className="word mr-[0.25em] inline-block last:mr-0"
+                    style={{
+                      color:
+                        i >= accentStart
+                          ? (slide.headingAccentColor ?? THEME_COLORS.red)
+                          : THEME_COLORS.shadowGrey900,
+                    }}
+                  >
+                    {word}
+                  </span>
+                ))}
+              </h1>
+            </div>
+
+            <p
+              ref={subRef}
+              className="mt-5 md:pl-2 md:mt-0 max-w-md text-[25px] leading-relaxed text-gray-600"
+            >
+              {slide.description}
+            </p>
           </div>
 
-          <div
-            ref={badgesRef}
-            className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 md:pt-1"
-          >
-            {TRUST_BADGES.map((badge, i) => (
-              <div key={i} className="flex items-center gap-1.5">
-                <span className="text-[11px] font-medium text-gray-500">
-                  {badge.label}
-                </span>
+          {/* ── BOTTOM CLUSTER: CTA button + trust badges ── */}
+          <div className="flex flex-col items-center gap-0 lg:items-start mb-10 lg:mb-0">
+            <div
+              ref={ctaRef}
+              className="mt-3 md:mt-0 flex flex-wrap items-center gap-3 relative"
+            >
+              <div className="relative inline-flex group-cta">
+                {/* Fog Border Element */}
+                <div className="fog-animated-border pointer-events-none" />
+
+                <Link
+                  href={slide.ctaPrimaryHref}
+                  className="enquiry-btn relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full border border-red-200 bg-red-600 px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-0.5"
+                >
+                  {/* liquid fill */}
+                  <span className="liquid-fill absolute inset-0 z-0" />
+                  {/* glow */}
+                  <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-red-400/30" />
+                  {/* shine sweep */}
+                  <span className="shine absolute inset-0 z-1" />
+                  {/* particles */}
+                  {mounted && (
+                    <span className="particles">
+                      {[...Array(40)].map((_, i) => {
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = 60 + Math.random() * 90;
+
+                        return (
+                          <span
+                            key={i}
+                            className="particle"
+                            style={
+                              {
+                                "--x": `${20 + Math.random() * 60}%`,
+                                "--y": `${20 + Math.random() * 60}%`,
+                                "--dx": `${Math.cos(angle) * distance}px`,
+                                "--dy": `${Math.sin(angle) * distance}px`,
+                                "--delay": `${Math.random() * 1.2}s`,
+                                "--duration": `${0.8 + Math.random() * 1.4}s`,
+                                "--size": `${2 + Math.random() * 4}px`,
+                              } as React.CSSProperties
+                            }
+                          />
+                        );
+                      })}
+                    </span>
+                  )}
+                  {/* text */}
+                  <span className="relative z-5 text-white">
+                    Request an Enquiry
+                  </span>{" "}
+                </Link>
               </div>
-            ))}
+            </div>
+
+            <div
+              ref={badgesRef}
+              className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 md:pt-1"
+            >
+              {TRUST_BADGES.map((badge, i) => (
+                <div key={i} className="flex items-center gap-1.5">
+                  <span className="text-[11px] font-medium text-gray-500">
+                    {badge.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -562,115 +557,104 @@ export default function HeroSlider() {
         }
           
         .enquiry-btn {
-  box-shadow:
-    0 0 0 rgba(56, 189, 248, 0),
-    inset 0 0 0 rgba(255,255,255,0);
-  backdrop-filter: blur(10px);
-}
+          box-shadow:
+            0 0 0 rgba(56, 189, 248, 0),
+            inset 0 0 0 rgba(255,255,255,0);
+          backdrop-filter: blur(10px);
+        }
 
-.enquiry-btn:hover {
-  border-color: rgba(220, 38, 38, 0.6);
-  box-shadow:
-    0 0 25px rgba(220, 38, 38, 0.25),
-    0 0 60px rgba(107, 114, 128, 0.12),
-    inset 0 0 30px rgba(220, 38, 38, 0.10);
-}
+        .enquiry-btn:hover {
+          border-color: rgba(220, 38, 38, 0.6);
+          box-shadow:
+            0 0 25px rgba(220, 38, 38, 0.25),
+            0 0 60px rgba(107, 114, 128, 0.12),
+            inset 0 0 30px rgba(220, 38, 38, 0.10);
+        }
 
-.liquid-fill {
-  background:
-    radial-gradient(circle at 50% 120%, rgba(220,38,38,0.55), transparent 65%);
-  transform: translateY(100%);
-  transition:
-    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.6s ease;
-  opacity: 0.9;
-}
+        .liquid-fill {
+          background:
+            radial-gradient(circle at 50% 120%, rgba(220,38,38,0.55), transparent 65%);
+          transform: translateY(100%);
+          transition:
+            transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.6s ease;
+          opacity: 0.9;
+        }
 
-.enquiry-btn:hover .liquid-fill {
-  transform: translateY(0%);
-}
+        .enquiry-btn:hover .liquid-fill {
+          transform: translateY(0%);
+        }
 
-.shine {
-  background: linear-gradient(
-    115deg,
-    transparent 20%,
-    rgba(255,255,255,0.18) 48%,
-    transparent 75%
-  );
-  transform: translateX(-160%);
-}
+        .shine {
+          background: linear-gradient(
+            115deg,
+            transparent 20%,
+            rgba(255,255,255,0.18) 48%,
+            transparent 75%
+          );
+          transform: translateX(-160%);
+        }
 
-.enquiry-btn:hover .shine {
-  transition: transform 1s ease;
-  transform: translateX(160%);
-}
+        .enquiry-btn:hover .shine {
+          transition: transform 1s ease;
+          transform: translateX(160%);
+        }
 
-.particles {
-  position: absolute;
-  inset: -40px;
-  overflow: visible;
-  pointer-events: none;
-  z-index: 2;
-}
+        .particles {
+          position: absolute;
+          inset: -40px;
+          overflow: visible;
+          pointer-events: none;
+          z-index: 2;
+        }
 
-.particle {
-  position: absolute;
+        .particle {
+          position: absolute;
+          width: var(--size);
+          height: var(--size);
+          left: var(--x);
+          top: var(--y);
+          border-radius: 999px;
+          background:
+            radial-gradient(circle,
+              rgba(254,202,202,1) 0%,
+              rgba(220,38,38,1) 45%,
+              rgba(220,38,38,0.2) 72%,
+              transparent 100%);
+          opacity: 0;
+          filter:
+            blur(0.4px)
+            drop-shadow(0 0 10px rgba(220,38,38,0.95))
+            drop-shadow(0 0 20px rgba(107,114,128,0.35));
+          transform:
+            translate(-50%, -50%)
+            scale(0.2);
+        }
 
-  width: var(--size);
-  height: var(--size);
+        .enquiry-btn:hover .particle {
+          animation: particle-burst var(--duration) linear infinite;
+          animation-delay: var(--delay);
+        }
 
-  left: var(--x);
-  top: var(--y);
-
-  border-radius: 999px;
-
-  background:
-    radial-gradient(circle,
-      rgba(254,202,202,1) 0%,
-      rgba(220,38,38,1) 45%,
-      rgba(220,38,38,0.2) 72%,
-      transparent 100%);
-
-  opacity: 0;
-
-  filter:
-    blur(0.4px)
-    drop-shadow(0 0 10px rgba(220,38,38,0.95))
-    drop-shadow(0 0 20px rgba(107,114,128,0.35));
-
-  transform:
-    translate(-50%, -50%)
-    scale(0.2);
-}
-
-.enquiry-btn:hover .particle {
-  animation: particle-burst var(--duration) linear infinite;
-  animation-delay: var(--delay);
-}
-
-@keyframes particle-burst {
-
-  0% {
-    opacity: 0;
-    transform:
-      translate(-50%, -50%)
-      translate(0px, 0px)
-      scale(0.2);
-  }
-
-  10% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-
-    transform:
-      translate(-50%, -50%)
-      translate(var(--dx), var(--dy))
-      scale(1);
-  }
-}
+        @keyframes particle-burst {
+          0% {
+            opacity: 0;
+            transform:
+              translate(-50%, -50%)
+              translate(0px, 0px)
+              scale(0.2);
+          }
+          10% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+            transform:
+              translate(-50%, -50%)
+              translate(var(--dx), var(--dy))
+              scale(1);
+          }
+        }
       `}</style>
     </section>
   );

@@ -10,6 +10,7 @@ import {
   SITE_NAME,
 } from "@/lib/constants";
 import { apiGet } from "@/utils/api";
+import Button from "../ui/Button";
 
 interface CategoriesResponse {
   success: boolean;
@@ -194,8 +195,11 @@ export default function Navbar() {
                         ))}
                       </div>
                     </div>
+                  
                   </div>
+                  
                 </li>
+                
               );
             }
 
@@ -212,6 +216,13 @@ export default function Navbar() {
             );
           })}
         </ul>
+        <Link href="/enquiry">
+  <Button
+    className="hidden lg:flex bg-red-600 text-white hover:bg-red-700 ml-4"
+  >
+    Enquire Now
+  </Button>
+</Link>
 
         {/* ── Mobile Menu Button ── */}
         <button

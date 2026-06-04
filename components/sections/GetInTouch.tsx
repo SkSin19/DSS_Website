@@ -141,7 +141,7 @@ const GetInTouch: React.FC = () => {
       {/* ─── RIGHT PANEL — Full-bleed background image ─── */}
       <div className="absolute inset-0 z-0">
         {/* The house photo fills the entire right side */}
-        <div className="absolute right-0 top-0 bottom-0 w-full md:w-[62%]">
+        <div className="absolute right-0 top-1 bottom-0 w-full md:w-[62%]">
           <Image
             src="/images/general/PUBLIC_NEXT_GET_IN_TOUCH.png"
             alt="Smart security home"
@@ -164,7 +164,7 @@ const GetInTouch: React.FC = () => {
       </div>
 
       {/* ─── LEFT PANEL — Get in Touch Form ─── */}
-      <div ref={formPanelRef} className="relative z-10 w-full md:w-[45%] flex flex-col justify-center px-8 py-14 lg:px-12">
+      <div ref={formPanelRef} className="relative z-10 w-full md:w-[45%] flex flex-col justify-center px-8 py-3 lg:px-8">
         <div className="w-full rounded-3xl border border-gray-200 p-6 shadow-[0_20px_60px_rgba(17,24,39,0.12)] backdrop-blur-md sm:p-8" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
           <h2 className="text-gray-900 text-3xl font-bold mb-2">Get in Touch</h2>
           <p className="text-red-600 text-sm mb-8">

@@ -186,15 +186,6 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     subCategories: ["Boom Barrier", "Turnstile Tripod", "Door Controllers", "Electromagnetic Locks"],
   },
   {
-    title: "IT & Network",
-    description:
-      "Supporting network hardware and accessories for connected security systems.",
-    href: "/products?category=IT%20%26%20Network",
-    imageSrc: "/images/categories/video-security-cctv-systems.png",
-    imageAlt: "IT and network infrastructure products",
-    subCategories: ["Metal Enclosures"],
-  },
-  {
     title: "Power & Energy",
     description:
       "UPS and backup energy systems that keep critical devices online.",

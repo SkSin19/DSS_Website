@@ -197,11 +197,11 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
   {
     title: "PA Systems and AV",
     description:
-      "CCTV cameras, DVRs and NVRs for comprehensive security monitoring.",
-    href: "/products?category=Surveillance%20Systems",
-    imageSrc: "/images/categories/surveillance-systems.png",
-    imageAlt: "Surveillance systems products",
-    subCategories: ["CCTV Cameras", "DVRs", "NVRs", "PTZ Cameras"],
+      "Professional audio speakers, mixers, amplifiers and public address equipment for workspaces and venues.",
+    href: "/products?category=PA%20Systems%20and%20AV",
+    imageSrc: "/images/services/pa-systems-and-av.png",
+    imageAlt: "Public address systems and audio-visual products",
+    subCategories: ["PA Speakers", "Audio Amplifiers", "Mixers & Consoles", "Microphones"],
   },
 ];
 

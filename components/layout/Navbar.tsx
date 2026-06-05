@@ -200,6 +200,7 @@ export default function Navbar() {
               );
             }
 
+
             return (
               <li key={link.href}>
                 <Link
@@ -279,7 +280,7 @@ export default function Navbar() {
         aria-label="Mobile navigation"
       >
         <div className="container-main py-4 space-y-1">
-          {NAV_LINKS.filter((link) => link.label !== "Solutions").map(
+          {NAV_LINKS.map(
             (link) => (
               <Link
                 key={link.href}

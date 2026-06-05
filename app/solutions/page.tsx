@@ -1,12 +1,12 @@
-import React from 'react'
-import Solutions from '@/components/sections/Solutions';
+import type { Metadata } from "next";
+import ServicesPage from "@/components/sections/ServicesPage";
 
-function page() {
-  return (
-    <div>
-        <Solutions />
-    </div>
-  )
+export const metadata: Metadata = {
+  title: "Solutions",
+  description:
+    "Explore our security solutions — Access Control, Home Automation, Biometric Attendance, Fire Alarm, Gate Automation, Intrusion Alarm and more.",
+};
+
+export default function page() {
+  return <ServicesPage />;
 }
-
-export default page

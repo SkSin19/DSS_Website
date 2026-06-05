@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/preserve-manual-memoization */
 "use client";
 
 import { useState, useCallback } from "react";
@@ -262,7 +263,7 @@ export default function ServicesPage() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 lg:mb-5">
             <div>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">Services</h1>
-              <p className="mt-2 text-gray-500 text-base">Smart solutions for a safer, smarter tomorrow.</p>
+              <p className="mt-2 text-red-500 text-base">Smart solutions for a safer, smarter tomorrow.</p>
             </div>
             <Link href="/products" className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-900 hover:text-red-600 transition-colors whitespace-nowrap group">
               Browse all products
@@ -292,16 +293,16 @@ export default function ServicesPage() {
                 {/* Tap hint */}
                 <div className="absolute top-5 right-5 z-10">
                   <span className={`inline-flex items-center gap-1.5 backdrop-blur-sm text-[11px] font-bold px-3.5 py-1.5 rounded-full border transition-colors shadow-sm ${
-                    open ? "bg-red-50 text-red-600 border-red-200" : "bg-white/90 text-gray-500 border-gray-200/60"
+                    open ? "bg-red-50 text-red-600 border-red-300/90" : "bg-white/90 text-gray-500 border-gray-200/60"
                   }`}>
-                    {open ? <X size={12} strokeWidth={2.5} /> : <ChevronRight size={12} strokeWidth={2.5} />}
+                    
                     {open ? "Close Panel" : "Tap to Explore"}
                   </span>
                 </div>
 
                 {/* Image */}
                 <div className="relative flex-1 p-8 flex items-center justify-center overflow-hidden">
-                  <div className="relative w-full h-full min-h-[250px]">
+                  <div className="relative w-full h-full min-h-62.5">
                     <Image
                       src={featured.imageSrc}
                       alt={featured.imageAlt}
@@ -316,14 +317,14 @@ export default function ServicesPage() {
 
                 {/* Info bar at bottom */}
                 <div className="p-6 flex items-center gap-4 bg-white border-t border-gray-100 mt-auto">
-                  <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center text-red-600">
+                  <div className="shrink-0 w-14 h-14 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center text-red-600">
                     {featured.icon}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h2 className="text-xl font-bold text-gray-900 leading-snug">{featured.title}</h2>
                     <p className="mt-1 text-sm text-gray-500 leading-relaxed line-clamp-2">{featured.description}</p>
                   </div>
-                  <div className={`flex-shrink-0 transition-transform duration-500 ${open ? "rotate-180 text-red-500" : ""}`}>
+                  <div className={`shrink-0 transition-transform duration-500 ${open ? "rotate-180 text-red-500" : ""}`}>
                     <ArrowRight size={22} className="text-gray-400" strokeWidth={2} />
                   </div>
                 </div>
@@ -378,7 +379,7 @@ export default function ServicesPage() {
                       <button
                         key={s.title}
                         onClick={() => setSlide(i)}
-                        className={`flex-shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border ${
+                        className={`shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border ${
                           slide === i
                             ? "bg-red-600 text-white border-red-500 shadow-md shadow-red-600/20"
                             : "bg-white text-gray-600 border-gray-200 hover:border-red-200 hover:bg-red-50 hover:text-red-600"
@@ -404,7 +405,7 @@ export default function ServicesPage() {
                       }`}
                     >
                       <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">{s.title}</h3>
-                      <p className="text-xs text-sm lg:text-base text-gray-600 leading-relaxed max-w-2xl mb-4">
+                      <p className="text-sm lg:text-base text-gray-600 leading-relaxed max-w-2xl mb-4">
                         {s.body}
                       </p>
 
@@ -524,7 +525,7 @@ export default function ServicesPage() {
                       <button
                         key={s.title}
                         onClick={() => setSlideOther(i)}
-                        className={`flex-shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border ${
+                        className={`shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 border ${
                           slideOther === i
                             ? "bg-red-600 text-white border-red-500 shadow-md shadow-red-600/20"
                             : "bg-white text-gray-600 border-gray-200 hover:border-red-200 hover:bg-red-50 hover:text-red-600"
@@ -550,7 +551,7 @@ export default function ServicesPage() {
                       }`}
                     >
                       <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">{s.title}</h3>
-                      <p className="text-xs text-sm lg:text-base text-gray-600 leading-relaxed max-w-2xl mb-4">
+                      <p className="text-sm lg:text-base text-gray-600 leading-relaxed max-w-2xl mb-4">
                         {s.body}
                       </p>
 
@@ -632,14 +633,13 @@ export default function ServicesPage() {
                   <span className={`inline-flex items-center gap-1.5 backdrop-blur-sm text-[11px] font-bold px-3.5 py-1.5 rounded-full border transition-colors shadow-sm ${
                     openOther ? "bg-red-50 text-red-600 border-red-200" : "bg-white/90 text-gray-500 border-gray-200/60"
                   }`}>
-                    {openOther ? <X size={12} strokeWidth={2.5} /> : <ChevronRight size={12} strokeWidth={2.5} />}
                     {openOther ? "Close Panel" : "Tap to Explore"}
                   </span>
                 </div>
 
                 {/* Image */}
                 <div className="relative flex-1 p-8 flex items-center justify-center overflow-hidden">
-                  <div className="relative w-full h-full min-h-[250px]">
+                  <div className="relative w-full h-full min-h-62.5">
                     <Image
                       src={featuredOther.imageSrc}
                       alt={featuredOther.imageAlt}
@@ -654,14 +654,14 @@ export default function ServicesPage() {
 
                 {/* Info bar at bottom */}
                 <div className="p-6 flex items-center gap-4 bg-white border-t border-gray-100 mt-auto">
-                  <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center text-red-600">
+                  <div className="shrink-0 w-14 h-14 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center text-red-600">
                     {featuredOther.icon}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h2 className="text-xl font-bold text-gray-900 leading-snug">{featuredOther.title}</h2>
                     <p className="mt-1 text-sm text-gray-500 leading-relaxed line-clamp-2">{featuredOther.description}</p>
                   </div>
-                  <div className={`flex-shrink-0 transition-transform duration-500 ${openOther ? "rotate-180 text-red-500" : ""}`}>
+                  <div className={`shrink-0 transition-transform duration-500 ${openOther ? "rotate-180 text-red-500" : ""}`}>
                     <ArrowRight size={22} className="text-gray-400" strokeWidth={2} />
                   </div>
                 </div>
@@ -681,15 +681,15 @@ export default function ServicesPage() {
             <div className="flex-1 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
               <span className="text-red-600 text-xs font-bold uppercase tracking-widest mb-3">Our Services</span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
-                Delivering the Most Advanced <span className="text-red-600">Security Solutions</span>
+                Delivering the Most Advanced <span className="text-red-600"> Digital Security Solutions</span>
               </h2>
               <p className="text-gray-500 text-sm md:text-base leading-relaxed">
-                End-to-end security services designed to protect what matters most with cutting-edge technology and expert support.
+                Surety of Security
               </p>
             </div>
             
             {/* Right side image */}
-            <div className="flex-1 relative min-h-[300px] md:min-h-[400px]">
+            <div className="flex-1 relative min-h-75 md:min-h-100">
               <Image
                 src="/images/general/technicians_installing_camera.png"
                 alt="Professional technicians installing dome security camera"
@@ -708,7 +708,7 @@ export default function ServicesPage() {
                 {[...MARQUEE_BRANDS, ...MARQUEE_BRANDS, ...MARQUEE_BRANDS].map((brand, index) => (
                   <div 
                     key={index} 
-                    className="flex items-center justify-center px-4 sm:px-8 md:px-12 w-28 sm:w-37.5 md:w-50 flex-shrink-0"
+                    className="flex items-center justify-center px-4 sm:px-8 md:px-12 w-28 sm:w-37.5 md:w-50 shrink-0"
                   >
                     <div className="flex items-center justify-center h-10 sm:h-12 w-full opacity-75 hover:opacity-100 transition-all duration-300">
                       <Image
@@ -741,7 +741,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
   return (
     <div
       id={`service-card-${service.id}`}
-      className="h-[290px] sm:h-[310px] lg:h-[270px] cursor-pointer"
+      className="h-72.5 sm:h-77.5 lg:h-67.5 cursor-pointer"
       style={{ perspective: "1000px" }}
       onClick={() => setIsFlipped((f) => !f)}
     >
@@ -760,8 +760,8 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         >
 
           <div className="absolute top-4 right-4 z-10">
-            <span className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-sm text-[10px] font-bold text-gray-500 px-3 py-1 rounded-full border border-gray-200/60 shadow-sm">
-              <RotateCcw size={10} strokeWidth={2.5} /> Tap
+            <span className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-sm text-[10px] font-bold text-gray-500 px-3 py-1 rounded-full border border-red-300/90 shadow-sm">
+               Tap to Explore
             </span>
           </div>
           <div className="relative flex-1 overflow-hidden">
@@ -774,14 +774,14 @@ function ServiceCard({ service }: { service: ServiceItem }) {
           
           {/* Bottom Bar styled precisely like the reference picture */}
           <div className="p-4.5 flex items-center gap-3 border-t border-gray-100 bg-white mt-auto">
-            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center text-red-600">
+            <div className="shrink-0 w-10 h-10 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center text-red-600">
               {service.icon}
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="text-sm font-bold text-gray-900 leading-tight truncate">{service.title}</h3>
               <p className="mt-0.5 text-xs text-gray-500 leading-snug line-clamp-2">{service.description}</p>
             </div>
-            <ArrowRight size={16} className="text-gray-400 flex-shrink-0" strokeWidth={2.5} />
+            <ArrowRight size={16} className="text-gray-400 shrink-0" strokeWidth={2.5} />
           </div>
         </div>
 
@@ -799,7 +799,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
             <ul className="space-y-1.5 flex-1 overflow-hidden">
               {service.highlights.slice(0, 3).map((item) => (
                 <li key={item} className="flex items-start gap-2">
-                  <CheckCircle2 size={12} className="text-red-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle2 size={12} className="text-red-600 mt-0.5 shrink-0" />
                   <span className="text-[11px] font-medium text-gray-700 truncate">{item}</span>
                 </li>
               ))}

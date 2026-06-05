@@ -5,7 +5,6 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { PRODUCT_CATEGORIES } from "@/lib/constants";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { THEME_COLORS } from "@/themes/colors";
 
 function CategoryCard({
   category,

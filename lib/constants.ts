@@ -190,7 +190,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     description:
       "CCTV cameras, DVRs and NVRs for comprehensive security monitoring.",
     href: "/products?category=Surveillance%20Systems",
-    imageSrc: "/images/categories/surveillance-systems.png",
+    imageSrc: "/images/categories/PUBLIC_NEXT_SUERVEILLANCE_SYSTEM_CARD_BG.jpg",
     imageAlt: "Surveillance systems products",
     subCategories: ["CCTV Cameras", "DVRs", "NVRs", "PTZ Cameras"],
   },

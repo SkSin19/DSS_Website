@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/static-components */
 "use client";
 
 import { useState } from "react";
@@ -281,7 +280,7 @@ export default function ProductFilters({
         <button
           type="submit"
           form={formId}
-          className="w-full rounded border border-yellow-500 bg-gradient-to-b from-yellow-300 to-yellow-400 py-1.5 text-[13px] font-semibold text-gray-900 shadow-sm transition-all hover:from-yellow-400 hover:to-yellow-500 active:from-yellow-500 active:to-yellow-500"
+          className="w-full rounded border border-yellow-500 bg-linear-to-b from-yellow-300 to-yellow-400 py-1.5 text-[13px] font-semibold text-gray-900 shadow-sm transition-all hover:from-yellow-400 hover:to-yellow-500 active:from-yellow-500 active:to-yellow-500"
         >
           Apply filters
         </button>
@@ -503,7 +502,7 @@ export function ProductSidebar({
           <div className="pt-4">
             <button
               type="submit"
-              className="w-full rounded border border-red-700 bg-gradient-to-b from-red-500 to-red-600 py-1.5 text-[13px] font-semibold text-white shadow-sm transition-all hover:from-red-600 hover:to-red-700 active:from-red-700 active:to-red-700"
+              className="w-full rounded border border-red-700 bg-linear-to-b from-red-500 to-red-600 py-1.5 text-[13px] font-semibold text-white shadow-sm transition-all hover:from-red-600 hover:to-red-700 active:from-red-700 active:to-red-700"
             >
               Apply filters
             </button>

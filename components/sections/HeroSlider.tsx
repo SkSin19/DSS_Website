@@ -510,7 +510,7 @@ export default function HeroSlider() {
 
             <div
               ref={badgesRef}
-              className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 md:pt-1"
+              className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 md:pt-10 lg:pt-12 justify-center lg:justify-start"
             >
               {TRUST_BADGES.map((badge, i) => (
                 <div key={i} className="flex items-center gap-1.5">

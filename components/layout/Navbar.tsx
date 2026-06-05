@@ -6,7 +6,6 @@ import Image from "next/image";
 import {
   BRANDS,
   NAV_LINKS,
-  PRODUCT_CATEGORIES,
   SITE_NAME,
 } from "@/lib/constants";
 import { apiGet } from "@/utils/api";
@@ -188,7 +187,7 @@ export default function Navbar() {
                             <p className="text-sm font-semibold text-gray-900">
                               {brand.name}
                             </p>
-                            <p className="mt-1 text-xs leading-relaxed text-gray-500">
+                            <p className="mt-1 text-xs leading-relaxed text-red-500">
                               {brand.tagline}
                             </p>
                           </Link>

@@ -61,7 +61,7 @@ export default function Navbar() {
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-50 w-full bg-gray-200/95 text-gray-900 backdrop-blur-md transition-all duration-300 border-b border-gray-300 ${
+      className={`sticky top-0 z-50 w-full bg-gray-200/95 text-gray-900 backdrop-blur-md transition-all select-none duration-300 border-b border-gray-300 ${
         isScrolled ? "navbar-scrolled" : ""
       }`}
       suppressHydrationWarning

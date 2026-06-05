@@ -111,7 +111,7 @@ function InfoBarItem({
       </div>
       <div>
         <h4 className="text-gray-900 font-semibold text-sm">{title}</h4>
-        <p className="text-gray-500 text-xs">{subtitle}</p>
+        <p className="text-red-500 text-xs">{subtitle}</p>
       </div>
     </div>
   );

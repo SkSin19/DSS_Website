@@ -13,7 +13,7 @@ function AboutUs() {
               How It Started
             </p>
             <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
-              Next Generation Digital Security Solutions for a Safer Tomorrow
+              Next Generation <span className="text-red-600">Digital Security Solutions</span> for a Safer Tomorrow
             </h1>
           </div>
 

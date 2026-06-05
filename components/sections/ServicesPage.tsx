@@ -154,7 +154,7 @@ const OTHER_SERVICES: ServiceItem[] = [
     description: "Control your lights, appliances, security and more from anywhere.",
     backDescription: "Transform your living space with intelligent automation. Control lighting, climate, entertainment systems, and security.",
     highlights: ["Voice & app-controlled lighting", "Smart climate management", "Automated curtains & blinds", "Energy usage monitoring"],
-    imageSrc: "/images/services/home-automation.png",
+    imageSrc: "/images/services/PUBLIC_NEXT_HOME_AUTOMATION_CARD_BG.avif",
     imageAlt: "Home automation smart living room setup",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
@@ -202,7 +202,7 @@ const OTHER_SERVICES: ServiceItem[] = [
     description: "Early detection and instant alerts for maximum safety.",
     backDescription: "Protect lives and property with advanced fire detection. From smoke sensors to alarm panels for homes and businesses.",
     highlights: ["Smoke & heat detection", "Instant mobile alerts", "Centralized alarm panels", "Compliance-ready systems"],
-    imageSrc: "/images/services/fire-alarm.png",
+    imageSrc: "/images/services/PUBLIC_NEXT_FIRE_ALARM_BG.jpg",
     imageAlt: "Fire alarm system components",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
@@ -293,7 +293,7 @@ export default function ServicesPage() {
                 {/* Tap hint */}
                 <div className="absolute top-5 right-5 z-10">
                   <span className={`inline-flex items-center gap-1.5 backdrop-blur-sm text-[11px] font-bold px-3.5 py-1.5 rounded-full border transition-colors shadow-sm ${
-                    open ? "bg-red-50 text-red-600 border-red-300/90" : "bg-white/90 text-gray-500 border-gray-200/60"
+                    open ? "bg-red-50 text-red-600 border-red-300/90" : "bg-white/90 text-gray-500 border-red-500/90"
                   }`}>
                     
                     {open ? "Close Panel" : "Tap to Explore"}
@@ -631,7 +631,7 @@ export default function ServicesPage() {
                 {/* Tap hint */}
                 <div className="absolute top-5 right-5 z-10">
                   <span className={`inline-flex items-center gap-1.5 backdrop-blur-sm text-[11px] font-bold px-3.5 py-1.5 rounded-full border transition-colors shadow-sm ${
-                    openOther ? "bg-red-50 text-red-600 border-red-200" : "bg-white/90 text-gray-500 border-gray-200/60"
+                    openOther ? "bg-red-50 text-red-600 border-red-200" : "bg-white/90 text-gray-500 border-red-500/90"
                   }`}>
                     {openOther ? "Close Panel" : "Tap to Explore"}
                   </span>
@@ -760,7 +760,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         >
 
           <div className="absolute top-4 right-4 z-10">
-            <span className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-sm text-[10px] font-bold text-gray-500 px-3 py-1 rounded-full border border-red-300/90 shadow-sm">
+            <span className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-sm text-[10px] font-bold text-gray-500 px-3 py-1 rounded-full border border-red-500/90 shadow-sm">
                Tap to Explore
             </span>
           </div>

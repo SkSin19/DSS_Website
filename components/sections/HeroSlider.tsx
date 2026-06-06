@@ -13,7 +13,8 @@ import { THEME_COLORS } from "@/themes/colors";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    CCTV MODEL — DESKTOP
-   Follows mouse. Dead zone only on horizontal axis (very small).
+   Follows mouse. Dead zone on left extreme AND rightmost ~30% of screen
+   (horizontal only).
 ───────────────────────────────────────────────────────────────────────────── */
 function CCTVModel({
   mousePosRef,
@@ -33,9 +34,17 @@ function CCTVModel({
     const rawDx = mousePosRef.current.x - 1.0;
     const rawDy = mousePosRef.current.y;
 
-    // Very small horizontal dead zone — only stops at the extreme left edge
-    const H_RANGE = 1.85; // nearly the full screen width before stopping
-    const inRange = rawDx > -H_RANGE;
+    // Left dead zone — only stops at the extreme left edge
+    const H_RANGE = 1.85;
+    const inLeftRange = rawDx > -H_RANGE;
+
+    // Right dead zone: freeze horizontal tracking when mouse is in the
+    // rightmost ~30% of screen. NDC x runs -1 (left) → +1 (right),
+    // so 30% from the right edge ≈ x > 0.4
+    const RIGHT_DEAD_ZONE = 0.4;
+    const inRightDeadZone = mousePosRef.current.x > RIGHT_DEAD_ZONE;
+
+    const inRange = inLeftRange && !inRightDeadZone;
 
     const MAX_Y = 0.9;
     const MAX_X = 0.5;

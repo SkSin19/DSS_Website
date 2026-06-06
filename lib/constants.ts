@@ -168,40 +168,32 @@ export const MARQUEE_BRANDS: MarqueeBrand[] = [
 
 export const PRODUCT_CATEGORIES: ProductCategory[] = [
   {
-    title: "Biometric & Identity",
-    description:
-      "Fingerprint and face recognition devices for identity verification.",
+    title: "Surveillance System",
+    description: "Advanced CCTV Systems for Complete Surveillance and Peace of Mind",
+    href: "/products?category=Surveillance%20Systems",
+    imageSrc: "/images/categories/video-security-cctv-systems.png",
+    imageAlt: "Surveillance System CCTV camera setup",
+  },
+  {
+    title: "Biometric",
+    description: "Smart Access Solutions for Seamless and Secure Entry",
     href: "/products?category=Biometric%20%26%20Identity",
     imageSrc: "/images/categories/access-control-smart-entry.png",
-    imageAlt: "Biometric and identity verification products",
-    subCategories: ["Fingerprint Recognition", "Face Recognition", "Aadhar Authentication"],
+    imageAlt: "Biometric Access Control systems",
+  },
+  {
+    title: "PA System",
+    description: "Reliable Alarm Systems that Detect, Deter and Protect",
+    href: "/products?category=PA%20Systems%20and%20AV",
+    imageSrc: "/images/categories/intrusion-alarm-detection.png",
+    imageAlt: "AX PRO wireless alarm system components",
   },
   {
     title: "Access Control",
-    description:
-      "Boom barriers, turnstiles and controllers for secure entry management.",
+    description: "Smart Intercoms for Clear Communication and Enhanced Security",
     href: "/products?category=Access%20Control",
-    imageSrc: "/images/categories/PUBLIC_NEXT_PRODUCT_CATOGORY-2.webp",
-    imageAlt: "Access control hardware and entry systems",
-    subCategories: ["Boom Barrier", "Turnstile Tripod", "Door Controllers", "Electromagnetic Locks"],
-  },
-  {
-    title: "Surveillance Systems",
-    description:
-      "CCTV cameras, DVRs and NVRs for comprehensive security monitoring.",
-    href: "/products?category=Surveillance%20Systems",
-    imageSrc: "/images/categories/PUBLIC_NEXT_SUERVEILLANCE_SYSTEM_CARD_BG.jpg",
-    imageAlt: "Surveillance systems products",
-    subCategories: ["CCTV Cameras", "DVRs", "NVRs", "PTZ Cameras"],
-  },
-  {
-    title: "PA Systems and AV",
-    description:
-      "Professional audio speakers, mixers, amplifiers and public address equipment for workspaces and venues.",
-    href: "/products?category=PA%20Systems%20and%20AV",
-    imageSrc: "/images/services/pa-systems-and-av.png",
-    imageAlt: "Public address systems and audio-visual products",
-    subCategories: ["PA Speakers", "Audio Amplifiers", "Mixers & Consoles", "Microphones"],
+    imageSrc: "/images/categories/intercom-communication-solutions.png",
+    imageAlt: "Intercom terminal and indoor display station",
   },
 ];
 

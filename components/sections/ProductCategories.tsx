@@ -13,7 +13,6 @@ function CategoryCard({
   category: (typeof PRODUCT_CATEGORIES)[number];
   index: number;
 }) {
-  // Even → from left, Odd → from right
   const direction = index % 2 === 0 ? "left" : "right";
   const ref = useScrollReveal<HTMLAnchorElement>({
     animation: direction,
@@ -24,41 +23,32 @@ function CategoryCard({
     <Link
       ref={ref}
       href={category.href}
-      className="category-card relative flex min-h-76 w-full flex-col justify-between overflow-hidden rounded-4xl p-6 sm:min-h-112.5 sm:p-8 md:p-10 border border-gray-200 bg-gray-200"
+      className="category-card group relative flex min-h-[220px] sm:min-h-[280px] md:min-h-[300px] w-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 border border-gray-100 bg-white shadow-sm hover:shadow-md transition-all duration-300"
     >
-      <div className="relative z-10 max-w-sm">
-        <h3 className="text-2xl sm:text-3xl font-bold text-black mb-3">
-          {category.title}
-        </h3>
-        <p className="text-gray-800 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
-          {category.description}
-        </p>
-        <span className="inline-flex items-center text-sm font-semibold text-red-600">
-          Explore category
+      <div className="relative z-10 max-w-[55%] flex flex-col justify-between min-h-[160px] sm:min-h-[220px] h-full">
+        <div>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-black mb-2 sm:mb-3 group-hover:text-red-600 transition-colors">
+            {category.title}
+          </h3>
+          <p className="text-gray-500 text-xs sm:text-sm md:text-base leading-relaxed mb-4">
+            {category.description}
+          </p>
+        </div>
+        <span className="inline-flex items-center text-xs sm:text-sm font-semibold text-black group-hover:text-red-600 transition-colors mt-auto">
+          Explore category <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>
         </span>
-
-        {category.subCategories?.length ? (
-          <div className="mt-4 sm:mt-6 flex flex-wrap gap-2">
-            {category.subCategories.map((subCategory) => (
-              <span
-                key={subCategory}
-                className="rounded-full border border-red-500 bg-gray-200 px-2.5 py-1 text-[10px] sm:text-[11px] font-medium text-gray-700"
-              >
-                {subCategory}
-              </span>
-            ))}
-          </div>
-        ) : null}
       </div>
 
-      <div className="absolute inset-0">
-        <Image
-          src={category.imageSrc}
-          alt={category.imageAlt}
-          fill
-          className="object-cover opacity-20 drop-shadow-xl"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
+      <div className="absolute right-0 bottom-0 top-0 w-[45%] md:w-[48%] flex items-center justify-center p-3 sm:p-5">
+        <div className="relative w-full h-[80%] sm:h-[90%]">
+          <Image
+            src={category.imageSrc}
+            alt={category.imageAlt}
+            fill
+            className="object-contain object-right opacity-100 drop-shadow-sm transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 45vw, 25vw"
+          />
+        </div>
       </div>
     </Link>
   );

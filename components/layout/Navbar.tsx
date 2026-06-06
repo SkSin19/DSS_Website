@@ -106,7 +106,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-red-600 rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
+                    className="px-4 py-2 text-sm font-medium text-gray-900 hover:!text-red-600 rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
                   >
                     {link.label}
                     <svg
@@ -154,7 +154,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-red-600 rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
+                    className="px-4 py-2 text-sm font-medium text-gray-900 hover:!text-red-600 rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
                   >
                     {link.label}
                     <svg
@@ -205,7 +205,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                  className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-red-600 rounded-lg transition-colors duration-200 focus-ring"
+                  className="px-4 py-2 text-sm font-medium text-gray-900 hover:!text-red-600 rounded-lg transition-colors duration-200 focus-ring"
                 >
                   {link.label}
                 </Link>

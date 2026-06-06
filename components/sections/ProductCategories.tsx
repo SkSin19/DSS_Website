@@ -23,9 +23,9 @@ function CategoryCard({
     <Link
       ref={ref}
       href={category.href}
-      className="category-card group relative flex min-h-[220px] sm:min-h-[280px] md:min-h-[300px] w-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 border border-gray-100 bg-white shadow-sm hover:shadow-md transition-all duration-300"
+      className="category-card group relative flex min-h-55 sm:min-h-70 md:min-h-75 w-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 border border-gray-100 bg-white shadow-sm hover:shadow-md transition-all duration-300"
     >
-      <div className="relative z-10 max-w-[55%] flex flex-col justify-between min-h-[160px] sm:min-h-[220px] h-full">
+      <div className="relative z-10 max-w-[55%] flex flex-col justify-between min-h-40 sm:min-h-55 h-full">
         <div>
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-black mb-2 sm:mb-3 group-hover:text-red-600 transition-colors">
             {category.title}

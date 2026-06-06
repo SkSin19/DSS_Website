@@ -17,7 +17,7 @@ export default function Home() {
       <BrandMarquee />
       <ProductCategories />
       <SmarterSecurity />
-      <Bestsellers />
+      {/* <Bestsellers /> */}
       <PremiumDesign />
       <FeaturedProducts />
       <WhyChooseUs />

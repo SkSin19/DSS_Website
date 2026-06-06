@@ -87,26 +87,26 @@ export const TRUST_BADGES: TrustBadge[] = [
 
 export const BRANDS: Brand[] = [
   {
-    name: "Hikvision",
-    tagline: "First Choice for Security",
+    name: "eSSL",
+    tagline: "Security at fingertips",
     color: THEME_COLORS.red,
     productImageSrc: "/images/banners/hikvision_banner.png",
   },
   {
-    name: "Dahua",
-    tagline: "Enabling a Safer Society",
+    name: "Bose",
+    tagline: "Better Sound Through Research",
     color: THEME_COLORS.shadowGrey700,
     productImageSrc: "/images/banners/alhua_banner.png",
   },
   {
     name: "CP Plus",
-    tagline: "Uparwala Sab Dekh Raha Hai",
+    tagline: "18 Years of Reforming a Secure India",
     color: THEME_COLORS.redDark,
     productImageSrc: "/images/banners/cpplus_banner.png",
   },
   {
-    name: "Godrej",
-    tagline: "Smart Security Solutions",
+    name: "Prama",
+    tagline: "Secure your home",
     color: THEME_COLORS.shadowGrey500,
     productImageSrc: "/images/banners/godrej_banner.png",
   },

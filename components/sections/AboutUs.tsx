@@ -126,9 +126,9 @@ export default function AboutUs() {
         </div>
 
         {/* Commitment Banner Card */}
-        <div className="relative w-full rounded-[2.5rem] bg-[#030712] overflow-hidden flex flex-col md:flex-row shadow-xl border border-slate-900 min-h-[420px] mt-8">
+        <div className="relative w-full rounded-[2.5rem] bg-[#030712] overflow-hidden flex flex-col md:flex-row shadow-xl border border-slate-900 min-h-105 mt-8">
           {/* Background image on the right */}
-          <div className="absolute right-0 top-0 bottom-0 w-full md:w-[55%] z-0 h-full min-h-[250px] md:min-h-auto">
+          <div className="absolute right-0 top-0 bottom-0 w-full md:w-[55%] z-0 h-full min-h-62.5 md:min-h-auto">
             <Image
               src="/images/general/PUBLIC_NEXT_GET_IN_TOUCH.png"
               alt="Trusted security solutions"
@@ -192,7 +192,7 @@ export default function AboutUs() {
 
             <Link
               href="/solutions"
-              className="inline-flex items-center justify-center bg-slate-950 hover:bg-red-600 !text-white font-semibold text-xs sm:text-sm px-6 py-3.5 rounded-full self-start transition-colors duration-200"
+              className="inline-flex items-center justify-center bg-slate-950 hover:bg-red-600 text-white! font-semibold text-xs sm:text-sm px-6 py-3.5 rounded-full self-start transition-colors duration-200"
               style={{ color: "white" }}
             >
               Explore Solutions <span className="ml-2">→</span>

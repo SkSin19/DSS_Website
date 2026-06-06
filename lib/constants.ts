@@ -93,7 +93,7 @@ export const BRANDS: Brand[] = [
     productImageSrc: "/images/banners/hikvision_banner.png",
   },
   {
-    name: "Bose",
+    name: "Bose Professional",
     tagline: "Better Sound Through Research",
     color: THEME_COLORS.shadowGrey700,
     productImageSrc: "/images/banners/alhua_banner.png",
@@ -105,7 +105,7 @@ export const BRANDS: Brand[] = [
     productImageSrc: "/images/banners/cpplus_banner.png",
   },
   {
-    name: "Prama",
+    name: "PRAMA",
     tagline: "Secure your home",
     color: THEME_COLORS.shadowGrey500,
     productImageSrc: "/images/banners/godrej_banner.png",
@@ -113,6 +113,12 @@ export const BRANDS: Brand[] = [
   {
     name: "Bosch",
     tagline: "Invented for Life",
+    color: THEME_COLORS.redSoft,
+    productImageSrc: "/images/banners/bosch_banner.png",
+  },
+  {
+    name: "Impact by Honeywell",
+    tagline: "Solutions that are personalized to your specific challenges",
     color: THEME_COLORS.redSoft,
     productImageSrc: "/images/banners/bosch_banner.png",
   },

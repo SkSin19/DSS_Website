@@ -238,7 +238,7 @@ export default function Navbar() {
                       <div className="grid grid-cols-2 gap-2">
                         {categories.map((category) => (
                           <Link key={category} href={`/products?category=${encodeURIComponent(category)}`}
-                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-gray-100 focus-ring">
+                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-red-200/50 focus-ring">
                             <p className="text-sm font-semibold text-gray-900">{category}</p>
                           </Link>
                         ))}
@@ -253,7 +253,7 @@ export default function Navbar() {
               return (
                 <li key={link.href} className="relative group">
                   <Link
-                    href={link.href}
+                    href=""
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                     className="px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
                   >
@@ -269,8 +269,8 @@ export default function Navbar() {
                       <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">Our Brands</p>
                       <div className="grid grid-cols-2 gap-2">
                         {BRANDS.map((brand) => (
-                          <Link key={brand.name} href={`/brands?name=${encodeURIComponent(brand.name)}`}
-                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-red-300 focus-ring">
+                          <Link key={brand.name} href={`/products?company=${encodeURIComponent(brand.name)}`}
+                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-red-200/50 focus-ring">
                             <p className="text-sm font-semibold text-gray-900">{brand.name}</p>
                           </Link>
                         ))}
@@ -303,13 +303,6 @@ export default function Navbar() {
             <span className="enq-shimmer" />
             <span className="enq-dot" />
             <span style={{ position: "relative" }}>Enquire Now</span>
-            <span className="enq-arrow">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2.5"
-                strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
           </button>
         </Link>
 
@@ -369,13 +362,6 @@ export default function Navbar() {
                 <span className="enq-shimmer" />
                 <span className="enq-dot" />
                 <span style={{ position: "relative" }}>Enquire Now</span>
-                <span className="enq-arrow">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="2.5"
-                    strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </span>
               </button>
             </Link>
           </div>

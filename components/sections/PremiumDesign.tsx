@@ -129,7 +129,7 @@ export default function PremiumDesign() {
           <div ref={rightRef} className="rounded-4xl p-10 md:p-16 flex flex-col justify-center border border-gray-200 shadow-[0_20px_60px_rgba(17,24,39,0.08)]" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
             <div className="flex items-center gap-2 mb-6">
               <ShieldIcon />
-              <span className="text-red-600 text-xs font-bold tracking-widest uppercase">
+              <span className="text-red-600 text-xs font-bold tracking-widest uppercase md:mb-2">
                 Trusted Security
               </span>
             </div>
@@ -183,7 +183,7 @@ export default function PremiumDesign() {
             <div>
               <Link
                 href="/about"
-                className="inline-flex items-center justify-center bg-red-600! text-white! hover:bg-red-700! px-8 py-3.5 rounded-full text-sm font-semibold transition-colors gap-2 group shadow-xl"
+                className="inline-flex items-center justify-center bg-red-600! text-white! hover:bg-white! hover:text-black! border-red-600 border-2 px-8 py-3.5 rounded-full text-sm font-semibold transition-colors gap-2 group shadow-xl"
               >
                 Read our Story
               </Link>

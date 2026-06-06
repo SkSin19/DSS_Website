@@ -149,7 +149,7 @@ export default function FeaturedProducts() {
           <button
             type="button"
             onClick={() => setShowAll((current) => !current)}
-            className="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-red-600 px-7 py-3 text-sm font-semibold text-white shadow-xl shadow-gray-900/10 transition-colors hover:bg-red-700 hover:text-white"
+            className="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-red-600 text-white! hover:bg-white! hover:text-black! border-red-600 border-2 px-7 py-3 text-sm font-semibold shadow-xl shadow-gray-900/10 transition-color duration-200"
           >
             {showAll ? "Show less" : "Show more"}
           </button>

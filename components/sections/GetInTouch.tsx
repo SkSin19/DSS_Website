@@ -1,13 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { requestEmailOtpGeneral, verifyEmailOtpGeneral, submitGeneralEnquiry } from "@/lib/enquiry-api";
 import Image from "next/image";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { THEME_COLORS } from "@/themes/colors";
 
+const IMAGES = [
+  {
+    src: "/images/general/PUBLIC_NEXT_GET_IN_TOUCH.png",
+    alt: "Smart security home",
+    showOverlay: true,
+  },
+  {
+    src: "/images/general/PUBLIC_NEXT_GET_IN_TOUCH_BUSINESS.jpg",
+    alt: "Smart security business",
+    showOverlay: false,
+  },
+];
+
 const GetInTouch: React.FC = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % IMAGES.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
   const formPanelRef  = useScrollReveal<HTMLDivElement>({ animation: "left",  delay: 0 });
   const rightTextRef  = useScrollReveal<HTMLDivElement>({ animation: "right", delay: 250 });
   const [formData, setFormData] = useState({
@@ -140,22 +162,31 @@ const GetInTouch: React.FC = () => {
     <section className="select-none relative w-full min-h-screen bg-[#FFFFFF] overflow-hidden flex">
       {/* ─── RIGHT PANEL — Full-bleed background image ─── */}
       <div className="absolute inset-0 z-0">
-        {/* The house photo fills the entire right side */}
+        {/* The images fill the entire right side and cross-fade */}
         <div className="absolute right-0 top-1 bottom-0 w-full md:w-[62%]">
-          <Image
-            src="/images/general/PUBLIC_NEXT_GET_IN_TOUCH.png"
-            alt="Smart security home"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover object-center"
-            unoptimized
-          />
-          
+          {IMAGES.map((img, idx) => (
+            <div
+              key={img.src}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                currentImageIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0"
+              }`}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-center"
+                unoptimized
+                priority={idx === 0}
+              />
+            </div>
+          ))}
         </div>
 
         {/* Bottom vignette */}
         <div
-          className="absolute inset-x-0 bottom-0 h-60 pointer-events-none"
+          className="absolute inset-x-0 bottom-0 h-60 pointer-events-none z-20"
           style={{
             background: "linear-gradient(to top, #FFFFFF 70%, transparent 100%)",
           }}
@@ -349,7 +380,12 @@ const GetInTouch: React.FC = () => {
       </div>
 
       {/* ─── RIGHT PANEL — Text overlay on image ─── */}
-      <div ref={rightTextRef} className="hidden md:flex relative z-10 flex-1 flex-col justify-end pb-16 px-10">
+      <div
+        ref={rightTextRef}
+        className={`hidden md:flex relative z-20 flex-1 flex-col justify-end pb-16 px-10 transition-opacity duration-1000 ${
+          IMAGES[currentImageIndex].showOverlay ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
         <div>
           <h2 className="text-black text-3xl font-bold leading-tight drop-shadow-lg">
             Smart Security for

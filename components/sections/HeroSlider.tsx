@@ -160,76 +160,160 @@ const SLIDES = [
     image: "/images/hero/hero-security-showcase.jpg",
     alt: "Residential Security Showcase",
     title: "Residential Security Showcase",
+    opacity: 0.60,
+    gradientWidth: "220px",
     hotspots: [
       {
         id: "r-cctv",
         title: "CCTV SURVEILLANCE",
         desc: "24/7 monitoring for complete safety.",
-        top: "14%",
-        left: "92%",
+        top: "22%",
+        left: "91%",
       },
       {
         id: "r-alarm",
         title: "FIRE ALARM SOUNDER",
         desc: "Loud audible alerts in case of emergency.",
-        top: "32%",
-        left: "95%",
+        top: "26%",
+        left: "73%",
       },
       {
         id: "r-panel",
         title: "FIRE ALARM PANEL",
         desc: "Intelligent detection and quick response.",
-        top: "52%",
-        left: "95%",
+        top: "50%",
+        left: "38%",
       },
       {
         id: "r-mcp",
         title: "MANUAL CALL POINT",
         desc: "Quick activation during emergencies.",
-        top: "55%",
-        left: "79%",
+        top: "66%",
+        left: "83%",
       },
       {
         id: "r-extinguisher",
         title: "FIRE EXTINGUISHERS",
         desc: "Always ready, always safe.",
-        top: "73%",
-        left: "79%",
+        top: "60%",
+        left: "31%",
       },
       {
         id: "r-access",
         title: "ACCESS CONTROL",
         desc: "Secure entry for residents & visitors.",
-        top: "73%",
-        left: "65%",
+        top: "64%",
+        left: "23%",
       },
       {
         id: "r-visitor",
         title: "VISITOR MANAGEMENT",
         desc: "Digital check-in for a safer community.",
-        top: "68%",
-        left: "84%",
+        top: "62%",
+        left: "35%",
       },
       {
         id: "r-barrier",
-        title: "BOOM BARRIER",
-        desc: "Controlled vehicle access.",
-        top: "72%",
-        left: "14%",
+        title: "AUTOMATED GATE MOTOR",
+        desc: "Reliable motorized automatic gate controls.",
+        top: "79%",
+        left: "76%",
       },
       {
         id: "r-intercom",
         title: "VIDEO INTERCOM",
         desc: "See, verify and communicate before granting access.",
-        top: "70%",
-        left: "13%",
+        top: "60%",
+        left: "12%",
       },
       {
         id: "r-pa",
         title: "PUBLIC ADDRESS SYSTEM",
         desc: "Instant announcements when needed.",
-        top: "49%",
-        left: "39%",
+        top: "16%",
+        left: "40%",
+      },
+      {
+        id: "r-go-inside",
+        title: "ENTER SMART HOME",
+        desc: "Interactive Showcase. Click to step inside and view home automation systems.",
+        top: "50%",
+        left: "41%",
+        action: "go-to-interior",
+        targetSlideId: "residential-interior",
+      },
+    ],
+  },
+  {
+    id: "residential-interior",
+    image: "/images/hero/hero-security-showcase-interior.jpg",
+    alt: "Smart Home Interior",
+    title: "Smart Home Interior",
+    opacity: 0.60,
+    gradientWidth: "220px",
+    hotspots: [
+      {
+        id: "w-interior-automation",
+        title: "SMART HOME PANEL",
+        desc: "Centrally manage lights, security, climate, and audio systems.",
+        top: "25%",
+        left: "14%",
+      },
+      {
+        id: "w-interior-intercom",
+        title: "VIDEO INTERCOM",
+        desc: "Interior communication monitor to view and talk with visitors at the gate.",
+        top: "53%",
+        left: "11%",
+      },
+      {
+        id: "w-interior-pinpad",
+        title: "PIN KEYPAD ACCESS",
+        desc: "Secure PIN code entry to arm/disarm the security system.",
+        top: "53%",
+        left: "22%",
+      },
+      {
+        id: "w-interior-alarm",
+        title: "SECURITY ALARM PANEL",
+        desc: "Quick-arm keypad displaying current system status.",
+        top: "77%",
+        left: "10%",
+      },
+      {
+        id: "w-interior-motion",
+        title: "MOTION SENSOR",
+        desc: "PIR motion detector protecting the main living area.",
+        top: "73%",
+        left: "22%",
+      },
+      {
+        id: "w-interior-tv",
+        title: "SURVEILLANCE VIDEO WALL",
+        desc: "Real-time camera feed grid monitoring gates, driveways, and garden areas.",
+        top: "43%",
+        left: "79%",
+      },
+      {
+        id: "w-interior-projector",
+        title: "HOME THEATER PROJECTOR",
+        desc: "High-definition smart projector for entertainment integration.",
+        top: "14%",
+        left: "49%",
+      },
+      {
+        id: "w-interior-audio",
+        title: "INTEGRATED AUDIO SYSTEM",
+        desc: "Premium sound system integrated with home automation controls.",
+        top: "55%",
+        left: "62%",
+      },
+      {
+        id: "w-interior-receiver",
+        title: "CENTRAL AV RECEIVER & NVR",
+        desc: "Centralized server hosting security video feeds and smart media.",
+        top: "66%",
+        left: "73%",
       },
     ],
   },
@@ -238,6 +322,8 @@ const SLIDES = [
     image: "/images/hero/hero-security-showcase-business.jpg",
     alt: "Commercial Security Showcase",
     title: "Commercial Security Showcase",
+    opacity: 0.85,
+    gradientWidth: "384px",
     hotspots: [
       {
         id: "c-cctv-dome",
@@ -295,6 +381,15 @@ const SLIDES = [
         top: "79%",
         left: "17%",
       },
+      {
+        id: "c-go-inside",
+        title: "CONFERENCE ROOM",
+        desc: "Interactive Showcase. Click to step inside and view meeting systems.",
+        top: "48%",
+        left: "51%",
+        action: "go-to-workspace",
+        targetSlideId: "workspace",
+      },
     ],
   },
   {
@@ -302,6 +397,8 @@ const SLIDES = [
     image: "/images/hero/hero-security-showcase-collaboration.jpg",
     alt: "Smart Collaboration Workspace",
     title: "Smart Collaboration Workspace",
+    opacity: 0.85,
+    gradientWidth: "384px",
     hotspots: [
       {
         id: "w-ceiling-mic",
@@ -366,6 +463,20 @@ const SLIDES = [
         top: "87%",
         left: "35.5%",
       },
+      {
+        id: "w-smoke-detector",
+        title: "SMOKE DETECTOR",
+        desc: "Addressable ceiling sensor for early fire detection.",
+        top: "6%",
+        left: "41.5%",
+      },
+      {
+        id: "w-fire-alarm",
+        title: "FIRE ALARM SOUNDER",
+        desc: "Wall-mounted alert speaker strobe for emergency warnings.",
+        top: "16%",
+        left: "80%",
+      },
     ],
   },
 ];
@@ -387,7 +498,7 @@ export default function HeroSlider() {
       setCurrentSlideIndex((prev) => (prev + 1) % SLIDES.length);
     }, 9000); // 9 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [currentSlideIndex]);
 
   const sectionRef = useRef<HTMLElement>(null);
   const bgGridRef = useRef<HTMLDivElement>(null);
@@ -402,9 +513,71 @@ export default function HeroSlider() {
   const scanLineRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef<boolean>(false);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [aspectBoxStyle, setAspectBoxStyle] = useState<React.CSSProperties>({
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  });
+
+  useEffect(() => {
+    if (!mounted || !containerRef.current) return;
+
+    const handleResize = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const containerWidth = rect.width;
+      const containerHeight = rect.height;
+      const imageAspectRatio = 1024 / 682; // 1.5
+
+      let boxWidth = containerWidth;
+      let boxHeight = containerHeight;
+
+      if (containerWidth && containerHeight) {
+        const containerAspectRatio = containerWidth / containerHeight;
+        if (containerAspectRatio > imageAspectRatio) {
+          boxWidth = containerWidth;
+          boxHeight = containerWidth / imageAspectRatio;
+        } else {
+          boxWidth = containerHeight * imageAspectRatio;
+          boxHeight = containerHeight;
+        }
+      }
+
+      setAspectBoxStyle({
+        width: `${boxWidth}px`,
+        height: `${boxHeight}px`,
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      });
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [mounted]);
+
   // const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  const slide = HERO_SLIDES[0];
+  const slide = {
+    badge: currentSlideIndex === 0 
+      ? "NEXT-GEN SURVEILLANCE" 
+      : currentSlideIndex === 1 
+      ? "SMART HOME INTERIOR" 
+      : currentSlideIndex === 2
+      ? "COMMERCIAL SAFETY" 
+      : "SMART COLLABORATION",
+    headingLine1: "Digital",
+    headingLine2: "Security Solutions",
+    headingAccentColor: THEME_COLORS.red,
+    description: "Surety of Security",
+    ctaPrimaryHref: "/enquiry",
+  };
 
   /* detect mobile once on mount */
   useEffect(() => {
@@ -591,29 +764,41 @@ export default function HeroSlider() {
       </div>
 
       {/* ── BACKGROUND IMAGE SHOWCASE (Right 85% of screen) ── */}
-      <div className="absolute right-0 top-0 bottom-0 w-full md:w-[85%] z-0 overflow-hidden select-none">
-        {SLIDES.map((slide, idx) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              currentSlideIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-            }`}
-          >
-            <Image
-              src={slide.image}
-              alt={slide.alt}
-              fill
-              className="object-cover object-center opacity-90"
-              priority={idx === 0}
-              unoptimized
-            />
-          </div>
-        ))}
+      <div 
+        ref={containerRef}
+        className="absolute right-0 top-0 bottom-0 w-full md:w-[85%] z-0 overflow-hidden select-none"
+      >
+        {/* Aspect Ratio Box that scales exactly like object-cover object-center */}
+        <div style={aspectBoxStyle}>
+          {/* Images */}
+          {SLIDES.map((slide, idx) => (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                currentSlideIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                fill
+                className="object-cover object-center"
+                style={{ opacity: slide.opacity }}
+                priority={idx === 0}
+                unoptimized
+              />
+            </div>
+          ))}
+        </div>
+
         {/* Mobile-only background watermark overlay */}
         <div className="absolute inset-0 bg-white/90 md:bg-transparent pointer-events-none z-15" />
         
         {/* Left edge fade gradient (desktop only) */}
-        <div className="absolute inset-y-0 left-0 w-96 hidden md:block bg-gradient-to-r from-white via-white/90 via-white/50 to-transparent pointer-events-none z-15" />
+        <div 
+          className="absolute inset-y-0 left-0 hidden md:block bg-gradient-to-r from-white via-white/90 via-white/50 to-transparent pointer-events-none z-15 transition-[width] duration-1000"
+          style={{ width: SLIDES[currentSlideIndex]?.gradientWidth ?? "384px" }}
+        />
         
         {/* Bottom edge fade gradient */}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none z-15" />
@@ -621,46 +806,82 @@ export default function HeroSlider() {
 
       {/* ── INTERACTIVE HOTSPOTS OVERLAY ── */}
       <div className="absolute right-0 top-0 bottom-0 w-full md:w-[85%] z-30 pointer-events-none overflow-hidden select-none">
-        {SLIDES.map((slide, slideIdx) => (
-          <div
-            key={`hotspots-${slide.id}`}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              currentSlideIndex === slideIdx ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-            }`}
-          >
-            {slide.hotspots.map((spot) => (
-              <div
-                key={spot.id}
-                className="absolute group z-30 pointer-events-auto cursor-pointer"
-                style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
-              >
-                {/* Pulse Ring */}
-                <div className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-75 h-4 w-4 -m-1" style={{ width: '16px', height: '16px' }} />
-                
-                {/* Active/Hover Dot */}
-                <button
-                  aria-label={spot.title}
-                  className="relative h-2 w-2 rounded-full bg-red-600 border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150"
-                  style={{ width: '8px', height: '8px' }}
-                />
-
-                {/* Tooltip Card */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto shadow-xl">
+        {/* Aspect Ratio Box centered and scaled exactly matching the showcase image */}
+        <div style={aspectBoxStyle}>
+          {SLIDES.map((slide, slideIdx) => (
+            <div
+              key={`hotspots-${slide.id}`}
+              className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${
+                currentSlideIndex === slideIdx ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+              }`}
+            >
+              {slide.hotspots.map((spot) => {
+                const isSpecial = !!spot.action;
+                const showBelow = parseFloat(spot.top) < 35;
+                return (
                   <div
-                    className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent -mt-1"
-                    style={{ borderTopColor: "rgba(0,0,0,0.85)" }}
-                  />
-                  <p className="text-[10px] font-bold text-red-400 tracking-wider uppercase mb-1 font-sans">
-                    {spot.title}
-                  </p>
-                  <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
-                    {spot.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        ))}
+                    key={spot.id}
+                    className="absolute group z-30 pointer-events-auto cursor-pointer"
+                    style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
+                    onClick={() => {
+                      if (isSpecial && spot.targetSlideId) {
+                        const targetIdx = SLIDES.findIndex(s => s.id === spot.targetSlideId);
+                        if (targetIdx !== -1) {
+                          setCurrentSlideIndex(targetIdx);
+                        }
+                      }
+                    }}
+                  >
+                    {/* Pulse Ring */}
+                    <div
+                      className={`absolute inset-0 rounded-full animate-ping opacity-75 h-4 w-4 -m-1 ${
+                        isSpecial ? "bg-cyan-400" : "bg-red-500"
+                      }`}
+                      style={{ width: '16px', height: '16px' }}
+                    />
+                    
+                    {/* Active/Hover Dot */}
+                    <button
+                      aria-label={spot.title}
+                      className={`relative h-2 w-2 rounded-full border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150 ${
+                        isSpecial
+                          ? "bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.8)]"
+                          : "bg-red-600"
+                      }`}
+                      style={{ width: '8px', height: '8px' }}
+                    />
+
+                    {/* Tooltip Card */}
+                    <div className={`absolute left-1/2 -translate-x-1/2 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform group-hover:opacity-100 group-hover:pointer-events-auto shadow-xl ${
+                      showBelow
+                        ? "top-full mt-3 -translate-y-2"
+                        : "bottom-full mb-3 translate-y-2"
+                    }`}>
+                      <div
+                        className={`absolute left-1/2 -translate-x-1/2 border-4 border-transparent ${
+                          showBelow ? "bottom-full -mb-1" : "top-full -mt-1"
+                        }`}
+                        style={
+                          showBelow
+                            ? { borderBottomColor: "rgba(0,0,0,0.85)" }
+                            : { borderTopColor: "rgba(0,0,0,0.85)" }
+                        }
+                      />
+                      <p className={`text-[10px] font-bold tracking-wider uppercase mb-1 font-sans ${
+                        isSpecial ? "text-cyan-400" : "text-red-400"
+                      }`}>
+                        {spot.title}
+                      </p>
+                      <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
+                        {spot.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* ── CCTV CANVAS — DESKTOP (hidden on mobile) ────────────────────────

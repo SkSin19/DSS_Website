@@ -335,6 +335,7 @@ export default function HeroSlider() {
           1.15,
         );
 
+        /*
         gsap.fromTo(
           scanLineRef.current,
           { y: "-100%" },
@@ -346,6 +347,7 @@ export default function HeroSlider() {
             repeatDelay: 2.5,
           },
         );
+        */
 
         const section = sectionRef.current;
 
@@ -390,7 +392,7 @@ export default function HeroSlider() {
       className="select-none relative w-full overflow-hidden bg-white"
       style={{ minHeight: "100svh" }}
     >
-      {/* scan line */}
+      {/* scan line (Commented out)
       <div
         ref={scanLineRef}
         className="pointer-events-none absolute inset-x-0 z-10 h-0.5 opacity-20"
@@ -399,6 +401,7 @@ export default function HeroSlider() {
             "linear-gradient(90deg, transparent, rgba(220,38,38,0.9), transparent)",
         }}
       />
+      */}
 
       {/* grid */}
       <div

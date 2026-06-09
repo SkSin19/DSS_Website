@@ -6,33 +6,14 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { HERO_SLIDES, TRUST_BADGES } from "@/lib/constants";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, useGLTF } from "@react-three/drei";
-import * as THREE from "three";
-import { THEME_COLORS } from "@/themes/colors";
 import Image from "next/image";
-
-const HERO_IMAGES = [
-  {
-    src: "/images/hero/hero-jbl.jpg",
-    alt: "JBL Professional Sound. Powerful Impact.",
-  },
-  {
-    src: "/images/hero/hero-hikvision.png",
-    alt: "Hikvision Intelligent Security. Everywhere.",
-  },
-  {
-    src: "/images/hero/hero-workspace.jpg",
-    alt: "Smart Collaboration for Modern Workspaces",
-  },
-  {
-    src: "/images/hero/hero-residential.jpg",
-    alt: "Ace City Noida Extension Complete Safety",
-  },
-];
+// import { Canvas, useFrame } from "@react-three/fiber";
+// import { Environment, Float, useGLTF } from "@react-three/drei";
+// import * as THREE from "three";
+import { THEME_COLORS } from "@/themes/colors";
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   CCTV MODEL — DESKTOP (Commented out)
+   CCTV MODEL — DESKTOP
    Follows mouse. Dead zone on left extreme AND rightmost ~30% of screen
    (horizontal only).
 ───────────────────────────────────────────────────────────────────────────── */
@@ -102,7 +83,7 @@ function CCTVModel({
 */
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   CCTV MODEL — MOBILE (Commented out)
+   CCTV MODEL — MOBILE
    No mouse. Autonomous spring animation: slow pan left/right + up/down bob,
    always biased toward the left side of screen (negative Y rotation).
 ───────────────────────────────────────────────────────────────────────────── */
@@ -169,26 +150,90 @@ function CCTVModelMobile() {
     </group>
   );
 }
+
+useGLTF.preload("/models/cctv.glb");
 */
 
-// useGLTF.preload("/models/cctv.glb");
+const HOTSPOTS = [
+  {
+    id: "cctv",
+    title: "CCTV SURVEILLANCE",
+    desc: "24/7 monitoring for complete safety.",
+    top: "14%",
+    left: "92%",
+  },
+  {
+    id: "alarm",
+    title: "FIRE ALARM SOUNDER",
+    desc: "Loud audible alerts in case of emergency.",
+    top: "32%",
+    left: "95%",
+  },
+  {
+    id: "panel",
+    title: "FIRE ALARM PANEL",
+    desc: "Intelligent detection and quick response.",
+    top: "52%",
+    left: "95%",
+  },
+  {
+    id: "mcp",
+    title: "MANUAL CALL POINT",
+    desc: "Quick activation during emergencies.",
+    top: "55%",
+    left: "79%",
+  },
+  {
+    id: "extinguisher",
+    title: "FIRE EXTINGUISHERS",
+    desc: "Always ready, always safe.",
+    top: "73%",
+    left: "79%",
+  },
+  {
+    id: "access",
+    title: "ACCESS CONTROL",
+    desc: "Secure entry for residents & visitors.",
+    top: "73%",
+    left: "65%",
+  },
+  {
+    id: "visitor",
+    title: "VISITOR MANAGEMENT",
+    desc: "Digital check-in for a safer community.",
+    top: "68%",
+    left: "84%",
+  },
+  {
+    id: "barrier",
+    title: "BOOM BARRIER",
+    desc: "Controlled vehicle access.",
+    top: "72%",
+    left: "14%",
+  },
+  {
+    id: "intercom",
+    title: "VIDEO INTERCOM",
+    desc: "See, verify and communicate before granting access.",
+    top: "70%",
+    left: "13%",
+  },
+  {
+    id: "pa",
+    title: "PUBLIC ADDRESS SYSTEM",
+    desc: "Instant announcements when needed.",
+    top: "49%",
+    left: "39%",
+  },
+];
 
 /* ─────────────────────────────────────────────────────────────────────────────
    HERO SECTION
 ───────────────────────────────────────────────────────────────────────────── */
 export default function HeroSlider() {
   const [mounted, setMounted] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 5000);
-    return () => clearInterval(timer);
   }, []);
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -204,7 +249,7 @@ export default function HeroSlider() {
   const scanLineRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef<boolean>(false);
 
-  const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  // const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const slide = HERO_SLIDES[0];
 
@@ -213,7 +258,7 @@ export default function HeroSlider() {
     isMobileRef.current = window.innerWidth < 768;
   }, []);
 
-  /* ── GLOBAL MOUSE (desktop only) ─────────────────────────────────────── */
+  /* ── GLOBAL MOUSE (desktop only) ───────────────────────────────────────
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       mousePosRef.current = {
@@ -224,6 +269,7 @@ export default function HeroSlider() {
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
+  ─────────────────────────────────────────────────────────────────────── */
 
   /* ── GSAP ─────────────────────────────────────────────────────────────── */
   useEffect(() => {
@@ -388,8 +434,7 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* ── CCTV CANVAS — DESKTOP (hidden on mobile) (Commented out) ──────────────────────── */}
-      {/*
+      {/* ── CCTV CANVAS — DESKTOP (hidden on mobile) ────────────────────────
       <div
         ref={productRef}
         className="pointer-events-none hidden md:block"
@@ -420,10 +465,9 @@ export default function HeroSlider() {
           </Suspense>
         </Canvas>
       </div>
-      */}
+      ────────────────────────────────────────────────────────────────────── */}
 
-      {/* ── CCTV CANVAS — MOBILE (hidden on desktop) (Commented out) ──────────────────────── */}
-      {/*
+      {/* ── CCTV CANVAS — MOBILE (hidden on desktop) ────────────────────────
       <div
         className="pointer-events-none block md:hidden"
         style={{
@@ -450,7 +494,7 @@ export default function HeroSlider() {
           </Suspense>
         </Canvas>
       </div>
-      */}
+      ────────────────────────────────────────────────────────────────────── */}
 
       {/* MAIN CONTENT */}
       <div className="relative z-10 mx-auto flex min-h-svh w-full max-w-7xl flex-col items-center justify-center px-4 py-24 sm:px-6 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8 lg:py-0">
@@ -569,74 +613,53 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* RIGHT — Carousel */}
-        <div className="relative w-full flex items-center justify-center pt-8 lg:pt-0">
-          <div className="group relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] rounded-[2rem] overflow-hidden border border-gray-200/80 bg-gray-50/50 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] transition-all duration-500 hover:shadow-[0_30px_70px_-10px_rgba(0,0,0,0.22)]">
-            
-            {/* Slides container */}
-            <div 
-              className="flex w-full h-full transition-transform duration-700 ease-in-out"
-              style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
-            >
-              {HERO_IMAGES.map((img, idx) => (
-                <div key={img.src} className="relative w-full h-full flex-shrink-0">
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover object-center transition-transform duration-[8000ms] ease-linear transform group-hover:scale-105"
-                    priority={idx === 0}
-                    unoptimized
-                  />
-                </div>
-              ))}
-            </div>
+        {/* RIGHT — Interactive Showcase */}
+        <div className="relative w-full h-[320px] sm:h-[400px] lg:h-[500px] mt-8 lg:mt-0 flex items-center justify-center">
+          <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gray-200 bg-white">
+            <Image
+              src="/images/hero/hero-security-showcase.jpg"
+              alt="Security systems showcase"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-center"
+              priority
+              unoptimized
+            />
+            {/* Dark overlay for hotspots contrast */}
+            <div className="absolute inset-0 bg-black/10 pointer-events-none" />
 
-            {/* Navigation Arrows */}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setCurrentImageIndex((prev) => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length);
-              }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 hover:bg-black/50 hover:scale-105"
-              aria-label="Previous slide"
-            >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-              }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 hover:bg-black/50 hover:scale-105"
-              aria-label="Next slide"
-            >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-
-            {/* Pagination Dots */}
-            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex gap-2.5 rounded-full bg-black/25 px-4 py-2.5 backdrop-blur-md">
-              {HERO_IMAGES.map((_, idx) => (
+            {/* HOTSPOTS */}
+            {HOTSPOTS.map((spot) => (
+              <div
+                key={spot.id}
+                className="absolute group z-30"
+                style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
+              >
+                {/* Pulse Ring */}
+                <div className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-75 h-4 w-4 -m-1" style={{ width: '16px', height: '16px' }} />
+                
+                {/* Active/Hover Dot */}
                 <button
-                  key={idx}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setCurrentImageIndex(idx);
-                  }}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
-                    currentImageIndex === idx ? "w-7 bg-red-600" : "w-2.5 bg-white/60 hover:bg-white"
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
+                  aria-label={spot.title}
+                  className="relative h-2 w-2 rounded-full bg-red-600 border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150"
+                  style={{ width: '8px', height: '8px' }}
                 />
-              ))}
-            </div>
 
+                {/* Tooltip Card */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto shadow-xl">
+                  <div
+                    className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent -mt-1"
+                    style={{ borderTopColor: "rgba(0,0,0,0.85)" }}
+                  />
+                  <p className="text-[10px] font-bold text-red-400 tracking-wider uppercase mb-1">
+                    {spot.title}
+                  </p>
+                  <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
+                    {spot.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

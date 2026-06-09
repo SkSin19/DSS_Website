@@ -715,7 +715,7 @@ export default function HeroSlider() {
   return (
     <section
       ref={sectionRef}
-      className="select-none relative w-full overflow-hidden bg-white"
+      className="select-none relative w-full overflow-hidden bg-white flex flex-col md:block"
       style={{ minHeight: "100svh" }}
     >
       {/* scan line (Commented out)
@@ -763,124 +763,127 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* ── BACKGROUND IMAGE SHOWCASE (Right 85% of screen) ── */}
-      <div 
-        ref={containerRef}
-        className="absolute right-0 top-0 bottom-0 w-full md:w-[85%] z-0 overflow-hidden select-none"
-      >
-        {/* Aspect Ratio Box that scales exactly like object-cover object-center */}
-        <div style={aspectBoxStyle}>
-          {/* Images */}
-          {SLIDES.map((slide, idx) => (
-            <div
-              key={slide.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                currentSlideIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-              }`}
-            >
-              <Image
-                src={slide.image}
-                alt={slide.alt}
-                fill
-                className="object-cover object-center"
-                style={{ opacity: slide.opacity }}
-                priority={idx === 0}
-                unoptimized
-              />
-            </div>
-          ))}
+      {/* Responsive Wrapper for Mobile Split Layout */}
+      <div className="relative w-full aspect-[3/2] md:static md:w-auto md:aspect-auto">
+        {/* ── BACKGROUND IMAGE SHOWCASE ── */}
+        <div 
+          ref={containerRef}
+          className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] z-0 overflow-hidden select-none"
+        >
+          {/* Aspect Ratio Box that scales exactly like object-cover object-center */}
+          <div style={aspectBoxStyle}>
+            {/* Images */}
+            {SLIDES.map((slide, idx) => (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  currentSlideIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                }`}
+              >
+                <Image
+                  src={slide.image}
+                  alt={slide.alt}
+                  fill
+                  className="object-cover object-center"
+                  style={{ opacity: slide.opacity }}
+                  priority={idx === 0}
+                  unoptimized
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile-only background watermark overlay (hidden on mobile, text is below) */}
+          <div className="absolute inset-0 bg-white/90 md:bg-transparent pointer-events-none z-15 hidden md:block" />
+          
+          {/* Left edge fade gradient (desktop only) */}
+          <div 
+            className="absolute inset-y-0 left-0 hidden md:block bg-gradient-to-r from-white via-white/90 via-white/50 to-transparent pointer-events-none z-15 transition-[width] duration-1000"
+            style={{ width: SLIDES[currentSlideIndex]?.gradientWidth ?? "384px" }}
+          />
+          
+          {/* Bottom edge fade gradient */}
+          <div className="absolute inset-x-0 bottom-0 h-8 md:h-24 bg-gradient-to-t from-white to-transparent pointer-events-none z-15" />
         </div>
 
-        {/* Mobile-only background watermark overlay */}
-        <div className="absolute inset-0 bg-white/90 md:bg-transparent pointer-events-none z-15" />
-        
-        {/* Left edge fade gradient (desktop only) */}
-        <div 
-          className="absolute inset-y-0 left-0 hidden md:block bg-gradient-to-r from-white via-white/90 via-white/50 to-transparent pointer-events-none z-15 transition-[width] duration-1000"
-          style={{ width: SLIDES[currentSlideIndex]?.gradientWidth ?? "384px" }}
-        />
-        
-        {/* Bottom edge fade gradient */}
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none z-15" />
-      </div>
-
-      {/* ── INTERACTIVE HOTSPOTS OVERLAY ── */}
-      <div className="absolute right-0 top-0 bottom-0 w-full md:w-[85%] z-30 pointer-events-none overflow-hidden select-none">
-        {/* Aspect Ratio Box centered and scaled exactly matching the showcase image */}
-        <div style={aspectBoxStyle}>
-          {SLIDES.map((slide, slideIdx) => (
-            <div
-              key={`hotspots-${slide.id}`}
-              className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${
-                currentSlideIndex === slideIdx ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-              }`}
-            >
-              {slide.hotspots.map((spot) => {
-                const isSpecial = !!spot.action;
-                const showBelow = parseFloat(spot.top) < 35;
-                return (
-                  <div
-                    key={spot.id}
-                    className="absolute group z-30 pointer-events-auto cursor-pointer"
-                    style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
-                    onClick={() => {
-                      if (isSpecial && spot.targetSlideId) {
-                        const targetIdx = SLIDES.findIndex(s => s.id === spot.targetSlideId);
-                        if (targetIdx !== -1) {
-                          setCurrentSlideIndex(targetIdx);
-                        }
-                      }
-                    }}
-                  >
-                    {/* Pulse Ring */}
+        {/* ── INTERACTIVE HOTSPOTS OVERLAY ── */}
+        <div className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] z-30 pointer-events-none overflow-visible select-none">
+          {/* Aspect Ratio Box centered and scaled exactly matching the showcase image */}
+          <div style={aspectBoxStyle}>
+            {SLIDES.map((slide, slideIdx) => (
+              <div
+                key={`hotspots-${slide.id}`}
+                className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${
+                  currentSlideIndex === slideIdx ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                }`}
+              >
+                {slide.hotspots.map((spot) => {
+                  const isSpecial = !!spot.action;
+                  const showBelow = parseFloat(spot.top) < 35;
+                  return (
                     <div
-                      className={`absolute inset-0 rounded-full animate-ping opacity-75 h-4 w-4 -m-1 ${
-                        isSpecial ? "bg-cyan-400" : "bg-red-500"
-                      }`}
-                      style={{ width: '16px', height: '16px' }}
-                    />
-                    
-                    {/* Active/Hover Dot */}
-                    <button
-                      aria-label={spot.title}
-                      className={`relative h-2 w-2 rounded-full border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150 ${
-                        isSpecial
-                          ? "bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.8)]"
-                          : "bg-red-600"
-                      }`}
-                      style={{ width: '8px', height: '8px' }}
-                    />
-
-                    {/* Tooltip Card */}
-                    <div className={`absolute left-1/2 -translate-x-1/2 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform group-hover:opacity-100 group-hover:pointer-events-auto shadow-xl ${
-                      showBelow
-                        ? "top-full mt-3 -translate-y-2"
-                        : "bottom-full mb-3 translate-y-2"
-                    }`}>
-                      <div
-                        className={`absolute left-1/2 -translate-x-1/2 border-4 border-transparent ${
-                          showBelow ? "bottom-full -mb-1" : "top-full -mt-1"
-                        }`}
-                        style={
-                          showBelow
-                            ? { borderBottomColor: "rgba(0,0,0,0.85)" }
-                            : { borderTopColor: "rgba(0,0,0,0.85)" }
+                      key={spot.id}
+                      className="absolute group z-30 pointer-events-auto cursor-pointer"
+                      style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
+                      onClick={() => {
+                        if (isSpecial && spot.targetSlideId) {
+                          const targetIdx = SLIDES.findIndex(s => s.id === spot.targetSlideId);
+                          if (targetIdx !== -1) {
+                            setCurrentSlideIndex(targetIdx);
+                          }
                         }
+                      }}
+                    >
+                      {/* Pulse Ring */}
+                      <div
+                        className={`absolute inset-0 rounded-full animate-ping opacity-75 h-4 w-4 -m-1 ${
+                          isSpecial ? "bg-cyan-400" : "bg-red-500"
+                        }`}
+                        style={{ width: '16px', height: '16px' }}
                       />
-                      <p className={`text-[10px] font-bold tracking-wider uppercase mb-1 font-sans ${
-                        isSpecial ? "text-cyan-400" : "text-red-400"
+                      
+                      {/* Active/Hover Dot */}
+                      <button
+                        aria-label={spot.title}
+                        className={`relative h-2 w-2 rounded-full border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150 ${
+                          isSpecial
+                            ? "bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.8)]"
+                            : "bg-red-600"
+                        }`}
+                        style={{ width: '8px', height: '8px' }}
+                      />
+
+                      {/* Tooltip Card */}
+                      <div className={`absolute left-1/2 -translate-x-1/2 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto shadow-xl ${
+                        showBelow
+                          ? "top-full mt-3 -translate-y-2"
+                          : "bottom-full mb-3 translate-y-2"
                       }`}>
-                        {spot.title}
-                      </p>
-                      <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
-                        {spot.desc}
-                      </p>
+                        <div
+                          className={`absolute left-1/2 -translate-x-1/2 border-4 border-transparent ${
+                            showBelow ? "bottom-full -mb-1" : "top-full -mt-1"
+                          }`}
+                          style={
+                            showBelow
+                              ? { borderBottomColor: "rgba(0,0,0,0.85)" }
+                              : { borderTopColor: "rgba(0,0,0,0.85)" }
+                          }
+                        />
+                        <p className={`text-[10px] font-bold tracking-wider uppercase mb-1 font-sans ${
+                          isSpecial ? "text-cyan-400" : "text-red-400"
+                        }`}>
+                          {spot.title}
+                        </p>
+                        <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
+                          {spot.desc}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          ))}
+                  );
+                })}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -947,11 +950,10 @@ export default function HeroSlider() {
       ────────────────────────────────────────────────────────────────────── */}
 
       {/* MAIN CONTENT */}
-      <div className="relative z-10 mx-auto flex min-h-svh w-full max-w-7xl flex-col items-center justify-center px-4 py-24 sm:px-6 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8 lg:py-0">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-4 py-10 sm:px-6 md:min-h-svh md:py-0 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8">
         {/* LEFT */}
         <div
-          className="flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-8 lg:gap-5 lg:justify-normal justify-between"
-          style={{ minHeight: "clamp(400px, 72svh, 600px)" }}
+          className="hero-left-content flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-8 lg:gap-5 lg:justify-normal justify-between"
         >
           {/* ── TOP CLUSTER: badge + headline + subtitle ── */}
           <div className="flex flex-col items-center gap-5 lg:items-start mt-8 lg:mt-0">
@@ -1203,6 +1205,17 @@ export default function HeroSlider() {
               translate(-50%, -50%)
               translate(var(--dx), var(--dy))
               scale(1);
+          }
+        }
+
+        @media (min-width: 768px) {
+          .hero-left-content {
+            min-height: clamp(400px, 72svh, 600px);
+          }
+        }
+        @media (max-width: 767px) {
+          .hero-left-content {
+            min-height: 380px;
           }
         }
       `}</style>

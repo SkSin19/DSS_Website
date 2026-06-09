@@ -771,27 +771,8 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* RIGHT — Spacer and Controls for background image on desktop */}
-        <div className="hidden lg:flex flex-col items-center justify-end w-full h-[500px] pb-8 z-20 pointer-events-auto select-none">
-          <div className="flex gap-3 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg">
-            {SLIDES.map((slide, idx) => (
-              <button
-                key={slide.id}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setCurrentSlideIndex(idx);
-                }}
-                className={`text-[10px] font-bold tracking-wider uppercase px-4 py-2 rounded-full transition-all duration-300 ${
-                  currentSlideIndex === idx
-                    ? "bg-red-600 text-white shadow-md"
-                    : "text-white/80 hover:text-white"
-                }`}
-              >
-                {slide.id === "residential" ? "Residential" : "Commercial"}
-              </button>
-            ))}
-          </div>
-        </div>
+        {/* RIGHT — Spacer for background image on desktop */}
+        <div className="hidden lg:block w-full h-[500px]" />
       </div>
 
       <style>{`

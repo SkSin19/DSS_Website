@@ -154,76 +154,148 @@ function CCTVModelMobile() {
 useGLTF.preload("/models/cctv.glb");
 */
 
-const HOTSPOTS = [
+const SLIDES = [
   {
-    id: "cctv",
-    title: "CCTV SURVEILLANCE",
-    desc: "24/7 monitoring for complete safety.",
-    top: "14%",
-    left: "92%",
+    id: "residential",
+    image: "/images/hero/hero-security-showcase.jpg",
+    alt: "Residential Security Showcase",
+    title: "Residential Security Showcase",
+    hotspots: [
+      {
+        id: "r-cctv",
+        title: "CCTV SURVEILLANCE",
+        desc: "24/7 monitoring for complete safety.",
+        top: "14%",
+        left: "92%",
+      },
+      {
+        id: "r-alarm",
+        title: "FIRE ALARM SOUNDER",
+        desc: "Loud audible alerts in case of emergency.",
+        top: "32%",
+        left: "95%",
+      },
+      {
+        id: "r-panel",
+        title: "FIRE ALARM PANEL",
+        desc: "Intelligent detection and quick response.",
+        top: "52%",
+        left: "95%",
+      },
+      {
+        id: "r-mcp",
+        title: "MANUAL CALL POINT",
+        desc: "Quick activation during emergencies.",
+        top: "55%",
+        left: "79%",
+      },
+      {
+        id: "r-extinguisher",
+        title: "FIRE EXTINGUISHERS",
+        desc: "Always ready, always safe.",
+        top: "73%",
+        left: "79%",
+      },
+      {
+        id: "r-access",
+        title: "ACCESS CONTROL",
+        desc: "Secure entry for residents & visitors.",
+        top: "73%",
+        left: "65%",
+      },
+      {
+        id: "r-visitor",
+        title: "VISITOR MANAGEMENT",
+        desc: "Digital check-in for a safer community.",
+        top: "68%",
+        left: "84%",
+      },
+      {
+        id: "r-barrier",
+        title: "BOOM BARRIER",
+        desc: "Controlled vehicle access.",
+        top: "72%",
+        left: "14%",
+      },
+      {
+        id: "r-intercom",
+        title: "VIDEO INTERCOM",
+        desc: "See, verify and communicate before granting access.",
+        top: "70%",
+        left: "13%",
+      },
+      {
+        id: "r-pa",
+        title: "PUBLIC ADDRESS SYSTEM",
+        desc: "Instant announcements when needed.",
+        top: "49%",
+        left: "39%",
+      },
+    ],
   },
   {
-    id: "alarm",
-    title: "FIRE ALARM SOUNDER",
-    desc: "Loud audible alerts in case of emergency.",
-    top: "32%",
-    left: "95%",
-  },
-  {
-    id: "panel",
-    title: "FIRE ALARM PANEL",
-    desc: "Intelligent detection and quick response.",
-    top: "52%",
-    left: "95%",
-  },
-  {
-    id: "mcp",
-    title: "MANUAL CALL POINT",
-    desc: "Quick activation during emergencies.",
-    top: "55%",
-    left: "79%",
-  },
-  {
-    id: "extinguisher",
-    title: "FIRE EXTINGUISHERS",
-    desc: "Always ready, always safe.",
-    top: "73%",
-    left: "79%",
-  },
-  {
-    id: "access",
-    title: "ACCESS CONTROL",
-    desc: "Secure entry for residents & visitors.",
-    top: "73%",
-    left: "65%",
-  },
-  {
-    id: "visitor",
-    title: "VISITOR MANAGEMENT",
-    desc: "Digital check-in for a safer community.",
-    top: "68%",
-    left: "84%",
-  },
-  {
-    id: "barrier",
-    title: "BOOM BARRIER",
-    desc: "Controlled vehicle access.",
-    top: "72%",
-    left: "14%",
-  },
-  {
-    id: "intercom",
-    title: "VIDEO INTERCOM",
-    desc: "See, verify and communicate before granting access.",
-    top: "70%",
-    left: "13%",
-  },
-  {
-    id: "pa",
-    title: "PUBLIC ADDRESS SYSTEM",
-    desc: "Instant announcements when needed.",
-    top: "49%",
-    left: "39%",
+    id: "commercial",
+    image: "/images/hero/hero-security-showcase-business.jpg",
+    alt: "Commercial Security Showcase",
+    title: "Commercial Security Showcase",
+    hotspots: [
+      {
+        id: "c-cctv-dome",
+        title: "CCTV DOME CAMERA",
+        desc: "High-definition 360-degree overhead surveillance.",
+        top: "12%",
+        left: "47%",
+      },
+      {
+        id: "c-cctv-bullet-l",
+        title: "WALL SURVEILLANCE",
+        desc: "HD bullet cameras guarding entry pathways.",
+        top: "25%",
+        left: "35%",
+      },
+      {
+        id: "c-cctv-bullet-r",
+        title: "PERIMETER CCTV",
+        desc: "Angled surveillance monitoring front facade points.",
+        top: "25%",
+        left: "61%",
+      },
+      {
+        id: "c-alarm-bell",
+        title: "FIRE ALARM BELL",
+        desc: "Loud physical alarm system for occupant warnings.",
+        top: "63%",
+        left: "34%",
+      },
+      {
+        id: "c-alarm-panel",
+        title: "FIRE ALARM INTERFACE",
+        desc: "Emergency trigger points and control modules.",
+        top: "54%",
+        left: "35%",
+      },
+      {
+        id: "c-access",
+        title: "SPEED GATE TURNSTILES",
+        desc: "Stainless steel security turnstiles for badge validation.",
+        top: "83%",
+        left: "62%",
+      },
+      {
+        id: "c-visitor",
+        title: "BIOMETRIC KIOSK",
+        desc: "Facial recognition terminal for automated check-in.",
+        top: "80%",
+        left: "78%",
+      },
+      {
+        id: "c-barrier",
+        title: "BOOM BARRIER GATE",
+        desc: "Heavy-duty vehicle barrier controlling driveway entry.",
+        top: "79%",
+        left: "17%",
+      },
+    ],
   },
 ];
 
@@ -234,6 +306,16 @@ export default function HeroSlider() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  // Auto-play interval
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlideIndex((prev) => (prev + 1) % SLIDES.length);
+    }, 9000); // 9 seconds
+    return () => clearInterval(interval);
   }, []);
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -439,55 +521,73 @@ export default function HeroSlider() {
 
       {/* ── BACKGROUND IMAGE SHOWCASE (Right 85% of screen) ── */}
       <div className="absolute right-0 top-0 bottom-0 w-full md:w-[85%] z-0 overflow-hidden select-none">
-        <Image
-          src="/images/hero/hero-security-showcase.jpg"
-          alt="Security systems showcase background"
-          fill
-          className="object-cover object-center opacity-90"
-          priority
-          unoptimized
-        />
+        {SLIDES.map((slide, idx) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              currentSlideIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+            }`}
+          >
+            <Image
+              src={slide.image}
+              alt={slide.alt}
+              fill
+              className="object-cover object-center opacity-90"
+              priority={idx === 0}
+              unoptimized
+            />
+          </div>
+        ))}
         {/* Mobile-only background watermark overlay */}
-        <div className="absolute inset-0 bg-white/90 md:bg-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-white/90 md:bg-transparent pointer-events-none z-15" />
         
         {/* Left edge fade gradient (desktop only) */}
-        <div className="absolute inset-y-0 left-0 w-96 hidden md:block bg-gradient-to-r from-white via-white/90 via-white/50 to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-96 hidden md:block bg-gradient-to-r from-white via-white/90 via-white/50 to-transparent pointer-events-none z-15" />
         
         {/* Bottom edge fade gradient */}
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none z-15" />
       </div>
 
       {/* ── INTERACTIVE HOTSPOTS OVERLAY ── */}
       <div className="absolute right-0 top-0 bottom-0 w-full md:w-[85%] z-30 pointer-events-none overflow-hidden select-none">
-        {HOTSPOTS.map((spot) => (
+        {SLIDES.map((slide, slideIdx) => (
           <div
-            key={spot.id}
-            className="absolute group z-30 pointer-events-auto cursor-pointer"
-            style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
+            key={`hotspots-${slide.id}`}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              currentSlideIndex === slideIdx ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            }`}
           >
-            {/* Pulse Ring */}
-            <div className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-75 h-4 w-4 -m-1" style={{ width: '16px', height: '16px' }} />
-            
-            {/* Active/Hover Dot */}
-            <button
-              aria-label={spot.title}
-              className="relative h-2 w-2 rounded-full bg-red-600 border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150"
-              style={{ width: '8px', height: '8px' }}
-            />
-
-            {/* Tooltip Card */}
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto shadow-xl">
+            {slide.hotspots.map((spot) => (
               <div
-                className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent -mt-1"
-                style={{ borderTopColor: "rgba(0,0,0,0.85)" }}
-              />
-              <p className="text-[10px] font-bold text-red-400 tracking-wider uppercase mb-1 font-sans">
-                {spot.title}
-              </p>
-              <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
-                {spot.desc}
-              </p>
-            </div>
+                key={spot.id}
+                className="absolute group z-30 pointer-events-auto cursor-pointer"
+                style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
+              >
+                {/* Pulse Ring */}
+                <div className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-75 h-4 w-4 -m-1" style={{ width: '16px', height: '16px' }} />
+                
+                {/* Active/Hover Dot */}
+                <button
+                  aria-label={spot.title}
+                  className="relative h-2 w-2 rounded-full bg-red-600 border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150"
+                  style={{ width: '8px', height: '8px' }}
+                />
+
+                {/* Tooltip Card */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto shadow-xl">
+                  <div
+                    className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent -mt-1"
+                    style={{ borderTopColor: "rgba(0,0,0,0.85)" }}
+                  />
+                  <p className="text-[10px] font-bold text-red-400 tracking-wider uppercase mb-1 font-sans">
+                    {spot.title}
+                  </p>
+                  <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
+                    {spot.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -671,8 +771,27 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* RIGHT — Spacer for background image on desktop */}
-        <div className="hidden lg:block w-full h-[500px]" />
+        {/* RIGHT — Spacer and Controls for background image on desktop */}
+        <div className="hidden lg:flex flex-col items-center justify-end w-full h-[500px] pb-8 z-20 pointer-events-auto select-none">
+          <div className="flex gap-3 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg">
+            {SLIDES.map((slide, idx) => (
+              <button
+                key={slide.id}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setCurrentSlideIndex(idx);
+                }}
+                className={`text-[10px] font-bold tracking-wider uppercase px-4 py-2 rounded-full transition-all duration-300 ${
+                  currentSlideIndex === idx
+                    ? "bg-red-600 text-white shadow-md"
+                    : "text-white/80 hover:text-white"
+                }`}
+              >
+                {slide.id === "residential" ? "Residential" : "Commercial"}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       <style>{`

@@ -10,12 +10,33 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { THEME_COLORS } from "@/themes/colors";
+import Image from "next/image";
+
+const HERO_IMAGES = [
+  {
+    src: "/images/hero/hero-jbl.jpg",
+    alt: "JBL Professional Sound. Powerful Impact.",
+  },
+  {
+    src: "/images/hero/hero-hikvision.png",
+    alt: "Hikvision Intelligent Security. Everywhere.",
+  },
+  {
+    src: "/images/hero/hero-workspace.jpg",
+    alt: "Smart Collaboration for Modern Workspaces",
+  },
+  {
+    src: "/images/hero/hero-residential.jpg",
+    alt: "Ace City Noida Extension Complete Safety",
+  },
+];
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   CCTV MODEL — DESKTOP
+   CCTV MODEL — DESKTOP (Commented out)
    Follows mouse. Dead zone on left extreme AND rightmost ~30% of screen
    (horizontal only).
 ───────────────────────────────────────────────────────────────────────────── */
+/*
 function CCTVModel({
   mousePosRef,
 }: {
@@ -78,12 +99,14 @@ function CCTVModel({
     </group>
   );
 }
+*/
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   CCTV MODEL — MOBILE
+   CCTV MODEL — MOBILE (Commented out)
    No mouse. Autonomous spring animation: slow pan left/right + up/down bob,
    always biased toward the left side of screen (negative Y rotation).
 ───────────────────────────────────────────────────────────────────────────── */
+/*
 function CCTVModelMobile() {
   const pivotRef = useRef<THREE.Group>(null);
   const gltf = useGLTF("/models/cctv.glb");
@@ -146,16 +169,26 @@ function CCTVModelMobile() {
     </group>
   );
 }
+*/
 
-useGLTF.preload("/models/cctv.glb");
+// useGLTF.preload("/models/cctv.glb");
 
 /* ─────────────────────────────────────────────────────────────────────────────
    HERO SECTION
 ───────────────────────────────────────────────────────────────────────────── */
 export default function HeroSlider() {
   const [mounted, setMounted] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(timer);
   }, []);
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -355,7 +388,8 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* ── CCTV CANVAS — DESKTOP (hidden on mobile) ──────────────────────── */}
+      {/* ── CCTV CANVAS — DESKTOP (hidden on mobile) (Commented out) ──────────────────────── */}
+      {/*
       <div
         ref={productRef}
         className="pointer-events-none hidden md:block"
@@ -386,8 +420,10 @@ export default function HeroSlider() {
           </Suspense>
         </Canvas>
       </div>
+      */}
 
-      {/* ── CCTV CANVAS — MOBILE (hidden on desktop) ──────────────────────── */}
+      {/* ── CCTV CANVAS — MOBILE (hidden on desktop) (Commented out) ──────────────────────── */}
+      {/*
       <div
         className="pointer-events-none block md:hidden"
         style={{
@@ -414,6 +450,7 @@ export default function HeroSlider() {
           </Suspense>
         </Canvas>
       </div>
+      */}
 
       {/* MAIN CONTENT */}
       <div className="relative z-10 mx-auto flex min-h-svh w-full max-w-7xl flex-col items-center justify-center px-4 py-24 sm:px-6 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8 lg:py-0">
@@ -532,7 +569,76 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* RIGHT — empty, model is fixed overlay */}
+        {/* RIGHT — Carousel */}
+        <div className="relative w-full flex items-center justify-center pt-8 lg:pt-0">
+          <div className="group relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] rounded-[2rem] overflow-hidden border border-gray-200/80 bg-gray-50/50 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] transition-all duration-500 hover:shadow-[0_30px_70px_-10px_rgba(0,0,0,0.22)]">
+            
+            {/* Slides container */}
+            <div 
+              className="flex w-full h-full transition-transform duration-700 ease-in-out"
+              style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+            >
+              {HERO_IMAGES.map((img, idx) => (
+                <div key={img.src} className="relative w-full h-full flex-shrink-0">
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover object-center transition-transform duration-[8000ms] ease-linear transform group-hover:scale-105"
+                    priority={idx === 0}
+                    unoptimized
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentImageIndex((prev) => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length);
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 hover:bg-black/50 hover:scale-105"
+              aria-label="Previous slide"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 hover:bg-black/50 hover:scale-105"
+              aria-label="Next slide"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Pagination Dots */}
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex gap-2.5 rounded-full bg-black/25 px-4 py-2.5 backdrop-blur-md">
+              {HERO_IMAGES.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentImageIndex(idx);
+                  }}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    currentImageIndex === idx ? "w-7 bg-red-600" : "w-2.5 bg-white/60 hover:bg-white"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+          </div>
+        </div>
       </div>
 
       <style>{`

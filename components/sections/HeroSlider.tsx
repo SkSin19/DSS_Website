@@ -297,6 +297,77 @@ const SLIDES = [
       },
     ],
   },
+  {
+    id: "workspace",
+    image: "/images/hero/hero-security-showcase-collaboration.jpg",
+    alt: "Smart Collaboration Workspace",
+    title: "Smart Collaboration Workspace",
+    hotspots: [
+      {
+        id: "w-ceiling-mic",
+        title: "CEILING MICROPHONE",
+        desc: "360° voice pickup for clear communication.",
+        top: "4.5%",
+        left: "51.5%",
+      },
+      {
+        id: "w-ptz-camera",
+        title: "PTZ CAMERA",
+        desc: "High quality video with auto framing.",
+        top: "21%",
+        left: "60.5%",
+      },
+      {
+        id: "w-ceiling-speakers",
+        title: "IN-CEILING SPEAKERS",
+        desc: "Premium audio throughout the room.",
+        top: "9.5%",
+        left: "67%",
+      },
+      {
+        id: "w-vc-camera",
+        title: "CONFERENCE CAMERA",
+        desc: "High-definition camera for clear presenter tracking.",
+        top: "34%",
+        left: "32.5%",
+      },
+      {
+        id: "w-soundbar",
+        title: "SOUNDBAR",
+        desc: "Crystal clear audio for every participant.",
+        top: "59%",
+        left: "32.5%",
+      },
+      {
+        id: "w-control-panel",
+        title: "AV CONTROL PANEL",
+        desc: "Intuitive touch control for effortless management.",
+        top: "84%",
+        left: "54.5%",
+      },
+      {
+        id: "w-dsp",
+        title: "DSP PROCESSOR",
+        desc: "Optimized digital sound processing for clear voice.",
+        top: "63%",
+        left: "83.5%",
+      },
+      {
+        id: "w-wireless-pres",
+        title: "WIRELESS PRESENTATION",
+        desc: "Share content wirelessly from any device.",
+        top: "68%",
+        left: "34.5%",
+      },
+      {
+        id: "w-table-mic",
+        title: "TABLE MICROPHONE",
+        desc: "Additional mic for better boundary voice coverage.",
+        top: "87%",
+        left: "35.5%",
+      },
+    ],
+  },
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────────

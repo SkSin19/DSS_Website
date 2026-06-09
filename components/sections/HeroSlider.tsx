@@ -434,6 +434,59 @@ export default function HeroSlider() {
         />
       </div>
 
+      {/* ── BACKGROUND IMAGE SHOWCASE (Right 85% of screen) ── */}
+      <div className="absolute right-0 top-0 bottom-0 w-full md:w-[85%] z-0 overflow-hidden select-none">
+        <Image
+          src="/images/hero/hero-security-showcase.jpg"
+          alt="Security systems showcase background"
+          fill
+          className="object-cover object-center opacity-90"
+          priority
+          unoptimized
+        />
+        {/* Mobile-only background watermark overlay */}
+        <div className="absolute inset-0 bg-white/90 md:bg-transparent pointer-events-none" />
+        
+        {/* Left edge fade gradient (desktop only) */}
+        <div className="absolute inset-y-0 left-0 w-96 hidden md:block bg-gradient-to-r from-white via-white/90 via-white/50 to-transparent pointer-events-none" />
+        
+        {/* Bottom edge fade gradient */}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+
+        {/* HOTSPOTS */}
+        {HOTSPOTS.map((spot) => (
+          <div
+            key={spot.id}
+            className="absolute group z-20"
+            style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
+          >
+            {/* Pulse Ring */}
+            <div className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-75 h-4 w-4 -m-1" style={{ width: '16px', height: '16px' }} />
+            
+            {/* Active/Hover Dot */}
+            <button
+              aria-label={spot.title}
+              className="relative h-2 w-2 rounded-full bg-red-600 border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150"
+              style={{ width: '8px', height: '8px' }}
+            />
+
+            {/* Tooltip Card */}
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto shadow-xl">
+              <div
+                className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent -mt-1"
+                style={{ borderTopColor: "rgba(0,0,0,0.85)" }}
+              />
+              <p className="text-[10px] font-bold text-red-400 tracking-wider uppercase mb-1 font-sans">
+                {spot.title}
+              </p>
+              <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
+                {spot.desc}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* ── CCTV CANVAS — DESKTOP (hidden on mobile) ────────────────────────
       <div
         ref={productRef}
@@ -613,55 +666,8 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* RIGHT — Interactive Showcase */}
-        <div className="relative w-full h-[320px] sm:h-[400px] lg:h-[500px] mt-8 lg:mt-0 flex items-center justify-center">
-          <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gray-200 bg-white">
-            <Image
-              src="/images/hero/hero-security-showcase.jpg"
-              alt="Security systems showcase"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
-              priority
-              unoptimized
-            />
-            {/* Dark overlay for hotspots contrast */}
-            <div className="absolute inset-0 bg-black/10 pointer-events-none" />
-
-            {/* HOTSPOTS */}
-            {HOTSPOTS.map((spot) => (
-              <div
-                key={spot.id}
-                className="absolute group z-30"
-                style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
-              >
-                {/* Pulse Ring */}
-                <div className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-75 h-4 w-4 -m-1" style={{ width: '16px', height: '16px' }} />
-                
-                {/* Active/Hover Dot */}
-                <button
-                  aria-label={spot.title}
-                  className="relative h-2 w-2 rounded-full bg-red-600 border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150"
-                  style={{ width: '8px', height: '8px' }}
-                />
-
-                {/* Tooltip Card */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto shadow-xl">
-                  <div
-                    className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent -mt-1"
-                    style={{ borderTopColor: "rgba(0,0,0,0.85)" }}
-                  />
-                  <p className="text-[10px] font-bold text-red-400 tracking-wider uppercase mb-1">
-                    {spot.title}
-                  </p>
-                  <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
-                    {spot.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* RIGHT — Spacer for background image on desktop */}
+        <div className="hidden lg:block w-full h-[500px]" />
       </div>
 
       <style>{`

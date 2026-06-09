@@ -572,8 +572,8 @@ export default function HeroSlider() {
       : currentSlideIndex === 2
       ? "COMMERCIAL SAFETY" 
       : "SMART COLLABORATION",
-    headingLine1: "Digital",
-    headingLine2: "Security Solutions",
+    headingLine1: "Digital Security",
+    headingLine2: "Solutions",
     headingAccentColor: THEME_COLORS.red,
     description: "Surety of Security",
     ctaPrimaryHref: "/enquiry",

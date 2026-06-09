@@ -452,12 +452,14 @@ export default function HeroSlider() {
         
         {/* Bottom edge fade gradient */}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+      </div>
 
-        {/* HOTSPOTS */}
+      {/* ── INTERACTIVE HOTSPOTS OVERLAY ── */}
+      <div className="absolute right-0 top-0 bottom-0 w-full md:w-[85%] z-30 pointer-events-none overflow-hidden select-none">
         {HOTSPOTS.map((spot) => (
           <div
             key={spot.id}
-            className="absolute group z-20"
+            className="absolute group z-30 pointer-events-auto cursor-pointer"
             style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
           >
             {/* Pulse Ring */}

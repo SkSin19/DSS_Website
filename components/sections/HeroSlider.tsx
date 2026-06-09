@@ -768,7 +768,7 @@ export default function HeroSlider() {
         {/* ── BACKGROUND IMAGE SHOWCASE ── */}
         <div 
           ref={containerRef}
-          className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] z-0 overflow-hidden select-none"
+          className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] lg:w-[80%] xl:w-[75%] 2xl:w-[70%] z-0 overflow-hidden select-none"
         >
           {/* Aspect Ratio Box that scales exactly like object-cover object-center */}
           <div style={aspectBoxStyle}>
@@ -807,7 +807,7 @@ export default function HeroSlider() {
         </div>
 
         {/* ── INTERACTIVE HOTSPOTS OVERLAY ── */}
-        <div className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] z-30 pointer-events-none overflow-visible select-none">
+        <div className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] lg:w-[80%] xl:w-[75%] 2xl:w-[70%] z-30 pointer-events-none overflow-visible select-none">
           {/* Aspect Ratio Box centered and scaled exactly matching the showcase image */}
           <div style={aspectBoxStyle}>
             {SLIDES.map((slide, slideIdx) => (

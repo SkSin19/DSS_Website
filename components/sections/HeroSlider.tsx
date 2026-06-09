@@ -160,8 +160,8 @@ const SLIDES = [
     image: "/images/hero/hero-security-showcase.jpg",
     alt: "Residential Security Showcase",
     title: "Residential Security Showcase",
-    opacity: 0.60,
-    gradientWidth: "220px",
+    opacity: 0.85,
+    gradientWidth: "240px",
     hotspots: [
       {
         id: "r-cctv",
@@ -249,8 +249,8 @@ const SLIDES = [
     image: "/images/hero/hero-security-showcase-interior.jpg",
     alt: "Smart Home Interior",
     title: "Smart Home Interior",
-    opacity: 0.60,
-    gradientWidth: "220px",
+    opacity: 0.85,
+    gradientWidth: "240px",
     hotspots: [
       {
         id: "w-interior-automation",
@@ -977,6 +977,7 @@ export default function HeroSlider() {
                         i >= accentStart
                           ? (slide.headingAccentColor ?? THEME_COLORS.red)
                           : THEME_COLORS.shadowGrey900,
+                      textShadow: "0 2px 10px rgba(255, 255, 255, 0.95), 0 1px 3px rgba(255, 255, 255, 0.90)",
                     }}
                   >
                     {word}
@@ -988,6 +989,9 @@ export default function HeroSlider() {
             <p
               ref={subRef}
               className="mt-5 md:pl-2 md:mt-0 max-w-md text-[25px] leading-relaxed text-gray-600"
+              style={{
+                textShadow: "0 2px 8px rgba(255, 255, 255, 0.95), 0 1px 3px rgba(255, 255, 255, 0.85)",
+              }}
             >
               {slide.description}
             </p>
@@ -1054,7 +1058,12 @@ export default function HeroSlider() {
             >
               {TRUST_BADGES.map((badge, i) => (
                 <div key={i} className="flex items-center gap-1.5">
-                  <span className="text-[11px] font-medium text-gray-500">
+                  <span 
+                    className="text-[11px] font-medium text-gray-500"
+                    style={{
+                      textShadow: "0 1px 4px rgba(255, 255, 255, 0.90)",
+                    }}
+                  >
                     {badge.label}
                   </span>
                 </div>

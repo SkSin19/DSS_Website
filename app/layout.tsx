@@ -1,13 +1,25 @@
 import { Metadata } from "next";
-import { Inter, Geist } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { Playfair_Display, Inter } from "next/font/google";
 
-// Load Inter font with font-display swap for performance
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 // Robust SEO metadata
 export const metadata: Metadata = {
@@ -82,22 +94,31 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": SITE_NAME,
-    "image": `${SITE_URL}/images/logo/dss_logo.png`,
+    name: SITE_NAME,
+    image: `${SITE_URL}/images/logo/dss_logo.png`,
     "@id": SITE_URL,
-    "url": SITE_URL,
-    "telephone": "+919876543210",
-    "address": {
+    url: SITE_URL,
+    telephone: "+919876543210",
+    address: {
       "@type": "PostalAddress",
-      "addressLocality": "Mumbai",
-      "addressRegion": "Maharashtra",
-      "addressCountry": "IN"
+      addressLocality: "Mumbai",
+      addressRegion: "Maharashtra",
+      addressCountry: "IN",
     },
-    "description": SITE_DESCRIPTION
+    description: SITE_DESCRIPTION,
   };
 
   return (
-    <html lang="en" className={cn("scroll-smooth", "antialiased", "font-sans", geist.variable)} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(
+        "scroll-smooth",
+        "antialiased",
+        "font-sans",
+        geist.variable,
+      )}
+      suppressHydrationWarning
+    >
       <head>
         <script
           type="application/ld+json"
@@ -105,11 +126,19 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="min-h-screen flex flex-col bg-white text-gray-900 overflow-x-hidden selection:bg-red-100 selection:text-gray-900"
+        className={cn(
+          "min-h-screen flex flex-col bg-white text-gray-900 overflow-x-hidden selection:bg-red-100 selection:text-gray-900",
+          geist.variable,
+          playfair.variable,
+          inter.variable,
+        )}
         suppressHydrationWarning
       >
         <Navbar />
-        <main className="flex-1 flex flex-col relative w-full overflow-x-clip" id="main-content">
+        <main
+          className="flex-1 flex flex-col relative w-full overflow-x-clip"
+          id="main-content"
+        >
           {children}
         </main>
         <Footer />

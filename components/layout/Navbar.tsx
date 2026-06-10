@@ -40,7 +40,10 @@ export default function Navbar() {
     loadCategories();
   }, []);
 
-  const toggleMobileMenu = useCallback(() => setIsMobileMenuOpen((prev) => !prev), []);
+  const toggleMobileMenu = useCallback(
+    () => setIsMobileMenuOpen((prev) => !prev),
+    [],
+  );
   const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
 
   return (
@@ -226,20 +229,35 @@ export default function Navbar() {
                     className="px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
                   >
                     {link.label}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
                       className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
-                      aria-hidden="true">
-                      <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clipRule="evenodd" />
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </Link>
                   <div className="absolute left-1/2 top-full z-50 w-150 -translate-x-1/2 pt-3 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
                     <div className="rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-4">
-                      <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">Product Categories</p>
+                      <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">
+                        Product Categories
+                      </p>
                       <div className="grid grid-cols-2 gap-2">
                         {categories.map((category) => (
-                          <Link key={category} href={`/products?category=${encodeURIComponent(category)}`}
-                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-red-200/50 focus-ring">
-                            <p className="text-sm font-semibold text-gray-900">{category}</p>
+                          <Link
+                            key={category}
+                            href={`/products?category=${encodeURIComponent(category)}`}
+                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-red-200/50 focus-ring"
+                          >
+                            <p className="text-sm font-semibold text-gray-900">
+                              {category}
+                            </p>
                           </Link>
                         ))}
                       </div>
@@ -258,20 +276,45 @@ export default function Navbar() {
                     className="px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
                   >
                     {link.label}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
                       className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
-                      aria-hidden="true">
-                      <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clipRule="evenodd" />
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </Link>
                   <div className="absolute left-1/2 top-full z-50 w-150 -translate-x-1/2 pt-3 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
                     <div className="rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-4">
-                      <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">Our Brands</p>
+                      <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">
+                        Our Brands
+                      </p>
                       <div className="grid grid-cols-2 gap-2">
                         {BRANDS.map((brand) => (
-                          <Link key={brand.name} href={`/products?company=${encodeURIComponent(brand.name)}`}
-                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-red-200/50 focus-ring">
-                            <p className="text-sm font-semibold text-gray-900">{brand.name}</p>
+                          <Link
+                            key={brand.name}
+                            href={`/products?company=${encodeURIComponent(brand.name)}`}
+                            className="rounded-xl p-3 transition-colors duration-200 hover:bg-red-200/50 focus-ring flex items-center gap-3"
+                          >
+                            {brand.logoSrc && (
+                              <Image
+                                src={brand.logoSrc}
+                                alt={brand.name}
+                                width={32}
+                                height={32}
+                                className="w-8 h-8 object-contain shrink-0"
+                              />
+                            )}
+
+                            <p className="text-sm font-semibold text-gray-900">
+                              {brand.name}
+                            </p>
                           </Link>
                         ))}
                       </div>
@@ -317,14 +360,36 @@ export default function Navbar() {
           aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
           {isMobileMenuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth={2} className="w-6 h-6" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="w-6 h-6"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth={2} className="w-6 h-6" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="w-6 h-6"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
             </svg>
           )}
         </button>

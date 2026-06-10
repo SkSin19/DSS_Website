@@ -17,7 +17,8 @@ export default function SectionHeading({
   align = "center",
   light = false,
 }: SectionHeadingProps) {
-  const alignClass = align === "center" ? "text-center items-center" : "text-left items-start";
+  const alignClass =
+    align === "center" ? "text-center items-center" : "text-left items-start";
   const titleColor = light ? "text-white" : "text-gray-900";
   const subtitleColor = "text-red-600";
 
@@ -29,14 +30,17 @@ export default function SectionHeading({
           {badge}
         </Badge>
       )}
-      <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight ${titleColor}`}>
+      <h2
+        className={`font-playfair text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight ${titleColor}`}
+      >
         {title}
       </h2>
-      {subtitle && (
-        <p className={`text-base md:text-lg max-w-2xl ${subtitleColor}`}>
-          {subtitle}
-        </p>
-      )}
+
+      <p
+        className={`font-inter text-base md:text-lg font-medium leading-relaxed max-w-2xl ${subtitleColor}`}
+      >
+        {subtitle}
+      </p>
     </div>
   );
 }

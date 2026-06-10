@@ -102,6 +102,8 @@
 }
 
 @theme inline {
+  --font-playfair: var(--font-playfair);
+  --font-inter: var(--font-inter);
   --color-background: var(--color-white);
   --color-foreground: var(--color-gray-900);
   --font-sans: var(--font-sans);

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
@@ -28,7 +29,7 @@ function BrandCard({ brand, priority }: { brand: (typeof BRANDS)[number]; priori
   return (
     <Link
       href={`/products?company=${encodeURIComponent(brand.name)}`}
-      className={`group relative aspect-[9/16] w-[240px] sm:w-[260px] md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] xl:w-[calc(20%-20px)] snap-start shrink-0 rounded-2xl overflow-hidden block border transition-all duration-500 ${
+      className={`group relative aspect-9/16 w-60 sm:w-65 md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] xl:w-[calc(20%-20px)] snap-center shrink-0 rounded-2xl overflow-hidden block border transition-all duration-500 ${
         isPrama ? "border-gray-200/80" : "border-gray-200/30"
       }`}
       onMouseEnter={() => setIsHovered(true)}
@@ -252,7 +253,7 @@ export default function DiscoverBrands() {
           {/* Navigation Arrows */}
           <button
             onClick={() => scroll("left")}
-            className="absolute left-2 lg:-left-6 top-[calc(50%-24px)] -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/95 dark:bg-gray-900/95 shadow-xl border border-gray-200/50 hover:bg-red-600 hover:text-white flex items-center justify-center transition-all duration-300 pointer-events-auto cursor-pointer"
+            className="absolute left-2 lg:-left-6 top-[calc(50%-24px)] -translate-y-1/2 z-10 w-12 h-12 rounded-full border-red-600 bg-white/95 dark:bg-gray-900/95 shadow-xl border hover:bg-red-600 hover:text-white flex items-center justify-center transition-all duration-300 pointer-events-auto cursor-pointer"
             aria-label="Scroll left"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -260,7 +261,7 @@ export default function DiscoverBrands() {
           
           <button
             onClick={() => scroll("right")}
-            className="absolute right-2 lg:-right-6 top-[calc(50%-24px)] -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/95 dark:bg-gray-900/95 shadow-xl border border-gray-200/50 hover:bg-red-600 hover:text-white flex items-center justify-center transition-all duration-300 pointer-events-auto cursor-pointer"
+            className="absolute right-2 lg:-right-6 top-[calc(50%-24px)] -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/95 dark:bg-gray-900/95 shadow-xl border border-red-600 hover:bg-red-600 hover:text-white flex items-center justify-center transition-all duration-300 pointer-events-auto cursor-pointer"
             aria-label="Scroll right"
           >
             <ChevronRight className="w-6 h-6" />
@@ -269,7 +270,7 @@ export default function DiscoverBrands() {
           {/* Carousel Scroll Container */}
           <div
             ref={scrollRef}
-            className="flex flex-row flex-nowrap overflow-x-auto gap-4 md:gap-6 pb-6 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex flex-row flex-nowrap overflow-x-auto gap-4 md:gap-6 pb-6 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
             style={{
               display: "flex",
               flexDirection: "row",

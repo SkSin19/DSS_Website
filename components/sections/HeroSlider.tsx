@@ -5,19 +5,19 @@
 
 import { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { TRUST_BADGES } from "@/lib/constants";
-// import { HERO_SLIDES } from "@/lib/constants";
+import { HERO_SLIDES, TRUST_BADGES } from "@/lib/constants";
 import Image from "next/image";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, useGLTF } from "@react-three/drei";
-import * as THREE from "three";
+// import { Canvas, useFrame } from "@react-three/fiber";
+// import { Environment, Float, useGLTF } from "@react-three/drei";
+// import * as THREE from "three";
 import { THEME_COLORS } from "@/themes/colors";
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   CCTV MODEL — DESKTOP
+/* ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+   CCTV MODEL ΓÇö DESKTOP
    Follows mouse. Dead zone on left extreme AND rightmost ~30% of screen
    (horizontal only).
-───────────────────────────────────────────────────────────────────────────── */
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+/*
 function CCTVModel({
   mousePosRef,
 }: {
@@ -36,13 +36,13 @@ function CCTVModel({
     const rawDx = mousePosRef.current.x - 1.0;
     const rawDy = mousePosRef.current.y;
 
-    // Left dead zone — only stops at the extreme left edge
+    // Left dead zone ΓÇö only stops at the extreme left edge
     const H_RANGE = 1.85;
     const inLeftRange = rawDx > -H_RANGE;
 
     // Right dead zone: freeze horizontal tracking when mouse is in the
-    // rightmost ~30% of screen. NDC x runs -1 (left) → +1 (right),
-    // so 30% from the right edge ≈ x > 0.4
+    // rightmost ~30% of screen. NDC x runs -1 (left) ΓåÆ +1 (right),
+    // so 30% from the right edge Γëê x > 0.4
     const RIGHT_DEAD_ZONE = 0.4;
     const inRightDeadZone = mousePosRef.current.x > RIGHT_DEAD_ZONE;
 
@@ -80,17 +80,19 @@ function CCTVModel({
     </group>
   );
 }
+*/
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   CCTV MODEL — MOBILE
+/* ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+   CCTV MODEL ΓÇö MOBILE
    No mouse. Autonomous spring animation: slow pan left/right + up/down bob,
    always biased toward the left side of screen (negative Y rotation).
-───────────────────────────────────────────────────────────────────────────── */
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+/*
 function CCTVModelMobile() {
   const pivotRef = useRef<THREE.Group>(null);
   const gltf = useGLTF("/models/cctv.glb");
 
-  // Spring state — current value + velocity for each axis
+  // Spring state ΓÇö current value + velocity for each axis
   const spring = useRef({
     rotY: -0.5,
     velY: 0,
@@ -98,7 +100,7 @@ function CCTVModelMobile() {
     velX: 0,
   });
 
-  // Patrol targets — change every few seconds
+  // Patrol targets ΓÇö change every few seconds
   const target = useRef({ y: -0.01, x: 0.01 });
   const nextChange = useRef(0);
 
@@ -111,7 +113,7 @@ function CCTVModelMobile() {
 
     const t = clock.getElapsedTime();
 
-    // Pick a new patrol target every 2.2–3.8 seconds
+    // Pick a new patrol target every 2.2ΓÇô3.8 seconds
     if (t > nextChange.current) {
       // Y stays negative (left-facing), varies between -0.7 and -0.15
       target.current.y = -0.55 + (Math.random() - 0.5) * 0.08;
@@ -119,7 +121,7 @@ function CCTVModelMobile() {
       nextChange.current = t + 4 + Math.random() * 2;
     }
 
-    // Spring constants — stiffness & damping for a lazy, weighty feel
+    // Spring constants ΓÇö stiffness & damping for a lazy, weighty feel
     const STIFFNESS = 0.22;
     const DAMPING = 0.9;
     const DT = 0.016; // approximate frame delta
@@ -150,8 +152,8 @@ function CCTVModelMobile() {
 }
 
 useGLTF.preload("/models/cctv.glb");
+*/
 
-/*
 const SLIDES = [
   {
     id: "residential",
@@ -401,7 +403,7 @@ const SLIDES = [
       {
         id: "w-ceiling-mic",
         title: "CEILING MICROPHONE",
-        desc: "360° voice pickup for clear communication.",
+        desc: "360┬░ voice pickup for clear communication.",
         top: "4.5%",
         left: "51.5%",
       },
@@ -478,18 +480,16 @@ const SLIDES = [
     ],
   },
 ];
-*/
 
-/* ─────────────────────────────────────────────────────────────────────────────
+/* ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
    HERO SECTION
-───────────────────────────────────────────────────────────────────────────── */
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 export default function HeroSlider() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  /*
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   // Auto-play interval
@@ -499,7 +499,6 @@ export default function HeroSlider() {
     }, 9000); // 9 seconds
     return () => clearInterval(interval);
   }, [currentSlideIndex]);
-  */
 
   const sectionRef = useRef<HTMLElement>(null);
   const bgGridRef = useRef<HTMLDivElement>(null);
@@ -511,9 +510,9 @@ export default function HeroSlider() {
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const badgesRef = useRef<HTMLDivElement>(null);
+  const scanLineRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef<boolean>(false);
 
-  /*
   const containerRef = useRef<HTMLDivElement>(null);
   const [aspectBoxStyle, setAspectBoxStyle] = useState<React.CSSProperties>({
     width: "100%",
@@ -562,27 +561,16 @@ export default function HeroSlider() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [mounted]);
-  */
 
-  const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  // const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const slide = {
-    badge: "NEXT-GEN SURVEILLANCE",
-    headingLine1: "Digital Security",
-    headingLine2: "Solutions",
-    headingAccentColor: THEME_COLORS.red,
-    description: "Surety of Security",
-    ctaPrimaryHref: "/enquiry",
-  };
-
-  /*
-  const slide = {
-    badge: currentSlideIndex === 0
-      ? "NEXT-GEN SURVEILLANCE"
-      : currentSlideIndex === 1
-      ? "SMART HOME INTERIOR"
+    badge: currentSlideIndex === 0 
+      ? "NEXT-GEN SURVEILLANCE" 
+      : currentSlideIndex === 1 
+      ? "SMART HOME INTERIOR" 
       : currentSlideIndex === 2
-      ? "COMMERCIAL SAFETY"
+      ? "COMMERCIAL SAFETY" 
       : "SMART COLLABORATION",
     headingLine1: "Digital Security",
     headingLine2: "Solutions",
@@ -590,14 +578,13 @@ export default function HeroSlider() {
     description: "Surety of Security",
     ctaPrimaryHref: "/enquiry",
   };
-  */
 
   /* detect mobile once on mount */
   useEffect(() => {
     isMobileRef.current = window.innerWidth < 768;
   }, []);
 
-  /* ── GLOBAL MOUSE (desktop only) ─────────────────────────────────────── */
+  /* ΓöÇΓöÇ GLOBAL MOUSE (desktop only) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       mousePosRef.current = {
@@ -608,8 +595,9 @@ export default function HeroSlider() {
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
-  /* ── GSAP ─────────────────────────────────────────────────────────────── */
+  /* ΓöÇΓöÇ GSAP ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
   useEffect(() => {
     let ctx: any;
 
@@ -775,13 +763,16 @@ export default function HeroSlider() {
         />
       </div>
 
-      {/* ── BACKGROUND IMAGE SHOWCASE (commented out) ──
+      {/* Responsive Wrapper for Mobile Split Layout */}
       <div className="relative w-full aspect-[3/2] md:static md:w-auto md:aspect-auto">
-        <div
+        {/* ΓöÇΓöÇ BACKGROUND IMAGE SHOWCASE ΓöÇΓöÇ */}
+        <div 
           ref={containerRef}
           className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] lg:w-[80%] xl:w-[75%] 2xl:w-[70%] z-0 overflow-hidden select-none"
         >
+          {/* Aspect Ratio Box that scales exactly like object-cover object-center */}
           <div style={aspectBoxStyle}>
+            {/* Images */}
             {SLIDES.map((slide, idx) => (
               <div
                 key={slide.id}
@@ -802,15 +793,22 @@ export default function HeroSlider() {
             ))}
           </div>
 
+          {/* Mobile-only background watermark overlay (hidden on mobile, text is below) */}
           <div className="absolute inset-0 bg-white/90 md:bg-transparent pointer-events-none z-15 hidden md:block" />
-          <div
+          
+          {/* Left edge fade gradient (desktop only) */}
+          <div 
             className="absolute inset-y-0 left-0 hidden md:block bg-gradient-to-r from-white via-white/90 via-white/50 to-transparent pointer-events-none z-15 transition-[width] duration-1000"
             style={{ width: SLIDES[currentSlideIndex]?.gradientWidth ?? "384px" }}
           />
+          
+          {/* Bottom edge fade gradient */}
           <div className="absolute inset-x-0 bottom-0 h-8 md:h-24 bg-gradient-to-t from-white to-transparent pointer-events-none z-15" />
         </div>
 
+        {/* ΓöÇΓöÇ INTERACTIVE HOTSPOTS OVERLAY ΓöÇΓöÇ */}
         <div className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] lg:w-[80%] xl:w-[75%] 2xl:w-[70%] z-30 pointer-events-none overflow-visible select-none">
+          {/* Aspect Ratio Box centered and scaled exactly matching the showcase image */}
           <div style={aspectBoxStyle}>
             {SLIDES.map((slide, slideIdx) => (
               <div
@@ -836,12 +834,15 @@ export default function HeroSlider() {
                         }
                       }}
                     >
+                      {/* Pulse Ring */}
                       <div
                         className={`absolute inset-0 rounded-full animate-ping opacity-75 h-4 w-4 -m-1 ${
                           isSpecial ? "bg-cyan-400" : "bg-red-500"
                         }`}
                         style={{ width: '16px', height: '16px' }}
                       />
+                      
+                      {/* Active/Hover Dot */}
                       <button
                         aria-label={spot.title}
                         className={`relative h-2 w-2 rounded-full border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150 ${
@@ -851,6 +852,8 @@ export default function HeroSlider() {
                         }`}
                         style={{ width: '8px', height: '8px' }}
                       />
+
+                      {/* Tooltip Card */}
                       <div className={`absolute left-1/2 -translate-x-1/2 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto shadow-xl ${
                         showBelow
                           ? "top-full mt-3 -translate-y-2"
@@ -883,46 +886,8 @@ export default function HeroSlider() {
           </div>
         </div>
       </div>
-      ── END BACKGROUND IMAGE SHOWCASE ── */}
 
-      {/* ── HERO BACKGROUND IMAGE — right half, behind CCTV canvas (z-index 1) ── */}
-      <div
-        className="pointer-events-none absolute hidden md:block"
-        style={{
-          right: 0,
-          top: 0,
-          bottom: 0,
-          width: "55%",
-          zIndex: 1,
-        }}
-      >
-        <Image
-          src="/images/hero/BG_IMAGE_HEROSECTION.png"
-          alt=""
-          fill
-          className="object-cover object-top-left"
-          style={{ opacity: 0.92 }}
-          priority
-          unoptimized
-        />
-        {/* Left-edge fade: blends smoothly into the white hero background */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to right, white 0%, rgba(255,255,255,0.6) 22%, rgba(255,255,255,0.08) 55%, transparent 100%)",
-          }}
-        />
-        {/* Bottom-edge fade */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-36"
-          style={{
-            background: "linear-gradient(to top, white 0%, transparent 100%)",
-          }}
-        />
-      </div>
-
-      {/* ── CCTV CANVAS — DESKTOP (hidden on mobile) ── */}
+      {/* ΓöÇΓöÇ CCTV CANVAS ΓÇö DESKTOP (hidden on mobile) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
       <div
         ref={productRef}
         className="pointer-events-none hidden md:block"
@@ -953,8 +918,9 @@ export default function HeroSlider() {
           </Suspense>
         </Canvas>
       </div>
+      ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
 
-      {/* ── CCTV CANVAS — MOBILE (hidden on desktop) ── */}
+      {/* ΓöÇΓöÇ CCTV CANVAS ΓÇö MOBILE (hidden on desktop) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
       <div
         className="pointer-events-none block md:hidden"
         style={{
@@ -981,6 +947,7 @@ export default function HeroSlider() {
           </Suspense>
         </Canvas>
       </div>
+      ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
 
       {/* MAIN CONTENT */}
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-4 py-10 sm:px-6 md:min-h-svh md:py-0 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8">
@@ -988,7 +955,7 @@ export default function HeroSlider() {
         <div
           className="hero-left-content flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-8 lg:gap-5 lg:justify-normal justify-between"
         >
-          {/* ── TOP CLUSTER: badge + headline + subtitle ── */}
+          {/* ΓöÇΓöÇ TOP CLUSTER: badge + headline + subtitle ΓöÇΓöÇ */}
           <div className="flex flex-col items-center gap-5 lg:items-start mt-8 lg:mt-0">
             <div className="flex mb-5 items-center gap-2.5 rounded-full border border-red-500/20 bg-red-50 px-3.5 py-1.5">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
@@ -1032,7 +999,7 @@ export default function HeroSlider() {
             </p>
           </div>
 
-          {/* ── BOTTOM CLUSTER: CTA button + trust badges ── */}
+          {/* ΓöÇΓöÇ BOTTOM CLUSTER: CTA button + trust badges ΓöÇΓöÇ */}
           <div className="flex flex-col items-center gap-0 lg:items-start mb-10 lg:mb-0">
             <div
               ref={ctaRef}
@@ -1093,7 +1060,7 @@ export default function HeroSlider() {
             >
               {TRUST_BADGES.map((badge, i) => (
                 <div key={i} className="flex items-center gap-1.5">
-                  <span
+                  <span 
                     className="text-[11px] font-medium text-gray-500"
                     style={{
                       textShadow: "0 1px 4px rgba(255, 255, 255, 0.90)",
@@ -1107,39 +1074,8 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* RIGHT — Spacer for background image on desktop */}
-        <div className="hidden lg:block w-full h-125" />
-      </div>
-
-      {/* ── HERO BACKGROUND IMAGE — MOBILE: in-flow below text/button ── */}
-      <div
-        className="pointer-events-none relative block md:hidden w-full mt-6"
-        style={{ height: "300px", zIndex: 1 }}
-      >
-        <Image
-          src="/images/hero/BG_IMAGE_HEROSECTION.png"
-          alt=""
-          fill
-          className="object-cover object-top"
-          style={{ opacity: 0.95 }}
-          priority
-          unoptimized
-        />
-        {/* Top-edge fade: blends up into the white content above */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom, white 0%, rgba(255,255,255,0.3) 20%, transparent 55%)",
-          }}
-        />
-        {/* Bottom-edge fade */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-24"
-          style={{
-            background: "linear-gradient(to top, white 0%, transparent 100%)",
-          }}
-        />
+        {/* RIGHT ΓÇö Spacer for background image on desktop */}
+        <div className="hidden lg:block w-full h-[500px]" />
       </div>
 
       <style>{`
@@ -1171,7 +1107,7 @@ export default function HeroSlider() {
           inset: -5px;
           opacity: 1;
         }
-
+          
         .enquiry-btn {
           box-shadow:
             0 0 0 rgba(56, 189, 248, 0),

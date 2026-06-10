@@ -87,7 +87,7 @@ export const TRUST_BADGES: TrustBadge[] = [
 
 export const BRANDS: Brand[] = [
   {
-    name: "Honeywell",
+    name: "Impact by Honeywell",
     tagline: "Advanced Protection. Total Peace of Mind.",
     color: "#FCBE13",
     productImageSrc: "/images/banners/honeywell_card.png",
@@ -105,7 +105,7 @@ export const BRANDS: Brand[] = [
     productImageSrc: "/images/banners/essl_card.png",
   },
   {
-    name: "Prama",
+    name: "PRAMA",
     tagline: "Surveillance That Protects. India That Leads.",
     color: "#FFFFFF",
     productImageSrc: "/images/banners/prama_card.png",
@@ -147,7 +147,7 @@ export const MARQUEE_BRANDS: MarqueeBrand[] = [
     logoSrc: "https://cdn.simpleicons.org/bosch",
   },
   {
-    name: "Honeywell",
+    name: "Impact by Honeywell",
     logoSrc: "https://commons.wikimedia.org/wiki/Special:FilePath/Honeywell_logo.svg",
   },
   {
@@ -471,7 +471,7 @@ export const WHY_CHOOSE_US = [
   {
     id: "support",
     title: "Trusted Brands & Technology",
-    description: "Partnering with leading brands like Hikvision, CP Plus, Honeywell, Panasonic, eSSL, and Samsung for quality security solutions.",
+    description: "Partnering with leading brands like Hikvision, CP Plus, Impact by Honeywell, Panasonic, eSSL, and Samsung for quality security solutions.",
     imageSrc: "/images/banners/cpplus_banner.png",
   },
   {

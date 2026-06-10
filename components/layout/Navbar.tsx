@@ -241,169 +241,246 @@ export default function Navbar() {
     >
       {/* ── Keyframes injected once, scoped by class names ── */}
       <style>{`
-        @keyframes enq-ring-pulse {
-          0%, 100% { opacity: 0; transform: scale(1); }
-          40%       { opacity: 1; transform: scale(1); }
-          80%       { opacity: 0; transform: scale(1.1); }
-        }
-        @keyframes enq-dot-breathe {
-          0%, 100% { opacity: 0.5; transform: scale(1); }
-          50%       { opacity: 1;   transform: scale(1.4); }
-        }
-        @keyframes enq-shimmer {
-          0%   { transform: translateX(-100%) skewX(-15deg); }
-          100% { transform: translateX(250%) skewX(-15deg); }
-        }
+       @keyframes enq-ring-pulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  40%       { opacity: 1; transform: scale(1); }
+  80%       { opacity: 0; transform: scale(1.1); }
+}
+@keyframes enq-dot-breathe {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.4); }
+}
+@keyframes enq-shimmer {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(250%) skewX(-15deg); }
+}
+@keyframes enq-wave-1 {
+  0%   { transform: translateX(0%)   scaleY(1);    border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%; }
+  25%  { transform: translateX(-8%)  scaleY(1.15); border-radius: 55% 45% 60% 40% / 40% 25% 75% 60%; }
+  50%  { transform: translateX(-18%) scaleY(0.9);  border-radius: 38% 62% 52% 48% / 25% 40% 60% 75%; }
+  75%  { transform: translateX(-8%)  scaleY(1.1);  border-radius: 60% 40% 42% 58% / 35% 60% 40% 65%; }
+  100% { transform: translateX(0%)   scaleY(1);    border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%; }
+}
+@keyframes enq-wave-2 {
+  0%   { transform: translateX(0%)   scaleY(1);    border-radius: 55% 45% 38% 62% / 40% 55% 45% 60%; }
+  33%  { transform: translateX(-12%) scaleY(1.2);  border-radius: 40% 60% 55% 45% / 55% 35% 65% 45%; }
+  66%  { transform: translateX(-22%) scaleY(0.85); border-radius: 62% 38% 48% 52% / 30% 65% 35% 70%; }
+  100% { transform: translateX(0%)   scaleY(1);    border-radius: 55% 45% 38% 62% / 40% 55% 45% 60%; }
+}
 
-        .enq-btn {
-          position: relative;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          border: none;
-          cursor: pointer;
-          font-weight: 700;
-          letter-spacing: 0.03em;
-          color: #fff;
-          background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-          overflow: hidden;
-          transition:
-            transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
-            box-shadow 0.25s ease;
-          box-shadow:
-            0 2px 10px rgba(220, 38, 38, 0.4),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        }
+.enq-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid rgba(220, 38, 38, 0.4);
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #fff;
+  background: #dc2626;
+  overflow: hidden;
+  transition:
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    color 0.5s ease,
+    border-color 0.3s ease;
+  box-shadow:
+    0 2px 10px rgba(220, 38, 38, 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+}
 
-        /* Desktop size */
-        .enq-btn--lg {
-          padding: 12px 26px;
-          border-radius: 100px;
-          font-size: 14px;
-        }
+.enq-btn--lg {
+  padding: 12px 26px;
+  border-radius: 100px;
+  font-size: 14px;
+}
 
-        /* Mobile size */
-        .enq-btn--sm {
-          padding: 9px 18px;
-          border-radius: 100px;
-          font-size: 13px;
-        }
+.enq-btn--sm {
+  padding: 9px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+}
 
-        .enq-btn:hover {
-          transform: scale(1.06) translateY(-1px);
-          box-shadow:
-            0 0 0 5px rgba(220, 38, 38, 0.18),
-            0 10px 28px rgba(220, 38, 38, 0.5),
-            inset 0 1px 0 rgba(255,255,255,0.22);
-        }
+.enq-btn:hover {
+  color: #dc2626;
+  border-color: rgba(220, 38, 38, 0.8);
+  transform: scale(1.06) translateY(-1px);
+  box-shadow:
+    0 0 0 5px rgba(220, 38, 38, 0.15),
+    0 10px 28px rgba(220, 38, 38, 0.3),
+    inset 0 0 30px rgba(220, 38, 38, 0.06);
+}
 
-        .enq-btn:active {
-          transform: scale(0.96) translateY(0);
-          box-shadow:
-            0 0 0 3px rgba(220, 38, 38, 0.15),
-            0 2px 8px rgba(220, 38, 38, 0.3);
-          transition: transform 0.08s ease, box-shadow 0.08s ease;
-        }
+.enq-btn:active {
+  transform: scale(0.96) translateY(0);
+  box-shadow:
+    0 0 0 3px rgba(220, 38, 38, 0.15),
+    0 2px 8px rgba(220, 38, 38, 0.3);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
 
-        /* Gloss top sheen */
-        .enq-gloss {
-          position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          background: linear-gradient(160deg, rgba(255,255,255,0.22) 0%, transparent 55%);
-          pointer-events: none;
-        }
+/* Gloss — fades out as white fill rises */
+.enq-gloss {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(160deg, rgba(255,255,255,0.22) 0%, transparent 55%);
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+.enq-btn:hover .enq-gloss {
+  opacity: 0;
+}
 
-        /* Pulsing outer ring */
-        .enq-ring {
-          position: absolute;
-          inset: -3px;
-          border-radius: 100px;
-          border: 2px solid rgba(239, 68, 68, 0.55);
-          animation: enq-ring-pulse 2.6s ease-in-out infinite;
-          pointer-events: none;
-        }
+/* Pulsing outer ring */
+.enq-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 100px;
+  border: 2px solid rgba(239, 68, 68, 0.55);
+  animation: enq-ring-pulse 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
 
-        /* Live dot */
-        .enq-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: rgba(255,255,255,0.8);
-          animation: enq-dot-breathe 2s ease-in-out infinite;
-          flex-shrink: 0;
-          position: relative;
-        }
-        .enq-btn--sm .enq-dot {
-          width: 5px;
-          height: 5px;
-        }
+/* Liquid fill — the rising white flood */
+.enq-liquid {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  transform: translateY(101%);
+  transition: transform 0s;
+  background: white;
+  pointer-events: none;
+}
 
-        /* Shimmer sweep on hover */
-        .enq-shimmer {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 40%;
-          height: 100%;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,0.28),
-            transparent
-          );
-          transform: translateX(-100%) skewX(-15deg);
-          pointer-events: none;
-        }
-        .enq-btn:hover .enq-shimmer {
-          animation: enq-shimmer 0.65s ease forwards;
-        }
+.enq-liquid::before,
+.enq-liquid::after {
+  content: '';
+  position: absolute;
+  left: -60%;
+  width: 220%;
+  background: white;
+  border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%;
+  animation: none;
+}
 
-        /* Arrow nudge */
-        .enq-arrow {
-          display: inline-flex;
-          align-items: center;
-          position: relative;
-          transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .enq-btn:hover .enq-arrow {
-          transform: translateX(3px);
-        }
+.enq-liquid::before {
+  height: 40px;
+  top: -22px;
+  opacity: 1;
+}
 
-        /* ── CCTV hanging mount connector ── */
-        @keyframes cctv-hang-sway {
-          0%, 100% { transform: rotate(-1.5deg); }
-          50%       { transform: rotate(1.5deg); }
-        }
+.enq-liquid::after {
+  height: 36px;
+  top: -18px;
+  opacity: 0.6;
+}
 
-        .cctv-mount-line {
-          position: absolute;
-          /* sits at the very top of the canvas container, centred horizontally */
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 2px;
-          /* height spans from navbar bottom edge up to the element — 
-             visually this is the "rod" the camera hangs from */
-          height: 14px;
-          background: linear-gradient(to bottom, #9ca3af, #6b7280);
-          border-radius: 1px;
-          z-index: 51;
-        }
+.enq-btn:hover .enq-liquid {
+  transform: translateY(0%);
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-        .cctv-mount-bracket {
-          position: absolute;
-          top: -3px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 10px;
-          height: 6px;
-          border-top: 2px solid #9ca3af;
-          border-left: 2px solid #9ca3af;
-          border-right: 2px solid #9ca3af;
-          border-radius: 3px 3px 0 0;
-          z-index: 51;
-        }
+.enq-btn:hover .enq-liquid::before {
+  animation: enq-wave-1 1.4s ease-in-out infinite;
+}
+
+.enq-btn:hover .enq-liquid::after {
+  animation: enq-wave-2 1.9s ease-in-out infinite 0.3s;
+}
+
+/* Live dot — flips red on hover */
+.enq-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  animation: enq-dot-breathe 2s ease-in-out infinite;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  transition: background 0.45s ease;
+}
+.enq-btn:hover .enq-dot {
+  background: #dc2626;
+}
+.enq-btn--sm .enq-dot {
+  width: 5px;
+  height: 5px;
+}
+
+/* Shimmer — faint red tint so it's visible on white */
+.enq-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(220, 38, 38, 0.12),
+    transparent
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+  z-index: 3;
+}
+.enq-btn:hover .enq-shimmer {
+  animation: enq-shimmer 0.65s ease forwards;
+}
+
+/* Text + dot stay above the liquid layer */
+.enq-btn > span[style] {
+  position: relative;
+  z-index: 2;
+}
+
+/* Arrow nudge */
+.enq-arrow {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.enq-btn:hover .enq-arrow {
+  transform: translateX(3px);
+}
+
+/* ── CCTV hanging mount connector ── */
+@keyframes cctv-hang-sway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50%       { transform: rotate(1.5deg); }
+}
+
+.cctv-mount-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 14px;
+  background: linear-gradient(to bottom, #9ca3af, #6b7280);
+  border-radius: 1px;
+  z-index: 51;
+}
+
+.cctv-mount-bracket {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 6px;
+  border-top: 2px solid #9ca3af;
+  border-left: 2px solid #9ca3af;
+  border-right: 2px solid #9ca3af;
+  border-radius: 3px 3px 0 0;
+  z-index: 51;
+}
+        
       `}</style>
 
       <nav
@@ -563,11 +640,13 @@ export default function Navbar() {
             <span className="enq-gloss" />
             <span className="enq-ring" />
             <span className="enq-shimmer" />
+            <span className="enq-liquid" /> {/* ← ADD THIS */}
             <span className="enq-dot" />
             <span style={{ position: "relative" }}>Enquire Now</span>
           </button>
         </Link>
 
+        {/* ── Mobile Menu Toggle ── */}
         {/* ── Mobile Menu Toggle ── */}
         <button
           type="button"
@@ -644,6 +723,7 @@ export default function Navbar() {
                 <span className="enq-gloss" />
                 <span className="enq-ring" />
                 <span className="enq-shimmer" />
+                <span className="enq-liquid" />
                 <span className="enq-dot" />
                 <span style={{ position: "relative" }}>Enquire Now</span>
               </button>

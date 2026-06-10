@@ -16,7 +16,7 @@ import { THEME_COLORS } from "@/themes/colors";
    ───────────────────────────────────────────── */
 
 export const SITE_NAME = "Digital Security Solutions";
-export const SITE_TAGLINE = "Advanced Digital Security Solutions";
+export const SITE_TAGLINE = "Surity of Security";
 export const SITE_DESCRIPTION =
   "Surety of Security";
 export const SITE_URL = "https://digitalsecuritysolutions.in";

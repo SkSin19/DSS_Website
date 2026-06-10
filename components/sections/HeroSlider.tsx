@@ -559,13 +559,14 @@ export default function HeroSlider() {
   // const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const slide = {
-    badge: currentSlideIndex === 0 
-      ? "NEXT-GEN SURVEILLANCE" 
-      : currentSlideIndex === 1 
-      ? "SMART HOME INTERIOR" 
-      : currentSlideIndex === 2
-      ? "COMMERCIAL SAFETY" 
-      : "SMART COLLABORATION",
+    badge:
+      currentSlideIndex === 0
+        ? "NEXT-GEN SURVEILLANCE"
+        : currentSlideIndex === 1
+          ? "SMART HOME INTERIOR"
+          : currentSlideIndex === 2
+            ? "COMMERCIAL SAFETY"
+            : "SMART COLLABORATION",
     headingLine1: "Digital Security",
     headingLine2: "Solutions",
     headingAccentColor: THEME_COLORS.red,
@@ -760,7 +761,7 @@ export default function HeroSlider() {
       {/* Responsive Wrapper for Mobile Split Layout */}
       <div className="relative w-full aspect-3/2 md:static md:w-auto md:aspect-auto">
         {/* ΓöÇΓöÇ BACKGROUND IMAGE SHOWCASE ΓöÇΓöÇ */}
-        <div 
+        <div
           ref={containerRef}
           className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] lg:w-[80%] xl:w-[75%] 2xl:w-[70%] z-0 overflow-hidden select-none"
         >
@@ -771,7 +772,9 @@ export default function HeroSlider() {
               <div
                 key={slide.id}
                 className={`absolute inset-0 transition-opacity duration-1000 ${
-                  currentSlideIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                  currentSlideIndex === idx
+                    ? "opacity-100 z-10"
+                    : "opacity-0 z-0 pointer-events-none"
                 }`}
               >
                 <Image
@@ -789,13 +792,13 @@ export default function HeroSlider() {
 
           {/* Mobile-only background watermark overlay (hidden on mobile, text is below) */}
           <div className="absolute inset-0 bg-white/90 md:bg-transparent pointer-events-none z-15 hidden md:block" />
-          
+
           {/* Left edge fade gradient (desktop only) */}
-          <div 
+          <div
             className="absolute inset-y-0 left-0 hidden md:block bg-linear-to-r from-white via-white/50 to-transparent pointer-events-none z-15 transition-[width] duration-1000"
             style={{ width: "40%" }}
           />
-          
+
           {/* Bottom edge fade gradient */}
           <div className="absolute inset-x-0 bottom-0 h-8 md:h-24 bg-linear-to-t from-white to-transparent pointer-events-none z-15" />
         </div>
@@ -808,7 +811,9 @@ export default function HeroSlider() {
               <div
                 key={`hotspots-${slide.id}`}
                 className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${
-                  currentSlideIndex === slideIdx ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                  currentSlideIndex === slideIdx
+                    ? "opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none"
                 }`}
               >
                 {slide.hotspots.map((spot) => {
@@ -818,10 +823,16 @@ export default function HeroSlider() {
                     <div
                       key={spot.id}
                       className="absolute group z-30 pointer-events-auto cursor-pointer"
-                      style={{ top: spot.top, left: spot.left, transform: "translate(-50%, -50%)" }}
+                      style={{
+                        top: spot.top,
+                        left: spot.left,
+                        transform: "translate(-50%, -50%)",
+                      }}
                       onClick={() => {
                         if (isSpecial && spot.targetSlideId) {
-                          const targetIdx = SLIDES.findIndex(s => s.id === spot.targetSlideId);
+                          const targetIdx = SLIDES.findIndex(
+                            (s) => s.id === spot.targetSlideId,
+                          );
                           if (targetIdx !== -1) {
                             setCurrentSlideIndex(targetIdx);
                           }
@@ -830,12 +841,12 @@ export default function HeroSlider() {
                     >
                       {/* Pulse Ring */}
                       <div
-                        className={`absolute inset-0 rounded-full animate-ping opacity-75 h-4 w-4 -m-1 ${
+                        className={`absolute inset-0 rounded-full animate-ping opacity-20 h-4 w-4 -m-1 ${
                           isSpecial ? "bg-cyan-400" : "bg-red-500"
                         }`}
-                        style={{ width: '16px', height: '16px' }}
+                        style={{ width: "16px", height: "16px" }}
                       />
-                      
+
                       {/* Active/Hover Dot */}
                       <button
                         aria-label={spot.title}
@@ -844,15 +855,17 @@ export default function HeroSlider() {
                             ? "bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.8)]"
                             : "bg-red-600"
                         }`}
-                        style={{ width: '8px', height: '8px' }}
+                        style={{ width: "8px", height: "8px" }}
                       />
 
                       {/* Tooltip Card */}
-                      <div className={`absolute left-1/2 -translate-x-1/2 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto shadow-xl ${
-                        showBelow
-                          ? "top-full mt-3 -translate-y-2"
-                          : "bottom-full mb-3 translate-y-2"
-                      }`}>
+                      <div
+                        className={`absolute left-1/2 -translate-x-1/2 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto shadow-xl ${
+                          showBelow
+                            ? "top-full mt-3 -translate-y-2"
+                            : "bottom-full mb-3 translate-y-2"
+                        }`}
+                      >
                         <div
                           className={`absolute left-1/2 -translate-x-1/2 border-4 border-transparent ${
                             showBelow ? "bottom-full -mb-1" : "top-full -mt-1"
@@ -863,9 +876,11 @@ export default function HeroSlider() {
                               : { borderTopColor: "rgba(0,0,0,0.85)" }
                           }
                         />
-                        <p className={`text-[10px] font-bold tracking-wider uppercase mb-1 font-sans ${
-                          isSpecial ? "text-cyan-400" : "text-red-400"
-                        }`}>
+                        <p
+                          className={`text-[10px] font-bold tracking-wider uppercase mb-1 font-sans ${
+                            isSpecial ? "text-cyan-400" : "text-red-400"
+                          }`}
+                        >
                           {spot.title}
                         </p>
                         <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
@@ -946,9 +961,7 @@ export default function HeroSlider() {
       {/* MAIN CONTENT */}
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-4 py-10 sm:px-6 md:min-h-svh md:py-0 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8">
         {/* LEFT */}
-        <div
-          className="hero-left-content flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-8 lg:gap-5 lg:justify-normal justify-between"
-        >
+        <div className="hero-left-content flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-8 lg:gap-5 lg:justify-normal justify-between">
           {/* ΓöÇΓöÇ TOP CLUSTER: badge + headline + subtitle ΓöÇΓöÇ */}
           <div className="flex flex-col items-center gap-5 lg:items-start mt-8 lg:mt-0">
             <div className="flex mb-5 items-center gap-2.5 rounded-full border border-red-500/20 bg-red-50 px-3.5 py-1.5">
@@ -973,7 +986,8 @@ export default function HeroSlider() {
                         i >= accentStart
                           ? (slide.headingAccentColor ?? THEME_COLORS.red)
                           : THEME_COLORS.shadowGrey900,
-                      textShadow: "0 2px 10px rgba(255, 255, 255, 0.95), 0 1px 3px rgba(255, 255, 255, 0.90)",
+                      textShadow:
+                        "0 2px 10px rgba(255, 255, 255, 0.95), 0 1px 3px rgba(255, 255, 255, 0.90)",
                     }}
                   >
                     {word}
@@ -986,7 +1000,8 @@ export default function HeroSlider() {
               ref={subRef}
               className="mt-5 md:pl-2 md:mt-0 max-w-md text-[25px] leading-relaxed text-gray-600"
               style={{
-                textShadow: "0 2px 8px rgba(255, 255, 255, 0.95), 0 1px 3px rgba(255, 255, 255, 0.85)",
+                textShadow:
+                  "0 2px 8px rgba(255, 255, 255, 0.95), 0 1px 3px rgba(255, 255, 255, 0.85)",
               }}
             >
               {slide.description}
@@ -1005,7 +1020,7 @@ export default function HeroSlider() {
 
                 <Link
                   href={slide.ctaPrimaryHref}
-                  className="enquiry-btn relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full border border-red-200 bg-red-600 px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-0.5"
+                  className="enquiry-btn relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full border border-red-200 bg-red-600 px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:border-red-600"
                 >
                   {/* liquid fill */}
                   <span className="liquid-fill absolute inset-0 z-0" />
@@ -1041,7 +1056,7 @@ export default function HeroSlider() {
                     </span>
                   )}
                   {/* text */}
-                  <span className="relative z-5 text-white">
+                  <span className="enquiry-btn-text relative z-5 text-white transition-colors duration-500">
                     Request an Enquiry
                   </span>{" "}
                 </Link>
@@ -1054,7 +1069,7 @@ export default function HeroSlider() {
             >
               {TRUST_BADGES.map((badge, i) => (
                 <div key={i} className="flex items-center gap-1.5">
-                  <span 
+                  <span
                     className="text-[11px] font-medium text-gray-500"
                     style={{
                       textShadow: "0 1px 4px rgba(255, 255, 255, 0.90)",
@@ -1074,14 +1089,14 @@ export default function HeroSlider() {
 
       <style>{`
         @keyframes pulse-dot {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50%       { opacity: 0.5; transform: scale(0.75); }
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50%       { opacity: 0.2; transform: scale(0.75); }
         }
 
         @keyframes fog {
-          0% { background-position: 0% 50%; opacity: 0.7; transform: scale(1); }
-          50% { background-position: 100% 50%; opacity: 1; transform: scale(1.02); }
-          100% { background-position: 0% 50%; opacity: 0.7; transform: scale(1); }
+          0% { background-position: 0% 50%; opacity: 0.3; transform: scale(1); }
+          50% { background-position: 100% 50%; opacity: 0.7; transform: scale(1.02); }
+          100% { background-position: 0% 50%; opacity: 0.3; transform: scale(1); }
         }
 
         .fog-animated-border {
@@ -1110,22 +1125,84 @@ export default function HeroSlider() {
         }
 
         .enquiry-btn:hover {
-          border-color: rgba(220, 38, 38, 0.6);
+          border-color: rgba(220, 38, 38, 0.8);
           box-shadow:
-            0 0 25px rgba(220, 38, 38, 0.25),
-            0 0 60px rgba(107, 114, 128, 0.12),
-            inset 0 0 30px rgba(220, 38, 38, 0.10);
+            0 0 30px rgba(220, 38, 38, 0.3),
+            0 0 70px rgba(220, 38, 38, 0.12),
+            inset 0 0 40px rgba(220, 38, 38, 0.08);
+        }
+
+        .enquiry-btn-text {
+          color: white;
+        }
+
+        .enquiry-btn:hover .enquiry-btn-text {
+          color: #dc2626;
         }
 
         .liquid-fill {
-          background:
-            radial-gradient(circle at 50% 120%, rgba(220,38,38,0.55), transparent 65%);
-          transform: translateY(100%);
-          transition:
-            transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-            opacity 0.6s ease;
-          opacity: 0.9;
-        }
+  position: absolute;
+  inset: 0;
+  background: white;
+  transform: translateY(101%);
+  transition: transform 0s;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.liquid-fill::before,
+.liquid-fill::after {
+  content: '';
+  position: absolute;
+  left: -60%;
+  width: 220%;
+  background: white;
+  border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%;
+  animation: none;
+}
+
+.liquid-fill::before {
+  height: 40px;
+  top: -22px;
+  opacity: 1;
+}
+
+.liquid-fill::after {
+  height: 36px;
+  top: -18px;
+  opacity: 0.6;
+}
+
+.enquiry-btn:hover .liquid-fill {
+  transform: translateY(0%);
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.enquiry-btn:hover .liquid-fill::before {
+  animation: wave-surface-1 1.4s ease-in-out infinite;
+}
+
+.enquiry-btn:hover .liquid-fill::after {
+  animation: wave-surface-2 1.9s ease-in-out infinite 0.3s;
+}
+
+@keyframes wave-surface-1 {
+  0%        { transform: translateX(0%)   scaleY(1);    border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%; }
+  25%       { transform: translateX(-8%)  scaleY(1.15); border-radius: 55% 45% 60% 40% / 40% 25% 75% 60%; }
+  50%       { transform: translateX(-18%) scaleY(0.9);  border-radius: 38% 62% 52% 48% / 25% 40% 60% 75%; }
+  75%       { transform: translateX(-8%)  scaleY(1.1);  border-radius: 60% 40% 42% 58% / 35% 60% 40% 65%; }
+  100%      { transform: translateX(0%)   scaleY(1);    border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%; }
+}
+
+@keyframes wave-surface-2 {
+  0%        { transform: translateX(0%)    scaleY(1);    border-radius: 55% 45% 38% 62% / 40% 55% 45% 60%; }
+  33%       { transform: translateX(-12%)  scaleY(1.2);  border-radius: 40% 60% 55% 45% / 55% 35% 65% 45%; }
+  66%       { transform: translateX(-22%)  scaleY(0.85); border-radius: 62% 38% 48% 52% / 30% 65% 35% 70%; }
+  100%      { transform: translateX(0%)    scaleY(1);    border-radius: 55% 45% 38% 62% / 40% 55% 45% 60%; }
+}
+  
+
+        
 
         .enquiry-btn:hover .liquid-fill {
           transform: translateY(0%);
@@ -1211,6 +1288,15 @@ export default function HeroSlider() {
           .hero-left-content {
             min-height: 380px;
           }
+        }
+        @keyframes ping {
+          0%   { transform: scale(1);   opacity: 0.18; }
+          70%  { transform: scale(1.8); opacity: 0.06; }
+          100% { transform: scale(2.2); opacity: 0; }
+        }
+
+        .animate-ping {
+          animation: ping 2.8s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
       `}</style>
     </section>

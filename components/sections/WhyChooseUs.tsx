@@ -4,7 +4,6 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import { WHY_CHOOSE_US } from "@/lib/constants";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { THEME_COLORS } from "@/themes/colors";
 
 export default function WhyChooseUs() {
   // Header

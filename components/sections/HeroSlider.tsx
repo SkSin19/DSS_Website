@@ -5,7 +5,8 @@
 
 import { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { HERO_SLIDES, TRUST_BADGES } from "@/lib/constants";
+import { TRUST_BADGES } from "@/lib/constants";
+// import { HERO_SLIDES } from "@/lib/constants";
 import Image from "next/image";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, useGLTF } from "@react-three/drei";
@@ -510,7 +511,6 @@ export default function HeroSlider() {
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const badgesRef = useRef<HTMLDivElement>(null);
-  const scanLineRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef<boolean>(false);
 
   /*
@@ -885,6 +885,43 @@ export default function HeroSlider() {
       </div>
       ── END BACKGROUND IMAGE SHOWCASE ── */}
 
+      {/* ── HERO BACKGROUND IMAGE — right half, behind CCTV canvas (z-index 1) ── */}
+      <div
+        className="pointer-events-none absolute hidden md:block"
+        style={{
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: "55%",
+          zIndex: 1,
+        }}
+      >
+        <Image
+          src="/images/hero/BG_IMAGE_HEROSECTION.png"
+          alt=""
+          fill
+          className="object-cover object-top-left"
+          style={{ opacity: 0.92 }}
+          priority
+          unoptimized
+        />
+        {/* Left-edge fade: blends smoothly into the white hero background */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, white 0%, rgba(255,255,255,0.6) 22%, rgba(255,255,255,0.08) 55%, transparent 100%)",
+          }}
+        />
+        {/* Bottom-edge fade */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-36"
+          style={{
+            background: "linear-gradient(to top, white 0%, transparent 100%)",
+          }}
+        />
+      </div>
+
       {/* ── CCTV CANVAS — DESKTOP (hidden on mobile) ── */}
       <div
         ref={productRef}
@@ -1071,7 +1108,38 @@ export default function HeroSlider() {
         </div>
 
         {/* RIGHT — Spacer for background image on desktop */}
-        <div className="hidden lg:block w-full h-[500px]" />
+        <div className="hidden lg:block w-full h-125" />
+      </div>
+
+      {/* ── HERO BACKGROUND IMAGE — MOBILE: in-flow below text/button ── */}
+      <div
+        className="pointer-events-none relative block md:hidden w-full mt-6"
+        style={{ height: "300px", zIndex: 1 }}
+      >
+        <Image
+          src="/images/hero/BG_IMAGE_HEROSECTION.png"
+          alt=""
+          fill
+          className="object-cover object-top"
+          style={{ opacity: 0.95 }}
+          priority
+          unoptimized
+        />
+        {/* Top-edge fade: blends up into the white content above */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, white 0%, rgba(255,255,255,0.3) 20%, transparent 55%)",
+          }}
+        />
+        {/* Bottom-edge fade */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-24"
+          style={{
+            background: "linear-gradient(to top, white 0%, transparent 100%)",
+          }}
+        />
       </div>
 
       <style>{`

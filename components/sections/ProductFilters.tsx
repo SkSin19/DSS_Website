@@ -46,7 +46,7 @@ type AccordionSectionProps = {
 function AccordionSection({ title, children, defaultOpen = true }: AccordionSectionProps) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-gray-200 py-3">
+    <div className="border-b border-gray-200 py-3 select-none">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
@@ -82,7 +82,7 @@ function CheckboxList({ items, name, selectedValues }: CheckboxListProps) {
   const visible = showAll ? items : items.slice(0, LIMIT);
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 select-none">
       {visible.map((item) => (
         <label key={item} className="flex cursor-pointer items-center gap-2 group">
           <input
@@ -171,7 +171,7 @@ export default function ProductFilters({
   };
 
   const sidebarContent = (formId: string) => (
-    <div className="w-full">
+    <div className="w-full select-none">
       {/* Active filters summary */}
       {filterCount > 0 && (
         <div className="mb-3 flex items-center justify-between border-b border-gray-200 pb-3">
@@ -298,7 +298,7 @@ export default function ProductFilters({
       />
 
       {/* ── MOBILE FILTER BUTTON BAR ── */}
-      <div className="sticky top-0 z-20 border-b border-gray-200 bg-white sm:hidden">
+      <div className="sticky top-0 z-20 border-b border-gray-200 bg-white sm:hidden select-none">
         <div className="flex items-center gap-2 px-3 py-2">
           <button
             type="button"
@@ -319,7 +319,7 @@ export default function ProductFilters({
             <button
               type="button"
               onClick={() => updateQuery(new FormData(), true)}
-              className="text-[12px] text-blue-600 hover:underline"
+              className="text-[12px] text-red-600! hover:underline"
             >
               Clear all
             </button>
@@ -420,7 +420,7 @@ export function ProductSidebar({
   };
 
   return (
-    <aside className="hidden sm:block w-56 shrink-0">
+    <aside className="hidden sm:block w-56 shrink-0 select-none">
       <form id="product-filter-form-desktop" action={(fd) => updateQuery(fd)}>
         <div className="sticky top-4">
           <p className="mb-1 text-[16px] font-bold text-gray-900 border-b border-gray-300 pb-2">

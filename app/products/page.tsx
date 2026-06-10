@@ -125,7 +125,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     selectedCategories.length || selectedSubCategories.length;
 
   return (
-    <section className="bg-white">
+    <section className="bg-white select-none">
       {/* Mobile filter bar (sticky) */}
       <ProductFilters {...filterProps} />
 
@@ -154,7 +154,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
               {hasActiveFilters ? (
                 <Link
                   href="/products"
-                  className="text-[12px] text-blue-600 hover:text-blue-800 hover:underline"
+                  className="text-[12px] md:text-white! md:bg-red-600 md:px-4 md:py-2 md:rounded-3xl md:hover:bg-white md:hover:text-red-600! md:border-2 md:border-red-600 text-blue-600 hover:text-blue-800 hover:underline"
                 >
                   Clear all filters
                 </Link>

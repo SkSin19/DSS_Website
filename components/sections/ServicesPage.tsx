@@ -262,7 +262,7 @@ export default function ServicesPage() {
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 lg:mb-5">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">Services</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">Solutions</h1>
               <p className="mt-2 text-red-500 text-base">Smart solutions for a safer, smarter tomorrow.</p>
             </div>
             <Link href="/products" className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-900 hover:text-red-600 transition-colors whitespace-nowrap group">

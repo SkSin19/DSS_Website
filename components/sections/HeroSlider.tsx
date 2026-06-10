@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { HERO_SLIDES, TRUST_BADGES } from "@/lib/constants";
+import { TRUST_BADGES } from "@/lib/constants";
 import Image from "next/image";
 // import { Canvas, useFrame } from "@react-three/fiber";
 // import { Environment, Float, useGLTF } from "@react-three/drei";
@@ -161,7 +161,6 @@ const SLIDES = [
     alt: "Residential Security Showcase",
     title: "Residential Security Showcase",
     opacity: 0.85,
-    gradientWidth: "240px",
     hotspots: [
       {
         id: "r-cctv",
@@ -250,7 +249,6 @@ const SLIDES = [
     alt: "Smart Home Interior",
     title: "Smart Home Interior",
     opacity: 0.85,
-    gradientWidth: "240px",
     hotspots: [
       {
         id: "w-interior-automation",
@@ -323,7 +321,6 @@ const SLIDES = [
     alt: "Commercial Security Showcase",
     title: "Commercial Security Showcase",
     opacity: 0.85,
-    gradientWidth: "384px",
     hotspots: [
       {
         id: "c-cctv-dome",
@@ -398,7 +395,6 @@ const SLIDES = [
     alt: "Smart Collaboration Workspace",
     title: "Smart Collaboration Workspace",
     opacity: 0.85,
-    gradientWidth: "384px",
     hotspots: [
       {
         id: "w-ceiling-mic",
@@ -505,12 +501,10 @@ export default function HeroSlider() {
   const ring1Ref = useRef<HTMLDivElement>(null);
   const ring2Ref = useRef<HTMLDivElement>(null);
   const ring3Ref = useRef<HTMLDivElement>(null);
-  const productRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const badgesRef = useRef<HTMLDivElement>(null);
-  const scanLineRef = useRef<HTMLDivElement>(null);
   const isMobileRef = useRef<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -764,7 +758,7 @@ export default function HeroSlider() {
       </div>
 
       {/* Responsive Wrapper for Mobile Split Layout */}
-      <div className="relative w-full aspect-[3/2] md:static md:w-auto md:aspect-auto">
+      <div className="relative w-full aspect-3/2 md:static md:w-auto md:aspect-auto">
         {/* ΓöÇΓöÇ BACKGROUND IMAGE SHOWCASE ΓöÇΓöÇ */}
         <div 
           ref={containerRef}
@@ -798,12 +792,12 @@ export default function HeroSlider() {
           
           {/* Left edge fade gradient (desktop only) */}
           <div 
-            className="absolute inset-y-0 left-0 hidden md:block bg-gradient-to-r from-white via-white/90 via-white/50 to-transparent pointer-events-none z-15 transition-[width] duration-1000"
-            style={{ width: SLIDES[currentSlideIndex]?.gradientWidth ?? "384px" }}
+            className="absolute inset-y-0 left-0 hidden md:block bg-linear-to-r from-white via-white/50 to-transparent pointer-events-none z-15 transition-[width] duration-1000"
+            style={{ width: "40%" }}
           />
           
           {/* Bottom edge fade gradient */}
-          <div className="absolute inset-x-0 bottom-0 h-8 md:h-24 bg-gradient-to-t from-white to-transparent pointer-events-none z-15" />
+          <div className="absolute inset-x-0 bottom-0 h-8 md:h-24 bg-linear-to-t from-white to-transparent pointer-events-none z-15" />
         </div>
 
         {/* ΓöÇΓöÇ INTERACTIVE HOTSPOTS OVERLAY ΓöÇΓöÇ */}
@@ -1075,7 +1069,7 @@ export default function HeroSlider() {
         </div>
 
         {/* RIGHT ΓÇö Spacer for background image on desktop */}
-        <div className="hidden lg:block w-full h-[500px]" />
+        <div className="hidden lg:block w-full h-125" />
       </div>
 
       <style>{`

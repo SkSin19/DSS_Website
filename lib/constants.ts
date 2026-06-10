@@ -111,7 +111,7 @@ export const BRANDS: Brand[] = [
     productImageSrc: "/images/banners/prama_card.png",
   },
   {
-    name: "Bose",
+    name: "Bose Professional",
     tagline: "Powerful Sound. Everywhere.",
     color: "#0A1C2A",
     productImageSrc: "/images/banners/bose_card.png",

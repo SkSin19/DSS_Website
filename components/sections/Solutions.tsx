@@ -28,7 +28,7 @@ const services = [
 ];
 
 export default function Solutions() {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <section className="bg-white min-h-screen px-6 py-16 md:px-12 lg:px-20 font-sans select-none">
       {/* Header Row */}
@@ -52,7 +52,10 @@ export default function Solutions() {
             From purchase to installation, we provide quality security solutions
             tailored to your needs.
           </p>
-          <button className="group inline-flex items-center gap-2 bg-gray-900 text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-red-600 transition-colors duration-200" onClick={() => router.push("/products")}>
+          <button
+            className="group inline-flex items-center gap-2 bg-gray-900 text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-red-600 transition-colors duration-200"
+            onClick={() => router.push("/products")}
+          >
             Our Products
           </button>
         </div>
@@ -61,7 +64,11 @@ export default function Solutions() {
       {/* Cards Row */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         {services.map((service, index) => (
-          <ServiceCard key={index} title={service.title} image={service.image} />
+          <ServiceCard
+            key={index}
+            title={service.title}
+            image={service.image}
+          />
         ))}
       </div>
     </section>

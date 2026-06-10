@@ -265,7 +265,8 @@ export default function ServicesPage() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">Solutions</h1>
               <p className="mt-2 text-red-500 text-base">Smart solutions for a safer, smarter tomorrow.</p>
             </div>
-            <Link href="/products" className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-900 hover:text-red-600 transition-colors whitespace-nowrap group">
+            <Link href="/products" className=" bg-white relative z-10 inline-flex items-center gap-1.5 text-sm font-medium text-gray-900 transition-colors group px-4 py-3 rounded-full border border-red-600 
+            hover:bg-red-600! hover:text-white!">
               Browse all products
               <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
@@ -702,8 +703,8 @@ export default function ServicesPage() {
 
           {/* Partners Card */}
           <div className="bg-blue-50/50 rounded-3xl border border-blue-100/30 py-8 text-center overflow-hidden">
-            <h3 className="text-gray-400 text-sm md:text-base font-semibold tracking-wide mb-6">Our partners</h3>
-            <div className="w-full overflow-hidden flex" aria-hidden="true">
+            <h3 className="text-gray-400 text-sm md:text-base font-semibold tracking-wide mb-12 md:mb-20">Our partners</h3>
+            <div className="w-full flex" aria-hidden="true">
               <div className="flex animate-marquee w-max">
                 {[...MARQUEE_BRANDS, ...MARQUEE_BRANDS, ...MARQUEE_BRANDS].map((brand, index) => (
                   <div 

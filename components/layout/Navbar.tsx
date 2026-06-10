@@ -161,10 +161,14 @@ function CCTVCanvasWrapper({
 
   return (
     <Canvas
-      camera={{ position: [0, 0.5, 4.2], fov: 44, near: 0.1, far: 100 }}
-      style={{ width: "100%", height: "100%" }}
-      gl={{ alpha: true, antialias: true }}
-    >
+  camera={{ position: [0, 0.5, 4.2], fov: 44, near: 0.1, far: 100 }}
+  style={{
+    width: "100%",
+    height: "100%",
+    pointerEvents: "none",
+  }}
+  gl={{ alpha: true, antialias: true }}
+>
       <ambientLight intensity={2.8} />
       <directionalLight position={[5, 5, 5]} intensity={3.5} />
       <pointLight position={[-4, 2, 4]} intensity={2.2} />

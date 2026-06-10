@@ -60,7 +60,7 @@ export default function WhyChooseUs() {
             </div>
           </div>
 
-          <div ref={card1Ref} className="md:col-span-6 rounded-4xl p-6 sm:p-8 md:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:shadow-xl transition-shadow group overflow-hidden relative min-h-80 sm:min-h-62.5 border border-gray-200" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
+          <div ref={card1Ref} className="md:col-span-6 rounded-4xl p-6 sm:p-8 md:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:shadow-xl transition-shadow group overflow-hidden relative min-h-80 sm:min-h-62.5 border border-gray-200 bg-gray-200">
             <div className="flex-1 relative z-10 w-full">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-3 leading-tight w-full sm:w-3/4">
                 {WHY_CHOOSE_US[1].title}
@@ -86,7 +86,7 @@ export default function WhyChooseUs() {
           {/* Bottom Row: 3 columns */}
 
           {/* Col 1: Innovation */}
-          <div ref={card2Ref} className="md:col-span-4 rounded-4xl p-6 sm:p-8 flex flex-col gap-6 hover:shadow-xl transition-shadow group overflow-hidden relative min-h-72 sm:min-h-75 border border-gray-200" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
+          <div ref={card2Ref} className="md:col-span-4 rounded-4xl p-6 sm:p-8 flex flex-col gap-6 hover:shadow-xl transition-shadow group overflow-hidden relative min-h-72 sm:min-h-75 border border-gray-200 bg-gray-200">
             <div className="relative z-10 w-full">
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 leading-tight w-full sm:w-3/4">
                 {WHY_CHOOSE_US[2].title}
@@ -110,7 +110,7 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Col 2: Comprehensive Features */}
-          <div ref={card3Ref} className="md:col-span-4 rounded-4xl p-6 sm:p-8 flex flex-col gap-6 hover:shadow-xl transition-shadow group overflow-hidden relative min-h-72 sm:min-h-75 border border-gray-200" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
+          <div ref={card3Ref} className="md:col-span-4 rounded-4xl p-6 sm:p-8 flex flex-col gap-6 hover:shadow-xl transition-shadow group overflow-hidden relative min-h-72 sm:min-h-75 border border-gray-200 bg-gray-200">
             <div className="relative z-10 w-full">
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 leading-tight w-full sm:w-3/4">
                 {WHY_CHOOSE_US[3].title}
@@ -137,7 +137,7 @@ export default function WhyChooseUs() {
           <div className="md:col-span-4 grid grid-cols-1 gap-4 lg:gap-6 sm:grid-rows-2 min-h-0 sm:min-h-75">
 
             {/* Support */}
-            <div ref={card4Ref} className="rounded-4xl p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:shadow-xl transition-shadow group overflow-hidden relative h-full min-h-56 sm:min-h-0 border border-gray-200" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
+            <div ref={card4Ref} className="rounded-4xl p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:shadow-xl transition-shadow group overflow-hidden relative h-full min-h-56 sm:min-h-0 border border-gray-200 bg-gray-200">
               <div className="flex-1 relative z-10">
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 leading-tight">
                   {WHY_CHOOSE_US[4].title}
@@ -161,7 +161,7 @@ export default function WhyChooseUs() {
             </div>
 
             {/* Trusted */}
-            <div ref={card5Ref} className="rounded-4xl p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:shadow-xl transition-shadow group overflow-hidden relative h-full min-h-56 sm:min-h-0 border border-gray-200" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
+            <div ref={card5Ref} className="rounded-4xl p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:shadow-xl transition-shadow group overflow-hidden relative h-full min-h-56 sm:min-h-0 border border-gray-200 bg-gray-200">
               <div className="flex-1 relative z-10">
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 leading-tight">
                   {WHY_CHOOSE_US[5].title}

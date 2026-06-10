@@ -23,7 +23,7 @@ function CategoryCard({
     <Link
       ref={ref}
       href={category.href}
-      className="category-card group relative flex min-h-55 sm:min-h-70 md:min-h-75 w-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 border border-gray-100 bg-white shadow-sm hover:shadow-md transition-all duration-300"
+      className="category-card group relative flex min-h-55 sm:min-h-70 md:min-h-75 w-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 border border-gray-200 bg-gray-200 shadow-sm hover:shadow-md transition-all duration-300"
     >
       <div className="relative z-10 max-w-[55%] flex flex-col justify-between min-h-40 sm:min-h-55 h-full">
         <div>

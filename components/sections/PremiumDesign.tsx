@@ -94,8 +94,11 @@ export default function PremiumDesign() {
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column (Image) */}
-          <div ref={leftRef} className="bg-gray-100 rounded-4xl p-8 min-h-100 lg:min-h-125 relative overflow-hidden flex items-center justify-center border border-gray-200">
-            {/* Background Shield Outline */}
+<div
+  ref={leftRef}
+  className="bg-gray-100 rounded-4xl p-8 min-h-100 lg:min-h-125 relative overflow-hidden flex items-center justify-center border border-gray-200
+  shadow-[0_30px_60px_rgba(0,0,0,0.18)]"
+>            {/* Background Shield Outline */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 pointer-events-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +119,7 @@ export default function PremiumDesign() {
             {/* Product Composition */}
             <div className="absolute inset-0 z-0">
               <Image
-                src="/images/hero/cctv-cameras-surveillance-systems-slide-1.png"
+                src="/images/general/premium_design_card_bg_image.png"
                 alt="Premium Security Composition"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

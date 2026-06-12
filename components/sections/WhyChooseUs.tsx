@@ -138,7 +138,7 @@ export default function WhyChooseUs() {
                   alt={WHY_CHOOSE_US[4].title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-cover object-bottom"
                 />
                 <div className="absolute inset-0 bg-linear-to-r from-gray-200/60 via-gray-200/10 to-transparent pointer-events-none" />
               </div>

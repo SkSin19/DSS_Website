@@ -61,8 +61,8 @@ function ProductCard({
         </div>
       )}
 
-      <div className="bg-gray-200 p-3 sm:p-4 flex items-center justify-center overflow-hidden">
-        <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-500" style={{ aspectRatio: "4 / 3" }}>
+      <div className="bg-gray-200 p-3 sm:p-4 flex items-center justify-center overflow-hidden duration-300">
+        <div className="relative w-full h-full transition-transform duration-500" style={{ aspectRatio: "4 / 3" }}>
           <Image
             src={product.imageSrc}
             alt={product.imageAlt}

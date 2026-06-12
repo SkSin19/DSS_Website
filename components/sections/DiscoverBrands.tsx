@@ -29,7 +29,7 @@ function BrandCard({ brand, priority }: { brand: (typeof BRANDS)[number]; priori
   return (
     <Link
       href={`/products?company=${encodeURIComponent(brand.name)}`}
-      className={`group relative aspect-9/16 w-60 sm:w-65 md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] xl:w-[calc(20%-20px)] snap-center shrink-0 rounded-2xl overflow-hidden block border transition-all duration-500 ${
+      className={`group relative aspect-9/16 w-60 sm:w-65 md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] xl:w-[calc(20%-20px)] snap-center shrink-0 rounded-2xl overflow-hidden  border transition-all duration-500 ${
         isPrama ? "border-gray-200/80" : "border-gray-200/30"
       }`}
       onMouseEnter={() => setIsHovered(true)}
@@ -270,7 +270,7 @@ export default function DiscoverBrands() {
           {/* Carousel Scroll Container */}
           <div
             ref={scrollRef}
-            className="flex flex-row flex-nowrap overflow-x-auto gap-4 md:gap-6 pb-6 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
+            className="flex flex-row flex-nowrap overflow-x-auto gap-4 md:gap-6 pb-6 md:pb-16 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
             style={{
               display: "flex",
               flexDirection: "row",

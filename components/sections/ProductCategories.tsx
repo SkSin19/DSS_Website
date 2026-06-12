@@ -25,6 +25,7 @@ function CategoryCard({
       href={category.href}
       className="category-card group relative flex min-h-55 sm:min-h-70 md:min-h-75 w-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 border border-gray-200 bg-gray-200 shadow-sm hover:shadow-md transition-all duration-300"
     >
+      {/* Text content */}
       <div className="relative z-10 max-w-[55%] flex flex-col justify-between min-h-40 sm:min-h-55 h-full">
         <div>
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-black mb-2 sm:mb-3 group-hover:text-red-600 transition-colors">
@@ -35,20 +36,23 @@ function CategoryCard({
           </p>
         </div>
         <span className="inline-flex items-center text-xs sm:text-sm font-semibold text-black group-hover:text-red-600 transition-colors mt-auto">
-          Explore category <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>
+          Explore category{" "}
+          <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>
         </span>
       </div>
 
-      <div className="absolute right-0 bottom-0 top-0 w-[45%] md:w-[48%] flex items-center justify-center p-3 sm:p-5">
-        <div className="relative w-full h-[80%] sm:h-[90%]">
-          <Image
-            src={category.imageSrc}
-            alt={category.imageAlt}
-            fill
-            className="object-contain object-right opacity-100 drop-shadow-sm transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 45vw, 25vw"
-          />
-        </div>
+      {/* Image — full card height, pinned to right edge */}
+      <div className="absolute inset-y-0 right-0 w-[50%] md:w-[50%]">
+        <Image
+          src={category.imageSrc}
+          alt={category.imageAlt}
+          fill
+          className="object-contain object-right transition-transform duration-500 group-hover:scale-100"
+          sizes="(max-width: 768px) 50vw, 25vw"
+        />
+
+        {/* Gradient: white → gray-200 (matches card bg), left-to-right */}
+        <div className="absolute inset-0 bg-linear-to-r from-gray-200 via-gray-200/60 to-transparent pointer-events-none" />
       </div>
     </Link>
   );

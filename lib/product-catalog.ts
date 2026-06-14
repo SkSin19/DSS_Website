@@ -87,7 +87,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     highlights: sharedHighlights,
     specs: sharedSpecSet,
   },
-  biometric: {
+  "biometric": {
     title: "Biometric Attendance",
     category: "Attendance Control",
     summary: "Accurate identification for secure access and attendance.",

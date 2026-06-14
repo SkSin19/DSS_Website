@@ -84,6 +84,8 @@ export type ProductQueryParams = {
   company?: string | string[];
   category?: string | string[];
   subCategory?: string | string[];
+  isFeatured?: boolean;   // ← add this
+  isBestSeller?: boolean; // ← and this
 };
 
 export async function getProductsFromApi(params: ProductQueryParams = {}) {
@@ -102,6 +104,9 @@ export async function getProductsFromApi(params: ProductQueryParams = {}) {
       value.forEach((item) => query.append(key, item));
       return;
     }
+
+    if (params.isFeatured) query.set("isFeatured", "true");
+    if (params.isBestSeller) query.set("isBestSeller", "true");
 
     query.set(key, value);
   };

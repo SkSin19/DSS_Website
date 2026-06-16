@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    qualities: [25, 50, 55, 60, 70, 75, 100],
+    qualities: [1, 5, 10, 20, 30, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 88, 90, 92, 95, 100],
     remotePatterns: [
       { protocol: "https", hostname: "picsum.photos" },
       { protocol: "https", hostname: "attendancemachine.in" },

@@ -122,7 +122,6 @@ useGLTF.preload("/models/cctv.glb");
 
 /* ─────────────────────────────────────────────────────────────────────────────
    CCTV CANVAS WRAPPER
-   Dynamically imported so Three.js never blocks the initial page load.
 ───────────────────────────────────────────────────────────────────────────── */
 function CCTVCanvasInner({
   mousePosRef,
@@ -153,8 +152,6 @@ function CCTVCanvasInner({
   );
 }
 
-// Dynamic import — Three.js/R3F only loads after hydration, never on SSR,
-// never blocks FCP or LCP.
 const CCTVCanvasWrapper = dynamic(() => Promise.resolve(CCTVCanvasInner), {
   ssr: false,
 });
@@ -165,9 +162,9 @@ const CCTVCanvasWrapper = dynamic(() => Promise.resolve(CCTVCanvasInner), {
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileBrandsOpen, setIsMobileBrandsOpen] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
   const [isMobile, setIsMobile] = useState(false);
-  // Delay rendering the 3D model until after first paint
   const [modelReady, setModelReady] = useState(false);
 
   const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -193,7 +190,6 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Defer 3D model mount until after LCP — gives the page time to paint first
   useEffect(() => {
     let id: number;
     if (typeof requestIdleCallback !== "undefined") {
@@ -219,11 +215,23 @@ export default function Navbar() {
     loadCategories();
   }, []);
 
-  const toggleMobileMenu = useCallback(
-    () => setIsMobileMenuOpen((prev) => !prev),
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen((prev) => !prev);
+    setIsMobileBrandsOpen(false);
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+    setIsMobileBrandsOpen(false);
+  }, []);
+
+  const toggleMobileBrands = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      setIsMobileBrandsOpen((prev) => !prev);
+    },
     [],
   );
-  const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
 
   return (
     <header
@@ -421,6 +429,43 @@ export default function Navbar() {
         border-right: 2px solid #9ca3af;
         border-radius: 3px 3px 0 0;
         z-index: 51;
+      }
+
+      /* ── Mobile brands panel ── */
+      .mobile-brands-panel {
+        overflow: hidden;
+        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.25s ease;
+      }
+      .mobile-brands-panel.closed {
+        max-height: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .mobile-brands-panel.open {
+        max-height: 600px;
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-brand-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: background-color 0.15s ease;
+      }
+      .mobile-brand-item:active {
+        background-color: rgba(220, 38, 38, 0.1);
+      }
+
+      .mobile-brands-chevron {
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .mobile-brands-chevron.rotated {
+        transform: rotate(180deg);
       }
       `}</style>
 
@@ -637,23 +682,102 @@ export default function Navbar() {
         id="mobile-menu"
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           isMobileMenuOpen
-            ? "max-h-120 border-t border-gray-300 bg-gray-50"
+            ? "max-h-150 border-t border-gray-300 bg-gray-50"
             : "max-h-0"
         }`}
         role="region"
         aria-label="Mobile navigation"
       >
         <div className="container-main py-4 space-y-1">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-red-600 rounded-xl transition-colors"
-              onClick={closeMobileMenu}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            // ── Brands: accordion with logo grid ──
+            if (link.label === "Brands") {
+              return (
+                <div key={link.href}>
+                  {/* Accordion trigger */}
+                  <button
+                    type="button"
+                    onClick={toggleMobileBrands}
+                    aria-expanded={isMobileBrandsOpen}
+                    className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-red-600 rounded-xl transition-colors text-left"
+                  >
+                    <span>Brands</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`w-5 h-5 text-gray-400 mobile-brands-chevron ${
+                        isMobileBrandsOpen ? "rotated" : ""
+                      }`}
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+
+                  {/* Slide-down brands panel */}
+                  <div
+                    className={`mobile-brands-panel ${isMobileBrandsOpen ? "open" : "closed"}`}
+                    aria-hidden={!isMobileBrandsOpen}
+                  >
+                    <div className="mx-2 mt-1 mb-2 rounded-xl border border-gray-200 bg-white overflow-hidden">
+                      <p className="px-4 pt-3 pb-2 text-[10px] tracking-[0.2em] uppercase text-gray-400 font-semibold">
+                        Our Brands
+                      </p>
+                      <div className="grid grid-cols-2 gap-px bg-gray-100">
+                        {BRANDS.map((brand) => (
+                          <Link
+                            key={brand.name}
+                            href={`/products?company=${encodeURIComponent(brand.name)}`}
+                            className="mobile-brand-item bg-white"
+                            onClick={closeMobileMenu}
+                          >
+                            {brand.logoSrc ? (
+                              <div className="w-9 h-9 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0 p-1">
+                                <Image
+                                  src={brand.logoSrc}
+                                  alt={brand.name}
+                                  width={28}
+                                  height={28}
+                                  className="w-full h-full object-contain"
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-9 h-9 rounded-lg bg-red-50 border border-red-100 flex items-center justify-center shrink-0">
+                                <span className="text-xs font-bold text-red-600">
+                                  {brand.name.charAt(0)}
+                                </span>
+                              </div>
+                            )}
+                            <span className="text-sm font-medium text-gray-800 leading-tight">
+                              {brand.name}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            // ── All other nav links ──
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-red-600 rounded-xl transition-colors"
+                onClick={closeMobileMenu}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+
           <div className="pt-2 pb-1 px-1">
             <Link href="/enquiry" onClick={closeMobileMenu}>
               <button className="enq-btn enq-btn--sm w-full justify-center">
@@ -669,9 +793,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* ── Desktop hanging CCTV model ──
-          Deferred via requestIdleCallback so it never competes with LCP.
-          Only mounts after the page is interactive and idle.            */}
+      {/* ── Desktop hanging CCTV model ── */}
       {modelReady && !isMobile && (
         <div
           aria-hidden="true"

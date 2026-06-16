@@ -111,6 +111,7 @@ export default function Footer() {
                     alt="Digital Security Solutions logo"
                     width={56}
                     height={56}
+                    style={{ width: "auto", height: "auto" }}
                     className="w-12 h-12 md:w-14 md:h-14"
                   />
                 </div>

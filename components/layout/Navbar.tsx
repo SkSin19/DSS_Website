@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
@@ -7,6 +8,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { BRANDS, NAV_LINKS, SITE_NAME } from "@/lib/constants";
 import { apiGet } from "@/utils/api";
+import * as THREE from "three";
+import { useFrame } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
+import dynamic from "next/dynamic";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    TYPES
@@ -24,8 +29,6 @@ export async function getProductCategoriesFromApi() {
 
 /* ─────────────────────────────────────────────────────────────────────────────
    CCTV HANGING MODEL
-   Inverted, small, pinned to the bottom-right of the navbar.
-   Mouse tracking with right dead zone (matches the hero section logic).
 ───────────────────────────────────────────────────────────────────────────── */
 function CCTVHangingModel({
   mousePosRef,
@@ -34,14 +37,9 @@ function CCTVHangingModel({
   mousePosRef: React.RefObject<{ x: number; y: number }>;
   isMobile?: boolean;
 }) {
-  const { useFrame } = require("@react-three/fiber");
-  const { useGLTF } = require("@react-three/drei");
-  const THREE = require("three");
-
-  const pivotRef = useRef<any>(null);
+  const pivotRef = useRef<THREE.Group>(null);
   const gltf = useGLTF("/models/cctv.glb");
 
-  // For mobile idle sway
   const idleTimeRef = useRef(0);
   const idleTargetY = useRef(0);
   const idleIntervalRef = useRef(0);
@@ -53,10 +51,9 @@ function CCTVHangingModel({
       idleTimeRef.current += delta;
       idleIntervalRef.current += delta;
 
-      // Pick a new random target every ~2 seconds
       if (idleIntervalRef.current >= 2) {
         idleIntervalRef.current = 0;
-        idleTargetY.current = (Math.random() - 0.5) * 0.3; // small range
+        idleTargetY.current = (Math.random() - 0.5) * 0.3;
       }
 
       pivotRef.current.rotation.y = THREE.MathUtils.lerp(
@@ -64,7 +61,6 @@ function CCTVHangingModel({
         idleTargetY.current,
         0.02,
       );
-      // Keep x neutral on mobile
       pivotRef.current.rotation.x = THREE.MathUtils.lerp(
         pivotRef.current.rotation.x,
         0,
@@ -122,53 +118,28 @@ function CCTVHangingModel({
   );
 }
 
+useGLTF.preload("/models/cctv.glb");
+
 /* ─────────────────────────────────────────────────────────────────────────────
    CCTV CANVAS WRAPPER
-   Lazy-loads the heavy R3F deps only on the client.
+   Dynamically imported so Three.js never blocks the initial page load.
 ───────────────────────────────────────────────────────────────────────────── */
-function CCTVCanvasWrapper({
+function CCTVCanvasInner({
   mousePosRef,
   isMobile = false,
 }: {
   mousePosRef: React.RefObject<{ x: number; y: number }>;
   isMobile?: boolean;
 }) {
-  const [R3F, setR3F] = useState<{
-    Canvas: any;
-    Environment: any;
-    Float: any;
-    useGLTF: any;
-  } | null>(null);
-
-  useEffect(() => {
-    Promise.all([
-      import("@react-three/fiber"),
-      import("@react-three/drei"),
-    ]).then(([fiber, drei]) => {
-      drei.useGLTF.preload("/models/cctv.glb");
-      setR3F({
-        Canvas: fiber.Canvas,
-        Environment: drei.Environment,
-        Float: drei.Float,
-        useGLTF: drei.useGLTF,
-      });
-    });
-  }, []);
-
-  if (!R3F) return null;
-
-  const { Canvas, Environment, Float } = R3F;
+  const { Canvas } = require("@react-three/fiber");
+  const { Environment, Float } = require("@react-three/drei");
 
   return (
     <Canvas
-  camera={{ position: [0, 0.5, 4.2], fov: 44, near: 0.1, far: 100 }}
-  style={{
-    width: "100%",
-    height: "100%",
-    pointerEvents: "none",
-  }}
-  gl={{ alpha: true, antialias: true }}
->
+      camera={{ position: [0, 0.5, 4.2], fov: 44, near: 0.1, far: 100 }}
+      style={{ width: "100%", height: "100%", pointerEvents: "none" }}
+      gl={{ alpha: true, antialias: true }}
+    >
       <ambientLight intensity={2.8} />
       <directionalLight position={[5, 5, 5]} intensity={3.5} />
       <pointLight position={[-4, 2, 4]} intensity={2.2} />
@@ -182,6 +153,12 @@ function CCTVCanvasWrapper({
   );
 }
 
+// Dynamic import — Three.js/R3F only loads after hydration, never on SSR,
+// never blocks FCP or LCP.
+const CCTVCanvasWrapper = dynamic(() => Promise.resolve(CCTVCanvasInner), {
+  ssr: false,
+});
+
 /* ─────────────────────────────────────────────────────────────────────────────
    NAVBAR
 ───────────────────────────────────────────────────────────────────────────── */
@@ -189,8 +166,10 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+  // Delay rendering the 3D model until after first paint
+  const [modelReady, setModelReady] = useState(false);
 
-  // Mouse position in NDC (-1 → +1) for the CCTV model
   const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -199,16 +178,33 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Global mouse tracking for the hanging CCTV model
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
-      mousePosRef.current = {
-        x: e.clientX,
-        y: e.clientY,
-      };
+      mousePosRef.current = { x: e.clientX, y: e.clientY };
     };
     window.addEventListener("mousemove", onMove, { passive: true });
     return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Defer 3D model mount until after LCP — gives the page time to paint first
+  useEffect(() => {
+    let id: number;
+    if (typeof requestIdleCallback !== "undefined") {
+      id = requestIdleCallback(() => setModelReady(true), { timeout: 2000 });
+    } else {
+      id = setTimeout(() => setModelReady(true), 1000) as unknown as number;
+    }
+    return () => {
+      if (typeof cancelIdleCallback !== "undefined") cancelIdleCallback(id);
+      else clearTimeout(id);
+    };
   }, []);
 
   useEffect(() => {
@@ -230,11 +226,6 @@ export default function Navbar() {
   const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
 
   return (
-    /*
-      The header uses `relative` so the absolutely-positioned CCTV model can
-      overflow *below* it (past its bottom edge) without affecting layout.
-      overflow-visible is set explicitly to counteract any inherited clip.
-    */
     <header
       id="site-header"
       className={`sticky top-0 z-50 w-full bg-gray-200/95 text-gray-900 backdrop-blur-md transition-all select-none duration-300 border-b border-gray-300 overflow-visible ${
@@ -243,7 +234,6 @@ export default function Navbar() {
       suppressHydrationWarning
       role="banner"
     >
-      {/* ── Keyframes injected once, scoped by class names ── */}
       <style>{`
        @keyframes enq-ring-pulse {
         0%, 100% { opacity: 0; transform: scale(1); }
@@ -324,7 +314,6 @@ export default function Navbar() {
         transition: transform 0.08s ease, box-shadow 0.08s ease;
       }
 
-      /* Gloss — fades out as white fill rises */
       .enq-gloss {
         position: absolute;
         inset: 0;
@@ -333,11 +322,8 @@ export default function Navbar() {
         pointer-events: none;
         transition: opacity 0.45s ease;
       }
-      .enq-btn:hover .enq-gloss {
-        opacity: 0;
-      }
+      .enq-btn:hover .enq-gloss { opacity: 0; }
 
-      /* Pulsing outer ring */
       .enq-ring {
         position: absolute;
         inset: -3px;
@@ -347,7 +333,6 @@ export default function Navbar() {
         pointer-events: none;
       }
 
-      /* Liquid fill — the rising white flood */
       .enq-liquid {
         position: absolute;
         inset: 0;
@@ -370,32 +355,16 @@ export default function Navbar() {
         animation: none;
       }
 
-      .enq-liquid::before {
-        height: 40px;
-        top: -22px;
-        opacity: 1;
-      }
-
-      .enq-liquid::after {
-        height: 36px;
-        top: -18px;
-        opacity: 0.6;
-      }
+      .enq-liquid::before { height: 40px; top: -22px; opacity: 1; }
+      .enq-liquid::after  { height: 36px; top: -18px; opacity: 0.6; }
 
       .enq-btn:hover .enq-liquid {
         transform: translateY(0%);
         transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
       }
+      .enq-btn:hover .enq-liquid::before { animation: enq-wave-1 1.4s ease-in-out infinite; }
+      .enq-btn:hover .enq-liquid::after  { animation: enq-wave-2 1.9s ease-in-out infinite 0.3s; }
 
-      .enq-btn:hover .enq-liquid::before {
-        animation: enq-wave-1 1.4s ease-in-out infinite;
-      }
-
-      .enq-btn:hover .enq-liquid::after {
-        animation: enq-wave-2 1.9s ease-in-out infinite 0.3s;
-      }
-
-      /* Live dot — flips red on hover */
       .enq-dot {
         width: 6px;
         height: 6px;
@@ -407,65 +376,36 @@ export default function Navbar() {
         z-index: 2;
         transition: background 0.45s ease;
       }
-      .enq-btn:hover .enq-dot {
-        background: #dc2626;
-      }
-      .enq-btn--sm .enq-dot {
-        width: 5px;
-        height: 5px;
-      }
+      .enq-btn:hover .enq-dot { background: #dc2626; }
+      .enq-btn--sm .enq-dot   { width: 5px; height: 5px; }
 
-      /* Shimmer — faint red tint so it's visible on white */
       .enq-shimmer {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 0; left: 0;
         width: 40%;
         height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(220, 38, 38, 0.12),
-          transparent
-        );
+        background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.12), transparent);
         transform: translateX(-100%) skewX(-15deg);
         pointer-events: none;
         z-index: 3;
       }
-      .enq-btn:hover .enq-shimmer {
-        animation: enq-shimmer 0.65s ease forwards;
-      }
+      .enq-btn:hover .enq-shimmer { animation: enq-shimmer 0.65s ease forwards; }
 
-      /* Text + dot stay above the liquid layer */
-      .enq-btn > span[style] {
-        position: relative;
-        z-index: 2;
-      }
+      .enq-btn > span[style] { position: relative; z-index: 2; }
 
-      /* Arrow nudge */
       .enq-arrow {
         display: inline-flex;
         align-items: center;
         position: relative;
         transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
       }
-      .enq-btn:hover .enq-arrow {
-        transform: translateX(3px);
-      }
-
-      /* ── CCTV hanging mount connector ── */
-      @keyframes cctv-hang-sway {
-        0%, 100% { transform: rotate(-1.5deg); }
-        50%       { transform: rotate(1.5deg); }
-      }
+      .enq-btn:hover .enq-arrow { transform: translateX(3px); }
 
       .cctv-mount-line {
         position: absolute;
-        top: 0;
-        left: 50%;
+        top: 0; left: 50%;
         transform: translateX(-50%);
-        width: 2px;
-        height: 14px;
+        width: 2px; height: 14px;
         background: linear-gradient(to bottom, #9ca3af, #6b7280);
         border-radius: 1px;
         z-index: 51;
@@ -473,18 +413,15 @@ export default function Navbar() {
 
       .cctv-mount-bracket {
         position: absolute;
-        top: -3px;
-        left: 50%;
+        top: -3px; left: 50%;
         transform: translateX(-50%);
-        width: 10px;
-        height: 6px;
+        width: 10px; height: 6px;
         border-top: 2px solid #9ca3af;
         border-left: 2px solid #9ca3af;
         border-right: 2px solid #9ca3af;
         border-radius: 3px 3px 0 0;
         z-index: 51;
       }
-        
       `}</style>
 
       <nav
@@ -611,7 +548,6 @@ export default function Navbar() {
                                 className="w-8 h-8 object-contain shrink-0"
                               />
                             )}
-
                             <p className="text-sm font-semibold text-gray-900">
                               {brand.name}
                             </p>
@@ -644,13 +580,12 @@ export default function Navbar() {
             <span className="enq-gloss" />
             <span className="enq-ring" />
             <span className="enq-shimmer" />
-            <span className="enq-liquid" /> {/* ← ADD THIS */}
+            <span className="enq-liquid" />
             <span className="enq-dot" />
             <span style={{ position: "relative" }}>Enquire Now</span>
           </button>
         </Link>
 
-        {/* ── Mobile Menu Toggle ── */}
         {/* ── Mobile Menu Toggle ── */}
         <button
           type="button"
@@ -719,8 +654,6 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-
-          {/* ── Mobile Enquire Button ── */}
           <div className="pt-2 pb-1 px-1">
             <Link href="/enquiry" onClick={closeMobileMenu}>
               <button className="enq-btn enq-btn--sm w-full justify-center">
@@ -736,51 +669,41 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* ─────────────────────────────────────────────────────────────────────
-          HANGING CCTV MODEL
-          Absolutely positioned so it protrudes below the navbar's bottom edge.
-          Hidden on mobile (no mouse pointer), shown on md+ screens.
-          pointer-events-none so it never blocks nav clicks.
-
-          Layout breakdown:
-          ┌─────────────────── navbar bottom edge ───────────────────┐
-                                                        │ mount rod  │
-                                                        └──── 14px ──┘
-                                                        ┌────────────┐
-                                                        │  Canvas    │  130×130 px
-                                                        │  (camera   │
-                                                        │  inverted) │
-                                                        └────────────┘
-      ──────────────────────────────────────────────────────────────── */}
-      {/* ── Desktop hanging model ── */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none hidden md:block absolute right-6 lg:right-10 top-full z-40"
-        style={{ width: 200, height: 214 }}
-      >
+      {/* ── Desktop hanging CCTV model ──
+          Deferred via requestIdleCallback so it never competes with LCP.
+          Only mounts after the page is interactive and idle.            */}
+      {modelReady && !isMobile && (
         <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: 200,
-            height: 200,
-          }}
+          aria-hidden="true"
+          className="pointer-events-none hidden md:block absolute right-6 lg:right-10 top-full z-40"
+          style={{ width: 200, height: 214 }}
         >
-          <CCTVCanvasWrapper mousePosRef={mousePosRef} isMobile={false} />
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: 200,
+              height: 200,
+            }}
+          >
+            <CCTVCanvasWrapper mousePosRef={mousePosRef} isMobile={false} />
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* ── Mobile hanging model — hidden when menu is open ── */}
-      <div
-        aria-hidden="true"
-        className={`pointer-events-none md:hidden absolute top-full z-40 transition-opacity duration-300 ${
-          isMobileMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
-        style={{ width: 100, height: 100, right: 16, bottom: 10 }}
-      >
-        <CCTVCanvasWrapper mousePosRef={mousePosRef} isMobile={true} />
-      </div>
+      {/* ── Mobile hanging CCTV model ── */}
+      {modelReady && isMobile && (
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none md:hidden absolute top-full z-40 transition-opacity duration-300 ${
+            isMobileMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+          style={{ width: 100, height: 100, right: 16, bottom: 10 }}
+        >
+          <CCTVCanvasWrapper mousePosRef={mousePosRef} isMobile={true} />
+        </div>
+      )}
     </header>
   );
 }

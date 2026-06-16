@@ -3,161 +3,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import Link from "next/link";
 import { TRUST_BADGES } from "@/lib/constants";
 import Image from "next/image";
-// import { Canvas, useFrame } from "@react-three/fiber";
-// import { Environment, Float, useGLTF } from "@react-three/drei";
-// import * as THREE from "three";
 import { THEME_COLORS } from "@/themes/colors";
-
-/* ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
-   CCTV MODEL ΓÇö DESKTOP
-   Follows mouse. Dead zone on left extreme AND rightmost ~30% of screen
-   (horizontal only).
-ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
-/*
-function CCTVModel({
-  mousePosRef,
-}: {
-  mousePosRef: React.RefObject<{ x: number; y: number }>;
-}) {
-  const pivotRef = useRef<THREE.Group>(null);
-  const gltf = useGLTF("/models/cctv.glb");
-
-  useFrame(({ camera }) => {
-    if (!pivotRef.current || !mousePosRef.current) return;
-
-    // Pin model flush to the right edge using exact frustum math
-    const rightEdgeWorld = new THREE.Vector3(1, 0, 0).unproject(camera);
-    pivotRef.current.position.set(rightEdgeWorld.x + 1.9, -1, 0);
-
-    const rawDx = mousePosRef.current.x - 1.0;
-    const rawDy = mousePosRef.current.y;
-
-    // Left dead zone ΓÇö only stops at the extreme left edge
-    const H_RANGE = 1.85;
-    const inLeftRange = rawDx > -H_RANGE;
-
-    // Right dead zone: freeze horizontal tracking when mouse is in the
-    // rightmost ~30% of screen. NDC x runs -1 (left) ΓåÆ +1 (right),
-    // so 30% from the right edge Γëê x > 0.4
-    const RIGHT_DEAD_ZONE = 0.4;
-    const inRightDeadZone = mousePosRef.current.x > RIGHT_DEAD_ZONE;
-
-    const inRange = inLeftRange && !inRightDeadZone;
-
-    const MAX_Y = 0.9;
-    const MAX_X = 0.5;
-
-    const targetY = inRange
-      ? THREE.MathUtils.clamp((rawDx / H_RANGE) * MAX_Y, -MAX_Y, MAX_Y)
-      : pivotRef.current.rotation.y;
-
-    const targetX = THREE.MathUtils.clamp(-rawDy * MAX_X, -MAX_X, MAX_X);
-
-    pivotRef.current.rotation.y = THREE.MathUtils.lerp(
-      pivotRef.current.rotation.y,
-      targetY,
-      0.04,
-    );
-    pivotRef.current.rotation.x = THREE.MathUtils.lerp(
-      pivotRef.current.rotation.x,
-      targetX,
-      0.04,
-    );
-  });
-
-  return (
-    <group ref={pivotRef}>
-      <primitive
-        object={gltf.scene}
-        scale={0.26}
-        rotation={[0, -Math.PI / 2, 0]}
-        position={[0, 0, 0]}
-      />
-    </group>
-  );
-}
-*/
-
-/* ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
-   CCTV MODEL ΓÇö MOBILE
-   No mouse. Autonomous spring animation: slow pan left/right + up/down bob,
-   always biased toward the left side of screen (negative Y rotation).
-ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
-/*
-function CCTVModelMobile() {
-  const pivotRef = useRef<THREE.Group>(null);
-  const gltf = useGLTF("/models/cctv.glb");
-
-  // Spring state ΓÇö current value + velocity for each axis
-  const spring = useRef({
-    rotY: -0.5,
-    velY: 0,
-    rotX: 0.0,
-    velX: 0,
-  });
-
-  // Patrol targets ΓÇö change every few seconds
-  const target = useRef({ y: -0.01, x: 0.01 });
-  const nextChange = useRef(0);
-
-  useFrame(({ clock, camera }) => {
-    if (!pivotRef.current) return;
-
-    // Pin to right edge
-    const rightEdgeWorld = new THREE.Vector3(1, 0, 0).unproject(camera);
-    pivotRef.current.position.set(rightEdgeWorld.x + 1.2, -1, 0);
-
-    const t = clock.getElapsedTime();
-
-    // Pick a new patrol target every 2.2ΓÇô3.8 seconds
-    if (t > nextChange.current) {
-      // Y stays negative (left-facing), varies between -0.7 and -0.15
-      target.current.y = -0.55 + (Math.random() - 0.5) * 0.08;
-      target.current.x = (Math.random() - 0.5) * 0.08;
-      nextChange.current = t + 4 + Math.random() * 2;
-    }
-
-    // Spring constants ΓÇö stiffness & damping for a lazy, weighty feel
-    const STIFFNESS = 0.22;
-    const DAMPING = 0.9;
-    const DT = 0.016; // approximate frame delta
-
-    const s = spring.current;
-
-    // Spring force = stiffness * (target - current) - damping * velocity
-    s.velY += (STIFFNESS * (target.current.y - s.rotY) - DAMPING * s.velY) * DT;
-    s.velX += (STIFFNESS * (target.current.x - s.rotX) - DAMPING * s.velX) * DT;
-
-    s.rotY += s.velY;
-    s.rotX += s.velX;
-
-    pivotRef.current.rotation.y = s.rotY;
-    pivotRef.current.rotation.x = s.rotX;
-  });
-
-  return (
-    <group ref={pivotRef}>
-      <primitive
-        object={gltf.scene}
-        scale={0.22} // smaller on mobile
-        rotation={[0, -Math.PI / 2, 0]}
-        position={[0, 0, 0]}
-      />
-    </group>
-  );
-}
-
-useGLTF.preload("/models/cctv.glb");
-*/
 
 const SLIDES = [
   {
     id: "residential",
-    image: "/images/hero/hero-security-showcase.jpg",
+    image: "/images/hero/hero-security-showcase.webp",
     alt: "Residential Security Showcase",
     title: "Residential Security Showcase",
     opacity: 0.85,
@@ -245,7 +100,7 @@ const SLIDES = [
   },
   {
     id: "residential-interior",
-    image: "/images/hero/hero-security-showcase-interior.jpg",
+    image: "/images/hero/hero-security-showcase-interior.webp",
     alt: "Smart Home Interior",
     title: "Smart Home Interior",
     opacity: 0.85,
@@ -317,7 +172,7 @@ const SLIDES = [
   },
   {
     id: "commercial",
-    image: "/images/hero/hero-security-showcase-business.jpg",
+    image: "/images/hero/hero-security-showcase-business.webp",
     alt: "Commercial Security Showcase",
     title: "Commercial Security Showcase",
     opacity: 0.85,
@@ -391,7 +246,7 @@ const SLIDES = [
   },
   {
     id: "workspace",
-    image: "/images/hero/hero-security-showcase-collaboration.jpg",
+    image: "/images/hero/hero-security-showcase-collaboration.webp",
     alt: "Smart Collaboration Workspace",
     title: "Smart Collaboration Workspace",
     opacity: 0.85,
@@ -399,7 +254,7 @@ const SLIDES = [
       {
         id: "w-ceiling-mic",
         title: "CEILING MICROPHONE",
-        desc: "360┬░ voice pickup for clear communication.",
+        desc: "360° voice pickup for clear communication.",
         top: "4.5%",
         left: "51.5%",
       },
@@ -477,9 +332,6 @@ const SLIDES = [
   },
 ];
 
-/* ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
-   HERO SECTION
-ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 export default function HeroSlider() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -488,13 +340,13 @@ export default function HeroSlider() {
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
-  // Auto-play interval
+  // FIX: empty deps — no restart on every slide change
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlideIndex((prev) => (prev + 1) % SLIDES.length);
-    }, 9000); // 9 seconds
+    }, 9000);
     return () => clearInterval(interval);
-  }, [currentSlideIndex]);
+  }, []);
 
   const sectionRef = useRef<HTMLElement>(null);
   const bgGridRef = useRef<HTMLDivElement>(null);
@@ -525,7 +377,7 @@ export default function HeroSlider() {
       const rect = containerRef.current.getBoundingClientRect();
       const containerWidth = rect.width;
       const containerHeight = rect.height;
-      const imageAspectRatio = 1024 / 682; // 1.5
+      const imageAspectRatio = 1024 / 682;
 
       let boxWidth = containerWidth;
       let boxHeight = containerHeight;
@@ -556,8 +408,6 @@ export default function HeroSlider() {
     return () => window.removeEventListener("resize", handleResize);
   }, [mounted]);
 
-  // const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-
   const slide = {
     badge:
       currentSlideIndex === 0
@@ -574,25 +424,29 @@ export default function HeroSlider() {
     ctaPrimaryHref: "/enquiry",
   };
 
-  /* detect mobile once on mount */
   useEffect(() => {
     isMobileRef.current = window.innerWidth < 768;
   }, []);
 
-  /* ΓöÇΓöÇ GLOBAL MOUSE (desktop only) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      mousePosRef.current = {
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: -((e.clientY / window.innerHeight) * 2 - 1),
-      };
-    };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, []);
-  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+  // FIX: memoize particle data — no random recalculation on every render
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 40 }, () => {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 60 + Math.random() * 90;
+        return {
+          x: `${20 + Math.random() * 60}%`,
+          y: `${20 + Math.random() * 60}%`,
+          dx: `${Math.cos(angle) * distance}px`,
+          dy: `${Math.sin(angle) * distance}px`,
+          delay: `${Math.random() * 1.2}s`,
+          duration: `${0.8 + Math.random() * 1.4}s`,
+          size: `${2 + Math.random() * 4}px`,
+        };
+      }),
+    [],
+  );
 
-  /* ΓöÇΓöÇ GSAP ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
   useEffect(() => {
     let ctx: any;
 
@@ -656,20 +510,6 @@ export default function HeroSlider() {
           1.15,
         );
 
-        /*
-        gsap.fromTo(
-          scanLineRef.current,
-          { y: "-100%" },
-          {
-            y: "100vh",
-            duration: 3.2,
-            ease: "none",
-            repeat: -1,
-            repeatDelay: 2.5,
-          },
-        );
-        */
-
         const section = sectionRef.current;
 
         gsap.to(bgGridRef.current, {
@@ -713,17 +553,6 @@ export default function HeroSlider() {
       className="select-none relative w-full overflow-hidden bg-white flex flex-col md:block"
       style={{ minHeight: "100svh" }}
     >
-      {/* scan line (Commented out)
-      <div
-        ref={scanLineRef}
-        className="pointer-events-none absolute inset-x-0 z-10 h-0.5 opacity-20"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent, rgba(220,38,38,0.9), transparent)",
-        }}
-      />
-      */}
-
       {/* grid */}
       <div
         ref={bgGridRef}
@@ -760,14 +589,12 @@ export default function HeroSlider() {
 
       {/* Responsive Wrapper for Mobile Split Layout */}
       <div className="relative w-full aspect-3/2 md:static md:w-auto md:aspect-auto">
-        {/* ΓöÇΓöÇ BACKGROUND IMAGE SHOWCASE ΓöÇΓöÇ */}
+        {/* ── BACKGROUND IMAGE SHOWCASE ── */}
         <div
           ref={containerRef}
           className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] lg:w-[80%] xl:w-[75%] 2xl:w-[70%] z-0 overflow-hidden select-none"
         >
-          {/* Aspect Ratio Box that scales exactly like object-cover object-center */}
           <div style={aspectBoxStyle}>
-            {/* Images */}
             {SLIDES.map((slide, idx) => (
               <div
                 key={slide.id}
@@ -777,6 +604,7 @@ export default function HeroSlider() {
                     : "opacity-0 z-0 pointer-events-none"
                 }`}
               >
+                {/* FIX: removed unoptimized, added sizes for proper srcset */}
                 <Image
                   src={slide.image}
                   alt={slide.alt}
@@ -784,13 +612,12 @@ export default function HeroSlider() {
                   className="object-cover object-center"
                   style={{ opacity: slide.opacity }}
                   priority={idx === 0}
-                  unoptimized
+                  sizes="(max-width: 768px) 100vw, 85vw"
                 />
               </div>
             ))}
           </div>
 
-          {/* Mobile-only background watermark overlay (hidden on mobile, text is below) */}
           <div className="absolute inset-0 bg-white/90 md:bg-transparent pointer-events-none z-15 hidden md:block" />
 
           {/* Left edge fade gradient (desktop only) */}
@@ -803,9 +630,8 @@ export default function HeroSlider() {
           <div className="absolute inset-x-0 bottom-0 h-8 md:h-24 bg-linear-to-t from-white to-transparent pointer-events-none z-15" />
         </div>
 
-        {/* ΓöÇΓöÇ INTERACTIVE HOTSPOTS OVERLAY ΓöÇΓöÇ */}
+        {/* ── INTERACTIVE HOTSPOTS OVERLAY ── */}
         <div className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] lg:w-[80%] xl:w-[75%] 2xl:w-[70%] z-30 pointer-events-none overflow-visible select-none">
-          {/* Aspect Ratio Box centered and scaled exactly matching the showcase image */}
           <div style={aspectBoxStyle}>
             {SLIDES.map((slide, slideIdx) => (
               <div
@@ -896,73 +722,11 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* ΓöÇΓöÇ CCTV CANVAS ΓÇö DESKTOP (hidden on mobile) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
-      <div
-        ref={productRef}
-        className="pointer-events-none hidden md:block"
-        style={{
-          position: "absolute",
-          right: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: "420px",
-          height: "450px",
-          zIndex: 20,
-          clipPath: "inset(0 0 0 15%)",
-        }}
-      >
-        <Canvas
-          camera={{ position: [0.2, 1, 5], fov: 38 }}
-          style={{ width: "100%", height: "100%" }}
-          gl={{ alpha: true }}
-        >
-          <ambientLight intensity={2.4} />
-          <directionalLight position={[5, 5, 5]} intensity={3.2} />
-          <pointLight position={[-4, 2, 4]} intensity={2} />
-          <Suspense fallback={null}>
-            <Float speed={1.2} rotationIntensity={0} floatIntensity={0.1}>
-              <CCTVModel mousePosRef={mousePosRef} />
-            </Float>
-            <Environment preset="studio" />
-          </Suspense>
-        </Canvas>
-      </div>
-      ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
-
-      {/* ΓöÇΓöÇ CCTV CANVAS ΓÇö MOBILE (hidden on desktop) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
-      <div
-        className="pointer-events-none block md:hidden"
-        style={{
-          position: "absolute",
-          right: "-40px",
-          top: "14%",
-          width: "220px",
-          height: "220px",
-          zIndex: 20,
-          clipPath: "inset(0 0 0 10%)",
-        }}
-      >
-        <Canvas
-          camera={{ position: [0, 0, 4.5], fov: 42 }}
-          style={{ width: "100%", height: "100%" }}
-          gl={{ alpha: true }}
-        >
-          <ambientLight intensity={2.6} />
-          <directionalLight position={[5, 5, 5]} intensity={3.5} />
-          <pointLight position={[-4, 2, 4]} intensity={2} />
-          <Suspense fallback={null}>
-            <CCTVModelMobile />
-            <Environment preset="studio" />
-          </Suspense>
-        </Canvas>
-      </div>
-      ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
-
       {/* MAIN CONTENT */}
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-4 py-10 sm:px-6 md:min-h-svh md:py-0 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8">
         {/* LEFT */}
         <div className="hero-left-content flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-8 lg:gap-5 lg:justify-normal justify-between">
-          {/* ΓöÇΓöÇ TOP CLUSTER: badge + headline + subtitle ΓöÇΓöÇ */}
+          {/* ── TOP CLUSTER: badge + headline + subtitle ── */}
           <div className="flex flex-col items-center gap-5 lg:items-start mt-8 lg:mt-0">
             <div className="flex mb-5 items-center gap-2.5 rounded-full border border-red-500/20 bg-red-50 px-3.5 py-1.5">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
@@ -1008,7 +772,7 @@ export default function HeroSlider() {
             </p>
           </div>
 
-          {/* ΓöÇΓöÇ BOTTOM CLUSTER: CTA button + trust badges ΓöÇΓöÇ */}
+          {/* ── BOTTOM CLUSTER: CTA button + trust badges ── */}
           <div className="flex flex-col items-center gap-0 lg:items-start mb-10 lg:mb-0">
             <div
               ref={ctaRef}
@@ -1028,37 +792,32 @@ export default function HeroSlider() {
                   <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-red-400/30" />
                   {/* shine sweep */}
                   <span className="shine absolute inset-0 z-1" />
-                  {/* particles */}
+                  {/* FIX: memoized particles — no random recalc on re-render */}
                   {mounted && (
                     <span className="particles">
-                      {[...Array(40)].map((_, i) => {
-                        const angle = Math.random() * Math.PI * 2;
-                        const distance = 60 + Math.random() * 90;
-
-                        return (
-                          <span
-                            key={i}
-                            className="particle"
-                            style={
-                              {
-                                "--x": `${20 + Math.random() * 60}%`,
-                                "--y": `${20 + Math.random() * 60}%`,
-                                "--dx": `${Math.cos(angle) * distance}px`,
-                                "--dy": `${Math.sin(angle) * distance}px`,
-                                "--delay": `${Math.random() * 1.2}s`,
-                                "--duration": `${0.8 + Math.random() * 1.4}s`,
-                                "--size": `${2 + Math.random() * 4}px`,
-                              } as React.CSSProperties
-                            }
-                          />
-                        );
-                      })}
+                      {particles.map((p, i) => (
+                        <span
+                          key={i}
+                          className="particle"
+                          style={
+                            {
+                              "--x": p.x,
+                              "--y": p.y,
+                              "--dx": p.dx,
+                              "--dy": p.dy,
+                              "--delay": p.delay,
+                              "--duration": p.duration,
+                              "--size": p.size,
+                            } as React.CSSProperties
+                          }
+                        />
+                      ))}
                     </span>
                   )}
                   {/* text */}
                   <span className="enquiry-btn-text relative z-5 text-white transition-colors duration-500">
                     Request an Enquiry
-                  </span>{" "}
+                  </span>
                 </Link>
               </div>
             </div>
@@ -1083,7 +842,7 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* RIGHT ΓÇö Spacer for background image on desktop */}
+        {/* RIGHT — Spacer for background image on desktop */}
         <div className="hidden lg:block w-full h-125" />
       </div>
 
@@ -1116,7 +875,7 @@ export default function HeroSlider() {
           inset: -5px;
           opacity: 1;
         }
-          
+
         .enquiry-btn {
           box-shadow:
             0 0 0 rgba(56, 189, 248, 0),
@@ -1141,71 +900,64 @@ export default function HeroSlider() {
         }
 
         .liquid-fill {
-  position: absolute;
-  inset: 0;
-  background: white;
-  transform: translateY(101%);
-  transition: transform 0s;
-  border-radius: inherit;
-  overflow: hidden;
-}
+          position: absolute;
+          inset: 0;
+          background: white;
+          transform: translateY(101%);
+          transition: transform 0s;
+          border-radius: inherit;
+          overflow: hidden;
+        }
 
-.liquid-fill::before,
-.liquid-fill::after {
-  content: '';
-  position: absolute;
-  left: -60%;
-  width: 220%;
-  background: white;
-  border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%;
-  animation: none;
-}
+        .liquid-fill::before,
+        .liquid-fill::after {
+          content: '';
+          position: absolute;
+          left: -60%;
+          width: 220%;
+          background: white;
+          border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%;
+          animation: none;
+        }
 
-.liquid-fill::before {
-  height: 40px;
-  top: -22px;
-  opacity: 1;
-}
+        .liquid-fill::before {
+          height: 40px;
+          top: -22px;
+          opacity: 1;
+        }
 
-.liquid-fill::after {
-  height: 36px;
-  top: -18px;
-  opacity: 0.6;
-}
-
-.enquiry-btn:hover .liquid-fill {
-  transform: translateY(0%);
-  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.enquiry-btn:hover .liquid-fill::before {
-  animation: wave-surface-1 1.4s ease-in-out infinite;
-}
-
-.enquiry-btn:hover .liquid-fill::after {
-  animation: wave-surface-2 1.9s ease-in-out infinite 0.3s;
-}
-
-@keyframes wave-surface-1 {
-  0%        { transform: translateX(0%)   scaleY(1);    border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%; }
-  25%       { transform: translateX(-8%)  scaleY(1.15); border-radius: 55% 45% 60% 40% / 40% 25% 75% 60%; }
-  50%       { transform: translateX(-18%) scaleY(0.9);  border-radius: 38% 62% 52% 48% / 25% 40% 60% 75%; }
-  75%       { transform: translateX(-8%)  scaleY(1.1);  border-radius: 60% 40% 42% 58% / 35% 60% 40% 65%; }
-  100%      { transform: translateX(0%)   scaleY(1);    border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%; }
-}
-
-@keyframes wave-surface-2 {
-  0%        { transform: translateX(0%)    scaleY(1);    border-radius: 55% 45% 38% 62% / 40% 55% 45% 60%; }
-  33%       { transform: translateX(-12%)  scaleY(1.2);  border-radius: 40% 60% 55% 45% / 55% 35% 65% 45%; }
-  66%       { transform: translateX(-22%)  scaleY(0.85); border-radius: 62% 38% 48% 52% / 30% 65% 35% 70%; }
-  100%      { transform: translateX(0%)    scaleY(1);    border-radius: 55% 45% 38% 62% / 40% 55% 45% 60%; }
-}
-  
-
-        
+        .liquid-fill::after {
+          height: 36px;
+          top: -18px;
+          opacity: 0.6;
+        }
 
         .enquiry-btn:hover .liquid-fill {
           transform: translateY(0%);
+          transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .enquiry-btn:hover .liquid-fill::before {
+          animation: wave-surface-1 1.4s ease-in-out infinite;
+        }
+
+        .enquiry-btn:hover .liquid-fill::after {
+          animation: wave-surface-2 1.9s ease-in-out infinite 0.3s;
+        }
+
+        @keyframes wave-surface-1 {
+          0%   { transform: translateX(0%)   scaleY(1);    border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%; }
+          25%  { transform: translateX(-8%)  scaleY(1.15); border-radius: 55% 45% 60% 40% / 40% 25% 75% 60%; }
+          50%  { transform: translateX(-18%) scaleY(0.9);  border-radius: 38% 62% 52% 48% / 25% 40% 60% 75%; }
+          75%  { transform: translateX(-8%)  scaleY(1.1);  border-radius: 60% 40% 42% 58% / 35% 60% 40% 65%; }
+          100% { transform: translateX(0%)   scaleY(1);    border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%; }
+        }
+
+        @keyframes wave-surface-2 {
+          0%   { transform: translateX(0%)    scaleY(1);    border-radius: 55% 45% 38% 62% / 40% 55% 45% 60%; }
+          33%  { transform: translateX(-12%)  scaleY(1.2);  border-radius: 40% 60% 55% 45% / 55% 35% 65% 45%; }
+          66%  { transform: translateX(-22%)  scaleY(0.85); border-radius: 62% 38% 48% 52% / 30% 65% 35% 70%; }
+          100% { transform: translateX(0%)    scaleY(1);    border-radius: 55% 45% 38% 62% / 40% 55% 45% 60%; }
         }
 
         .shine {
@@ -1267,9 +1019,7 @@ export default function HeroSlider() {
               translate(0px, 0px)
               scale(0.2);
           }
-          10% {
-            opacity: 1;
-          }
+          10% { opacity: 1; }
           100% {
             opacity: 0;
             transform:

@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'www.prama-asia.com' },
       { protocol: 'https', hostname: 'www.honeywell.com' },
       { protocol: 'https', hostname: 'www.adorama.com' },
+      { protocol: 'https', hostname: 'rukmini1.flixcart.com' },
+      { protocol: 'https', hostname: 'miro.co.za' },
+      { protocol: 'https', hostname: 'fgtechstore.com' },
+      { protocol: 'https', hostname: 'm.media-amazon.com' },
     ],
   },
 };

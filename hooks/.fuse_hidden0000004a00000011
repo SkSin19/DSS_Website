@@ -9,7 +9,7 @@ interface ScrollRevealOptions {
   animation?: AnimationType;
   /** Delay in ms before the animation starts after visibility */
   delay?: number;
-  /** How much of the element must be visible before triggering (0-1) */
+  /** How much of the element must be visible before triggering (0–1) */
   threshold?: number;
   /** Extra class names to apply permanently */
   className?: string;

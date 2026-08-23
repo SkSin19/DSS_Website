@@ -340,7 +340,7 @@ export default function HeroSlider() {
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
-  // FIX: empty deps - no restart on every slide change
+  // FIX: empty deps — no restart on every slide change
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlideIndex((prev) => (prev + 1) % SLIDES.length);
@@ -428,7 +428,7 @@ export default function HeroSlider() {
     isMobileRef.current = window.innerWidth < 768;
   }, []);
 
-  // FIX: memoize particle data - no random recalculation on every render
+  // FIX: memoize particle data — no random recalculation on every render
   const particles = useMemo(
     () =>
       Array.from({ length: 40 }, () => {
@@ -792,7 +792,7 @@ export default function HeroSlider() {
                   <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-red-400/30" />
                   {/* shine sweep */}
                   <span className="shine absolute inset-0 z-1" />
-                  {/* FIX: memoized particles - no random recalc on re-render */}
+                  {/* FIX: memoized particles — no random recalc on re-render */}
                   {mounted && (
                     <span className="particles">
                       {particles.map((p, i) => (
@@ -842,7 +842,7 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* RIGHT - Spacer for background image on desktop */}
+        {/* RIGHT — Spacer for background image on desktop */}
         <div className="hidden lg:block w-full h-125" />
       </div>
 

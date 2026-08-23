@@ -16,10 +16,17 @@ import { THEME_COLORS } from "@/themes/colors";
    ───────────────────────────────────────────── */
 
 export const SITE_NAME = "Digital Security Solutions";
-export const SITE_TAGLINE = "Surity of Security";
+export const SITE_TAGLINE = "Surety of Security";
 export const SITE_DESCRIPTION =
-  "Surety of Security";
-export const SITE_URL = "https://digitalsecuritysolutions.in";
+  "Digital Security Solutions supplies and installs CCTV cameras, access control, biometric attendance and alarm systems across Delhi and India.";
+export const SITE_URL = "https://digitalsecurityindia.com";
+
+// Public LinkedIn profile (used in footer and structured data sameAs)
+export const SITE_LINKEDIN_URL =
+  "https://www.linkedin.com/in/digital-security-solutions-4063b9376";
+// Primary public contact used in structured data
+export const SITE_PHONE = "+919999605550";
+export const SITE_EMAIL = "info@digitalsecurityindia.com";
 
 /* ─────────────────────────────────────────────
    Navigation
@@ -308,7 +315,7 @@ export const BESTSELLERS = [
   },
   {
     title: "Wireless Alarm Kit",
-    description: "Easy to install, always connected and built to protect what matters most—24/7.",
+    description: "Easy to install, always connected and built to protect what matters most-24/7.",
     imageSrc: "/images/categories/PUBLIC_NEXT_ALARM_KIT.jpg",
     imageAlt: "Wireless Alarm Kit",
     hasOffer: true,

@@ -283,7 +283,7 @@ export default function ProductEnquiryDialog({ product }: ProductEnquiryDialogPr
                     <div>
                       <p className="text-lg font-semibold">Enquiry submitted</p>
                       <p className="text-sm text-gray-600">
-                        Thank you - we received your enquiry for <span className="font-medium">{enquiryTitle}</span>.
+                        Thank you — we received your enquiry for <span className="font-medium">{enquiryTitle}</span>.
                       </p>
                     </div>
                   </div>

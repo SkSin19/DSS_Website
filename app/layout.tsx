@@ -3,7 +3,14 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
+import {
+  SITE_NAME,
+  SITE_DESCRIPTION,
+  SITE_URL,
+  SITE_LINKEDIN_URL,
+  SITE_PHONE,
+  SITE_EMAIL,
+} from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { Playfair_Display, Inter } from "next/font/google";
 
@@ -25,46 +32,23 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
   title: {
     template: `%s | ${SITE_NAME}`,
-    default: `${SITE_NAME} — Advanced Digital Security Solutions`,
+    default: `${SITE_NAME} - Advanced Digital Security Solutions`,
   },
   description: SITE_DESCRIPTION,
   keywords: [
     "CCTV cameras",
-    "Digital security",
-    "Surveillance systems",
-    "Access control",
-    "Hikvision India",
+    "CCTV installation Delhi",
+    "surveillance systems",
+    "access control systems",
+    "biometric attendance",
+    "intrusion alarm systems",
+    "video door phone",
+    "security solutions India",
+    "Hikvision",
     "CP Plus",
     "Godrej security",
-    "Intrusion alarms",
-    "Bose",
-    "JBL",
-    "jbl",
-    "bose",
-    "security solutions",
     "home security",
     "business security",
-    "security services",
-    "security installation",
-    "security maintenance",
-    "security consultation",
-    "security products",
-    "security systems",
-    "security cameras",
-    "security alarms",
-    "security access control",
-    "security monitoring",
-    "security upgrades",
-    "security audits",
-    "security assessments",
-    "security training",
-    "security support",
-    "security integration",
-    "security automation",
-    "security analytics",
-    "security reporting",
-    "security compliance",
-    "security best practices",
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
@@ -85,7 +69,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     images: [
       {
-        url: "/images/hero/cctv-cameras-surveillance-systems-slide-1.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: `${SITE_NAME} - Advanced Security Solutions`,
@@ -98,7 +82,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
-    images: ["/images/hero/cctv-cameras-surveillance-systems-slide-1.png"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -122,18 +106,28 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: SITE_NAME,
-    image: `${SITE_URL}/images/logo/dss_logo.png`,
     "@id": SITE_URL,
+    name: SITE_NAME,
+    legalName: SITE_NAME,
+    slogan: "Surety of Security",
+    image: `${SITE_URL}/images/logo/dss_logo.png`,
+    logo: `${SITE_URL}/images/logo/dss_logo.png`,
     url: SITE_URL,
-    telephone: "+919876543210",
+    telephone: SITE_PHONE,
+    email: SITE_EMAIL,
+    priceRange: "$$",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Mumbai",
-      addressRegion: "Maharashtra",
+      addressLocality: "Delhi",
+      addressRegion: "Delhi",
       addressCountry: "IN",
     },
+    areaServed: {
+      "@type": "Country",
+      name: "India",
+    },
     description: SITE_DESCRIPTION,
+    sameAs: [SITE_LINKEDIN_URL],
   };
 
   return (

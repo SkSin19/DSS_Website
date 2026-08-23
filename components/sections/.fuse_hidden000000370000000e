@@ -73,7 +73,7 @@ export default function WhyChooseUs() {
             </div>
           </div>
 
-          {/* Col 1 - image bottom */}
+          {/* Col 1 — image bottom */}
           <div ref={card2Ref} className="md:col-span-4 rounded-4xl p-6 sm:p-8 flex flex-col gap-6 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 will-change-transform group overflow-hidden relative min-h-72 sm:min-h-75 border border-gray-200 bg-gray-200">
             <div className="relative z-10 w-full">
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 leading-tight w-full sm:w-3/4">
@@ -96,7 +96,7 @@ export default function WhyChooseUs() {
             </div>
           </div>
 
-          {/* Col 2 - image bottom-right */}
+          {/* Col 2 — image bottom-right */}
           <div ref={card3Ref} className="md:col-span-4 rounded-4xl p-6 sm:p-8 flex flex-col gap-6 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 will-change-transform group overflow-hidden relative min-h-72 sm:min-h-75 border border-gray-200 bg-gray-200">
             <div className="relative z-10 w-full">
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 leading-tight w-full sm:w-3/4">

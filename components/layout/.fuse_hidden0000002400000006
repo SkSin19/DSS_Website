@@ -145,7 +145,7 @@ function CCTVHangingModel({
       );
     }
 
-    // ── Pan the camera left/right (x-axis) - only while it's down looking ──
+    // ── Pan the camera left/right (x-axis) — only while it's down looking ──
     if (pivotRef.current) {
       if (phase === "looking") {
         panTimerRef.current += delta;
@@ -172,7 +172,7 @@ function CCTVHangingModel({
     void t;
   });
 
-  // Orientation: model in its natural pose - mount base up (flush against
+  // Orientation: model in its natural pose — mount base up (flush against
   // the navbar underside), lens facing the viewer (+Z). The pan animation
   // on pivotRef rotates about Y so the lens sweeps left/right.
   return (
@@ -541,7 +541,7 @@ export default function Navbar() {
           href="/"
           id="nav-logo"
           className="flex items-center gap-2.5 shrink-0 focus-ring rounded-lg"
-          aria-label={`${SITE_NAME} - Home`}
+          aria-label={`${SITE_NAME} — Home`}
           onClick={closeMobileMenu}
         >
           <Image

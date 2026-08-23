@@ -102,7 +102,7 @@ const GetInTouch: React.FC = () => {
       case "phone":       return sanitizePhone(raw);
       case "city":        return sanitizeCity(raw);
       case "message":     return sanitizeMessage(raw);
-      case "enquiryAbout": return raw; // controlled select - value is always one of the defined options
+      case "enquiryAbout": return raw; // controlled select — value is always one of the defined options
       default:            return raw;
     }
   };

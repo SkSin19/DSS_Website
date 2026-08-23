@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────
-   Type Definitions — Digital Security Solutions
+   Type Definitions - Digital Security Solutions
    ───────────────────────────────────────────── */
 
 /** Hero slider slide configuration */

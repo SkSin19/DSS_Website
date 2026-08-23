@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────────
-   Design Tokens — Digital Security Solutions
+   Design Tokens - Digital Security Solutions
    ───────────────────────────────────────────── */
 
 :root {
@@ -256,13 +256,13 @@ a {
    Scroll-Reveal (IntersectionObserver driven)
    ───────────────────────────────────────────── */
 
-/* Initial hidden states — applied via JS before IntersectionObserver fires */
+/* Initial hidden states - applied via JS before IntersectionObserver fires */
 .scroll-reveal-hidden {
   opacity: 0;
   will-change: opacity, transform;
 }
 
-/* Direction variants — combined with .scroll-reveal-hidden */
+/* Direction variants - combined with .scroll-reveal-hidden */
 .scroll-reveal-up    { transform: translateY(80px); }
 .scroll-reveal-left  { transform: translateX(-100px); }
 .scroll-reveal-right { transform: translateX(100px); }

@@ -290,7 +290,7 @@ export default function ProductFilters({
 
   return (
     <>
-      {/* Hidden form that holds all filter values - desktop sidebar submits via this */}
+      {/* Hidden form that holds all filter values — desktop sidebar submits via this */}
       <form
         id="product-filter-form-sidebar"
         action={(fd) => updateQuery(fd)}
@@ -358,14 +358,14 @@ export default function ProductFilters({
       )}
 
       {/* ── DESKTOP SIDEBAR (exported as a data attribute for the page to pick up) ── */}
-      {/* This component renders nothing visible on desktop - the sidebar is rendered
+      {/* This component renders nothing visible on desktop — the sidebar is rendered
           inside the page layout via the ProductSidebar export below */}
     </>
   );
 }
 
 /**
- * Standalone sidebar panel - render this inside the left column on desktop.
+ * Standalone sidebar panel — render this inside the left column on desktop.
  * Pass the same props as ProductFilters.
  */
 export function ProductSidebar({

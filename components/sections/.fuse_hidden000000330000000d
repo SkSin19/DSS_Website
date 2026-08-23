@@ -412,7 +412,7 @@ export default function ServicesPage() {
 
                       <div className="grid grid-cols-3 gap-3 max-w-xl">
                         {[
-                          { label: "Setup Time", value: "2-4 hrs" },
+                          { label: "Setup Time", value: "2–4 hrs" },
                           { label: "Warranty", value: "2 Years" },
                           { label: "Support", value: "24/7" },
                         ].map((stat) => (
@@ -558,7 +558,7 @@ export default function ServicesPage() {
 
                       <div className="grid grid-cols-3 gap-3 max-w-xl">
                         {[
-                          { label: "Setup Time", value: "1-2 hrs" },
+                          { label: "Setup Time", value: "1–2 hrs" },
                           { label: "Warranty", value: "2 Years" },
                           { label: "Support", value: "24/7" },
                         ].map((stat) => (

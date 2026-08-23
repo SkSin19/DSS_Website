@@ -22,6 +22,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'miro.co.za' },
       { protocol: 'https', hostname: 'fgtechstore.com' },
       { protocol: 'https', hostname: 'm.media-amazon.com' },
+      { protocol: 'https', hostname: 'media.esslsecurity.com' },
     ],
   },
 };

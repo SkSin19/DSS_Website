@@ -31,88 +31,163 @@ export async function getProductCategoriesFromApi() {
    CCTV HANGING MODEL
 ───────────────────────────────────────────────────────────────────────────── */
 function CCTVHangingModel({
-  mousePosRef,
   isMobile = false,
 }: {
-  mousePosRef: React.RefObject<{ x: number; y: number }>;
   isMobile?: boolean;
 }) {
+  const bobRef = useRef<THREE.Group>(null);
   const pivotRef = useRef<THREE.Group>(null);
+  const modelRef = useRef<THREE.Group>(null);
   const gltf = useGLTF("/models/cctv.glb");
+  const fittedRef = useRef(false);
 
-  const idleTimeRef = useRef(0);
-  const idleTargetY = useRef(0);
-  const idleIntervalRef = useRef(0);
+  // Auto-center + auto-fit the loaded model so it always sits in frame,
+  // regardless of the GLB's own scale/origin. Runs once after mount.
+  useEffect(() => {
+    if (!modelRef.current || fittedRef.current) return;
+    const box = new THREE.Box3().setFromObject(modelRef.current);
+    const size = new THREE.Vector3();
+    const center = new THREE.Vector3();
+    box.getSize(size);
+    box.getCenter(center);
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
+    const TARGET = 1.5; // desired on-screen size in world units
+    const s = TARGET / maxDim;
+    modelRef.current.scale.setScalar(s);
+    // Align the model's TOP (mount base) to TOP_Y so it hangs flush from the
+    // navbar underside when fully emerged. x/z are centered; y is top-aligned.
+    const TOP_Y = 2.0; // world-space y for the top edge of the model (lower = sits lower on screen)
+    const topOffset = (box.max.y - center.y) * s; // half-height after scaling
+    modelRef.current.position.set(
+      -center.x * s,
+      TOP_Y - topOffset,
+      -center.z * s,
+    );
+    // Keep the camera straight (no downward tilt); it only pans left/right.
+    modelRef.current.rotation.x = 0;
+
+    // Tint the model's materials a bit darker so it doesn't read as pure white.
+    const TINT = 0.55; // 1 = original, lower = darker
+    gltf.scene.traverse((o: any) => {
+      if (o.isMesh && o.material) {
+        const mats = Array.isArray(o.material) ? o.material : [o.material];
+        mats.forEach((m: any) => {
+          if (m && m.color && !m.userData.__tinted) {
+            m.color.multiplyScalar(TINT);
+            m.userData.__tinted = true; // guard against double-tint on re-render
+          }
+        });
+      }
+    });
+
+    fittedRef.current = true;
+  }, [gltf]);
+
+  // ── Pan (x-axis "look here and there") state ──
+  const panTargetY = useRef(0);
+  const panTimerRef = useRef(0);
+  const PAN_INTERVAL = 2.2; // seconds between each new "look" direction
+  const MAX_PAN = isMobile ? 0.45 : 0.7; // max left/right swing (radians)
+
+  // ── Emerge / retract cycle state machine ──
+  // Phases: hidden → emerging → looking → retracting → (loop)
+  // bobRef.position.y: 0 = fully down/visible, HIDE_Y = up & hidden behind navbar.
+  const phaseRef = useRef<"hidden" | "emerging" | "looking" | "retracting">(
+    "hidden",
+  );
+  const phaseTimeRef = useRef(0);
+  const HIDE_Y = 3.2; // how far up to slide so it fully clears the navbar
+  const HIDDEN_DURATION = 2.5; // pause while hidden (s)
+  const LOOK_DURATION = 12; // time spent out looking around while down (s)
 
   useFrame((_state: any, delta: number) => {
-    if (!pivotRef.current) return;
+    const t = _state.clock.elapsedTime;
+    phaseTimeRef.current += delta;
 
-    if (isMobile) {
-      idleTimeRef.current += delta;
-      idleIntervalRef.current += delta;
+    // ── Vertical slide target based on phase ──
+    let targetY = HIDE_Y; // default: up/hidden
+    const phase = phaseRef.current;
 
-      if (idleIntervalRef.current >= 2) {
-        idleIntervalRef.current = 0;
-        idleTargetY.current = (Math.random() - 0.5) * 0.3;
+    if (phase === "hidden") {
+      targetY = HIDE_Y;
+      if (phaseTimeRef.current >= HIDDEN_DURATION) {
+        phaseRef.current = "emerging";
+        phaseTimeRef.current = 0;
+      }
+    } else if (phase === "emerging") {
+      targetY = 0; // slide down into view
+      if (bobRef.current && bobRef.current.position.y < 0.05) {
+        phaseRef.current = "looking";
+        phaseTimeRef.current = 0;
+      }
+    } else if (phase === "looking") {
+      targetY = 0; // stay down
+      if (phaseTimeRef.current >= LOOK_DURATION) {
+        phaseRef.current = "retracting";
+        phaseTimeRef.current = 0;
+      }
+    } else if (phase === "retracting") {
+      targetY = HIDE_Y; // slide back up
+      if (bobRef.current && bobRef.current.position.y > HIDE_Y - 0.05) {
+        phaseRef.current = "hidden";
+        phaseTimeRef.current = 0;
+      }
+    }
+
+    // smoothly ease the vertical slide toward the phase target.
+    // Retracting (springing back up) is slower than emerging.
+    if (bobRef.current) {
+      const slideSpeed = phase === "retracting" ? 0.03 : 0.06;
+      bobRef.current.position.y = THREE.MathUtils.lerp(
+        bobRef.current.position.y,
+        targetY,
+        slideSpeed,
+      );
+    }
+
+    // ── Pan the camera left/right (x-axis) — only while it's down looking ──
+    if (pivotRef.current) {
+      if (phase === "looking") {
+        panTimerRef.current += delta;
+        if (panTimerRef.current >= PAN_INTERVAL) {
+          panTimerRef.current = 0;
+          panTargetY.current = (Math.random() * 2 - 1) * MAX_PAN;
+        }
+      } else {
+        // recentre while hidden/moving so it emerges facing forward
+        panTargetY.current = 0;
       }
 
       pivotRef.current.rotation.y = THREE.MathUtils.lerp(
         pivotRef.current.rotation.y,
-        idleTargetY.current,
-        0.02,
+        panTargetY.current,
+        0.03,
       );
       pivotRef.current.rotation.x = THREE.MathUtils.lerp(
         pivotRef.current.rotation.x,
         0,
         0.05,
       );
-    } else {
-      if (!mousePosRef.current) return;
-
-      const modelX =
-        window.innerWidth - 100 - (window.innerWidth >= 1024 ? 40 : 24);
-      const modelY = 80 + 65;
-
-      const dx = mousePosRef.current.x - modelX;
-      const dy = mousePosRef.current.y - modelY;
-
-      const FALLOFF = 400;
-      const MAX_Y = 0.6;
-      const MAX_X = 0.35;
-
-      const targetY = THREE.MathUtils.clamp(
-        (-dx / FALLOFF) * MAX_Y,
-        -MAX_Y,
-        MAX_Y,
-      );
-      const targetX = THREE.MathUtils.clamp(
-        (-dy / FALLOFF) * MAX_X,
-        -MAX_X,
-        MAX_X,
-      );
-
-      pivotRef.current.rotation.y = THREE.MathUtils.lerp(
-        pivotRef.current.rotation.y,
-        targetY,
-        0.05,
-      );
-      pivotRef.current.rotation.x = THREE.MathUtils.lerp(
-        pivotRef.current.rotation.x,
-        targetX,
-        0.05,
-      );
     }
+    void t;
   });
 
+  // Orientation: model in its natural pose — mount base up (flush against
+  // the navbar underside), lens facing the viewer (+Z). The pan animation
+  // on pivotRef rotates about Y so the lens sweeps left/right.
   return (
-    <group rotation={[Math.PI, Math.PI, 0]}>
-      <group ref={pivotRef}>
-        <primitive
-          object={gltf.scene}
-          scale={0.18}
-          rotation={[0, -Math.PI / 2, 0]}
-          position={[-0.4, -2, 0]}
-        />
+    <group>
+      {/* bobRef slides the whole camera vertically (emerge / retract behind navbar).
+          Starts up & hidden (y = HIDE_Y); the frame loop drives the cycle. */}
+      <group ref={bobRef} position={[0, 3.2, 0]}>
+        <group ref={pivotRef}>
+          {/* Model is auto-centered + auto-fitted by the effect above,
+              so it always sits in frame regardless of the GLB's origin/scale.
+              pivotRef pans it left/right on the x-axis while it's down. */}
+          <group ref={modelRef}>
+            <primitive object={gltf.scene} />
+          </group>
+        </group>
       </group>
     </group>
   );
@@ -124,10 +199,8 @@ useGLTF.preload("/models/cctv.glb");
    CCTV CANVAS WRAPPER
 ───────────────────────────────────────────────────────────────────────────── */
 function CCTVCanvasInner({
-  mousePosRef,
   isMobile = false,
 }: {
-  mousePosRef: React.RefObject<{ x: number; y: number }>;
   isMobile?: boolean;
 }) {
   const { Canvas } = require("@react-three/fiber");
@@ -139,14 +212,14 @@ function CCTVCanvasInner({
       style={{ width: "100%", height: "100%", pointerEvents: "none" }}
       gl={{ alpha: true, antialias: true }}
     >
-      <ambientLight intensity={2.8} />
-      <directionalLight position={[5, 5, 5]} intensity={3.5} />
-      <pointLight position={[-4, 2, 4]} intensity={2.2} />
+      <ambientLight intensity={1.6} />
+      <directionalLight position={[5, 5, 5]} intensity={2.0} />
+      <pointLight position={[-4, 2, 4]} intensity={1.3} />
       <Suspense fallback={null}>
         <Float speed={1.4} rotationIntensity={0} floatIntensity={0.08}>
-          <CCTVHangingModel mousePosRef={mousePosRef} isMobile={isMobile} />
+          <CCTVHangingModel isMobile={isMobile} />
         </Float>
-        <Environment preset="studio" />
+        <Environment preset="studio" environmentIntensity={0.45} />
       </Suspense>
     </Canvas>
   );
@@ -167,20 +240,10 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const [modelReady, setModelReady] = useState(false);
 
-  const mousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      mousePosRef.current = { x: e.clientX, y: e.clientY };
-    };
-    window.addEventListener("mousemove", onMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
   useEffect(() => {
@@ -809,7 +872,7 @@ export default function Navbar() {
               height: 200,
             }}
           >
-            <CCTVCanvasWrapper mousePosRef={mousePosRef} isMobile={false} />
+            <CCTVCanvasWrapper isMobile={false} />
           </div>
         </div>
       )}
@@ -823,7 +886,7 @@ export default function Navbar() {
           }`}
           style={{ width: 100, height: 100, right: 16, bottom: 10 }}
         >
-          <CCTVCanvasWrapper mousePosRef={mousePosRef} isMobile={true} />
+          <CCTVCanvasWrapper isMobile={true} />
         </div>
       )}
     </header>

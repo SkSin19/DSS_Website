@@ -15,7 +15,7 @@ type ProductPageProps = {
 export const dynamic = "force-dynamic";
 
 const getProductImage = (product: BackendProduct) =>
-  product.featuredImage || product.images?.[0]?.url || "https://picsum.photos/seed/product-detail-fallback/1200/900";
+  product.featuredImage || product.images?.[0]?.url || "https://images.unsplash.com/photo-1643123182527-3bd30840e7ed?auto=format&fit=crop&w=1200&q=80";
 
 const getProductHref = (product: BackendProduct) => product.url || `/products/${product.slug}`;
 
@@ -270,7 +270,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                 <div className="relative aspect-4/3 p-6 bg-linear-to-b from-white to-slate-100 select-none">
                   <div className="relative h-full w-full group-hover:scale-[1.03] transition-transform duration-500 select-none">
                     <Image
-                      src={item.featuredImage || item.images?.[0]?.url || "https://picsum.photos/seed/related-fallback/1200/900"}
+                      src={item.featuredImage || item.images?.[0]?.url || "https://images.unsplash.com/photo-1643123182527-3bd30840e7ed?auto=format&fit=crop&w=1200&q=80"}
                       alt={item.images?.[0]?.alt || item.name}
                       fill
                       sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"

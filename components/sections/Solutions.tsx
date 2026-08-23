@@ -8,22 +8,22 @@ const services = [
   {
     title: "Get a quote",
     image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=80",
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=600&q=80",
   },
   {
     title: "Discussion",
     image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80",
   },
   {
     title: "Planning",
     image:
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80",
+      "https://images.unsplash.com/photo-1551135049-8a33b5883817?auto=format&fit=crop&w=600&q=80",
   },
   {
     title: "Installation",
     image:
-      "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=80",
+      "https://images.unsplash.com/photo-1660330589693-99889d60181e?auto=format&fit=crop&w=600&q=80",
   },
 ];
 

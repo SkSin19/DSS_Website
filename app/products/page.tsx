@@ -35,7 +35,7 @@ const getProductImage = (product: BackendProduct) => {
   }
   const firstImage = product.images?.find((img) => isValidImage(img?.url));
   if (firstImage?.url) return firstImage.url;
-  return "https://picsum.photos/seed/product-fallback/1200/900";
+  return "https://images.unsplash.com/photo-1643123182527-3bd30840e7ed?auto=format&fit=crop&w=1200&q=80";
 };
 
 const getProductAlt = (product: BackendProduct) =>

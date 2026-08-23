@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'fgtechstore.com' },
       { protocol: 'https', hostname: 'm.media-amazon.com' },
       { protocol: 'https', hostname: 'media.esslsecurity.com' },
+      { protocol: 'https', hostname: 'ik.imagekit.io' },
     ],
   },
 };

@@ -197,7 +197,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "Access Control",
     description: "Smart entry solutions with PIN, card, and biometric authentication for every door.",
     href: "/products?category=Access%20Control",
-    imageSrc: "/images/categories/access-control-smart-entry.png",
+    imageSrc: "https://ik.imagekit.io/dssindia/accessControl.jpg",
     imageAlt: "Access control keypad and card reader",
   },
   {

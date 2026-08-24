@@ -1,1052 +1,380 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-/* eslint-disable react-hooks/purity */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
-import { TRUST_BADGES } from "@/lib/constants";
 import Image from "next/image";
+import {
+  Cctv,
+  KeyRound,
+  Fingerprint,
+  Volume2,
+  Flame,
+  House,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  type LucideIcon,
+} from "lucide-react";
 import { THEME_COLORS } from "@/themes/colors";
 
-const SLIDES = [
+/* ────────────────────────────────────────────────────────────────────────
+   HERO MEDIA
+   ------------------------------------------------------------------------
+   The hero background cycles through this list IN ORDER:
+   videos first, then still images. Each item gets one pagination indicator.
+
+   ▸ TO ADD / REORDER MEDIA LATER, just edit this array:
+       • A video item:
+           { id: "my-video", type: "video", src: "/videos/my-clip.mp4",
+             poster: "/images/hero/xyz.webp", durationMs: 12000 }
+       • An image item:
+           { id: "my-image", type: "image", src: "/images/hero/xyz.webp",
+             alt: "…", durationMs: 6000 }
+   Videos autoplay muted and advance to the next item when they finish
+   (or after durationMs). Images advance after durationMs.
+   ──────────────────────────────────────────────────────────────────────── */
+
+type MediaItem = {
+  id: string;
+  type: "video" | "image";
+  src: string;
+  poster?: string;
+  alt?: string;
+  opacity?: number;
+  durationMs?: number;
+};
+
+const DEFAULT_IMAGE_MS = 6000;
+const DEFAULT_VIDEO_CAP_MS = 30000; // safety cap in case a video's "ended" never fires
+
+const MEDIA: MediaItem[] = [
+  // ── VIDEOS (play in order) ──
+  {
+    id: "video-landing",
+    type: "video",
+    src: "/videos/dssLanding.mp4",
+  },
+  // ▸ THIRD VIDEO — drop the file into /public/videos, then uncomment this
+  //   block (it will get its own pagination indicator automatically).
+  // {
+  //   id: "video-three",
+  //   type: "video",
+  //   src: "/videos/hero-video-3.mp4",
+  // },
+
+  // ── STILL IMAGES ──
   {
     id: "residential",
-    image: "/images/hero/hero-security-showcase.webp",
+    type: "image",
+    src: "/images/hero/hero-security-showcase.webp",
     alt: "Residential Security Showcase",
-    title: "Residential Security Showcase",
-    opacity: 0.85,
-    hotspots: [
-      {
-        id: "r-cctv",
-        title: "CCTV SURVEILLANCE",
-        desc: "24/7 monitoring for complete safety.",
-        top: "22%",
-        left: "91%",
-      },
-      {
-        id: "r-alarm",
-        title: "FIRE ALARM SOUNDER",
-        desc: "Loud audible alerts in case of emergency.",
-        top: "26%",
-        left: "73%",
-      },
-      {
-        id: "r-panel",
-        title: "FIRE ALARM PANEL",
-        desc: "Intelligent detection and quick response.",
-        top: "50%",
-        left: "38%",
-      },
-      {
-        id: "r-mcp",
-        title: "MANUAL CALL POINT",
-        desc: "Quick activation during emergencies.",
-        top: "66%",
-        left: "83%",
-      },
-      {
-        id: "r-extinguisher",
-        title: "FIRE EXTINGUISHERS",
-        desc: "Always ready, always safe.",
-        top: "60%",
-        left: "31%",
-      },
-      {
-        id: "r-access",
-        title: "ACCESS CONTROL",
-        desc: "Secure entry for residents & visitors.",
-        top: "64%",
-        left: "23%",
-      },
-      {
-        id: "r-visitor",
-        title: "VISITOR MANAGEMENT",
-        desc: "Digital check-in for a safer community.",
-        top: "62%",
-        left: "35%",
-      },
-      {
-        id: "r-barrier",
-        title: "AUTOMATED GATE MOTOR",
-        desc: "Reliable motorized automatic gate controls.",
-        top: "79%",
-        left: "76%",
-      },
-      {
-        id: "r-intercom",
-        title: "VIDEO INTERCOM",
-        desc: "See, verify and communicate before granting access.",
-        top: "60%",
-        left: "12%",
-      },
-      {
-        id: "r-pa",
-        title: "PUBLIC ADDRESS SYSTEM",
-        desc: "Instant announcements when needed.",
-        top: "16%",
-        left: "40%",
-      },
-      {
-        id: "r-go-inside",
-        title: "ENTER SMART HOME",
-        desc: "Interactive Showcase. Click to step inside and view home automation systems.",
-        top: "50%",
-        left: "41%",
-        action: "go-to-interior",
-        targetSlideId: "residential-interior",
-      },
-    ],
-  },
-  {
-    id: "residential-interior",
-    image: "/images/hero/hero-security-showcase-interior.webp",
-    alt: "Smart Home Interior",
-    title: "Smart Home Interior",
-    opacity: 0.85,
-    hotspots: [
-      {
-        id: "w-interior-automation",
-        title: "SMART HOME PANEL",
-        desc: "Centrally manage lights, security, climate, and audio systems.",
-        top: "25%",
-        left: "14%",
-      },
-      {
-        id: "w-interior-intercom",
-        title: "VIDEO INTERCOM",
-        desc: "Interior communication monitor to view and talk with visitors at the gate.",
-        top: "53%",
-        left: "11%",
-      },
-      {
-        id: "w-interior-pinpad",
-        title: "PIN KEYPAD ACCESS",
-        desc: "Secure PIN code entry to arm/disarm the security system.",
-        top: "53%",
-        left: "22%",
-      },
-      {
-        id: "w-interior-alarm",
-        title: "SECURITY ALARM PANEL",
-        desc: "Quick-arm keypad displaying current system status.",
-        top: "77%",
-        left: "10%",
-      },
-      {
-        id: "w-interior-motion",
-        title: "MOTION SENSOR",
-        desc: "PIR motion detector protecting the main living area.",
-        top: "73%",
-        left: "22%",
-      },
-      {
-        id: "w-interior-tv",
-        title: "SURVEILLANCE VIDEO WALL",
-        desc: "Real-time camera feed grid monitoring gates, driveways, and garden areas.",
-        top: "43%",
-        left: "79%",
-      },
-      {
-        id: "w-interior-projector",
-        title: "HOME THEATER PROJECTOR",
-        desc: "High-definition smart projector for entertainment integration.",
-        top: "14%",
-        left: "49%",
-      },
-      {
-        id: "w-interior-audio",
-        title: "INTEGRATED AUDIO SYSTEM",
-        desc: "Premium sound system integrated with home automation controls.",
-        top: "55%",
-        left: "62%",
-      },
-      {
-        id: "w-interior-receiver",
-        title: "CENTRAL AV RECEIVER & NVR",
-        desc: "Centralized server hosting security video feeds and smart media.",
-        top: "66%",
-        left: "73%",
-      },
-    ],
   },
   {
     id: "commercial",
-    image: "/images/hero/hero-security-showcase-business.webp",
+    type: "image",
+    src: "/images/hero/hero-security-showcase-business.webp",
     alt: "Commercial Security Showcase",
-    title: "Commercial Security Showcase",
-    opacity: 0.85,
-    hotspots: [
-      {
-        id: "c-cctv-dome",
-        title: "CCTV DOME CAMERA",
-        desc: "High-definition 360-degree overhead surveillance.",
-        top: "12%",
-        left: "47%",
-      },
-      {
-        id: "c-cctv-bullet-l",
-        title: "WALL SURVEILLANCE",
-        desc: "HD bullet cameras guarding entry pathways.",
-        top: "25%",
-        left: "35%",
-      },
-      {
-        id: "c-cctv-bullet-r",
-        title: "PERIMETER CCTV",
-        desc: "Angled surveillance monitoring front facade points.",
-        top: "25%",
-        left: "61%",
-      },
-      {
-        id: "c-alarm-bell",
-        title: "FIRE ALARM BELL",
-        desc: "Loud physical alarm system for occupant warnings.",
-        top: "63%",
-        left: "34%",
-      },
-      {
-        id: "c-alarm-panel",
-        title: "FIRE ALARM INTERFACE",
-        desc: "Emergency trigger points and control modules.",
-        top: "54%",
-        left: "35%",
-      },
-      {
-        id: "c-access",
-        title: "SPEED GATE TURNSTILES",
-        desc: "Stainless steel security turnstiles for badge validation.",
-        top: "83%",
-        left: "62%",
-      },
-      {
-        id: "c-visitor",
-        title: "BIOMETRIC KIOSK",
-        desc: "Facial recognition terminal for automated check-in.",
-        top: "80%",
-        left: "78%",
-      },
-      {
-        id: "c-barrier",
-        title: "BOOM BARRIER GATE",
-        desc: "Heavy-duty vehicle barrier controlling driveway entry.",
-        top: "79%",
-        left: "17%",
-      },
-      {
-        id: "c-go-inside",
-        title: "CONFERENCE ROOM",
-        desc: "Interactive Showcase. Click to step inside and view meeting systems.",
-        top: "48%",
-        left: "51%",
-        action: "go-to-workspace",
-        targetSlideId: "workspace",
-      },
-    ],
   },
   {
     id: "workspace",
-    image: "/images/hero/hero-security-showcase-collaboration.webp",
+    type: "image",
+    src: "/images/hero/hero-security-showcase-collaboration.webp",
     alt: "Smart Collaboration Workspace",
-    title: "Smart Collaboration Workspace",
-    opacity: 0.85,
-    hotspots: [
-      {
-        id: "w-ceiling-mic",
-        title: "CEILING MICROPHONE",
-        desc: "360° voice pickup for clear communication.",
-        top: "4.5%",
-        left: "51.5%",
-      },
-      {
-        id: "w-ptz-camera",
-        title: "PTZ CAMERA",
-        desc: "High quality video with auto framing.",
-        top: "21%",
-        left: "60.5%",
-      },
-      {
-        id: "w-ceiling-speakers",
-        title: "IN-CEILING SPEAKERS",
-        desc: "Premium audio throughout the room.",
-        top: "9.5%",
-        left: "67%",
-      },
-      {
-        id: "w-vc-camera",
-        title: "CONFERENCE CAMERA",
-        desc: "High-definition camera for clear presenter tracking.",
-        top: "34%",
-        left: "32.5%",
-      },
-      {
-        id: "w-soundbar",
-        title: "SOUNDBAR",
-        desc: "Crystal clear audio for every participant.",
-        top: "59%",
-        left: "32.5%",
-      },
-      {
-        id: "w-control-panel",
-        title: "AV CONTROL PANEL",
-        desc: "Intuitive touch control for effortless management.",
-        top: "84%",
-        left: "54.5%",
-      },
-      {
-        id: "w-dsp",
-        title: "DSP PROCESSOR",
-        desc: "Optimized digital sound processing for clear voice.",
-        top: "63%",
-        left: "83.5%",
-      },
-      {
-        id: "w-wireless-pres",
-        title: "WIRELESS PRESENTATION",
-        desc: "Share content wirelessly from any device.",
-        top: "68%",
-        left: "34.5%",
-      },
-      {
-        id: "w-table-mic",
-        title: "TABLE MICROPHONE",
-        desc: "Additional mic for better boundary voice coverage.",
-        top: "87%",
-        left: "35.5%",
-      },
-      {
-        id: "w-smoke-detector",
-        title: "SMOKE DETECTOR",
-        desc: "Addressable ceiling sensor for early fire detection.",
-        top: "6%",
-        left: "41.5%",
-      },
-      {
-        id: "w-fire-alarm",
-        title: "FIRE ALARM SOUNDER",
-        desc: "Wall-mounted alert speaker strobe for emergency warnings.",
-        top: "16%",
-        left: "80%",
-      },
-    ],
+  },
+];
+
+/* ── RIGHT-CARD SERVICES (icon + label grid, like the reference) ──
+   Edit freely — add/remove items and the grid reflows. */
+type ServiceItem = {
+  id: string;
+  icon: LucideIcon;
+  label: string;
+  href: string;
+};
+
+const SERVICES: ServiceItem[] = [
+  {
+    id: "surveillance",
+    icon: Cctv,
+    label: "Surveillance systems",
+    href: "/products?category=Surveillance%20Systems",
+  },
+  {
+    id: "access",
+    icon: KeyRound,
+    label: "Access control",
+    href: "/products?category=Access%20Control",
+  },
+  {
+    id: "biometric",
+    icon: Fingerprint,
+    label: "Biometric & identity",
+    href: "/products?category=Biometric%20%26%20Identity",
+  },
+  {
+    id: "pa-av",
+    icon: Volume2,
+    label: "PA system & AV",
+    href: "/products?category=PA%20Systems%20and%20AV",
+  },
+  {
+    id: "fire-alarm",
+    icon: Flame,
+    label: "Fire alarm systems",
+    href: "/solutions",
+  },
+  {
+    id: "automation",
+    icon: House,
+    label: "Smart home automation",
+    href: "/solutions",
   },
 ];
 
 export default function HeroSlider() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // FIX: empty deps - no restart on every slide change
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlideIndex((prev) => (prev + 1) % SLIDES.length);
-    }, 9000);
-    return () => clearInterval(interval);
+  const goTo = useCallback((idx: number) => {
+    setCurrentIndex(((idx % MEDIA.length) + MEDIA.length) % MEDIA.length);
   }, []);
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const bgGridRef = useRef<HTMLDivElement>(null);
-  const ring1Ref = useRef<HTMLDivElement>(null);
-  const ring2Ref = useRef<HTMLDivElement>(null);
-  const ring3Ref = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLDivElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const badgesRef = useRef<HTMLDivElement>(null);
-  const isMobileRef = useRef<boolean>(false);
+  const goNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % MEDIA.length);
+  }, []);
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [aspectBoxStyle, setAspectBoxStyle] = useState<React.CSSProperties>({
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-  });
+  const goPrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + MEDIA.length) % MEDIA.length);
+  }, []);
 
+  const current = MEDIA[currentIndex];
+
+  // ── AUTO-ADVANCE ──
+  // Images advance after their duration. Videos advance when they finish
+  // playing (onEnded) but also carry a safety timeout so a stalled/looping
+  // clip can never freeze the carousel.
   useEffect(() => {
-    if (!mounted || !containerRef.current) return;
+    if (!mounted) return;
 
-    const handleResize = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const containerWidth = rect.width;
-      const containerHeight = rect.height;
-      const imageAspectRatio = 1024 / 682;
-
-      let boxWidth = containerWidth;
-      let boxHeight = containerHeight;
-
-      if (containerWidth && containerHeight) {
-        const containerAspectRatio = containerWidth / containerHeight;
-        if (containerAspectRatio > imageAspectRatio) {
-          boxWidth = containerWidth;
-          boxHeight = containerWidth / imageAspectRatio;
-        } else {
-          boxWidth = containerHeight * imageAspectRatio;
-          boxHeight = containerHeight;
-        }
+    const activeVideo = videoRefs.current[currentIndex];
+    if (current.type === "video" && activeVideo) {
+      try {
+        activeVideo.currentTime = 0;
+        const p = activeVideo.play();
+        if (p && typeof p.catch === "function") p.catch(() => {});
+      } catch {
+        /* autoplay may be blocked; safety timer below still advances */
       }
+    }
 
-      setAspectBoxStyle({
-        width: `${boxWidth}px`,
-        height: `${boxHeight}px`,
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-      });
-    };
+    const duration =
+      current.durationMs ??
+      (current.type === "video" ? DEFAULT_VIDEO_CAP_MS : DEFAULT_IMAGE_MS);
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [mounted]);
-
-  const slide = {
-    badge:
-      currentSlideIndex === 0
-        ? "NEXT-GEN SURVEILLANCE"
-        : currentSlideIndex === 1
-          ? "SMART HOME INTERIOR"
-          : currentSlideIndex === 2
-            ? "COMMERCIAL SAFETY"
-            : "SMART COLLABORATION",
-    headingLine1: "Digital Security",
-    headingLine2: "Solutions",
-    headingAccentColor: THEME_COLORS.red,
-    description: "Surety of Security",
-    ctaPrimaryHref: "/enquiry",
-  };
-
-  useEffect(() => {
-    isMobileRef.current = window.innerWidth < 768;
-  }, []);
-
-  // FIX: memoize particle data - no random recalculation on every render
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 40 }, () => {
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 60 + Math.random() * 90;
-        return {
-          x: `${20 + Math.random() * 60}%`,
-          y: `${20 + Math.random() * 60}%`,
-          dx: `${Math.cos(angle) * distance}px`,
-          dy: `${Math.sin(angle) * distance}px`,
-          delay: `${Math.random() * 1.2}s`,
-          duration: `${0.8 + Math.random() * 1.4}s`,
-          size: `${2 + Math.random() * 4}px`,
-        };
-      }),
-    [],
-  );
-
-  useEffect(() => {
-    let ctx: any;
-
-    const init = async () => {
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
-
-      ctx = gsap.context(() => {
-        const entry = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-        entry.fromTo(
-          bgGridRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 1.4 },
-          0,
-        );
-
-        [ring1Ref, ring2Ref, ring3Ref].forEach((r, i) => {
-          entry.fromTo(
-            r.current,
-            { scale: 0.4, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 1.6, ease: "expo.out" },
-            0.2 + i * 0.12,
-          );
-        });
-
-        const words = headlineRef.current?.querySelectorAll(".word");
-        if (words?.length) {
-          entry.fromTo(
-            words,
-            { y: 60, opacity: 0, rotateX: -40 },
-            {
-              y: 0,
-              opacity: 1,
-              rotateX: 0,
-              duration: 0.9,
-              stagger: 0.07,
-              ease: "back.out(1.4)",
-            },
-            0.55,
-          );
-        }
-
-        entry.fromTo(
-          subRef.current,
-          { y: 24, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          0.85,
-        );
-        entry.fromTo(
-          ctaRef.current,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7 },
-          1.0,
-        );
-        entry.fromTo(
-          badgesRef.current,
-          { y: 16, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7 },
-          1.15,
-        );
-
-        const section = sectionRef.current;
-
-        gsap.to(bgGridRef.current, {
-          yPercent: -22,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1.6,
-          },
-        });
-
-        [ring1Ref, ring2Ref, ring3Ref].forEach((r, i) => {
-          gsap.to(r.current, {
-            yPercent: -30 - i * 8,
-            ease: "none",
-            scrollTrigger: {
-              trigger: section,
-              start: "top top",
-              end: "bottom top",
-              scrub: 1.2 + i * 0.2,
-            },
-          });
-        });
-      }, sectionRef);
-    };
-
-    init();
-    return () => {
-      ctx?.revert();
-    };
-  }, []);
-
-  const headline = `${slide.headingLine1} ${slide.headingLine2}`;
-  const accentStart = slide.headingLine1.split(" ").length;
+    const timer = setTimeout(goNext, duration);
+    return () => clearTimeout(timer);
+  }, [mounted, currentIndex, current, goNext]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="select-none relative w-full overflow-hidden bg-white flex flex-col md:block"
-      style={{ minHeight: "100svh" }}
-    >
-      {/* grid */}
+    <section className="relative w-full min-h-[90vh] md:h-[90vh] overflow-hidden bg-neutral-900 select-none font-poppins">
+      {/* ── BACKGROUND MEDIA (full-bleed) ── */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {MEDIA.map((item, idx) => {
+          const isActive = currentIndex === idx;
+          const shouldLoadVideo =
+            item.type === "video" &&
+            (isActive || (currentIndex + 1) % MEDIA.length === idx);
+
+          return (
+            <div
+              key={item.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                isActive
+                  ? "opacity-100 z-10"
+                  : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              {item.type === "video" ? (
+                <video
+                  ref={(el) => {
+                    videoRefs.current[idx] = el;
+                  }}
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                  style={{ opacity: item.opacity ?? 1 }}
+                  src={shouldLoadVideo ? item.src : undefined}
+                  poster={item.poster}
+                  muted
+                  playsInline
+                  autoPlay={isActive}
+                  preload={shouldLoadVideo ? "auto" : "none"}
+                  onEnded={() => {
+                    if (isActive) goNext();
+                  }}
+                />
+              ) : (
+                <Image
+                  src={item.src}
+                  alt={item.alt ?? ""}
+                  fill
+                  className="object-cover object-center"
+                  style={{ opacity: item.opacity ?? 1 }}
+                  priority={idx === 0}
+                  sizes="100vw"
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ── LEGIBILITY SCRIM (subtle dark wash on the left for white text) ── */}
       <div
-        ref={bgGridRef}
-        className="pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none absolute inset-0 z-20"
         style={{
-          backgroundImage:
-            "radial-gradient(rgba(107,114,128,0.14) 1px, transparent 1px)",
-          backgroundSize: "36px 36px",
+          background:
+            "linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.30) 30%, rgba(0,0,0,0.08) 52%, rgba(0,0,0,0) 70%)",
         }}
       />
 
-      {/* HUD RINGS */}
-      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
-        <div
-          ref={ring1Ref}
-          className="absolute rounded-full border border-dashed border-red-500/20"
-          style={{ width: "min(780px, 110vw)", height: "min(780px, 110vw)" }}
-        />
-        <div
-          ref={ring2Ref}
-          className="absolute rounded-full border border-gray-400/10"
-          style={{
-            width: "min(560px, 85vw)",
-            height: "min(560px, 85vw)",
-            borderStyle: "dashed",
-          }}
-        />
-        <div
-          ref={ring3Ref}
-          className="absolute rounded-full border border-red-500/20"
-          style={{ width: "min(340px, 60vw)", height: "min(340px, 60vw)" }}
-        />
-      </div>
+      {/* ── OVERLAY CONTENT ── */}
+      <div className="relative z-30 h-full">
+        <div className="mx-auto flex h-full min-h-[90vh] w-full max-w-360 flex-col items-stretch justify-center gap-8 px-5 py-10 sm:px-8 md:min-h-0 md:flex-row md:items-center md:justify-between md:gap-6 md:py-0 lg:px-14">
+          {/* LEFT — headline + stat + CTA */}
+          <div className="hero-fade-up w-full max-w-xl self-center md:self-center">
+            <h1 className="font-poppins font-extrabold leading-[1.05] tracking-tight text-white text-[clamp(2.3rem,5.4vw,4.4rem)]">
+              Digital Security
+              <br />
+              <span style={{ color: THEME_COLORS.red }}>Solutions</span>
+            </h1>
 
-      {/* Responsive Wrapper for Mobile Split Layout */}
-      <div className="relative w-full aspect-3/2 md:static md:w-auto md:aspect-auto">
-        {/* ── BACKGROUND IMAGE SHOWCASE ── */}
-        <div
-          ref={containerRef}
-          className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] lg:w-[80%] xl:w-[75%] 2xl:w-[70%] z-0 overflow-hidden select-none"
-        >
-          <div style={aspectBoxStyle}>
-            {SLIDES.map((slide, idx) => (
-              <div
-                key={slide.id}
-                className={`absolute inset-0 transition-opacity duration-1000 ${
-                  currentSlideIndex === idx
-                    ? "opacity-100 z-10"
-                    : "opacity-0 z-0 pointer-events-none"
-                }`}
-              >
-                {/* FIX: removed unoptimized, added sizes for proper srcset */}
-                <Image
-                  src={slide.image}
-                  alt={slide.alt}
-                  fill
-                  className="object-cover object-center"
-                  style={{ opacity: slide.opacity }}
-                  priority={idx === 0}
-                  sizes="(max-width: 768px) 100vw, 85vw"
-                />
+            {/* boxed stat + supporting phrase (mirrors reference) */}
+            <div className="mt-7 flex items-center gap-4">
+              <div className="flex flex-col items-center justify-center rounded-md border border-white/70 px-4 py-2 text-center leading-none">
+                <span className="font-poppins text-2xl font-bold text-white">
+                  24×7
+                </span>
+                <span className="mt-1 font-poppins text-[11px] font-medium uppercase tracking-wide text-white/80">
+                  Protection
+                </span>
               </div>
-            ))}
-          </div>
-
-          <div className="absolute inset-0 bg-white/90 md:bg-transparent pointer-events-none z-15 hidden md:block" />
-
-          {/* Left edge fade gradient (desktop only) */}
-          <div
-            className="absolute inset-y-0 left-0 hidden md:block bg-linear-to-r from-white via-white/50 to-transparent pointer-events-none z-15 transition-[width] duration-1000"
-            style={{ width: "40%" }}
-          />
-
-          {/* Bottom edge fade gradient */}
-          <div className="absolute inset-x-0 bottom-0 h-8 md:h-24 bg-linear-to-t from-white to-transparent pointer-events-none z-15" />
-        </div>
-
-        {/* ── INTERACTIVE HOTSPOTS OVERLAY ── */}
-        <div className="absolute inset-0 md:absolute md:right-0 md:top-0 md:bottom-0 md:left-auto md:w-[85%] lg:w-[80%] xl:w-[75%] 2xl:w-[70%] z-30 pointer-events-none overflow-visible select-none">
-          <div style={aspectBoxStyle}>
-            {SLIDES.map((slide, slideIdx) => (
-              <div
-                key={`hotspots-${slide.id}`}
-                className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${
-                  currentSlideIndex === slideIdx
-                    ? "opacity-100 pointer-events-auto"
-                    : "opacity-0 pointer-events-none"
-                }`}
-              >
-                {slide.hotspots.map((spot) => {
-                  const isSpecial = !!spot.action;
-                  const showBelow = parseFloat(spot.top) < 35;
-                  return (
-                    <div
-                      key={spot.id}
-                      className="absolute group z-30 pointer-events-auto cursor-pointer"
-                      style={{
-                        top: spot.top,
-                        left: spot.left,
-                        transform: "translate(-50%, -50%)",
-                      }}
-                      onClick={() => {
-                        if (isSpecial && spot.targetSlideId) {
-                          const targetIdx = SLIDES.findIndex(
-                            (s) => s.id === spot.targetSlideId,
-                          );
-                          if (targetIdx !== -1) {
-                            setCurrentSlideIndex(targetIdx);
-                          }
-                        }
-                      }}
-                    >
-                      {/* Pulse Ring */}
-                      <div
-                        className={`absolute inset-0 rounded-full animate-ping opacity-20 h-4 w-4 -m-1 ${
-                          isSpecial ? "bg-cyan-400" : "bg-red-500"
-                        }`}
-                        style={{ width: "16px", height: "16px" }}
-                      />
-
-                      {/* Active/Hover Dot */}
-                      <button
-                        aria-label={spot.title}
-                        className={`relative h-2 w-2 rounded-full border border-white focus:outline-none transition-transform duration-300 group-hover:scale-150 ${
-                          isSpecial
-                            ? "bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.8)]"
-                            : "bg-red-600"
-                        }`}
-                        style={{ width: "8px", height: "8px" }}
-                      />
-
-                      {/* Tooltip Card */}
-                      <div
-                        className={`absolute left-1/2 -translate-x-1/2 w-56 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white opacity-0 pointer-events-none transition-all duration-300 transform group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto shadow-xl ${
-                          showBelow
-                            ? "top-full mt-3 -translate-y-2"
-                            : "bottom-full mb-3 translate-y-2"
-                        }`}
-                      >
-                        <div
-                          className={`absolute left-1/2 -translate-x-1/2 border-4 border-transparent ${
-                            showBelow ? "bottom-full -mb-1" : "top-full -mt-1"
-                          }`}
-                          style={
-                            showBelow
-                              ? { borderBottomColor: "rgba(0,0,0,0.85)" }
-                              : { borderTopColor: "rgba(0,0,0,0.85)" }
-                          }
-                        />
-                        <p
-                          className={`text-[10px] font-bold tracking-wider uppercase mb-1 font-sans ${
-                            isSpecial ? "text-cyan-400" : "text-red-400"
-                          }`}
-                        >
-                          {spot.title}
-                        </p>
-                        <p className="text-[11px] text-gray-200 leading-normal font-medium font-sans">
-                          {spot.desc}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* MAIN CONTENT */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-center px-4 py-10 sm:px-6 md:min-h-svh md:py-0 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-0 lg:px-8">
-        {/* LEFT */}
-        <div className="hero-left-content flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-8 lg:gap-5 lg:justify-normal justify-between">
-          {/* ── TOP CLUSTER: badge + headline + subtitle ── */}
-          <div className="flex flex-col items-center gap-5 lg:items-start mt-8 lg:mt-0">
-            <div className="flex mb-5 items-center gap-2.5 rounded-full border border-red-500/20 bg-red-50 px-3.5 py-1.5">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-red-700">
-                {slide.badge ?? "Next-Gen Surveillance"}
-              </span>
+              <p className="font-poppins text-[clamp(1.1rem,2vw,1.5rem)] font-semibold leading-tight text-white">
+                Surety of
+                <br />
+                Security
+              </p>
             </div>
 
-            <div
-              ref={headlineRef}
-              className="overflow-hidden -mt-5 md:mt-0"
-              style={{ perspective: "600px" }}
-            >
-              <h1 className="text-[clamp(2.4rem,5.5vw,4rem)] font-black leading-[1.04] tracking-tight text-gray-900">
-                {headline.split(" ").map((word, i) => (
-                  <span
-                    key={i}
-                    className="word mr-[0.25em] inline-block last:mr-0"
-                    style={{
-                      color:
-                        i >= accentStart
-                          ? (slide.headingAccentColor ?? THEME_COLORS.red)
-                          : THEME_COLORS.shadowGrey900,
-                      textShadow:
-                        "0 2px 10px rgba(255, 255, 255, 0.95), 0 1px 3px rgba(255, 255, 255, 0.90)",
-                    }}
+            {/* outlined pill CTA */}
+            <div className="mt-8">
+              <Link
+                href="/enquiry"
+                className="group inline-flex text-white! items-center gap-3 rounded-full border border-white/80 bg-transparent px-7 py-3.5 font-poppins text-[15px] font-semibolds transition-all duration-300 hover:border-white hover:bg-white hover:text-black!" 
+              >
+                Request an Enquiry
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </div>
+
+          {/* RIGHT — white service card */}
+          <div className="hero-fade-up-delayed w-full self-center md:w-[clamp(340px,36vw,560px)]">
+            <div className="rounded-1xl bg-white p-6 shadow-2xl sm:p-8 md:p-9">
+              <h2
+                className="font-poppins font-semibold leading-[1.05] tracking-tight text-[clamp(1.9rem,3vw,3rem)]"
+                style={{ color: THEME_COLORS.red }}
+              >
+                Secure
+                <br />
+                your space
+              </h2>
+
+              <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3">
+                {SERVICES.map(({ id, icon: Icon, label, href }) => (
+                  <Link
+                    key={id}
+                    href={href}
+                    className="group flex flex-col items-center text-center focus:outline-none"
                   >
-                    {word}
-                  </span>
-                ))}
-              </h1>
-            </div>
-
-            <p
-              ref={subRef}
-              className="mt-5 md:pl-2 md:mt-0 max-w-md text-[25px] leading-relaxed text-gray-600"
-              style={{
-                textShadow:
-                  "0 2px 8px rgba(255, 255, 255, 0.95), 0 1px 3px rgba(255, 255, 255, 0.85)",
-              }}
-            >
-              {slide.description}
-            </p>
-          </div>
-
-          {/* ── BOTTOM CLUSTER: CTA button + trust badges ── */}
-          <div className="flex flex-col items-center gap-0 lg:items-start mb-10 lg:mb-0">
-            <div
-              ref={ctaRef}
-              className="mt-3 md:mt-0 flex flex-wrap items-center gap-3 relative"
-            >
-              <div className="relative inline-flex group-cta">
-                {/* Fog Border Element */}
-                <div className="fog-animated-border pointer-events-none" />
-
-                <Link
-                  href={slide.ctaPrimaryHref}
-                  className="enquiry-btn relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full border border-red-200 bg-red-600 px-7 py-3.5 text-[13px] font-semibold tracking-[0.08em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:border-red-600"
-                >
-                  {/* liquid fill */}
-                  <span className="liquid-fill absolute inset-0 z-0" />
-                  {/* glow */}
-                  <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100 group-hover:bg-red-400/30" />
-                  {/* shine sweep */}
-                  <span className="shine absolute inset-0 z-1" />
-                  {/* FIX: memoized particles - no random recalc on re-render */}
-                  {mounted && (
-                    <span className="particles">
-                      {particles.map((p, i) => (
-                        <span
-                          key={i}
-                          className="particle"
-                          style={
-                            {
-                              "--x": p.x,
-                              "--y": p.y,
-                              "--dx": p.dx,
-                              "--dy": p.dy,
-                              "--delay": p.delay,
-                              "--duration": p.duration,
-                              "--size": p.size,
-                            } as React.CSSProperties
-                          }
-                        />
-                      ))}
+                    <Icon
+                      className="h-9 w-9 text-neutral-700 transition-colors duration-300 group-hover:text-red-600"
+                      strokeWidth={1.4}
+                    />
+                    <span className="mt-3 font-poppins text-[13px] font-medium leading-snug text-neutral-800 transition-colors duration-300 group-hover:text-red-600">
+                      {label}
                     </span>
-                  )}
-                  {/* text */}
-                  <span className="enquiry-btn-text relative z-5 text-white transition-colors duration-500">
-                    Request an Enquiry
-                  </span>
-                </Link>
+                  </Link>
+                ))}
               </div>
-            </div>
-
-            <div
-              ref={badgesRef}
-              className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 md:pt-10 lg:pt-12 justify-center lg:justify-start"
-            >
-              {TRUST_BADGES.map((badge, i) => (
-                <div key={i} className="flex items-center gap-1.5">
-                  <span
-                    className="text-[11px] font-medium text-gray-500"
-                    style={{
-                      textShadow: "0 1px 4px rgba(255, 255, 255, 0.90)",
-                    }}
-                  >
-                    {badge.label}
-                  </span>
-                </div>
-              ))}
             </div>
           </div>
         </div>
+      </div>
 
-        {/* RIGHT - Spacer for background image on desktop */}
-        <div className="hidden lg:block w-full h-125" />
+      {/* ── PAGINATION (reference-style pill: ← indicators → ) ── */}
+      <div className="absolute inset-x-0 bottom-6 md:bottom-7 z-40 flex justify-center">
+        <div className="flex items-center gap-4 rounded-full bg-white/90 px-4 py-2.5 shadow-lg backdrop-blur-md">
+          <button
+            type="button"
+            aria-label="Previous slide"
+            onClick={goPrev}
+            className="flex h-6 w-6 items-center justify-center text-neutral-800 transition-colors hover:text-red-600 focus:outline-none"
+          >
+            <ChevronLeft className="h-5 w-5" strokeWidth={2.2} />
+          </button>
+
+          <div className="flex items-center gap-2">
+            {MEDIA.map((item, idx) => {
+              const isActive = currentIndex === idx;
+              return (
+                <button
+                  key={`dot-${item.id}`}
+                  type="button"
+                  aria-label={`Go to slide ${idx + 1}`}
+                  aria-current={isActive}
+                  onClick={() => goTo(idx)}
+                  className="group flex items-center focus:outline-none"
+                >
+                  <span
+                    className="block h-1.5 rounded-full transition-all duration-500"
+                    style={{
+                      width: isActive ? "28px" : "8px",
+                      backgroundColor: isActive
+                        ? THEME_COLORS.red
+                        : "rgba(23,23,23,0.28)",
+                    }}
+                  />
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            type="button"
+            aria-label="Next slide"
+            onClick={goNext}
+            className="flex h-6 w-6 items-center justify-center text-neutral-800 transition-colors hover:text-red-600 focus:outline-none"
+          >
+            <ChevronRight className="h-5 w-5" strokeWidth={2.2} />
+          </button>
+        </div>
       </div>
 
       <style>{`
-        @keyframes pulse-dot {
-          0%, 100% { opacity: 0.5; transform: scale(1); }
-          50%       { opacity: 0.2; transform: scale(0.75); }
+        @keyframes hero-fade-up {
+          0%   { opacity: 0; transform: translateY(26px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes fog {
-          0% { background-position: 0% 50%; opacity: 0.3; transform: scale(1); }
-          50% { background-position: 100% 50%; opacity: 0.7; transform: scale(1.02); }
-          100% { background-position: 0% 50%; opacity: 0.3; transform: scale(1); }
+        .hero-fade-up {
+          animation: hero-fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
-
-        .fog-animated-border {
-          position: absolute;
-          inset: -3px;
-          border-radius: 9999px;
-          background: linear-gradient(90deg, #dc2626, #b91c1c, #6b7280, #dc2626);
-          background-size: 300% 300%;
-          filter: blur(8px);
-          animation: fog 4s ease infinite;
-          z-index: 0;
-          transition: all 0.5s ease;
-        }
-
-        .group-cta:hover .fog-animated-border {
-          filter: blur(12px);
-          inset: -5px;
-          opacity: 1;
-        }
-
-        .enquiry-btn {
-          box-shadow:
-            0 0 0 rgba(56, 189, 248, 0),
-            inset 0 0 0 rgba(255,255,255,0);
-          backdrop-filter: blur(10px);
-        }
-
-        .enquiry-btn:hover {
-          border-color: rgba(220, 38, 38, 0.8);
-          box-shadow:
-            0 0 30px rgba(220, 38, 38, 0.3),
-            0 0 70px rgba(220, 38, 38, 0.12),
-            inset 0 0 40px rgba(220, 38, 38, 0.08);
-        }
-
-        .enquiry-btn-text {
-          color: white;
-        }
-
-        .enquiry-btn:hover .enquiry-btn-text {
-          color: #dc2626;
-        }
-
-        .liquid-fill {
-          position: absolute;
-          inset: 0;
-          background: white;
-          transform: translateY(101%);
-          transition: transform 0s;
-          border-radius: inherit;
-          overflow: hidden;
-        }
-
-        .liquid-fill::before,
-        .liquid-fill::after {
-          content: '';
-          position: absolute;
-          left: -60%;
-          width: 220%;
-          background: white;
-          border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%;
-          animation: none;
-        }
-
-        .liquid-fill::before {
-          height: 40px;
-          top: -22px;
-          opacity: 1;
-        }
-
-        .liquid-fill::after {
-          height: 36px;
-          top: -18px;
-          opacity: 0.6;
-        }
-
-        .enquiry-btn:hover .liquid-fill {
-          transform: translateY(0%);
-          transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .enquiry-btn:hover .liquid-fill::before {
-          animation: wave-surface-1 1.4s ease-in-out infinite;
-        }
-
-        .enquiry-btn:hover .liquid-fill::after {
-          animation: wave-surface-2 1.9s ease-in-out infinite 0.3s;
-        }
-
-        @keyframes wave-surface-1 {
-          0%   { transform: translateX(0%)   scaleY(1);    border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%; }
-          25%  { transform: translateX(-8%)  scaleY(1.15); border-radius: 55% 45% 60% 40% / 40% 25% 75% 60%; }
-          50%  { transform: translateX(-18%) scaleY(0.9);  border-radius: 38% 62% 52% 48% / 25% 40% 60% 75%; }
-          75%  { transform: translateX(-8%)  scaleY(1.1);  border-radius: 60% 40% 42% 58% / 35% 60% 40% 65%; }
-          100% { transform: translateX(0%)   scaleY(1);    border-radius: 42% 58% 45% 55% / 30% 30% 70% 70%; }
-        }
-
-        @keyframes wave-surface-2 {
-          0%   { transform: translateX(0%)    scaleY(1);    border-radius: 55% 45% 38% 62% / 40% 55% 45% 60%; }
-          33%  { transform: translateX(-12%)  scaleY(1.2);  border-radius: 40% 60% 55% 45% / 55% 35% 65% 45%; }
-          66%  { transform: translateX(-22%)  scaleY(0.85); border-radius: 62% 38% 48% 52% / 30% 65% 35% 70%; }
-          100% { transform: translateX(0%)    scaleY(1);    border-radius: 55% 45% 38% 62% / 40% 55% 45% 60%; }
-        }
-
-        .shine {
-          background: linear-gradient(
-            115deg,
-            transparent 20%,
-            rgba(255,255,255,0.18) 48%,
-            transparent 75%
-          );
-          transform: translateX(-160%);
-        }
-
-        .enquiry-btn:hover .shine {
-          transition: transform 1s ease;
-          transform: translateX(160%);
-        }
-
-        .particles {
-          position: absolute;
-          inset: -40px;
-          overflow: visible;
-          pointer-events: none;
-          z-index: 2;
-        }
-
-        .particle {
-          position: absolute;
-          width: var(--size);
-          height: var(--size);
-          left: var(--x);
-          top: var(--y);
-          border-radius: 999px;
-          background:
-            radial-gradient(circle,
-              rgba(254,202,202,1) 0%,
-              rgba(220,38,38,1) 45%,
-              rgba(220,38,38,0.2) 72%,
-              transparent 100%);
-          opacity: 0;
-          filter:
-            blur(0.4px)
-            drop-shadow(0 0 10px rgba(220,38,38,0.95))
-            drop-shadow(0 0 20px rgba(107,114,128,0.35));
-          transform:
-            translate(-50%, -50%)
-            scale(0.2);
-        }
-
-        .enquiry-btn:hover .particle {
-          animation: particle-burst var(--duration) linear infinite;
-          animation-delay: var(--delay);
-        }
-
-        @keyframes particle-burst {
-          0% {
-            opacity: 0;
-            transform:
-              translate(-50%, -50%)
-              translate(0px, 0px)
-              scale(0.2);
-          }
-          10% { opacity: 1; }
-          100% {
-            opacity: 0;
-            transform:
-              translate(-50%, -50%)
-              translate(var(--dx), var(--dy))
-              scale(1);
-          }
-        }
-
-        @media (min-width: 768px) {
-          .hero-left-content {
-            min-height: clamp(400px, 72svh, 600px);
-          }
-        }
-        @media (max-width: 767px) {
-          .hero-left-content {
-            min-height: 380px;
-          }
-        }
-        @keyframes ping {
-          0%   { transform: scale(1);   opacity: 0.18; }
-          70%  { transform: scale(1.8); opacity: 0.06; }
-          100% { transform: scale(2.2); opacity: 0; }
-        }
-
-        .animate-ping {
-          animation: ping 2.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+        .hero-fade-up-delayed {
+          animation: hero-fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
         }
       `}</style>
     </section>

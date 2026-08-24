@@ -12,12 +12,19 @@ import {
   SITE_EMAIL,
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display, Inter, Poppins } from "next/font/google";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-playfair",
+  display: "swap",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -153,6 +160,7 @@ export default function RootLayout({
           geist.variable,
           playfair.variable,
           inter.variable,
+          poppins.variable,
         )}
         suppressHydrationWarning
       >

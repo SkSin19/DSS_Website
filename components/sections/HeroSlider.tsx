@@ -274,7 +274,7 @@ export default function HeroSlider() {
             <div className="mt-8">
               <Link
                 href="/enquiry"
-                className="group inline-flex text-white! items-center gap-3 rounded-full border border-white/80 bg-transparent px-7 py-3.5 font-poppins text-[15px] font-semibolds transition-all duration-300 hover:border-white hover:bg-white hover:text-black!" 
+                className="group inline-flex text-white! items-center gap-3 rounded-full border border-white/80 bg-transparent px-7 py-3.5 font-poppins text-[15px] font-semibolds transition-all duration-300 hover:border-white hover:bg-white hover:text-black!"
               >
                 Request an Enquiry
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -283,15 +283,15 @@ export default function HeroSlider() {
           </div>
 
           {/* RIGHT — white service card */}
-          <div className="hero-fade-up-delayed w-full self-center md:w-[clamp(340px,36vw,560px)]">
-            <div className="rounded-1xl bg-white p-6 shadow-2xl sm:p-8 md:p-9">
+          <div className="hero-fade-up-delayed w-full self-center rounded-2xl backdrop-blur-md md:w-[clamp(280px,24vw,380px)]">
+            <div className="h-107.5 rounded-2xl bg-white/40 p-6 shadow-2xl sm:p-8 md:p-9">
               <h2
-                className="font-poppins font-semibold leading-[1.05] tracking-tight text-[clamp(1.9rem,3vw,3rem)]"
+                className="font-poppins leading-[1.05] tracking-tight text-[clamp(1.9rem,3vw,3rem)]"
                 style={{ color: THEME_COLORS.red }}
               >
                 Secure
                 <br />
-                your space
+                <span className="font-medium">your space</span>
               </h2>
 
               <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3">
@@ -305,6 +305,7 @@ export default function HeroSlider() {
                       className="h-9 w-9 text-neutral-700 transition-colors duration-300 group-hover:text-red-600"
                       strokeWidth={1.4}
                     />
+
                     <span className="mt-3 font-poppins text-[13px] font-medium leading-snug text-neutral-800 transition-colors duration-300 group-hover:text-red-600">
                       {label}
                     </span>

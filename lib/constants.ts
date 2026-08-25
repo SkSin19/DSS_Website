@@ -24,9 +24,19 @@ export const SITE_URL = "https://digitalsecurityindia.com";
 // Public LinkedIn profile (used in footer and structured data sameAs)
 export const SITE_LINKEDIN_URL =
   "https://www.linkedin.com/in/digital-security-solutions-4063b9376";
+// JustDial listing (used in structured data sameAs)
+export const SITE_JUSTDIAL_URL =
+  "https://www.justdial.com/Delhi/Digital-Security-Solutions-Near-Nirman-Vihar-Metro-Station-Shakarpur/011PXX11-XX11-141016154711-G2G1_BZDET";
+// Verified Google Maps geo coordinates for the shop
+export const SITE_GEO = { latitude: 28.635190833333, longitude: 77.285255277778 };
+export const SITE_MAP_URL =
+  "https://www.google.com/maps/search/?api=1&query=28.635190833333,77.285255277778";
 // Primary public contact used in structured data
 export const SITE_PHONE = "+919999605550";
 export const SITE_EMAIL = "info@digitalsecurityindia.com";
+// Full postal address (used in footer, contact and structured data)
+export const SITE_ADDRESS =
+  "Shop Number-34 & 35, Near Nirman Vihar Metro Station, Vikas Marg, Shakarpur, Delhi-110092";
 
 /* ─────────────────────────────────────────────
    Navigation
@@ -280,7 +290,7 @@ export const CONTACT_INFO: ContactInfo[] = [
   {
     icon: "location",
     label: "Address",
-    value: "Delhi, India",
+    value: SITE_ADDRESS,
   },
 ];
 
@@ -473,8 +483,8 @@ export const WHY_CHOOSE_US = [
   },
   {
     id: "innovation",
-    title: "14+ Years of Experience",
-    description: "Delivering trusted CCTV installation and advanced security solutions since 2011 across residential, commercial, and industrial spaces.",
+    title: "17+ Years of Experience",
+    description: "Delivering trusted CCTV installation and advanced security solutions since 2008 across residential, commercial, and industrial spaces.",
     imageSrc: "/images/categories/video-security-cctv-systems.png",
   },
   {

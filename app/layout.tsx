@@ -8,6 +8,9 @@ import {
   SITE_DESCRIPTION,
   SITE_URL,
   SITE_LINKEDIN_URL,
+  SITE_JUSTDIAL_URL,
+  SITE_GEO,
+  SITE_MAP_URL,
   SITE_PHONE,
   SITE_EMAIL,
 } from "@/lib/constants";
@@ -39,8 +42,9 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
   title: {
     template: `%s | ${SITE_NAME}`,
-    default: `${SITE_NAME} - Advanced Digital Security Solutions`,
+    default: `${SITE_NAME} — CCTV, Access Control & Alarm Systems in Delhi`,
   },
+  applicationName: SITE_NAME,
   description: SITE_DESCRIPTION,
   keywords: [
     "CCTV cameras",
@@ -109,32 +113,122 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Structured Data (JSON-LD) for Local Business/Organization
+  // Structured Data (JSON-LD). A @graph binds the WebSite node (which drives
+  // the site name Google shows in search results) to the LocalBusiness so
+  // both share one canonical identity.
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": SITE_URL,
-    name: SITE_NAME,
-    legalName: SITE_NAME,
-    slogan: "Surety of Security",
-    image: `${SITE_URL}/images/logo/dss_logo.png`,
-    logo: `${SITE_URL}/images/logo/dss_logo.png`,
-    url: SITE_URL,
-    telephone: SITE_PHONE,
-    email: SITE_EMAIL,
-    priceRange: "$$",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Delhi",
-      addressRegion: "Delhi",
-      addressCountry: "IN",
-    },
-    areaServed: {
-      "@type": "Country",
-      name: "India",
-    },
-    description: SITE_DESCRIPTION,
-    sameAs: [SITE_LINKEDIN_URL],
+    "@graph": [
+      {
+        // Primary signal for the Google search-result "site name".
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: SITE_NAME,
+        alternateName: ["DSS", "Digital Security India"],
+        url: SITE_URL,
+        inLanguage: "en-IN",
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${SITE_URL}/products?search={search_term_string}`,
+          },
+          "query-input": "required name=search_term_string",
+        },
+      },
+      {
+        "@type": ["Organization", "LocalBusiness"],
+        "@id": `${SITE_URL}/#organization`,
+        name: SITE_NAME,
+        legalName: SITE_NAME,
+        alternateName: "DSS",
+        slogan: "Surety of Security",
+        image: `${SITE_URL}/images/logo/dss_logo.png`,
+        logo: {
+          "@type": "ImageObject",
+          url: `${SITE_URL}/images/logo/dss_logo.png`,
+        },
+        url: SITE_URL,
+        telephone: SITE_PHONE,
+        email: SITE_EMAIL,
+        priceRange: "$$",
+        foundingDate: "2008",
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday",
+            ],
+            opens: "10:30",
+            closes: "19:30",
+          },
+        ],
+        address: {
+          "@type": "PostalAddress",
+          streetAddress:
+            "Shop Number 34 & 35, Near Nirman Vihar Metro Station, Vikas Marg, Shakarpur",
+          addressLocality: "Delhi",
+          addressRegion: "Delhi",
+          postalCode: "110092",
+          addressCountry: "IN",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: SITE_GEO.latitude,
+          longitude: SITE_GEO.longitude,
+        },
+        hasMap: SITE_MAP_URL,
+        areaServed: [
+          { "@type": "Country", name: "India" },
+          { "@type": "State", name: "Delhi" },
+          { "@type": "City", name: "New Delhi" },
+        ],
+        description: SITE_DESCRIPTION,
+        knowsAbout: [
+          "CCTV cameras",
+          "Video surveillance systems",
+          "Access control systems",
+          "Biometric attendance systems",
+          "Intrusion alarm systems",
+          "Fire alarm systems",
+          "Video door phones",
+          "Smart locks",
+          "Gate automation",
+          "Home automation",
+          "PA systems and professional audio-visual",
+          "Hikvision",
+          "CP Plus",
+          "Dahua",
+          "Godrej security",
+          "Honeywell",
+        ],
+        makesOffer: [
+          "CCTV Installation & Surveillance",
+          "Access Control Systems",
+          "Biometric Attendance Systems",
+          "Intrusion & Burglar Alarm Systems",
+          "Fire Alarm Systems",
+          "Video Door Phones & Intercoms",
+          "Home & Gate Automation",
+          "PA System & AV Solutions",
+          "Security System Support & Maintenance",
+        ].map((service) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service,
+          },
+        })),
+        sameAs: [SITE_LINKEDIN_URL, SITE_JUSTDIAL_URL],
+      },
+    ],
   };
 
   return (

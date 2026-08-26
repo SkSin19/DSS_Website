@@ -228,14 +228,14 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
   {
     title: "PA System & AV",
     description: "Professional public address and audio-visual systems for clear, powerful sound everywhere.",
-    href: "/products?category=PA%20Systems%20and%20AV",
+    href: "/products?category=PA%20SYSTEM%20%26%20AV",
     imageSrc: "/images/categories/intercom-communication-solutions.png",
     imageAlt: "PA system speaker and AV equipment",
   },
   {
     title: "Surveillance",
     description: "Advanced CCTV cameras and NVR systems for complete, round-the-clock monitoring.",
-    href: "/products?category=Surveillance%20Systems",
+    href: "/products?category=Surveillance",
     imageSrc: "/images/categories/video-security-cctv-systems.png",
     imageAlt: "Surveillance CCTV camera system",
   },
@@ -306,7 +306,7 @@ export const BESTSELLERS = [
     imageSrc: "/images/hero/cctv-cameras-surveillance-systems-slide-1.png",
     imageAlt: "Smart PTZ Camera",
     hasOffer: true,
-    href: "/products?category=Surveillance%20Systems",
+    href: "/products?category=Surveillance",
   },
   {
     title: "Video Door Phone",
@@ -330,7 +330,7 @@ export const BESTSELLERS = [
     imageSrc: "/images/categories/PUBLIC_NEXT_ALARM_KIT.jpg",
     imageAlt: "Wireless Alarm Kit",
     hasOffer: true,
-    href: "/products?category=Intrusion%20Alarm",
+    href: "/products",
   },
 ];
 
@@ -344,7 +344,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Home Automation",
     icon: "home",
     hasOffer: true,
-    href: "/products?category=Home%20Automation",
+    href: "/products",
   },
   {
     id: "biometric",
@@ -366,7 +366,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Gate Automation",
     icon: "gate",
     hasOffer: true,
-    href: "/products?category=Gate%20Automation",
+    href: "/products?category=Access%20Control",
   },
   {
     id: "intrusion-alarm",
@@ -377,7 +377,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Intrusion Alarm",
     icon: "shield",
     hasOffer: true,
-    href: "/products?category=Intrusion%20Alarm",
+    href: "/products",
   },
   {
     id: "video-security",
@@ -388,7 +388,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Video Security",
     icon: "shield",
     hasOffer: true,
-    href: "/products?category=Surveillance%20Systems",
+    href: "/products?category=Surveillance",
   },
   {
     id: "access-control",
@@ -421,7 +421,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Smart PTZ Camera",
     icon: "eye",
     hasOffer: true,
-    href: "/products?category=Surveillance%20Systems",
+    href: "/products?category=Surveillance",
   },
   {
     id: "wireless-alarm",
@@ -432,7 +432,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Wireless Alarm Kit",
     icon: "shield",
     hasOffer: true,
-    href: "/products?category=Intrusion%20Alarm",
+    href: "/products",
   },
   {
     id: "smart-lock",

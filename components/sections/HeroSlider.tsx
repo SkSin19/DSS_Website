@@ -96,7 +96,7 @@ const SERVICES: ServiceItem[] = [
     id: "surveillance",
     icon: Cctv,
     label: "Surveillance systems",
-    href: "/products?category=Surveillance%20Systems",
+    href: "/products?category=Surveillance",
   },
   {
     id: "access",
@@ -114,7 +114,7 @@ const SERVICES: ServiceItem[] = [
     id: "pa-av",
     icon: Volume2,
     label: "PA system & AV",
-    href: "/products?category=PA%20Systems%20and%20AV",
+    href: "/products?category=PA%20SYSTEM%20%26%20AV",
   },
   {
     id: "automation",

@@ -95,7 +95,7 @@ const SERVICES: ServiceItem[] = [
       </svg>
     ),
     hasOffer: false,
-    href: "/products?category=Surveillance%20Systems",
+    href: "/products?category=Surveillance",
   },
   {
     id: "gate-automation",
@@ -111,7 +111,7 @@ const SERVICES: ServiceItem[] = [
       </svg>
     ),
     hasOffer: true,
-    href: "/products?category=Gate%20Automation",
+    href: "/products?category=Access%20Control",
   },
   {
     id: "intrusion-alarm",
@@ -127,7 +127,7 @@ const SERVICES: ServiceItem[] = [
       </svg>
     ),
     hasOffer: true,
-    href: "/products?category=Intrusion%20Alarm",
+    href: "/products",
   },
 ];
 
@@ -146,7 +146,7 @@ const OTHER_SERVICES: ServiceItem[] = [
       </svg>
     ),
     hasOffer: false,
-    href: "/products?category=Networking%20%26%20Power",
+    href: "/products?category=IT%20%26%20Network&category=Power%20%26%20Energy",
   },
   {
     id: "home-automation",
@@ -162,7 +162,7 @@ const OTHER_SERVICES: ServiceItem[] = [
       </svg>
     ),
     hasOffer: false,
-    href: "/products?category=Home%20Automation",
+    href: "/products",
   },
   {
     id: "video-door-phone",
@@ -178,7 +178,7 @@ const OTHER_SERVICES: ServiceItem[] = [
       </svg>
     ),
     hasOffer: false,
-    href: "/products?category=Surveillance%20Systems",
+    href: "/products?category=Surveillance",
   },
   {
     id: "pa-systems-av",
@@ -194,7 +194,7 @@ const OTHER_SERVICES: ServiceItem[] = [
       </svg>
     ),
     hasOffer: false,
-    href: "/products?category=PA%20Systems%20and%20AV",
+    href: "/products?category=PA%20SYSTEM%20%26%20AV",
   },
 ];
 

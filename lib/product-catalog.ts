@@ -98,17 +98,6 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     highlights: sharedHighlights,
     specs: sharedSpecSet,
   },
-  "fire-alarm": {
-    title: "Fire Alarm",
-    category: "Safety",
-    summary: "Early detection and instant alerts for maximum safety.",
-    description:
-      "Placeholder fire alarm page. The same layout can be populated from backend product records later.",
-    heroImageSrc: "/images/categories/intrusion-alarm-detection.png",
-    heroImageAlt: "Fire Alarm placeholder",
-    highlights: sharedHighlights,
-    specs: sharedSpecSet,
-  },
   "gate-automation": {
     title: "Gate Automation",
     category: "Access Control",

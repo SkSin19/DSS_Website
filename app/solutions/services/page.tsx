@@ -4,7 +4,8 @@ import ServicesPage from "@/components/sections/ServicesPage";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Explore our security services - Home Automation, Biometric Attendance, Fire Alarm, Gate Automation, Intrusion Alarm and more.",
+    "Explore our security services - Home Automation, Biometric Attendance, Gate Automation, Intrusion Alarm and more.",
+  alternates: { canonical: "/solutions/services" },
 };
 
 export default function Services() {

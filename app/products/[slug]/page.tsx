@@ -49,6 +49,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   return {
     title: `${product.name} ${product.model}`,
     description: product.shortDescription || product.description,
+    alternates: { canonical: `/products/${slug}` },
   };
 }
 

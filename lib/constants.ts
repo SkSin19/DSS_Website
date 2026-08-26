@@ -43,8 +43,9 @@ export const SITE_ADDRESS =
    ───────────────────────────────────────────── */
 
 export const NAV_LINKS: NavLink[] = [
+  { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
-  { label: "Brands", href: "/brands" },
+  { label: "Brands", href: "/#brands" },
   { label: "Solutions", href: "/solutions" },
   { label: "About Us", href: "/about" },
 ];
@@ -189,12 +190,12 @@ export const MARQUEE_BRANDS: MarqueeBrand[] = [
   },
   {
     name: "Dahua",
-    logoSrc: "https://www.dahuasecurity.com/assets/img/logo.png",
+    logoSrc: "https://www.dahuasecurity.com/logo.png",
   },
-  {
-    name: "Matrix",
-    logoSrc: "https://cdn.simpleicons.org/matrix",
-  },
+  // {
+  //   name: "Matrix",
+  //   logoSrc: "https://cdn.simpleicons.org/matrix",
+  // },
   {
     name: "Zicom",
     logoSrc: "https://cdn.simpleicons.org/bosch",
@@ -305,7 +306,7 @@ export const BESTSELLERS = [
     imageSrc: "/images/hero/cctv-cameras-surveillance-systems-slide-1.png",
     imageAlt: "Smart PTZ Camera",
     hasOffer: true,
-    href: "/products/ptz-camera",
+    href: "/products?category=Surveillance%20Systems",
   },
   {
     title: "Video Door Phone",
@@ -313,7 +314,7 @@ export const BESTSELLERS = [
     imageSrc: "/images/categories/intercom-communication-solutions.png",
     imageAlt: "Video Door Phone",
     hasOffer: true,
-    href: "/products/video-door-phone",
+    href: "/products?category=Access%20Control",
   },
   {
     title: "Access Control System",
@@ -321,7 +322,7 @@ export const BESTSELLERS = [
     imageSrc: "/images/categories/access-control-smart-entry.png",
     imageAlt: "Access Control System",
     hasOffer: true,
-    href: "/products/access-control",
+    href: "/products?category=Access%20Control",
   },
   {
     title: "Wireless Alarm Kit",
@@ -329,7 +330,7 @@ export const BESTSELLERS = [
     imageSrc: "/images/categories/PUBLIC_NEXT_ALARM_KIT.jpg",
     imageAlt: "Wireless Alarm Kit",
     hasOffer: true,
-    href: "/products/wireless-alarm",
+    href: "/products?category=Intrusion%20Alarm",
   },
 ];
 
@@ -343,7 +344,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Home Automation",
     icon: "home",
     hasOffer: true,
-    href: "/products/home-automation",
+    href: "/products?category=Home%20Automation",
   },
   {
     id: "biometric",
@@ -354,18 +355,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Biometric Attendance",
     icon: "fingerprint",
     hasOffer: true,
-    href: "/products/biometric",
-  },
-  {
-    id: "fire-alarm",
-    slug: "fire-alarm",
-    title: "Fire Alarm",
-    description: "Early detection and instant alerts for maximum safety.",
-    imageSrc: "/images/services/PUBLIC_NEXT_FIRE_ALARM_BG.jpg",
-    imageAlt: "Fire Alarm",
-    icon: "fire",
-    hasOffer: true,
-    href: "/products/fire-alarm",
+    href: "/products?category=Biometric%20%26%20Identity",
   },
   {
     id: "gate-automation",
@@ -376,7 +366,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Gate Automation",
     icon: "gate",
     hasOffer: true,
-    href: "/products/gate-automation",
+    href: "/products?category=Gate%20Automation",
   },
   {
     id: "intrusion-alarm",
@@ -387,7 +377,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Intrusion Alarm",
     icon: "shield",
     hasOffer: true,
-    href: "/products/intrusion-alarm",
+    href: "/products?category=Intrusion%20Alarm",
   },
   {
     id: "video-security",
@@ -398,7 +388,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Video Security",
     icon: "shield",
     hasOffer: true,
-    href: "/products/video-security",
+    href: "/products?category=Surveillance%20Systems",
   },
   {
     id: "access-control",
@@ -409,7 +399,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Access Control System",
     icon: "lock",
     hasOffer: true,
-    href: "/products/access-control",
+    href: "/products?category=Access%20Control",
   },
   {
     id: "video-door-phone",
@@ -420,7 +410,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Video Door Phone",
     icon: "bell",
     hasOffer: true,
-    href: "/products/video-door-phone",
+    href: "/products?category=Access%20Control",
   },
   {
     id: "ptz-camera",
@@ -431,7 +421,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Smart PTZ Camera",
     icon: "eye",
     hasOffer: true,
-    href: "/products/ptz-camera",
+    href: "/products?category=Surveillance%20Systems",
   },
   {
     id: "wireless-alarm",
@@ -442,7 +432,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Wireless Alarm Kit",
     icon: "shield",
     hasOffer: true,
-    href: "/products/wireless-alarm",
+    href: "/products?category=Intrusion%20Alarm",
   },
   {
     id: "smart-lock",
@@ -453,7 +443,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Smart Lock System",
     icon: "lock",
     hasOffer: true,
-    href: "/products/smart-lock",
+    href: "/products?category=Access%20Control",
   },
   {
     id: "intercom-solutions",
@@ -464,7 +454,7 @@ export const FEATURED_PRODUCTS = [
     imageAlt: "Intercom Solutions",
     icon: "bell",
     hasOffer: true,
-    href: "/products/intercom-solutions",
+    href: "/products?category=Access%20Control",
   },
 ];
 
@@ -478,7 +468,7 @@ export const WHY_CHOOSE_US = [
   {
     id: "reliable",
     title: "Complete Security Systems",
-    description: "End-to-end solutions including HD/IP CCTV cameras, access control, fire alarms, gate automation, and intercom systems.",
+    description: "End-to-end solutions including HD/IP CCTV cameras, access control, gate automation, and intercom systems.",
     imageSrc: "/images/hero/cctv-cameras-surveillance-systems-slide-1.png",
   },
   {

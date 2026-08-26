@@ -17,6 +17,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Products",
   description: "Browse the available digital security product catalog.",
+  alternates: { canonical: "/products" },
 };
 
 const isValidImage = (value?: string | null) => {

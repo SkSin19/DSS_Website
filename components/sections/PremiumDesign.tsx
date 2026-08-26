@@ -129,7 +129,7 @@ export default function PremiumDesign() {
           </div>
 
           {/* Right Column (Text Content) */}
-          <div ref={rightRef} className="rounded-4xl p-10 md:p-16 flex flex-col justify-center border border-gray-200 shadow-[0_20px_60px_rgba(17,24,39,0.08)]" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
+          <div ref={rightRef} className="rounded-4xl p-10 md:p-16 flex flex-col justify-center items-center text-center md:items-start md:text-left border border-gray-200 shadow-[0_20px_60px_rgba(17,24,39,0.08)]" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
             <div className="flex items-center gap-2 mb-6">
               <ShieldIcon />
               <span className="text-red-600 text-xs font-bold tracking-widest uppercase md:mb-2">
@@ -148,8 +148,8 @@ export default function PremiumDesign() {
               driven by passion, we work to empower others to live the same way.
             </p>
 
-            <div className="flex flex-wrap gap-x-8 gap-y-6 mb-12">
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-20">
+            <div className="flex flex-wrap justify-center md:justify-start gap-x-8 gap-y-6 mb-12">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left min-w-20">
                 <DiamondIcon />
                 <span className="text-xs font-semibold text-gray-700 leading-tight">
                   Premium
@@ -157,7 +157,7 @@ export default function PremiumDesign() {
                   Quality
                 </span>
               </div>
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-20">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left min-w-20">
                 <ShieldIcon />
                 <span className="text-xs font-semibold text-gray-700 leading-tight">
                   Reliable
@@ -165,7 +165,7 @@ export default function PremiumDesign() {
                   Protection
                 </span>
               </div>
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-20">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left min-w-20">
                 <SmartIcon />
                 <span className="text-xs font-semibold text-gray-700 leading-tight">
                   Smart
@@ -173,7 +173,7 @@ export default function PremiumDesign() {
                   Solutions
                 </span>
               </div>
-              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-20">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left min-w-20">
                 <SupportIcon />
                 <span className="text-xs font-semibold text-gray-700 leading-tight">
                   Dedicated

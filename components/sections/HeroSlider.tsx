@@ -8,7 +8,6 @@ import {
   KeyRound,
   Fingerprint,
   Volume2,
-  Flame,
   House,
   ArrowRight,
   ChevronLeft,
@@ -116,12 +115,6 @@ const SERVICES: ServiceItem[] = [
     icon: Volume2,
     label: "PA system & AV",
     href: "/products?category=PA%20Systems%20and%20AV",
-  },
-  {
-    id: "fire-alarm",
-    icon: Flame,
-    label: "Fire alarm systems",
-    href: "/solutions",
   },
   {
     id: "automation",
@@ -270,8 +263,8 @@ export default function HeroSlider() {
               </p>
             </div>
 
-            {/* outlined pill CTA */}
-            <div className="mt-8">
+            {/* outlined pill CTA (desktop / tablet) */}
+            <div className="mt-8 hidden md:block">
               <Link
                 href="/enquiry"
                 className="group inline-flex text-white! items-center gap-3 rounded-full border border-white/80 bg-transparent px-7 py-3.5 font-poppins text-[15px] font-semibolds transition-all duration-300 hover:border-white hover:bg-white hover:text-black!"
@@ -282,8 +275,8 @@ export default function HeroSlider() {
             </div>
           </div>
 
-          {/* RIGHT - white service card */}
-          <div className="hero-fade-up-delayed w-full self-center rounded-2xl backdrop-blur-md md:w-[clamp(280px,24vw,380px)]">
+          {/* RIGHT - white service card (hidden on mobile) */}
+          <div className="hero-fade-up-delayed hidden w-full self-center rounded-2xl backdrop-blur-md md:block md:w-[clamp(280px,24vw,380px)]">
             <div className="h-107.5 rounded-2xl bg-white/40 p-6 shadow-2xl sm:p-8 md:p-9">
               <h2
                 className="font-poppins leading-[1.05] tracking-tight text-[clamp(1.9rem,3vw,3rem)]"
@@ -315,6 +308,17 @@ export default function HeroSlider() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* ── MOBILE-ONLY CTA (bottom center, above pagination) ── */}
+      <div className="absolute inset-x-0 bottom-20 z-40 flex justify-center px-6 md:hidden">
+        <Link
+          href="/enquiry"
+          className="group inline-flex items-center gap-3 rounded-full border border-white/80 bg-black/30 px-7 py-3.5 font-poppins text-[15px] font-semibold text-white! backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white hover:text-black"
+        >
+          Request an Enquiry
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
       </div>
 
       {/* ── PAGINATION (reference-style pill: ← indicators → ) ── */}

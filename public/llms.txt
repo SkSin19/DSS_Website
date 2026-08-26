@@ -23,7 +23,6 @@
 - Access control systems
 - Biometric & identity / attendance systems
 - Intrusion & burglar alarm systems
-- Fire alarm systems
 - Video door phones & intercoms
 - Smart locks & gate automation
 - Home automation

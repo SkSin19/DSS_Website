@@ -45,9 +45,9 @@ export default function WhyChooseUs() {
                 alt={WHY_CHOOSE_US[0].title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-contain sm:object-contain object-bottom-right sm:object-right"
+                className="object-contain object-center sm:object-bottom-right sm:object-right"
               />
-              <div className="absolute inset-0 bg-linear-to-r from-gray-200/80 via-gray-200/40 to-transparent pointer-events-none" />
+              <div className="hidden sm:block absolute inset-0 bg-linear-to-r from-gray-200/80 via-gray-200/40 to-transparent pointer-events-none" />
             </div>
           </div>
 
@@ -67,9 +67,9 @@ export default function WhyChooseUs() {
                 alt={WHY_CHOOSE_US[1].title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
+                className="object-contain object-center sm:object-cover"
               />
-              <div className="absolute inset-0 bg-linear-to-r from-gray-200/80 via-gray-200/40 to-transparent pointer-events-none" />
+              <div className="hidden sm:block absolute inset-0 bg-linear-to-r from-gray-200/80 via-gray-200/40 to-transparent pointer-events-none" />
             </div>
           </div>
 
@@ -90,9 +90,9 @@ export default function WhyChooseUs() {
                 alt={WHY_CHOOSE_US[2].title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover object-bottom"
+                className="object-contain object-center sm:object-cover sm:object-bottom"
               />
-              <div className="absolute inset-0 bg-linear-to-b from-gray-200/50 via-gray-200/20 to-transparent pointer-events-none" />
+              <div className="hidden sm:block absolute inset-0 bg-linear-to-b from-gray-200/50 via-gray-200/20 to-transparent pointer-events-none" />
             </div>
           </div>
 
@@ -113,9 +113,9 @@ export default function WhyChooseUs() {
                 alt={WHY_CHOOSE_US[3].title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-contain object-bottom-right drop-shadow-2xl translate-x-4 translate-y-4"
+                className="object-contain object-center sm:object-bottom-right drop-shadow-2xl sm:translate-x-4 sm:translate-y-4"
               />
-              <div className="absolute inset-0 bg-linear-to-br from-gray-200/80 via-gray-200/40 to-transparent pointer-events-none" />
+              <div className="hidden sm:block absolute inset-0 bg-linear-to-br from-gray-200/80 via-gray-200/40 to-transparent pointer-events-none" />
             </div>
           </div>
 
@@ -132,15 +132,15 @@ export default function WhyChooseUs() {
                   {WHY_CHOOSE_US[4].description}
                 </p>
               </div>
-              <div className="relative w-full h-32 sm:w-1/3 sm:h-full sm:absolute sm:right-0 sm:top-0">
+              <div className="relative w-full h-44 sm:w-1/3 sm:h-full sm:absolute sm:right-0 sm:top-0">
                 <Image
                   src={WHY_CHOOSE_US[4].imageSrc!}
                   alt={WHY_CHOOSE_US[4].title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover object-bottom"
+                  className="object-contain object-center sm:object-cover sm:object-bottom"
                 />
-                <div className="absolute inset-0 bg-linear-to-r from-gray-200/60 via-gray-200/10 to-transparent pointer-events-none" />
+                <div className="hidden sm:block absolute inset-0 bg-linear-to-r from-gray-200/60 via-gray-200/10 to-transparent pointer-events-none" />
               </div>
             </div>
 
@@ -154,15 +154,15 @@ export default function WhyChooseUs() {
                   {WHY_CHOOSE_US[5].description}
                 </p>
               </div>
-              <div className="relative w-full h-32 sm:w-1/3 sm:h-full sm:absolute sm:right-0 sm:top-0">
+              <div className="relative w-full h-44 sm:w-1/3 sm:h-full sm:absolute sm:right-0 sm:top-0">
                 <Image
                   src={WHY_CHOOSE_US[5].imageSrc!}
                   alt={WHY_CHOOSE_US[5].title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-contain object-center sm:object-cover"
                 />
-                <div className="absolute inset-0 bg-linear-to-r from-gray-200/80 via-gray-200/0 to-transparent pointer-events-none" />
+                <div className="hidden sm:block absolute inset-0 bg-linear-to-r from-gray-200/80 via-gray-200/0 to-transparent pointer-events-none" />
               </div>
             </div>
 

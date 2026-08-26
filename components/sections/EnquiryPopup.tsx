@@ -187,20 +187,20 @@ const EnquiryPopup: React.FC = () => {
 
   return (
     <>
-      {/* Backdrop */}
+      {/* Backdrop + centering container */}
       <div
         onClick={closePopup}
         aria-hidden="true"
-        className={`fixed inset-0 z-[60] bg-black/30 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-      />
-
-      {/* Slide-in panel (from the left) */}
-      <aside
-        role="dialog"
-        aria-modal="true"
-        aria-label="Quick enquiry"
-        className={`fixed left-4 top-1/2 -translate-y-1/2 z-[61] w-[340px] max-w-[88vw] transform transition-transform duration-500 ease-out ${open ? "translate-x-0" : "-translate-x-[130%]"}`}
+        className={`fixed inset-0 z-[60] flex items-center justify-center px-4 bg-black/30 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       >
+        {/* Centered pop-up panel (fades + scales up on open, down on close) */}
+        <aside
+          role="dialog"
+          aria-modal="true"
+          aria-label="Quick enquiry"
+          onClick={(e) => e.stopPropagation()}
+          className={`relative w-[340px] max-w-[88vw] transform transition-all duration-300 ease-out ${open ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4 pointer-events-none"}`}
+        >
         <div className="relative rounded-2xl border border-gray-200 bg-white p-5 shadow-[0_20px_60px_rgba(17,24,39,0.25)]">
           {/* Close */}
           <button
@@ -233,7 +233,7 @@ const EnquiryPopup: React.FC = () => {
           ) : (
             <div className="flex flex-col gap-3">
               <div className="pr-6">
-                <h2 className="text-gray-900 text-lg font-bold leading-tight">Get a Quick Quote</h2>
+                <h2 className="text-gray-900 text-lg font-bold leading-tight">Lets Connect</h2>
                 <p className="text-red-600 text-xs">Leave your details - we&apos;ll call you back.</p>
               </div>
 
@@ -289,7 +289,8 @@ const EnquiryPopup: React.FC = () => {
             </div>
           )}
         </div>
-      </aside>
+        </aside>
+      </div>
     </>
   );
 };

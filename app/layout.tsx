@@ -71,9 +71,6 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL(SITE_URL),
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
@@ -198,7 +195,6 @@ export default function RootLayout({
           "Access control systems",
           "Biometric attendance systems",
           "Intrusion alarm systems",
-          "Fire alarm systems",
           "Video door phones",
           "Smart locks",
           "Gate automation",
@@ -215,7 +211,6 @@ export default function RootLayout({
           "Access Control Systems",
           "Biometric Attendance Systems",
           "Intrusion & Burglar Alarm Systems",
-          "Fire Alarm Systems",
           "Video Door Phones & Intercoms",
           "Home & Gate Automation",
           "PA System & AV Solutions",

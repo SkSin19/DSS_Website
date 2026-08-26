@@ -24,6 +24,9 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'm.media-amazon.com' },
       { protocol: 'https', hostname: 'media.esslsecurity.com' },
       { protocol: 'https', hostname: 'ik.imagekit.io' },
+      { protocol: 'https', hostname: 'assets.boseprofessional.com' },
+      { protocol: 'https', hostname: 'adn.harmanpro.com' },
+      { protocol: 'https', hostname: 'www.timeattendance.co.in' },
     ],
   },
 };

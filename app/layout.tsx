@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import EnquiryPopup from "@/components/sections/EnquiryPopup";
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
@@ -266,6 +267,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <EnquiryPopup />
       </body>
     </html>
   );

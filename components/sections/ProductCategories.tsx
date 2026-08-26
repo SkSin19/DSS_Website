@@ -23,7 +23,7 @@ function CategoryCard({
     <Link
       ref={ref}
       href={category.href}
-      className="category-card group relative flex min-h-55 sm:min-h-70 md:min-h-75 w-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 border border-gray-200 bg-gray-200 shadow-sm hover:shadow-md transition-all duration-300"
+      className="category-card group relative flex min-h-55 sm:min-h-70 md:min-h-75 w-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 border border-gray-200 bg-white/30 shadow-sm hover:shadow-md transition-all duration-300"
     >
       {/* Text content */}
       <div className="relative z-10 max-w-[55%] flex flex-col justify-between min-h-40 sm:min-h-55 h-full">
@@ -52,7 +52,7 @@ function CategoryCard({
         />
 
         {/* Gradient: white → gray-200 (matches card bg), left-to-right */}
-        <div className="absolute inset-0 bg-linear-to-r from-gray-200 via-gray-200/60 to-transparent pointer-events-none" />
+        {/* <div className="absolute inset-0 bg-linear-to-r from-gray-200 via-gray-200/60 to-transparent pointer-events-none" /> */}
       </div>
     </Link>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface ProductFiltersProps {
@@ -110,6 +110,20 @@ function CheckboxList({ items, name, selectedValues }: CheckboxListProps) {
   );
 }
 
+/** Full-screen overlay shown while a filter navigation is in progress. */
+function FilterLoadingOverlay() {
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className="fixed inset-0 z-[80] flex flex-col items-center justify-center gap-3 bg-white/70 backdrop-blur-sm"
+    >
+      <span className="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-red-600" />
+      <span className="text-sm font-semibold text-gray-700">Applying filters…</span>
+    </div>
+  );
+}
+
 export default function ProductFilters({
   companies,
   categories,
@@ -124,6 +138,7 @@ export default function ProductFilters({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const filterCount = activeFilterCount(
     selectedCompanies,
@@ -147,7 +162,7 @@ export default function ProductFilters({
 
     if (shouldClear) {
       setMobileOpen(false);
-      router.push(pathname);
+      startTransition(() => router.push(pathname));
       return;
     }
 
@@ -167,7 +182,7 @@ export default function ProductFilters({
 
     const query = params.toString();
     setMobileOpen(false);
-    router.push(query ? `${pathname}?${query}` : pathname);
+    startTransition(() => router.push(query ? `${pathname}?${query}` : pathname));
   };
 
   const sidebarContent = (formId: string) => (
@@ -290,6 +305,8 @@ export default function ProductFilters({
 
   return (
     <>
+      {isPending && <FilterLoadingOverlay />}
+
       {/* Hidden form that holds all filter values - desktop sidebar submits via this */}
       <form
         id="product-filter-form-sidebar"
@@ -381,6 +398,7 @@ export function ProductSidebar({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
 
   const filterCount = activeFilterCount(
     selectedCompanies,
@@ -403,7 +421,7 @@ export function ProductSidebar({
     params.delete("model");
 
     if (shouldClear) {
-      router.push(pathname);
+      startTransition(() => router.push(pathname));
       return;
     }
 
@@ -416,11 +434,12 @@ export function ProductSidebar({
     parseCheckedValues(formData, "subCategory").forEach((v) => params.append("subCategory", v));
 
     const query = params.toString();
-    router.push(query ? `${pathname}?${query}` : pathname);
+    startTransition(() => router.push(query ? `${pathname}?${query}` : pathname));
   };
 
   return (
     <aside className="hidden sm:block w-56 shrink-0 select-none">
+      {isPending && <FilterLoadingOverlay />}
       <form id="product-filter-form-desktop" action={(fd) => updateQuery(fd)}>
         <div className="sticky top-4">
           <p className="mb-1 text-[16px] font-bold text-gray-900 border-b border-gray-300 pb-2">

@@ -45,7 +45,7 @@ export default function WhyChooseUs() {
                 alt={WHY_CHOOSE_US[0].title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-contain object-center sm:object-bottom-right sm:object-right"
+                className="object-contain object-center sm:object-bottom-right"
               />
               <div className="hidden sm:block absolute inset-0 bg-linear-to-r from-gray-200/80 via-gray-200/40 to-transparent pointer-events-none" />
             </div>

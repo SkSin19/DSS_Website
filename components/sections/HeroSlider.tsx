@@ -12,6 +12,7 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  DoorClosedLocked,
   type LucideIcon,
 } from "lucide-react";
 import { THEME_COLORS } from "@/themes/colors";
@@ -121,6 +122,12 @@ const SERVICES: ServiceItem[] = [
     icon: House,
     label: "Smart home automation",
     href: "/solutions",
+  },
+  {
+    id: "gateautomation",
+    icon: DoorClosedLocked,
+    label: "Gate Automation",
+    href: "/products?category=Gate%20Automation",
   },
 ];
 
@@ -250,10 +257,10 @@ export default function HeroSlider() {
             <div className="mt-7 flex items-center gap-4">
               <div className="flex flex-col items-center justify-center rounded-md border border-white/70 px-4 py-2 text-center leading-none">
                 <span className="font-poppins text-2xl font-bold text-white">
-                  24×7
+                  18+ Years
                 </span>
                 <span className="mt-1 font-poppins text-[11px] font-medium uppercase tracking-wide text-white/80">
-                  Protection
+                  experience
                 </span>
               </div>
               <p className="font-poppins text-[clamp(1.1rem,2vw,1.5rem)] font-semibold leading-tight text-white">

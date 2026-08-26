@@ -191,7 +191,7 @@ const EnquiryPopup: React.FC = () => {
       <div
         onClick={closePopup}
         aria-hidden="true"
-        className={`fixed inset-0 z-[60] flex items-center justify-center px-4 bg-black/30 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        className={`fixed inset-0 z-60 flex items-center justify-center px-4 bg-black/30 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       >
         {/* Centered pop-up panel (fades + scales up on open, down on close) */}
         <aside
@@ -199,7 +199,7 @@ const EnquiryPopup: React.FC = () => {
           aria-modal="true"
           aria-label="Quick enquiry"
           onClick={(e) => e.stopPropagation()}
-          className={`relative w-[340px] max-w-[88vw] transform transition-all duration-300 ease-out ${open ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4 pointer-events-none"}`}
+          className={`relative w-85 max-w-[88vw] transform transition-all duration-300 ease-out ${open ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4 pointer-events-none"}`}
         >
         <div className="relative rounded-2xl border border-gray-200 bg-white p-5 shadow-[0_20px_60px_rgba(17,24,39,0.25)]">
           {/* Close */}

@@ -129,7 +129,7 @@ const EnquiryPopup: React.FC = () => {
       errs.phone = "Enter a valid 10-digit phone number.";
     if (!formData.city || formData.city.trim().length < 2)
       errs.city = "Enter your city.";
-    // message is optional — no validation
+    // message is optional - no validation
     return errs;
   };
 
@@ -168,7 +168,7 @@ const EnquiryPopup: React.FC = () => {
         window.turnstile.reset(widgetIdRef.current);
       }
 
-      // Filled once — stop nagging on this browser from now on.
+      // Filled once - stop nagging on this browser from now on.
       try { localStorage.setItem(SUBMITTED_KEY, "1"); } catch {}
       if (intervalRef.current) { clearInterval(intervalRef.current); intervalRef.current = null; }
     } catch (err: any) {
@@ -234,7 +234,7 @@ const EnquiryPopup: React.FC = () => {
             <div className="flex flex-col gap-3">
               <div className="pr-6">
                 <h2 className="text-gray-900 text-lg font-bold leading-tight">Get a Quick Quote</h2>
-                <p className="text-red-600 text-xs">Leave your details — we&apos;ll call you back.</p>
+                <p className="text-red-600 text-xs">Leave your details - we&apos;ll call you back.</p>
               </div>
 
               {/* Full Name */}

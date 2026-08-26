@@ -43,7 +43,7 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
   title: {
     template: `%s | ${SITE_NAME}`,
-    default: `${SITE_NAME} — CCTV, Access Control & Alarm Systems in Delhi`,
+    default: `${SITE_NAME} - CCTV, Access Control & Alarm Systems in Delhi`,
   },
   applicationName: SITE_NAME,
   description: SITE_DESCRIPTION,

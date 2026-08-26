@@ -54,7 +54,7 @@ const MEDIA: MediaItem[] = [
     type: "video",
     src: "/videos/dssLanding.mp4",
   },
-  // ▸ THIRD VIDEO — drop the file into /public/videos, then uncomment this
+  // ▸ THIRD VIDEO - drop the file into /public/videos, then uncomment this
   //   block (it will get its own pagination indicator automatically).
   // {
   //   id: "video-three",
@@ -84,7 +84,7 @@ const MEDIA: MediaItem[] = [
 ];
 
 /* ── RIGHT-CARD SERVICES (icon + label grid, like the reference) ──
-   Edit freely — add/remove items and the grid reflows. */
+   Edit freely - add/remove items and the grid reflows. */
 type ServiceItem = {
   id: string;
   icon: LucideIcon;
@@ -245,7 +245,7 @@ export default function HeroSlider() {
       {/* ── OVERLAY CONTENT ── */}
       <div className="relative z-30 h-full">
         <div className="mx-auto flex h-full min-h-[90vh] w-full max-w-360 flex-col items-stretch justify-center gap-8 px-5 py-10 sm:px-8 md:min-h-0 md:flex-row md:items-center md:justify-between md:gap-6 md:py-0 lg:px-14">
-          {/* LEFT — headline + stat + CTA */}
+          {/* LEFT - headline + stat + CTA */}
           <div className="hero-fade-up w-full max-w-xl self-center md:self-center">
             <h1 className="font-poppins font-extrabold leading-[1.05] tracking-tight text-white text-[clamp(2.3rem,5.4vw,4.4rem)]">
               Digital Security
@@ -282,7 +282,7 @@ export default function HeroSlider() {
             </div>
           </div>
 
-          {/* RIGHT — white service card */}
+          {/* RIGHT - white service card */}
           <div className="hero-fade-up-delayed w-full self-center rounded-2xl backdrop-blur-md md:w-[clamp(280px,24vw,380px)]">
             <div className="h-107.5 rounded-2xl bg-white/40 p-6 shadow-2xl sm:p-8 md:p-9">
               <h2

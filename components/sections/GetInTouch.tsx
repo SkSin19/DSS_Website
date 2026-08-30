@@ -124,8 +124,6 @@ const GetInTouch: React.FC = () => {
       errs.phone = "Enter a valid 10-digit phone number.";
     if (!formData.enquiryAbout)
       errs.enquiryAbout = "Please select an enquiry subject.";
-    if (!formData.message || formData.message.trim().length < 10)
-      errs.message = "Please add a short message (at least 10 characters).";
     return errs;
   };
 
@@ -273,8 +271,8 @@ const GetInTouch: React.FC = () => {
 
               {/* Message */}
               <div className="flex flex-col gap-1">
-                <label className="text-gray-600 text-xs font-medium tracking-wide uppercase"><span className="text-red-500 mr-1">*</span>Message</label>
-                <textarea name="message" placeholder="Tell us about your enquiry, use case, quantity, or installation needs." value={formData.message} onChange={handleChange} rows={4} maxLength={2000}
+                <label className="text-gray-600 text-xs font-medium tracking-wide uppercase">Message <span className="text-gray-400 normal-case">(optional)</span></label>
+                <textarea name="message" placeholder="Tell us about your enquiry, use case, quantity, or installation needs. (optional)" value={formData.message} onChange={handleChange} rows={4} maxLength={2000}
                   className={`bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.message ? "border-red-500" : "border-gray-300"}`} />
                 <p className="text-right text-xs text-gray-400">{formData.message.length}/2000</p>
                 {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}

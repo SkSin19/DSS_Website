@@ -126,10 +126,6 @@ export default function ProductEnquiryDialog({ product }: ProductEnquiryDialogPr
       setError("Enter a valid 10-digit phone number.");
       return;
     }
-    if (cleanedMessage.trim().length < 10) {
-      setError("Please write a short enquiry message (at least 10 characters).");
-      return;
-    }
     if (!turnstileToken) {
       setError("Please complete the verification check.");
       return;
@@ -247,13 +243,13 @@ export default function ProductEnquiryDialog({ product }: ProductEnquiryDialogPr
 
                   {/* Message */}
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-gray-700">Message</label>
+                    <label className="mb-2 block text-sm font-medium text-gray-700">Message <span className="text-gray-400 font-normal">(optional)</span></label>
                     <textarea
                       value={form.message}
                       onChange={(e) => setForm((c) => ({ ...c, message: sanitizeMessage(e.target.value) }))}
                       rows={4}
                       maxLength={1000}
-                      placeholder="Tell us what you need, your use case, quantity, or installation needs."
+                      placeholder="Tell us what you need, your use case, quantity, or installation needs. (optional)"
                       className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition-colors placeholder:text-gray-500 focus:border-red-400"
                     />
                     <p className="mt-1 text-right text-xs text-gray-400">{form.message.length}/1000</p>

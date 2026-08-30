@@ -30,170 +30,170 @@ export async function getProductCategoriesFromApi() {
 /* ─────────────────────────────────────────────────────────────────────────────
    CCTV HANGING MODEL
 ───────────────────────────────────────────────────────────────────────────── */
-function CCTVHangingModel({
-  isMobile = false,
-}: {
-  isMobile?: boolean;
-}) {
-  const bobRef = useRef<THREE.Group>(null);
-  const pivotRef = useRef<THREE.Group>(null);
-  const modelRef = useRef<THREE.Group>(null);
-  const gltf = useGLTF("/models/cctv.glb");
-  const fittedRef = useRef(false);
+// function CCTVHangingModel({
+//   isMobile = false,
+// }: {
+//   isMobile?: boolean;
+// }) {
+//   const bobRef = useRef<THREE.Group>(null);
+//   const pivotRef = useRef<THREE.Group>(null);
+//   const modelRef = useRef<THREE.Group>(null);
+//   const gltf = useGLTF("/models/cctv.glb");
+//   const fittedRef = useRef(false);
 
-  // Auto-center + auto-fit the loaded model so it always sits in frame,
-  // regardless of the GLB's own scale/origin. Runs once after mount.
-  useEffect(() => {
-    if (!modelRef.current || fittedRef.current) return;
-    const box = new THREE.Box3().setFromObject(modelRef.current);
-    const size = new THREE.Vector3();
-    const center = new THREE.Vector3();
-    box.getSize(size);
-    box.getCenter(center);
-    const maxDim = Math.max(size.x, size.y, size.z) || 1;
-    const TARGET = 1.5; // desired on-screen size in world units
-    const s = TARGET / maxDim;
-    modelRef.current.scale.setScalar(s);
-    // Align the model's TOP (mount base) to TOP_Y so it hangs flush from the
-    // navbar underside when fully emerged. x/z are centered; y is top-aligned.
-    const TOP_Y = 2.0; // world-space y for the top edge of the model (lower = sits lower on screen)
-    const topOffset = (box.max.y - center.y) * s; // half-height after scaling
-    modelRef.current.position.set(
-      -center.x * s,
-      TOP_Y - topOffset,
-      -center.z * s,
-    );
-    // Keep the camera straight (no downward tilt); it only pans left/right.
-    modelRef.current.rotation.x = 0;
+//   // Auto-center + auto-fit the loaded model so it always sits in frame,
+//   // regardless of the GLB's own scale/origin. Runs once after mount.
+//   useEffect(() => {
+//     if (!modelRef.current || fittedRef.current) return;
+//     const box = new THREE.Box3().setFromObject(modelRef.current);
+//     const size = new THREE.Vector3();
+//     const center = new THREE.Vector3();
+//     box.getSize(size);
+//     box.getCenter(center);
+//     const maxDim = Math.max(size.x, size.y, size.z) || 1;
+//     const TARGET = 1.5; // desired on-screen size in world units
+//     const s = TARGET / maxDim;
+//     modelRef.current.scale.setScalar(s);
+//     // Align the model's TOP (mount base) to TOP_Y so it hangs flush from the
+//     // navbar underside when fully emerged. x/z are centered; y is top-aligned.
+//     const TOP_Y = 2.0; // world-space y for the top edge of the model (lower = sits lower on screen)
+//     const topOffset = (box.max.y - center.y) * s; // half-height after scaling
+//     modelRef.current.position.set(
+//       -center.x * s,
+//       TOP_Y - topOffset,
+//       -center.z * s,
+//     );
+//     // Keep the camera straight (no downward tilt); it only pans left/right.
+//     modelRef.current.rotation.x = 0;
 
-    // Tint the model's materials a bit darker so it doesn't read as pure white.
-    const TINT = 0.55; // 1 = original, lower = darker
-    gltf.scene.traverse((o: any) => {
-      if (o.isMesh && o.material) {
-        const mats = Array.isArray(o.material) ? o.material : [o.material];
-        mats.forEach((m: any) => {
-          if (m && m.color && !m.userData.__tinted) {
-            m.color.multiplyScalar(TINT);
-            m.userData.__tinted = true; // guard against double-tint on re-render
-          }
-        });
-      }
-    });
+//     // Tint the model's materials a bit darker so it doesn't read as pure white.
+//     const TINT = 0.55; // 1 = original, lower = darker
+//     gltf.scene.traverse((o: any) => {
+//       if (o.isMesh && o.material) {
+//         const mats = Array.isArray(o.material) ? o.material : [o.material];
+//         mats.forEach((m: any) => {
+//           if (m && m.color && !m.userData.__tinted) {
+//             m.color.multiplyScalar(TINT);
+//             m.userData.__tinted = true; // guard against double-tint on re-render
+//           }
+//         });
+//       }
+//     });
 
-    fittedRef.current = true;
-  }, [gltf]);
+//     fittedRef.current = true;
+//   }, [gltf]);
 
-  // ── Pan (x-axis "look here and there") state ──
-  const panTargetY = useRef(0);
-  const panTimerRef = useRef(0);
-  const PAN_INTERVAL = 2.2; // seconds between each new "look" direction
-  const MAX_PAN = isMobile ? 0.45 : 0.7; // max left/right swing (radians)
+//   // ── Pan (x-axis "look here and there") state ──
+//   const panTargetY = useRef(0);
+//   const panTimerRef = useRef(0);
+//   const PAN_INTERVAL = 2.2; // seconds between each new "look" direction
+//   const MAX_PAN = isMobile ? 0.45 : 0.7; // max left/right swing (radians)
 
-  // ── Emerge / retract cycle state machine ──
-  // Phases: hidden → emerging → looking → retracting → (loop)
-  // bobRef.position.y: 0 = fully down/visible, HIDE_Y = up & hidden behind navbar.
-  const phaseRef = useRef<"hidden" | "emerging" | "looking" | "retracting">(
-    "hidden",
-  );
-  const phaseTimeRef = useRef(0);
-  const HIDE_Y = 3.2; // how far up to slide so it fully clears the navbar
-  const HIDDEN_DURATION = 2.5; // pause while hidden (s)
-  const LOOK_DURATION = 12; // time spent out looking around while down (s)
+//   // ── Emerge / retract cycle state machine ──
+//   // Phases: hidden → emerging → looking → retracting → (loop)
+//   // bobRef.position.y: 0 = fully down/visible, HIDE_Y = up & hidden behind navbar.
+//   const phaseRef = useRef<"hidden" | "emerging" | "looking" | "retracting">(
+//     "hidden",
+//   );
+//   const phaseTimeRef = useRef(0);
+//   const HIDE_Y = 3.2; // how far up to slide so it fully clears the navbar
+//   const HIDDEN_DURATION = 2.5; // pause while hidden (s)
+//   const LOOK_DURATION = 12; // time spent out looking around while down (s)
 
-  useFrame((_state: any, delta: number) => {
-    const t = _state.clock.elapsedTime;
-    phaseTimeRef.current += delta;
+//   useFrame((_state: any, delta: number) => {
+//     const t = _state.clock.elapsedTime;
+//     phaseTimeRef.current += delta;
 
-    // ── Vertical slide target based on phase ──
-    let targetY = HIDE_Y; // default: up/hidden
-    const phase = phaseRef.current;
+//     // ── Vertical slide target based on phase ──
+//     let targetY = HIDE_Y; // default: up/hidden
+//     const phase = phaseRef.current;
 
-    if (phase === "hidden") {
-      targetY = HIDE_Y;
-      if (phaseTimeRef.current >= HIDDEN_DURATION) {
-        phaseRef.current = "emerging";
-        phaseTimeRef.current = 0;
-      }
-    } else if (phase === "emerging") {
-      targetY = 0; // slide down into view
-      if (bobRef.current && bobRef.current.position.y < 0.05) {
-        phaseRef.current = "looking";
-        phaseTimeRef.current = 0;
-      }
-    } else if (phase === "looking") {
-      targetY = 0; // stay down
-      if (phaseTimeRef.current >= LOOK_DURATION) {
-        phaseRef.current = "retracting";
-        phaseTimeRef.current = 0;
-      }
-    } else if (phase === "retracting") {
-      targetY = HIDE_Y; // slide back up
-      if (bobRef.current && bobRef.current.position.y > HIDE_Y - 0.05) {
-        phaseRef.current = "hidden";
-        phaseTimeRef.current = 0;
-      }
-    }
+//     if (phase === "hidden") {
+//       targetY = HIDE_Y;
+//       if (phaseTimeRef.current >= HIDDEN_DURATION) {
+//         phaseRef.current = "emerging";
+//         phaseTimeRef.current = 0;
+//       }
+//     } else if (phase === "emerging") {
+//       targetY = 0; // slide down into view
+//       if (bobRef.current && bobRef.current.position.y < 0.05) {
+//         phaseRef.current = "looking";
+//         phaseTimeRef.current = 0;
+//       }
+//     } else if (phase === "looking") {
+//       targetY = 0; // stay down
+//       if (phaseTimeRef.current >= LOOK_DURATION) {
+//         phaseRef.current = "retracting";
+//         phaseTimeRef.current = 0;
+//       }
+//     } else if (phase === "retracting") {
+//       targetY = HIDE_Y; // slide back up
+//       if (bobRef.current && bobRef.current.position.y > HIDE_Y - 0.05) {
+//         phaseRef.current = "hidden";
+//         phaseTimeRef.current = 0;
+//       }
+//     }
 
-    // smoothly ease the vertical slide toward the phase target.
-    // Retracting (springing back up) is slower than emerging.
-    if (bobRef.current) {
-      const slideSpeed = phase === "retracting" ? 0.03 : 0.06;
-      bobRef.current.position.y = THREE.MathUtils.lerp(
-        bobRef.current.position.y,
-        targetY,
-        slideSpeed,
-      );
-    }
+//     // smoothly ease the vertical slide toward the phase target.
+//     // Retracting (springing back up) is slower than emerging.
+//     if (bobRef.current) {
+//       const slideSpeed = phase === "retracting" ? 0.03 : 0.06;
+//       bobRef.current.position.y = THREE.MathUtils.lerp(
+//         bobRef.current.position.y,
+//         targetY,
+//         slideSpeed,
+//       );
+//     }
 
-    // ── Pan the camera left/right (x-axis) - only while it's down looking ──
-    if (pivotRef.current) {
-      if (phase === "looking") {
-        panTimerRef.current += delta;
-        if (panTimerRef.current >= PAN_INTERVAL) {
-          panTimerRef.current = 0;
-          panTargetY.current = (Math.random() * 2 - 1) * MAX_PAN;
-        }
-      } else {
-        // recentre while hidden/moving so it emerges facing forward
-        panTargetY.current = 0;
-      }
+//     // ── Pan the camera left/right (x-axis) - only while it's down looking ──
+//     if (pivotRef.current) {
+//       if (phase === "looking") {
+//         panTimerRef.current += delta;
+//         if (panTimerRef.current >= PAN_INTERVAL) {
+//           panTimerRef.current = 0;
+//           panTargetY.current = (Math.random() * 2 - 1) * MAX_PAN;
+//         }
+//       } else {
+//         // recentre while hidden/moving so it emerges facing forward
+//         panTargetY.current = 0;
+//       }
 
-      pivotRef.current.rotation.y = THREE.MathUtils.lerp(
-        pivotRef.current.rotation.y,
-        panTargetY.current,
-        0.03,
-      );
-      pivotRef.current.rotation.x = THREE.MathUtils.lerp(
-        pivotRef.current.rotation.x,
-        0,
-        0.05,
-      );
-    }
-    void t;
-  });
+//       pivotRef.current.rotation.y = THREE.MathUtils.lerp(
+//         pivotRef.current.rotation.y,
+//         panTargetY.current,
+//         0.03,
+//       );
+//       pivotRef.current.rotation.x = THREE.MathUtils.lerp(
+//         pivotRef.current.rotation.x,
+//         0,
+//         0.05,
+//       );
+//     }
+//     void t;
+//   });
 
-  // Orientation: model in its natural pose - mount base up (flush against
-  // the navbar underside), lens facing the viewer (+Z). The pan animation
-  // on pivotRef rotates about Y so the lens sweeps left/right.
-  return (
-    <group>
-      {/* bobRef slides the whole camera vertically (emerge / retract behind navbar).
-          Starts up & hidden (y = HIDE_Y); the frame loop drives the cycle. */}
-      <group ref={bobRef} position={[0, 3.2, 0]}>
-        <group ref={pivotRef}>
-          {/* Model is auto-centered + auto-fitted by the effect above,
-              so it always sits in frame regardless of the GLB's origin/scale.
-              pivotRef pans it left/right on the x-axis while it's down. */}
-          <group ref={modelRef}>
-            <primitive object={gltf.scene} />
-          </group>
-        </group>
-      </group>
-    </group>
-  );
-}
+//   // Orientation: model in its natural pose - mount base up (flush against
+//   // the navbar underside), lens facing the viewer (+Z). The pan animation
+//   // on pivotRef rotates about Y so the lens sweeps left/right.
+//   return (
+//     <group>
+//       {/* bobRef slides the whole camera vertically (emerge / retract behind navbar).
+//           Starts up & hidden (y = HIDE_Y); the frame loop drives the cycle. */}
+//       <group ref={bobRef} position={[0, 3.2, 0]}>
+//         <group ref={pivotRef}>
+//           {/* Model is auto-centered + auto-fitted by the effect above,
+//               so it always sits in frame regardless of the GLB's origin/scale.
+//               pivotRef pans it left/right on the x-axis while it's down. */}
+//           <group ref={modelRef}>
+//             <primitive object={gltf.scene} />
+//           </group>
+//         </group>
+//       </group>
+//     </group>
+//   );
+// }
 
-useGLTF.preload("/models/cctv.glb");
+// useGLTF.preload("/models/cctv.glb");
 
 /* ─────────────────────────────────────────────────────────────────────────────
    CCTV CANVAS WRAPPER
@@ -216,9 +216,9 @@ function CCTVCanvasInner({
       <directionalLight position={[5, 5, 5]} intensity={2.0} />
       <pointLight position={[-4, 2, 4]} intensity={1.3} />
       <Suspense fallback={null}>
-        <Float speed={1.4} rotationIntensity={0} floatIntensity={0.08}>
+        {/* <Float speed={1.4} rotationIntensity={0} floatIntensity={0.08}>
           <CCTVHangingModel isMobile={isMobile} />
-        </Float>
+        </Float> */}
         <Environment preset="studio" environmentIntensity={0.45} />
       </Suspense>
     </Canvas>

@@ -26,18 +26,33 @@ import { THEME_COLORS } from "@/themes/colors";
    ▸ TO ADD / REORDER MEDIA LATER, just edit this array:
        • A video item:
            { id: "my-video", type: "video", src: "/videos/my-clip.mp4",
+             srcWebm: "/videos/my-clip.webm", // optional, smaller + preferred
              poster: "/images/hero/xyz.webp", durationMs: 12000 }
        • An image item:
            { id: "my-image", type: "image", src: "/images/hero/xyz.webp",
              alt: "…", durationMs: 6000 }
    Videos autoplay muted and advance to the next item when they finish
    (or after durationMs). Images advance after durationMs.
+
+   PERF NOTES:
+   - Always set `poster` on video items. Without it the video area is
+     black/blank until the first frame decodes, which hurts LCP and looks
+     broken on slow connections.
+   - If you can, export a `.webm` (VP9/AV1) alongside the `.mp4` — it's
+     typically 30-50% smaller for the same visual quality and browsers
+     that support it will prefer it automatically via the <source> tags
+     below.
+   - Keep hero videos short, muted, and re-encoded at a sane bitrate
+     (e.g. 1080p, ~2-4 Mbps, no audio track) — the biggest perf win here
+     is almost always the source file itself, this component can only do
+     so much.
    ──────────────────────────────────────────────────────────────────────── */
 
 type MediaItem = {
   id: string;
   type: "video" | "image";
   src: string;
+  srcWebm?: string;
   poster?: string;
   alt?: string;
   opacity?: number;
@@ -53,6 +68,8 @@ const MEDIA: MediaItem[] = [
     id: "video-landing",
     type: "video",
     src: "/videos/dssLanding.mp4",
+    // srcWebm: "/videos/dssLanding.webm", // add this once you have a webm export
+    poster: "/images/hero/dssLanding-poster.webp", // TODO: add a real poster frame here
   },
   // ▸ THIRD VIDEO - drop the file into /public/videos, then uncomment this
   //   block (it will get its own pagination indicator automatically).
@@ -60,6 +77,7 @@ const MEDIA: MediaItem[] = [
   //   id: "video-three",
   //   type: "video",
   //   src: "/videos/hero-video-3.mp4",
+  //   poster: "/images/hero/hero-video-3-poster.webp",
   // },
 
   // ── STILL IMAGES ──
@@ -139,6 +157,9 @@ export default function HeroSlider() {
   }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [inView, setInView] = useState(true);
+  const [tabVisible, setTabVisible] = useState(true);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const goTo = useCallback((idx: number) => {
@@ -155,23 +176,53 @@ export default function HeroSlider() {
 
   const current = MEDIA[currentIndex];
 
-  // ── AUTO-ADVANCE ──
+  // ── PAUSE WHEN OFFSCREEN ──
+  // Stop decoding/playing the video (and stop burning CPU/battery/data)
+  // once the hero has been scrolled past.
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // ── PAUSE WHEN TAB IS HIDDEN ──
+  useEffect(() => {
+    const onVisibility = () => setTabVisible(!document.hidden);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
+  const shouldPlay = inView && tabVisible;
+
+  // ── AUTO-ADVANCE + PLAY/PAUSE ──
   // Images advance after their duration. Videos advance when they finish
   // playing (onEnded) but also carry a safety timeout so a stalled/looping
-  // clip can never freeze the carousel.
+  // clip can never freeze the carousel. Playback itself is gated on
+  // shouldPlay so an offscreen/backgrounded tab doesn't keep decoding video.
   useEffect(() => {
     if (!mounted) return;
 
     const activeVideo = videoRefs.current[currentIndex];
     if (current.type === "video" && activeVideo) {
-      try {
-        activeVideo.currentTime = 0;
-        const p = activeVideo.play();
-        if (p && typeof p.catch === "function") p.catch(() => {});
-      } catch {
-        /* autoplay may be blocked; safety timer below still advances */
+      if (shouldPlay) {
+        try {
+          const p = activeVideo.play();
+          if (p && typeof p.catch === "function") p.catch(() => {});
+        } catch {
+          /* autoplay may be blocked; safety timer below still advances */
+        }
+      } else {
+        activeVideo.pause();
       }
     }
+
+    if (!shouldPlay) return; // don't advance the carousel while paused offscreen/hidden
 
     const duration =
       current.durationMs ??
@@ -179,17 +230,19 @@ export default function HeroSlider() {
 
     const timer = setTimeout(goNext, duration);
     return () => clearTimeout(timer);
-  }, [mounted, currentIndex, current, goNext]);
+  }, [mounted, currentIndex, current, goNext, shouldPlay]);
 
   return (
-    <section className="relative w-full min-h-[90vh] md:h-[90vh] overflow-hidden bg-neutral-900 select-none font-poppins">
+    <section
+      ref={sectionRef}
+      className="relative w-full min-h-[90vh] md:h-[90vh] overflow-hidden bg-neutral-900 select-none font-poppins"
+    >
       {/* ── BACKGROUND MEDIA (full-bleed) ── */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {MEDIA.map((item, idx) => {
           const isActive = currentIndex === idx;
-          const shouldLoadVideo =
-            item.type === "video" &&
-            (isActive || (currentIndex + 1) % MEDIA.length === idx);
+          const isNext = (currentIndex + 1) % MEDIA.length === idx;
+          const shouldLoadVideo = item.type === "video" && (isActive || isNext);
 
           return (
             <div
@@ -207,16 +260,24 @@ export default function HeroSlider() {
                   }}
                   className="absolute inset-0 h-full w-full object-cover object-center"
                   style={{ opacity: item.opacity ?? 1 }}
-                  src={shouldLoadVideo ? item.src : undefined}
                   poster={item.poster}
                   muted
                   playsInline
-                  autoPlay={isActive}
-                  preload={shouldLoadVideo ? "auto" : "none"}
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  controlsList="nodownload noplaybackrate"
+                  preload={
+                    !shouldLoadVideo ? "none" : isActive ? "auto" : "metadata"
+                  }
                   onEnded={() => {
                     if (isActive) goNext();
                   }}
-                />
+                >
+                  {shouldLoadVideo && item.srcWebm && (
+                    <source src={item.srcWebm} type="video/webm" />
+                  )}
+                  {shouldLoadVideo && <source src={item.src} type="video/mp4" />}
+                </video>
               ) : (
                 <Image
                   src={item.src}

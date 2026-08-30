@@ -243,14 +243,14 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "Access Control",
     description: "Smart entry solutions with PIN, card, and biometric authentication for every door.",
     href: "/products?category=Access%20Control",
-    imageSrc: "/images/categories/access-control-smart-entry.png",
+    imageSrc: "/images/categories/turnstile.png",
     imageAlt: "Access control keypad and card reader",
   },
   {
     title: "Biometric & Identity",
     description: "Accurate fingerprint and face recognition for secure access and attendance tracking.",
     href: "/products?category=Biometric%20%26%20Identity",
-    imageSrc: "/images/categories/fingerPrint.png",
+    imageSrc: "/images/categories/access-control-smart-entry.png",
     imageAlt: "Biometric fingerprint scanner",
   },
   {

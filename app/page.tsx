@@ -5,7 +5,6 @@ import BrandMarquee from "@/components/sections/BrandMarquee";
 
 import ProductCategories from "@/components/sections/ProductCategories";
 import SmarterSecurity from "@/components/sections/SmarterSecurity";
-import Bestsellers from "@/components/sections/Bestsellers";
 import PremiumDesign from "@/components/sections/PremiumDesign";
 import FeaturedProducts from "@/components/sections/FeaturedProducts";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
@@ -16,7 +15,7 @@ import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants";
 // brand (previously /enquiry shared the default title and won the duplicate).
 export const metadata: Metadata = {
   title: {
-    absolute: `${SITE_NAME} — CCTV, Access Control & Alarm Systems in Delhi`,
+    absolute: `${SITE_NAME} - CCTV, Access Control & Alarm Systems in Delhi`,
   },
   description: SITE_DESCRIPTION,
   alternates: { canonical: "/" },

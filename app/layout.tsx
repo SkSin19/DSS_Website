@@ -14,6 +14,7 @@ import {
   SITE_MAP_URL,
   SITE_PHONE,
   SITE_EMAIL,
+  OFFICE_LOCATIONS,
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { Playfair_Display, Inter, Poppins } from "next/font/google";
@@ -111,9 +112,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [headOffice, ...branchOffices] = OFFICE_LOCATIONS;
+
   // Structured Data (JSON-LD). A @graph binds the WebSite node (which drives
   // the site name Google shows in search results) to the LocalBusiness so
-  // both share one canonical identity.
+  // both share one canonical identity. Branch offices are modeled as
+  // department entries linked back to the main organization.
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -150,6 +154,7 @@ export default function RootLayout({
         url: SITE_URL,
         telephone: SITE_PHONE,
         email: SITE_EMAIL,
+        taxID: headOffice.gstin,
         priceRange: "$$",
         foundingDate: "2008",
         openingHoursSpecification: [
@@ -170,8 +175,7 @@ export default function RootLayout({
         ],
         address: {
           "@type": "PostalAddress",
-          streetAddress:
-            "Shop Number 34 & 35, Near Nirman Vihar Metro Station, Vikas Marg, Shakarpur",
+          streetAddress: headOffice.address,
           addressLocality: "Delhi",
           addressRegion: "Delhi",
           postalCode: "110092",
@@ -186,6 +190,8 @@ export default function RootLayout({
         areaServed: [
           { "@type": "Country", name: "India" },
           { "@type": "State", name: "Delhi" },
+          { "@type": "State", name: "Uttar Pradesh" },
+          { "@type": "State", name: "Bihar" },
           { "@type": "City", name: "New Delhi" },
         ],
         description: SITE_DESCRIPTION,
@@ -220,6 +226,19 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: service,
+          },
+        })),
+        department: branchOffices.map((branch) => ({
+          "@type": "LocalBusiness",
+          "@id": `${SITE_URL}/#${branch.id}`,
+          name: `${SITE_NAME} - ${branch.region}`,
+          parentOrganization: { "@id": `${SITE_URL}/#organization` },
+          taxID: branch.gstin,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: branch.address,
+            addressRegion: branch.region,
+            addressCountry: "IN",
           },
         })),
         sameAs: [SITE_LINKEDIN_URL, SITE_JUSTDIAL_URL],

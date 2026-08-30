@@ -7,6 +7,7 @@ import {
   CONTACT_INFO,
   SITE_LINKEDIN_URL,
   SITE_JUSTDIAL_URL,
+  OFFICE_LOCATIONS,
 } from "@/lib/constants";
 
 function PhoneIcon() {
@@ -235,9 +236,41 @@ export default function Footer() {
               </ul>
             </div>
           </div>
+
+          {/* Office Locations */}
+          <div className="mt-10 pt-10 border-t border-gray-200 lg:mt-14 lg:pt-14">
+            <div className="mb-6 relative">
+              <h3 className="text-[13px] font-bold text-red-600 tracking-wider uppercase">
+                Our Offices
+              </h3>
+              <div className="absolute  -bottom-2 left-0 w-6 h-px bg-red-600"></div>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 bg-gray-200/95">
+              {OFFICE_LOCATIONS.map((office) => (
+                <div
+                  key={office.id}
+                  className="rounded-xl bg-gray-200/95 border border-red-100 px-5 py-4"
+                >
+                  <p className="text-[13px] font-bold text-gray-900 uppercase tracking-wide mb-1">
+                    {office.region}
+                  </p>
+                  <p className="text-[13px] font-semibold text-gray-800 mb-1">
+                    {office.label}
+                  </p>
+                  <p className="text-[14px] text-gray-600 leading-relaxed mb-2">
+                    {office.address}
+                  </p>
+                  <p className="text-[13px] text-gray-700">
+                    <span className="font-semibold">GSTIN:</span>{" "}
+                    {office.gstin}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* ── Bottom bar inside the card ── */}
+        {/* Bottom bar inside the card */}
         <div className="relative z-10 px-4 md:px-12 lg:px-16 pb-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 sm:px-6 lg:gap-6">
           <p className="text-sm font-medium text-gray-500">
             &copy; {currentYear} {SITE_NAME}. All rights reserved.

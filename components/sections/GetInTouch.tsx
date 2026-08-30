@@ -7,6 +7,7 @@ import { submitGeneralEnquiry } from "@/lib/enquiry-api";
 import Image from "next/image";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { THEME_COLORS } from "@/themes/colors";
+import { OFFICE_LOCATIONS } from "@/lib/constants";
 
 declare global {
   interface Window {
@@ -122,8 +123,6 @@ const GetInTouch: React.FC = () => {
       errs.email = "Enter a valid email address.";
     if (!formData.phone || !/^\d{10}$/.test(formData.phone))
       errs.phone = "Enter a valid 10-digit phone number.";
-    if (!formData.enquiryAbout)
-      errs.enquiryAbout = "Please select an enquiry subject.";
     return errs;
   };
 
@@ -171,7 +170,7 @@ const GetInTouch: React.FC = () => {
   };
 
   return (
-    <section className="select-none relative w-full min-h-screen bg-[#FFFFFF] overflow-hidden flex">
+    <section className="select-none relative w-full h-screen overflow-hidden bg-[#FFFFFF] flex">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <div className="absolute right-0 top-1 bottom-0 w-full md:w-[62%]">
@@ -188,10 +187,10 @@ const GetInTouch: React.FC = () => {
       </div>
 
       {/* Form panel */}
-      <div ref={formPanelRef} className="relative z-10 w-full md:w-[45%] flex flex-col justify-center px-8 py-3 lg:px-8">
-        <div className="w-full rounded-3xl border border-gray-200 p-6 shadow-[0_20px_60px_rgba(17,24,39,0.12)] backdrop-blur-md sm:p-8" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
-          <h2 className="text-gray-900 text-3xl font-bold mb-2">Get in Touch</h2>
-          <p className="text-red-600 text-sm mb-8">We&apos;re here to help you build a safer and smarter tomorrow.</p>
+      <div ref={formPanelRef} className="relative z-10 w-full md:w-[45%] h-full flex flex-col justify-center px-8 py-3 lg:px-8">
+        <div className="w-full rounded-3xl border border-gray-200 p-5 shadow-[0_20px_60px_rgba(17,24,39,0.12)] backdrop-blur-md sm:p-6" style={{ backgroundColor: THEME_COLORS.shadowGrey50 }}>
+          <h2 className="text-gray-900 text-2xl font-bold mb-1">Get in Touch</h2>
+          <p className="text-red-600 text-xs mb-4">We&apos;re here to help you build a safer and smarter tomorrow.</p>
 
           {submitted ? (
             <div className="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-gray-100 p-6">
@@ -211,43 +210,43 @@ const GetInTouch: React.FC = () => {
               </button>
             </div>
           ) : (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2.5">
               {/* Full Name */}
               <div className="flex flex-col gap-1">
-                <label className="text-gray-600 text-xs font-medium tracking-wide uppercase"><span className="text-red-500 mr-1">*</span>Full Name</label>
+                <label className="text-gray-600 text-[11px] font-medium tracking-wide uppercase"><span className="text-red-500 mr-1">*</span>Full Name</label>
                 <input type="text" name="fullName" placeholder="Enter your full name" value={formData.fullName} onChange={handleChange} maxLength={100}
-                  className={`bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.fullName ? "border-red-500" : "border-gray-300"}`} />
-                {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
+                  className={`bg-white border rounded-xl px-3.5 py-2 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.fullName ? "border-red-500" : "border-gray-300"}`} />
+                {errors.fullName && <p className="text-red-500 text-xs mt-0.5">{errors.fullName}</p>}
               </div>
 
               {/* Email */}
               <div className="flex flex-col gap-1">
-                <label className="text-gray-600 text-xs font-medium tracking-wide uppercase"><span className="text-red-500 mr-1">*</span>Email Address</label>
+                <label className="text-gray-600 text-[11px] font-medium tracking-wide uppercase"><span className="text-red-500 mr-1">*</span>Email Address</label>
                 <input type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} maxLength={254}
-                  className={`bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.email ? "border-red-500" : "border-gray-300"}`} />
-                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                  className={`bg-white border rounded-xl px-3.5 py-2 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.email ? "border-red-500" : "border-gray-300"}`} />
+                {errors.email && <p className="text-red-500 text-xs mt-0.5">{errors.email}</p>}
               </div>
 
               {/* Phone */}
               <div className="flex flex-col gap-1">
-                <label className="text-gray-600 text-xs font-medium tracking-wide uppercase"><span className="text-red-500 mr-1">*</span>Phone Number</label>
+                <label className="text-gray-600 text-[11px] font-medium tracking-wide uppercase"><span className="text-red-500 mr-1">*</span>Phone Number</label>
                 <div className="flex gap-2">
-                  <div className="flex items-center gap-1 bg-gray-100 border border-gray-300 rounded-2xl px-3 py-2.5 text-gray-900 text-sm" style={{ minWidth: 70 }}>
+                  <div className="flex items-center gap-1 bg-gray-100 border border-gray-300 rounded-xl px-3 py-2 text-gray-900 text-sm" style={{ minWidth: 65 }}>
                     <span className="text-base">🇮🇳</span>
                     <span className="text-gray-600 text-xs">+91</span>
                   </div>
                   <input type="tel" name="phone" placeholder="10-digit mobile number" value={formData.phone} onChange={handleChange} maxLength={10} inputMode="numeric"
-                    className={`flex-1 bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.phone ? "border-red-500" : "border-gray-300"}`} />
+                    className={`flex-1 bg-white border rounded-xl px-3.5 py-2 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.phone ? "border-red-500" : "border-gray-300"}`} />
                 </div>
-                {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                {errors.phone && <p className="text-red-500 text-xs mt-0.5">{errors.phone}</p>}
               </div>
 
               {/* Enquiry About */}
               <div className="flex flex-col gap-1">
-                <label className="text-gray-600 text-xs font-medium tracking-wide uppercase"><span className="text-red-500 mr-1">*</span>Enquiry About</label>
+                <label className="text-gray-600 text-[11px] font-medium tracking-wide uppercase"><span className="text-red-500 mr-1"></span>Enquiry About</label>
                 <div className="relative">
                   <select name="enquiryAbout" value={formData.enquiryAbout} onChange={handleChange}
-                    className={`w-full bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-red-400 transition-colors appearance-none cursor-pointer ${errors.enquiryAbout ? "border-red-500" : "border-gray-300"}`}>
+                    className={`w-full bg-white border rounded-xl px-3.5 py-2 text-gray-900 text-sm focus:outline-none focus:border-red-400 transition-colors appearance-none cursor-pointer ${errors.enquiryAbout ? "border-red-500" : "border-gray-300"}`}>
                     <option value="" disabled>Select an option</option>
                     <option value="cctv">CCTV Systems</option>
                     <option value="access">Access Control</option>
@@ -259,23 +258,22 @@ const GetInTouch: React.FC = () => {
                     <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1L6 6L11 1" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" /></svg>
                   </div>
                 </div>
-                {errors.enquiryAbout && <p className="text-red-500 text-xs mt-1">{errors.enquiryAbout}</p>}
+                {errors.enquiryAbout && <p className="text-red-500 text-xs mt-0.5">{errors.enquiryAbout}</p>}
               </div>
 
               {/* City */}
               <div className="flex flex-col gap-1">
-                <label className="text-gray-600 text-xs font-medium tracking-wide uppercase">City</label>
+                <label className="text-gray-600 text-[11px] font-medium tracking-wide uppercase">City</label>
                 <input type="text" name="city" placeholder="Enter your city" value={formData.city} onChange={handleChange} maxLength={100}
-                  className="bg-white border border-gray-300 rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors" />
+                  className="bg-white border border-gray-300 rounded-xl px-3.5 py-2 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors" />
               </div>
 
               {/* Message */}
               <div className="flex flex-col gap-1">
-                <label className="text-gray-600 text-xs font-medium tracking-wide uppercase">Message <span className="text-gray-400 normal-case">(optional)</span></label>
-                <textarea name="message" placeholder="Tell us about your enquiry, use case, quantity, or installation needs. (optional)" value={formData.message} onChange={handleChange} rows={4} maxLength={2000}
-                  className={`bg-white border rounded-2xl px-4 py-3 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors ${errors.message ? "border-red-500" : "border-gray-300"}`} />
-                <p className="text-right text-xs text-gray-400">{formData.message.length}/2000</p>
-                {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+                <label className="text-gray-600 text-[11px] font-medium tracking-wide uppercase">Message <span className="text-gray-400 normal-case">(optional)</span></label>
+                <textarea name="message" placeholder="Tell us about your enquiry, use case, quantity, or installation needs. (optional)" value={formData.message} onChange={handleChange} rows={2} maxLength={2000}
+                  className={`bg-white border rounded-xl px-3.5 py-2 text-gray-900 text-sm placeholder-gray-500 focus:outline-none focus:border-red-400 transition-colors resize-none ${errors.message ? "border-red-500" : "border-gray-300"}`} />
+                {errors.message && <p className="text-red-500 text-xs mt-0.5">{errors.message}</p>}
               </div>
 
               {/* Turnstile widget */}
@@ -284,7 +282,7 @@ const GetInTouch: React.FC = () => {
               {statusMsg && <p className="text-sm text-red-600">{statusMsg}</p>}
 
               <button onClick={handleSubmit} disabled={loading || !turnstileToken}
-                className={`mt-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-4 px-10 rounded-full transition-colors duration-200 self-start disabled:opacity-60 disabled:cursor-not-allowed ${loading ? "pointer-events-none" : ""}`}>
+                className={`mt-1 bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-2.5 px-8 rounded-full transition-colors duration-200 self-start disabled:opacity-60 disabled:cursor-not-allowed ${loading ? "pointer-events-none" : ""}`}>
                 {loading ? "Submitting..." : "SUBMIT ENQUIRY"}
               </button>
             </div>
@@ -292,13 +290,28 @@ const GetInTouch: React.FC = () => {
         </div>
       </div>
 
-      {/* Right text overlay */}
-      <div ref={rightTextRef}
-        className={`hidden md:flex relative z-20 flex-1 flex-col justify-end pb-16 px-10 transition-opacity duration-1000 ${IMAGES[currentImageIndex].showOverlay ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-        <div>
+      {/* Right column: fading headline near the top, address box centered in the section */}
+      <div ref={rightTextRef} className="hidden md:block relative z-20 flex-1 h-full">
+        {/* Headline text, fades with the current slide */}
+        <div className={`absolute top-16 left-10 right-10 transition-opacity duration-1000 ${IMAGES[currentImageIndex].showOverlay ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
           <h2 className="text-black text-3xl font-bold leading-tight drop-shadow-lg">Smart Security for</h2>
           <h2 className="text-red-600 text-3xl font-bold leading-tight mb-3 drop-shadow-lg">Every Home.</h2>
           <p className="text-black/70 text-sm max-w-sm drop-shadow-md">Intelligent security solutions that protect what matters most.</p>
+        </div>
+
+        {/* Address box, centered both vertically and horizontally in the right section */}
+        <div className="absolute inset-0 flex items-center justify-center px-10">
+          <div className="w-full max-w-sm rounded-3xl border border-white/40 bg-white/20 backdrop-blur-md p-6 shadow-[0_20px_60px_rgba(17,24,39,0.2)]">
+            <h3 className="text-gray-900 text-xs font-bold uppercase tracking-wider mb-4">Our Offices</h3>
+            <div className="flex flex-col gap-4">
+              {OFFICE_LOCATIONS.map((office) => (
+                <div key={office.id}>
+                  <p className="text-gray-900 text-sm font-semibold">{office.region}</p>
+                  <p className="text-gray-700 text-xs leading-snug mt-0.5">{office.address}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

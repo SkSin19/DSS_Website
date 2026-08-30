@@ -545,21 +545,21 @@ export default function Navbar() {
           onClick={closeMobileMenu}
         >
           <Image
-            src="/images/logo/dss_logo.png"
+            src="/images/logo/dss_logo_bg_removed.png"
             alt="Digital Security Solutions logo"
             width={40}
             height={40}
-            className="w-9 h-9 md:w-10 md:h-10"
+            className="w-16 h-16 md:w-25 md:h-25 translate-x-5"
             priority
           />
-          <span className="hidden sm:flex flex-col leading-tight">
+          {/* <span className="hidden sm:flex flex-col leading-tight">
             <span className="text-sm md:text-base font-bold text-gray-900 tracking-tight">
               DIGITAL SECURITY
             </span>
             <span className="text-[10px] md:text-xs font-semibold text-gray-500 tracking-widest uppercase">
               SOLUTIONS
             </span>
-          </span>
+          </span> */}
         </Link>
 
         {/* ── Desktop Nav Links ── */}

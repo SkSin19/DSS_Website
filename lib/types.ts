@@ -62,6 +62,14 @@ export interface Feature {
   label: string;
 }
 
+export interface OfficeLocation {
+  id: string;
+  region: string;
+  label: string;
+  address: string;
+  gstin: string;
+}
+
 /** Footer link group */
 export interface FooterLinkGroup {
   title: string;

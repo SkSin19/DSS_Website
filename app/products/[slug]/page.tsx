@@ -78,7 +78,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
 
   return (
     <>
-      <section className="bg-white py-10 lg:py-14">
+      <section className="bg-white py-5 md:py-0">
         <Container className="md:py-10">
           <div className="mb-8 flex flex-wrap items-center gap-2 text-sm text-gray-400">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -109,10 +109,10 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
             </div>
 
             <div className="text-white">
-              <p className="inline-flex items-center rounded-full border border-black/20 bg-transparent px-3 py-0.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-red-600">
+              <p className="inline-flex items-center rounded-full border border-black/50 bg-transparent px-3 py-0.5 text-[11px] uppercase tracking-[0.18em] text-gray-500 font-bold">
                 Product Highlights
               </p>
-              <h1 className="mt-4 text-2xl md:text-3xl font-bold tracking-tight">
+              <h1 className="mt-4 text-gray-800 text-2xl md:text-3xl font-bold tracking-tight">
                 {product.name}
               </h1>
               <p className="mt-2 text-sm font-medium text-red-600">

@@ -9,7 +9,35 @@ import type {
   FooterLinkGroup,
   ContactInfo,
 } from "./types";
+import type { OfficeLocation } from "./types";
 import { THEME_COLORS } from "@/themes/colors";
+
+export const OFFICE_LOCATIONS: OfficeLocation[] = [
+  {
+    id: "delhi-hq",
+    region: "New Delhi",
+    label: "Head Office Address",
+    address:
+      "Shop No. 5, Ground Floor, Vinayak Complex, Veer Savarkar Block, Shakarpur, Delhi-110092",
+    gstin: "07AWSPK8969J1ZF",
+  },
+  {
+    id: "up-branch",
+    region: "Uttar Pradesh",
+    label: "Branch Office",
+    address:
+      "Plot No. GH 01, K-103, ACE City, Sector-1, Greater Noida West, G. B. Nagar, Uttar Pradesh 201306",
+    gstin: "09AWSPK8969J1ZB",
+  },
+  {
+    id: "bihar-branch",
+    region: "Bihar",
+    label: "Branch Office",
+    address:
+      "Post MIT, Thana Brahampura, Laxmi Chowk, Main Road Muzaffarpur, Bihar 842003",
+    gstin: "10AWSPK8969J1ZS",
+  },
+];
 
 /* ─────────────────────────────────────────────
    Site-wide Constants
@@ -287,11 +315,6 @@ export const CONTACT_INFO: ContactInfo[] = [
     label: "Phone",
     value: "+91 9999605550",
     href: "tel:+919999605550",
-  },
-  {
-    icon: "location",
-    label: "Address",
-    value: SITE_ADDRESS,
   },
 ];
 

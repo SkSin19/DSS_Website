@@ -304,6 +304,22 @@ export default function Navbar() {
     setIsMobileBrandsOpen(false);
   }, []);
 
+  // Dropdowns open directly under their nav item (so the pointer can move
+  // straight down into them); if that would overflow the viewport, shift the
+  // panel left just enough to keep a 16px margin on both sides.
+  const fitDropdownToViewport = useCallback((e: React.SyntheticEvent<HTMLLIElement>) => {
+    const panel = e.currentTarget.querySelector<HTMLElement>("[data-nav-dropdown]");
+    if (!panel) return;
+    const margin = 16;
+    const itemLeft = e.currentTarget.getBoundingClientRect().left;
+    const width = panel.offsetWidth;
+    const maxRight = window.innerWidth - margin;
+    let shift = 0;
+    if (itemLeft + width > maxRight) shift = maxRight - (itemLeft + width);
+    if (itemLeft + shift < margin) shift = margin - itemLeft;
+    panel.style.setProperty("--dd-shift", `${Math.round(shift)}px`);
+  }, []);
+
   const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
     setIsMobileBrandsOpen(false);
@@ -612,7 +628,12 @@ export default function Navbar() {
           {NAV_LINKS.map((link) => {
             if (link.label === "Products") {
               return (
-                <li key={link.href} className="group flex items-center">
+                <li
+                  key={link.href}
+                  className="group relative flex items-center"
+                  onMouseEnter={fitDropdownToViewport}
+                  onFocus={fitDropdownToViewport}
+                >
                   <Link
                     href={link.href}
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
@@ -633,7 +654,7 @@ export default function Navbar() {
                       />
                     </svg>
                   </Link>
-                  <div className="absolute left-1/2 top-full z-50 w-[min(37.5rem,calc(100vw-2rem))] -translate-x-1/2 pt-2 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                  <div data-nav-dropdown className="absolute left-0 top-full z-50 w-[min(37.5rem,calc(100vw-2rem))] translate-x-[var(--dd-shift,0px)] pt-2 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
                     <div className="max-h-[70vh] overflow-y-auto overscroll-contain rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-4">
                       <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">
                         Product Categories
@@ -659,7 +680,12 @@ export default function Navbar() {
 
             if (link.label === "Brands") {
               return (
-                <li key={link.href} className="group flex items-center">
+                <li
+                  key={link.href}
+                  className="group relative flex items-center"
+                  onMouseEnter={fitDropdownToViewport}
+                  onFocus={fitDropdownToViewport}
+                >
                   <Link
                     href="/#clients"
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
@@ -680,7 +706,7 @@ export default function Navbar() {
                       />
                     </svg>
                   </Link>
-                  <div className="absolute left-1/2 top-full z-50 w-[min(37.5rem,calc(100vw-2rem))] -translate-x-1/2 pt-2 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                  <div data-nav-dropdown className="absolute left-0 top-full z-50 w-[min(37.5rem,calc(100vw-2rem))] translate-x-[var(--dd-shift,0px)] pt-2 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
                     <div className="max-h-[70vh] overflow-y-auto overscroll-contain rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-4">
                       <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">
                         Our Brands

@@ -11,14 +11,25 @@ import {
 import ProductFilters from "@/components/sections/ProductFilters";
 import { ProductSidebar } from "@/components/sections/ProductFilters";
 import { THEME_COLORS } from "@/themes/colors";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Products",
-  description: "Browse the available digital security product catalog.",
-  alternates: { canonical: "/products" },
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "CCTV Cameras, Access Control & Security Products",
+  description:
+    "Buy CCTV cameras, DVR/NVR, biometric attendance machines, access control, video door phones and PA systems from Hikvision, CP Plus, Dahua, eSSL and more in Delhi.",
+  path: "/products",
+  keywords: [
+    "CCTV camera price Delhi",
+    "Hikvision camera dealer",
+    "CP Plus camera dealer",
+    "biometric attendance machine price",
+    "access control products",
+    "video door phone",
+    "PA system dealer Delhi",
+  ],
+});
 
 const isValidImage = (value?: string | null) => {
   if (!value) return false;

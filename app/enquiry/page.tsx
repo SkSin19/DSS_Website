@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import GetInTouch from "@/components/sections/GetInTouch";
 import SecureToday from "@/components/sections/SecureToday";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Request an Enquiry",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Contact Us – Get a Free CCTV & Security System Quote",
   description:
-    "Request a free quote for CCTV, access control, biometric attendance and alarm systems from Digital Security Solutions in Delhi.",
-  alternates: { canonical: "/enquiry" },
-};
+    "Request a free site survey and quote for CCTV installation, repair & AMC, access control, biometric attendance and alarm systems in Delhi NCR. Call +91 99996 05550.",
+  path: "/enquiry",
+});
 
 export default function EnquiryPage() {
   return (

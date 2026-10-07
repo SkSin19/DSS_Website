@@ -7,6 +7,8 @@ import PremiumDesign from "@/components/sections/PremiumDesign";
 import { getProductBySlugFromApi, getProductsFromApi, type BackendProduct } from "@/lib/products-api";
 import ProductImageGallery from "@/components/ui/ProductImageGallery";
 import ProductEnquiryDialog from "@/components/sections/ProductEnquiryDialog";
+import { breadcrumbJsonLd, buildPageMetadata } from "@/lib/seo";
+import { SITE_URL } from "@/lib/constants";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -46,11 +48,20 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     };
   }
 
-  return {
-    title: `${product.name} ${product.model}`,
-    description: product.shortDescription || product.description,
-    alternates: { canonical: `/products/${slug}` },
-  };
+  const description = (product.shortDescription || product.description || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 160);
+
+  return buildPageMetadata({
+    title: `${product.name} ${product.model}`.trim(),
+    description:
+      description ||
+      `${product.name} ${product.model} by ${product.company} - price, specifications and installation in Delhi NCR.`,
+    path: `/products/${slug}`,
+    keywords: [product.name, product.model, product.company, product.category].filter(Boolean),
+    image: { url: getProductImage(product), alt: `${product.name} ${product.model}` },
+  });
 }
 
 export default async function ProductDetailsPage({ params }: ProductPageProps) {
@@ -76,8 +87,28 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
 
   const galleryImages = getGalleryImages(product);
 
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: `${product.name} ${product.model}`.trim(),
+      ...(product.model ? { model: product.model, mpn: product.model } : {}),
+      description: product.shortDescription || product.description,
+      image: galleryImages,
+      brand: { "@type": "Brand", name: product.company },
+      category: product.category,
+      url: `${SITE_URL}/products/${slug}`,
+    },
+    breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Products", path: "/products" },
+      { name: product.name, path: `/products/${slug}` },
+    ]),
+  ];
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="bg-white py-5 md:py-0">
         <Container className="md:py-10">
           <div className="mb-8 flex flex-wrap items-center gap-2 text-sm text-gray-400">

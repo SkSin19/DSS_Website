@@ -62,6 +62,12 @@ export const SITE_MAP_URL =
 // Primary public contact used in structured data
 export const SITE_PHONE = "+919999605550";
 export const SITE_EMAIL = "info@digitalsecurityindia.com";
+// WhatsApp chat link (same number as SITE_PHONE; change here if WhatsApp differs)
+export const SITE_WHATSAPP_URL = `https://wa.me/${SITE_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(
+  "Hi, I'd like a quote for a security system.",
+)}`;
+// Year the business was established (drives "N+ years" copy)
+export const FOUNDING_YEAR = 2008;
 // Full postal address (used in footer, contact and structured data)
 export const SITE_ADDRESS =
   "Shop Number-34 & 35, Near Nirman Vihar Metro Station, Vikas Marg, Shakarpur, Delhi-110092";
@@ -75,6 +81,7 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Products", href: "/products" },
   { label: "Brands", href: "/#brands" },
   { label: "Solutions", href: "/solutions" },
+  { label: "Blogs", href: "/blogs" },
   { label: "About Us", href: "/about" },
 ];
 
@@ -292,12 +299,14 @@ export const FOOTER_LINK_GROUPS: FooterLinkGroup[] = [
       { label: "Products", href: "/products" },
       { label: "Enquiry", href: "/enquiry" },
       { label: "Brands", href: "/#brands" },
+      { label: "Blogs", href: "/blogs" },
     ],
   },
   {
     title: "UTILITY PAGES",
     links: [
       { label: "Products", href: "/products" },
+      { label: "Security Guides", href: "/blogs" },
       { label: "Contact", href: "/enquiry" },
     ],
   },
@@ -496,7 +505,7 @@ export const WHY_CHOOSE_US = [
   },
   {
     id: "innovation",
-    title: "17+ Years of Experience",
+    title: "18+ Years of Experience",
     description: "Delivering trusted CCTV installation and advanced security solutions since 2008 across residential, commercial, and industrial spaces.",
     imageSrc: "/images/categories/video-security-cctv-systems.png",
   },

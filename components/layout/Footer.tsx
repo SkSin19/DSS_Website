@@ -1,302 +1,283 @@
 import Link from "next/link";
 import Image from "next/image";
-import Container from "@/components/ui/Container";
+import { ChevronRight, MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
 import {
   SITE_NAME,
-  FOOTER_LINK_GROUPS,
-  CONTACT_INFO,
+  SITE_ADDRESS,
+  SITE_EMAIL,
+  SITE_PHONE,
+  SITE_GEO,
+  SITE_MAP_URL,
   SITE_LINKEDIN_URL,
   SITE_JUSTDIAL_URL,
+  SITE_WHATSAPP_URL,
+  CONTACT_INFO,
   OFFICE_LOCATIONS,
+  FOUNDING_YEAR,
 } from "@/lib/constants";
+import { getAllPosts } from "@/lib/blog";
 
-function PhoneIcon() {
+/* Footer brand colour — change here to retheme the whole footer. */
+const FOOTER_BG = "#b91c1c";
+
+const SERVICE_LINKS = [
+  { label: "CCTV Camera Installation", href: "/products?category=Surveillance" },
+  { label: "CCTV Repair & AMC", href: "/enquiry" },
+  { label: "Access Control Systems", href: "/products?category=Access%20Control" },
+  { label: "Biometric Attendance", href: "/products?category=Biometric%20%26%20Identity" },
+  { label: "Video Door Phones", href: "/solutions" },
+  { label: "Intrusion & Fire Alarms", href: "/solutions" },
+  { label: "Gate & Home Automation", href: "/solutions" },
+  { label: "PA System & AV", href: "/products?category=PA%20SYSTEM%20%26%20AV" },
+  { label: "Products Catalog", href: "/products" },
+];
+
+const BOTTOM_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Products", href: "/products" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Blogs", href: "/blogs" },
+  { label: "Contact", href: "/enquiry" },
+  { label: "XML Sitemap", href: "/sitemap.xml" },
+];
+
+const phoneDisplay = CONTACT_INFO.find((c) => c.icon === "phone")?.value ?? SITE_PHONE;
+const MAP_EMBED_URL = `https://www.google.com/maps?q=${SITE_GEO.latitude},${SITE_GEO.longitude}&z=16&output=embed`;
+
+function FooterHeading({ children }: { children: React.ReactNode }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="w-4 h-4"
-      aria-hidden="true"
-    >
-      <path
-        fillRule="evenodd"
-        d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z"
-        clipRule="evenodd"
-      />
-    </svg>
+    <h2 className="mb-5 border-l-4 border-white/80 pl-3 text-lg font-bold leading-tight text-white">
+      {children}
+    </h2>
   );
 }
 
-function EmailIcon() {
+function IconChip({ children }: { children: React.ReactNode }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="w-4 h-4"
-      aria-hidden="true"
-    >
-      <path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z" />
-      <path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" />
-    </svg>
+    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-red-700">
+      {children}
+    </span>
   );
 }
-
-function LocationIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="w-4 h-4"
-      aria-hidden="true"
-    >
-      <path
-        fillRule="evenodd"
-        d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.274 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-}
-
-const contactIcons = {
-  phone: PhoneIcon,
-  email: EmailIcon,
-  location: LocationIcon,
-};
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const guides = getAllPosts().slice(0, 5);
 
   return (
     <footer
       id="site-footer"
-      className="bg-gray-200/95 text-gray-900 relative overflow-hidden border-t border-gray-200"
       role="contentinfo"
+      className="relative text-white font-poppins"
+      style={{ backgroundColor: FOOTER_BG }}
     >
-      {/* Subtle dotted background pattern on left side */}
-      <div className="absolute top-0 left-0 bottom-0 w-1/3 opacity-[0.05] pointer-events-none overflow-hidden">
-        <svg width="100%" height="100%">
-          <pattern
-            id="pattern-circles"
-            x="0"
-            y="0"
-            width="20"
-            height="20"
-            patternUnits="userSpaceOnUse"
-          >
-            <circle cx="2" cy="2" r="1.5" fill="#e5e7eb"></circle>
-          </pattern>
-          <rect
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            fill="url(#pattern-circles)"
-          ></rect>
-        </svg>
-      </div>
+      <div className="mx-auto w-full max-w-7xl px-4 pt-14 pb-6 sm:px-6 lg:px-8">
+        {/* ── Main columns ── */}
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.1fr_1fr_1.15fr_1fr] lg:gap-8">
+          {/* About */}
+          <div>
+            <Link
+              href="/"
+              aria-label={`${SITE_NAME} - Home`}
+              className="inline-flex rounded-xl bg-white px-3 py-2 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              <Image
+                src="/images/logo/dss_logo.png"
+                alt={`${SITE_NAME} logo`}
+                width={140}
+                height={56}
+                style={{ height: 48, width: "auto" }}
+              />
+            </Link>
+            <p className="mt-5 text-[14px] leading-relaxed text-white/90">
+              {SITE_NAME}{" "}provides CCTV camera installation, repair &amp; AMC, access control,
+              biometric attendance and alarm systems across Delhi NCR. Serving homes and businesses
+              since {FOUNDING_YEAR} with genuine, warranty-backed brands.
+            </p>
 
-      <Container className="relative z-10 px-0 overflow-x-clip select-none">
-        <div className="relative z-10 px-4 py-10 sm:px-6 md:px-12 lg:px-16 lg:py-16">
-          <div className="flex flex-col gap-10 lg:flex-row lg:gap-8">
-            {/* Column 1: Brand and Bio */}
-            <div className="w-full lg:w-[35%] flex flex-col items-start pr-0 lg:pr-12 relative">
-              {/* Subtle vertical separator line (desktop only) */}
-              <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-px bg-gray-200"></div>
-
+            <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-white">
+              Need a security system?
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2.5">
               <Link
-                href="/"
-                className="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 rounded-lg mb-8"
-                aria-label={`${SITE_NAME} - Home`}
+                href="/enquiry"
+                className="rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-red-700! transition-colors hover:bg-red-50"
               >
-                <div className="bg-gray-50 rounded-full p-1 shadow-sm border border-gray-200">
-                  <Image
-                    src="/images/logo/dss_logo.png"
-                    alt="Digital Security Solutions logo"
-                    width={56}
-                    height={56}
-                    style={{ width: "auto", height: "auto" }}
-                    className="w-12 h-12 md:w-14 md:h-14"
-                  />
-                </div>
-                <span className="flex flex-col leading-tight">
-                  <span className="text-lg md:text-xl font-bold tracking-tight text-gray-900">
-                    DIGITAL SECURITY
-                  </span>
-                  <span className="text-lg md:text-xl font-bold tracking-tight text-red-600">
-                    SOLUTIONS
-                  </span>
-                </span>
+                Get Free Quote
               </Link>
+              <a
+                href={SITE_WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg border border-white/60 px-4 py-2.5 text-sm font-semibold text-white! transition-colors hover:bg-white/10"
+              >
+                WhatsApp Us
+              </a>
+            </div>
+          </div>
 
-              <p className="text-gray-600 text-[15px] leading-relaxed mb-10">
-                From purchasing to installation, we have got you covered.
-              </p>
-
-              {/* Social icons */}
-              <div className="flex items-center gap-4">
-                <a
-                  href={SITE_LINKEDIN_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${SITE_NAME} on LinkedIn`}
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-600 hover:text-white transition-all duration-300"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-4 h-4"
+          {/* Services */}
+          <nav aria-label="Services">
+            <FooterHeading>Our Services</FooterHeading>
+            <ul className="space-y-2.5">
+              {SERVICE_LINKS.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="group inline-flex items-start gap-1.5 text-[14px] font-medium text-white! transition-opacity hover:opacity-80"
                   >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                </a>
-                <a
-                  href={SITE_JUSTDIAL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${SITE_NAME} on JustDial`}
-                  className="h-10 px-3 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 font-bold text-sm hover:bg-red-600 hover:text-white transition-all duration-300"
-                >
-                  JD
-                </a>
-              </div>
-            </div>
-
-            {/* Columns 2 & 3: Links */}
-            <div className="w-full lg:w-[35%] flex flex-col gap-8 sm:flex-row sm:justify-between sm:gap-10 lg:flex-row lg:pl-6">
-              {FOOTER_LINK_GROUPS.map((group) => (
-                <div key={group.title} className="min-w-0 flex-1">
-                  <div className="mb-6 relative">
-                    <h3 className="text-[13px] font-bold text-red-600 tracking-wider">
-                      {group.title}
-                    </h3>
-                    <div className="absolute -bottom-2 left-0 w-6 h-px bg-red-600"></div>
-                  </div>
-                  <ul className="space-y-4">
-                    {group.links.map((link) => (
-                      <li key={`${link.href}-${link.label}`}>
-                        <Link
-                          href={link.href}
-                          className="text-[15px] font-medium text-gray-600 hover:text-red-600 transition-colors duration-200 flex items-center justify-between gap-3 group"
-                        >
-                          <span>{link.label}</span>
-                          <span className="text-gray-400 group-hover:text-red-600 transition-colors text-xs font-mono ml-4">
-                            &gt;
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                    <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                    {link.label}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
+          </nav>
 
-            {/* Column 4: Contact Us */}
-            <div className="w-full lg:w-[30%] lg:pl-10 relative">
-              <div className="mb-6 relative">
-                <h3 className="text-[13px] font-bold text-red-600 tracking-wider uppercase">
-                  Contact Us
-                </h3>
-                <div className="absolute -bottom-2 left-0 w-6 h-px bg-red-600"></div>
-              </div>
-
-              <ul className="space-y-6">
-                {CONTACT_INFO.map((item) => {
-                  const IconComp = contactIcons[item.icon];
-                  return (
-                    <li key={item.label} className="flex items-start gap-4">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 text-red-600 shrink-0 mt-1">
-                        <IconComp />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-[15px] font-semibold text-gray-900 mb-0.5">
-                          {item.label}
-                        </span>
-                        {item.value &&
-                          (item.href ? (
-                            <a
-                              href={item.href}
-                              className="text-[14px] text-gray-600 hover:text-red-600 transition-colors duration-200"
-                            >
-                              {item.value}
-                            </a>
-                          ) : (
-                            <span className="text-[14px] text-gray-600">
-                              {item.value}
-                            </span>
-                          ))}
-                      </div>
-                    </li>
-                  );
-                })}
+          {/* Contact */}
+          <div>
+            <FooterHeading>Contact Details</FooterHeading>
+            <address className="not-italic">
+              <ul className="space-y-4 text-[14px]">
+                <li className="flex items-start gap-3">
+                  <IconChip><MapPin className="h-4 w-4" aria-hidden="true" /></IconChip>
+                  <span className="leading-relaxed text-white/95">{SITE_ADDRESS}</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <IconChip><Phone className="h-4 w-4" aria-hidden="true" /></IconChip>
+                  <a href={`tel:${SITE_PHONE}`} className="font-semibold text-white! hover:underline">
+                    {phoneDisplay}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <IconChip><Mail className="h-4 w-4" aria-hidden="true" /></IconChip>
+                  <a href={`mailto:${SITE_EMAIL}`} className="break-all text-white! hover:underline">
+                    {SITE_EMAIL}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <IconChip><Clock className="h-4 w-4" aria-hidden="true" /></IconChip>
+                  <span className="text-white/95">Monday – Sunday: 10:30 AM – 07:30 PM</span>
+                </li>
               </ul>
-            </div>
+            </address>
           </div>
 
-          {/* Office Locations */}
-          <div className="mt-10 pt-10 border-t border-gray-200 lg:mt-14 lg:pt-14">
-            <div className="mb-6 relative">
-              <h3 className="text-[13px] font-bold text-red-600 tracking-wider uppercase">
-                Our Offices
-              </h3>
-              <div className="absolute  -bottom-2 left-0 w-6 h-px bg-red-600"></div>
+          {/* Map + social */}
+          <div>
+            <FooterHeading>Office Location</FooterHeading>
+            <div className="overflow-hidden rounded-xl border border-white/20 bg-white/10">
+              <iframe
+                src={MAP_EMBED_URL}
+                title={`${SITE_NAME} location on Google Maps`}
+                className="block h-40 w-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 bg-gray-200/95">
-              {OFFICE_LOCATIONS.map((office) => (
-                <div
-                  key={office.id}
-                  className="rounded-xl bg-gray-200/95 border border-red-100 px-5 py-4"
-                >
-                  <p className="text-[13px] font-bold text-gray-900 uppercase tracking-wide mb-1">
-                    {office.region}
-                  </p>
-                  <p className="text-[13px] font-semibold text-gray-800 mb-1">
-                    {office.label}
-                  </p>
-                  <p className="text-[14px] text-gray-600 leading-relaxed mb-2">
-                    {office.address}
-                  </p>
-                  <p className="text-[13px] text-gray-700">
-                    <span className="font-semibold">GSTIN:</span>{" "}
-                    {office.gstin}
-                  </p>
-                </div>
+            <a
+              href={SITE_MAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-white! hover:underline"
+            >
+              Get directions <ExternalLink className="h-3 w-3" aria-hidden="true" />
+            </a>
+
+            <div className="mt-4 flex items-center gap-2.5">
+              <a
+                href={SITE_LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${SITE_NAME} on LinkedIn`}
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-red-700! transition-transform hover:-translate-y-0.5"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </a>
+              <a
+                href={SITE_JUSTDIAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${SITE_NAME} on JustDial`}
+                className="flex h-10 items-center justify-center rounded-lg bg-white px-3 text-sm font-bold text-red-700! transition-transform hover:-translate-y-0.5"
+              >
+                JD
+              </a>
+              <a
+                href={SITE_WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Chat with ${SITE_NAME} on WhatsApp`}
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-red-700! transition-transform hover:-translate-y-0.5"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-4.5 w-4.5" aria-hidden="true">
+                  <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.4 9.4 0 0 1-1.44-5.01c0-5.2 4.24-9.43 9.44-9.43 2.52 0 4.89.98 6.67 2.77a9.37 9.37 0 0 1 2.76 6.67c0 5.2-4.24 9.43-9.44 9.43m8.03-17.46A11.27 11.27 0 0 0 12.05.72C5.8.72.7 5.8.7 12.07c0 2 .52 3.95 1.52 5.67L.6 23.28l5.68-1.49a11.3 11.3 0 0 0 5.43 1.38h.01c6.25 0 11.35-5.09 11.35-11.35 0-3.03-1.18-5.88-3.33-8.03" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Offices (pill row) ── */}
+        <div className="mt-12 border-t border-white/20 pt-8">
+          <FooterHeading>Our Offices</FooterHeading>
+          <ul className="flex flex-wrap gap-2.5">
+            {OFFICE_LOCATIONS.map((office) => (
+              <li
+                key={office.id}
+                className="inline-flex max-w-full items-start gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[13px] text-white/95"
+              >
+                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                <span>
+                  <strong className="font-semibold text-white">{office.region}:</strong> {office.address}
+                  <span className="text-white/70"> · GSTIN {office.gstin}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* ── Guides (pill row, internal links) ── */}
+        {guides.length > 0 && (
+          <div className="mt-8">
+            <FooterHeading>Security Guides</FooterHeading>
+            <ul className="flex flex-wrap gap-2.5">
+              {guides.map((post) => (
+                <li key={post.slug}>
+                  <Link
+                    href={`/blogs/${post.slug}`}
+                    className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[13px] font-medium text-white! transition-colors hover:bg-white/20"
+                  >
+                    {post.title}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-        </div>
+        )}
 
-        {/* Bottom bar inside the card */}
-        <div className="relative z-10 px-4 md:px-12 lg:px-16 pb-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 sm:px-6 lg:gap-6">
-          <p className="text-sm font-medium text-gray-500">
-            &copy; {currentYear} {SITE_NAME}. All rights reserved.
+        {/* ── Bottom bar ── */}
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/20 pt-6 md:flex-row">
+          <p className="text-center text-sm text-white/90 md:text-left">
+            &copy; {currentYear} {SITE_NAME}. All Rights Reserved.
           </p>
-
-          {/* Payment Icons */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-            <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-black/50">
-              <span className="sr-only">PayPal</span>
-              <span className="font-extrabold text-sm tracking-tight text-gray-700">
-                PayPal
-              </span>
-            </div>
-            <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-black/50">
-              <span className="font-black tracking-tight text-gray-700 text-sm leading-none italic">
-                stripe
-              </span>
-            </div>
-            <div className="h-8 bg-gray-50 rounded flex items-center justify-center px-3 min-w-15 border border-black/50">
-              <span className="font-bold text-sm tracking-tight text-red-600">
-                Mastercard
-              </span>
-            </div>
-          </div>
+          <nav aria-label="Footer">
+            <ul className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[13px]">
+              {BOTTOM_LINKS.map((link, i) => (
+                <li key={link.href} className="flex items-center gap-2">
+                  {i > 0 && <span className="text-white/50" aria-hidden="true">•</span>}
+                  <Link href={link.href} className="text-white! hover:underline">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }

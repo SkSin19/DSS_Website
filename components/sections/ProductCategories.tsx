@@ -19,40 +19,40 @@ function CategoryCard({
     delay: index * 200,
   });
 
+  // Layout responds to the card's own width (container queries), so it adapts
+  // both to small phones and to the narrow 2-column grid on tablets:
+  // narrow card → image on top, text below; wide card → text left, image right.
   return (
     <Link
       ref={ref}
       href={category.href}
-      className="category-card group relative flex min-h-55 sm:min-h-70 md:min-h-75 w-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 border border-gray-200 bg-white/30 shadow-sm hover:shadow-md transition-all duration-300"
+      className="category-card @container group block h-full w-full overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md"
     >
-      {/* Text content */}
-      <div className="relative z-10 max-w-[55%] flex flex-col justify-between min-h-40 sm:min-h-55 h-full">
-        <div>
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-black mb-2 sm:mb-3 group-hover:text-red-600 transition-colors">
+      <div className="flex h-full flex-col @md:min-h-72 @md:flex-row">
+        {/* Image */}
+        <div className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-gray-100 @md:order-last @md:aspect-auto @md:w-[45%]">
+          <Image
+            src={category.imageSrc}
+            alt={category.imageAlt}
+            fill
+            className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+          />
+        </div>
+
+        {/* Text */}
+        <div className="flex flex-1 flex-col p-5 @sm:p-6 @lg:p-8">
+          <h3 className="mb-2 text-xl font-bold leading-tight text-black! transition-colors group-hover:text-red-600! @sm:text-2xl @xl:text-3xl">
             {category.title}
           </h3>
-          <p className="text-gray-500 text-xs sm:text-sm md:text-base leading-relaxed mb-4">
+          <p className="text-sm leading-relaxed text-gray-500! @xl:text-base">
             {category.description}
           </p>
+          <span className="mt-auto inline-flex items-center pt-5 text-sm font-semibold text-black! transition-colors group-hover:text-red-600!">
+            Explore category
+            <span className="ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </span>
         </div>
-        <span className="inline-flex items-center text-xs sm:text-sm font-semibold text-black group-hover:text-red-600 transition-colors mt-auto">
-          Explore category{" "}
-          <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>
-        </span>
-      </div>
-
-      {/* Image - full card height, pinned to right edge */}
-      <div className="absolute inset-y-0 right-0 w-[50%] md:w-[50%]">
-        <Image
-          src={category.imageSrc}
-          alt={category.imageAlt}
-          fill
-          className="object-contain object-right transition-transform duration-500 group-hover:scale-100"
-          sizes="(max-width: 768px) 50vw, 25vw"
-        />
-
-        {/* Gradient: white → gray-200 (matches card bg), left-to-right */}
-        {/* <div className="absolute inset-0 bg-linear-to-r from-gray-200 via-gray-200/60 to-transparent pointer-events-none" /> */}
       </div>
     </Link>
   );

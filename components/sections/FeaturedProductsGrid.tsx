@@ -43,12 +43,12 @@ function ProductCard({
     <Link
       ref={ref}
       href={href}
-      className="group flex flex-col rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full border border-gray-200"
+      className="group flex flex-col rounded-2xl sm:rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative h-full border border-gray-200"
       style={{ backgroundColor: THEME_COLORS.shadowGrey200 }}
     >
       {/* Image */}
       <div
-        className="p-3 sm:p-4 flex items-center justify-center overflow-hidden"
+        className="p-2.5 sm:p-4 flex items-center justify-center overflow-hidden"
         style={{ backgroundColor: THEME_COLORS.shadowGrey100 }}
       >
         <div
@@ -67,23 +67,23 @@ function ProductCard({
       </div>
 
       {/* Content */}
-      <div className="p-4 sm:p-5 flex-1 flex flex-col">
+      <div className="p-3 sm:p-5 flex-1 flex flex-col min-w-0">
         {/* Category + Company badges */}
-        <div className="flex flex-wrap gap-1.5 mb-3">
+        <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3 min-w-0">
           {product.company && (
-            <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-red-700">
+            <span className="inline-block max-w-full truncate rounded-full bg-red-50 px-2 py-0.5 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-red-700!">
               {product.company}
             </span>
           )}
           {product.category && (
-            <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-gray-700">
+            <span className="hidden sm:inline-block max-w-full truncate rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-700!">
               {product.category}
             </span>
           )}
         </div>
 
-        <div className="flex items-start gap-3 flex-1">
-          <div className="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-red-600 shrink-0 border border-red-100">
+        <div className="flex items-start gap-3 flex-1 min-w-0">
+          <div className="hidden sm:flex w-9 h-9 rounded-full bg-red-50 items-center justify-center text-red-600 shrink-0 border border-red-100" aria-hidden="true">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -99,22 +99,22 @@ function ProductCard({
               />
             </svg>
           </div>
-          <div className="flex-1">
-            <h4 className="text-base font-bold text-gray-900 mb-1 line-clamp-1">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm sm:text-base font-bold leading-snug text-gray-900! mb-1 line-clamp-2 sm:line-clamp-1">
               {product.name}
-            </h4>
+            </h3>
             {product.model && (
-              <p className="text-[9px] font-medium uppercase tracking-[0.18em] text-red-600 mb-1">
+              <p className="text-[10px] font-medium uppercase tracking-wider text-red-600! mb-1 truncate">
                 Model {product.model}
               </p>
             )}
-            <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">
+            <p className="text-gray-500! text-[11px] sm:text-xs leading-relaxed line-clamp-2">
               {product.shortDescription || product.description}
             </p>
           </div>
         </div>
 
-        <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-red-600">
+        <div className="mt-3 sm:mt-4 inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-red-600!">
           View details{" "}
           <span className="transition-transform group-hover:translate-x-1">
             →
@@ -194,7 +194,7 @@ export default function FeaturedProductsGrid({
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+            <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
               {visibleProducts.map((product, index) => (
                 <ProductCard
                   key={product._id}

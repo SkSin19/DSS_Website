@@ -244,7 +244,7 @@ export default function DiscoverBrands() {
 
         <div 
           ref={carouselRevealRef} 
-          className="relative mt-8 sm:mt-12 lg:mt-16 max-w-7xl mx-auto px-4 md:px-0"
+          className="relative mt-8 sm:mt-12 lg:mt-16 max-w-7xl mx-auto"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={() => setIsPaused(true)}
@@ -253,7 +253,7 @@ export default function DiscoverBrands() {
           {/* Navigation Arrows */}
           <button
             onClick={() => scroll("left")}
-            className="absolute left-2 lg:-left-6 top-[calc(50%-24px)] -translate-y-1/2 z-10 w-12 h-12 rounded-full border-red-600 bg-white/95 dark:bg-gray-900/95 shadow-xl border hover:bg-red-600 hover:text-white flex items-center justify-center transition-all duration-300 pointer-events-auto cursor-pointer"
+            className="absolute left-2 lg:-left-6 top-[calc(50%-24px)] -translate-y-1/2 z-10 w-12 h-12 rounded-full border-red-600 bg-white/95 dark:bg-gray-900/95 shadow-xl border hover:bg-red-600 hover:text-white hidden md:flex items-center justify-center transition-all duration-300 pointer-events-auto cursor-pointer"
             aria-label="Scroll left"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -261,7 +261,7 @@ export default function DiscoverBrands() {
           
           <button
             onClick={() => scroll("right")}
-            className="absolute right-2 lg:-right-6 top-[calc(50%-24px)] -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/95 dark:bg-gray-900/95 shadow-xl border border-red-600 hover:bg-red-600 hover:text-white flex items-center justify-center transition-all duration-300 pointer-events-auto cursor-pointer"
+            className="absolute right-2 lg:-right-6 top-[calc(50%-24px)] -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/95 dark:bg-gray-900/95 shadow-xl border border-red-600 hover:bg-red-600 hover:text-white hidden md:flex items-center justify-center transition-all duration-300 pointer-events-auto cursor-pointer"
             aria-label="Scroll right"
           >
             <ChevronRight className="w-6 h-6" />
@@ -270,7 +270,10 @@ export default function DiscoverBrands() {
           {/* Carousel Scroll Container */}
           <div
             ref={scrollRef}
-            className="flex flex-row flex-nowrap overflow-x-auto gap-4 md:gap-6 pb-6 md:pb-16 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
+            // Phones: break out of the container padding so cards run to the
+            // screen edge, and fade the partially visible neighbours instead of
+            // clipping them abruptly.
+            className="flex flex-row flex-nowrap overflow-x-auto gap-4 md:gap-6 pt-2 pb-6 md:pb-16 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none max-md:mx-[calc(var(--section-padding-x)*-1)] max-md:[mask-image:linear-gradient(to_right,transparent,black_18%,black_82%,transparent)] max-md:[-webkit-mask-image:linear-gradient(to_right,transparent,black_18%,black_82%,transparent)]"
             style={{
               display: "flex",
               flexDirection: "row",

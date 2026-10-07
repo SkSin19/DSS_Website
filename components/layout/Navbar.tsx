@@ -547,12 +547,12 @@ export default function Navbar() {
       {/* ── Top contact strip ── */}
       <div className="bg-red-700 text-white">
         <div className="container-main flex h-9 items-center justify-between gap-4 text-xs sm:text-[13px]">
-          <p className="hidden sm:inline-flex items-center gap-1.5 font-medium">
+          <p className="hidden lg:inline-flex items-center gap-1.5 whitespace-nowrap font-medium">
             <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
             Trusted Security Partner Since {FOUNDING_YEAR}
           </p>
-          <div className="flex w-full items-center justify-between gap-5 sm:w-auto sm:justify-end">
-            <span className="hidden md:inline-flex items-center gap-1.5 text-white/90">
+          <div className="flex w-full items-center justify-between gap-5 whitespace-nowrap lg:w-auto lg:justify-end">
+            <span className="hidden xl:inline-flex items-center gap-1.5 whitespace-nowrap text-white/90">
               <Clock className="h-3.5 w-3.5" aria-hidden="true" />
               Mon–Sun 10:30 AM – 7:30 PM
             </span>

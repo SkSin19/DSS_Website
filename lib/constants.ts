@@ -264,8 +264,8 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "PA System & AV",
     description: "Professional public address and audio-visual systems for clear, powerful sound everywhere.",
     href: "/products?category=PA%20SYSTEM%20%26%20AV",
-    imageSrc: "/images/categories/intercom-communication-solutions.png",
-    imageAlt: "PA system speaker and AV equipment",
+    imageSrc: "/images/services/pa-systems-and-av.png",
+    imageAlt: "PA system mixer, microphones and AV display in a conference room",
   },
   {
     title: "Surveillance",

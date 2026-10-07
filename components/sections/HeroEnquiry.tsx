@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ShieldCheck,
   Phone,
   CalendarCheck,
-  CheckCircle2,
+  ArrowUpRight,
 } from "lucide-react";
 import EnquiryForm from "@/components/sections/EnquiryForm";
 import {
@@ -23,12 +24,32 @@ const STATS = [
 ];
 
 const SERVICES = [
-  { label: "CCTV Installation & Repair", href: "/products?category=Surveillance" },
-  { label: "Access Control Systems", href: "/products?category=Access%20Control" },
-  { label: "Biometric Attendance", href: "/products?category=Biometric%20%26%20Identity" },
-  { label: "Video Door Phones", href: "/solutions" },
-  { label: "Intrusion Alarm Systems", href: "/solutions" },
-  { label: "Gate & Home Automation", href: "/solutions" },
+  {
+    label: "CCTV & Surveillance",
+    href: "/products?category=Surveillance",
+    image: "/images/categories/video-security-cctv-systems.png",
+  },
+  {
+    label: "Access Control",
+    href: "/products?category=Access%20Control",
+    image: "/images/categories/access-control-smart-entry.png",
+  },
+  {
+    label: "Biometric Attendance",
+    href: "/products?category=Biometric%20%26%20Identity",
+    image: "/images/services/biometric-attendance.png",
+  },
+  {
+    label: "Gate Automation",
+    href: "/solutions",
+    image: "/images/services/gate-automation.png",
+  },
+];
+
+const CREDENTIALS = [
+  { src: "/images/certifications/msme.webp", alt: "MSME registered - Ministry of MSME, Govt. of India", w: 300, h: 132 },
+  { src: "/images/certifications/gem.webp", alt: "Registered seller on GeM (Government e-Marketplace)", w: 174, h: 78 },
+  { src: "/images/certifications/iso-9001-2015.webp", alt: "ISO 9001:2015 certified", w: 300, h: 110 },
 ];
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -61,9 +82,9 @@ export default function HeroEnquiry() {
         }}
       />
 
-      <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-4 py-10 sm:px-6 md:py-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:px-8 lg:py-16">
+      <div className="relative grid w-full grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
         {/* ── LEFT: pitch ── */}
-        <div className="flex flex-col justify-center">
+        <div className="flex w-full max-w-[720px] flex-col justify-center px-4 py-10 sm:px-6 md:py-14 lg:ml-auto lg:py-16 lg:pr-12 lg:pl-8">
           <p className="inline-flex w-fit items-center gap-2 rounded-full border border-red-100 bg-red-50 px-3.5 py-1.5 text-xs font-medium text-red-700! sm:text-[13px]">
             <ShieldCheck className="h-4 w-4" aria-hidden="true" />
             Delhi NCR&apos;s Trusted Security Partner Since {FOUNDING_YEAR}
@@ -120,16 +141,41 @@ export default function HeroEnquiry() {
             </a>
           </div>
 
-          {/* services */}
-          <ul className="mt-8 grid max-w-xl grid-cols-1 gap-x-6 gap-y-2.5 border-t border-gray-200 pt-6 sm:grid-cols-2">
+          {/* credentials */}
+          <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-gray-500!">Certified &amp; registered</span>
+            {CREDENTIALS.map((c) => (
+              <Image
+                key={c.src}
+                src={c.src}
+                alt={c.alt}
+                width={c.w}
+                height={c.h}
+                style={{ height: 34, width: "auto" }}
+              />
+            ))}
+          </div>
+
+          {/* services as image tiles */}
+          <ul className="mt-7 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
             {SERVICES.map((service) => (
               <li key={service.label}>
                 <Link
                   href={service.href}
-                  className="group inline-flex items-center gap-2 text-sm text-gray-700! transition-colors hover:text-red-600!"
+                  className="group relative block aspect-4/3 overflow-hidden rounded-xl border border-gray-200 bg-gray-100 shadow-sm sm:aspect-square"
                 >
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-red-600!" aria-hidden="true" />
-                  {service.label}
+                  <Image
+                    src={service.image}
+                    alt={service.label}
+                    fill
+                    sizes="(max-width: 640px) 50vw, 160px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span className="absolute inset-0 bg-linear-to-t from-gray-950/85 via-gray-950/20 to-transparent" />
+                  <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-1 p-2.5 text-[13px] font-semibold leading-tight text-white!">
+                    {service.label}
+                    <ArrowUpRight className="h-4 w-4 shrink-0 opacity-70 transition-opacity group-hover:opacity-100" aria-hidden="true" />
+                  </span>
                 </Link>
               </li>
             ))}
@@ -137,8 +183,18 @@ export default function HeroEnquiry() {
         </div>
 
         {/* ── RIGHT: enquiry form ── */}
-        <div id="enquiry" className="scroll-mt-36 lg:self-center">
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-[0_20px_50px_rgba(17,24,39,0.08)] sm:p-7">
+        <div id="enquiry" className="relative flex scroll-mt-36 items-center justify-center px-4 py-10 sm:px-6 md:py-14 lg:px-10 lg:py-16">
+          <Image
+            src="/images/hero/hero-security-showcase-business.webp"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 45vw"
+            className="object-cover object-center"
+          />
+          <div aria-hidden="true" className="absolute inset-0 bg-gray-950/30" />
+          <div aria-hidden="true" className="absolute inset-0 bg-linear-to-br from-red-900/20 via-transparent to-gray-950/25" />
+          <div className="relative w-full max-w-[480px] rounded-2xl border border-gray-200 bg-white p-5 shadow-[0_24px_60px_rgba(17,24,39,0.18)] sm:p-7 lg:border-white/60">
             <p className="inline-flex items-center gap-2 text-xs font-medium text-red-700!">
               <CalendarCheck className="h-4 w-4" aria-hidden="true" />
               Book a Free Site Survey

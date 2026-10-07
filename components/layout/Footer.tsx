@@ -6,7 +6,7 @@ import {
   SITE_ADDRESS,
   SITE_EMAIL,
   SITE_PHONE,
-  SITE_GEO,
+  SITE_MAP_QUERY,
   SITE_MAP_URL,
   SITE_LINKEDIN_URL,
   SITE_JUSTDIAL_URL,
@@ -15,7 +15,6 @@ import {
   OFFICE_LOCATIONS,
   FOUNDING_YEAR,
 } from "@/lib/constants";
-import { getAllPosts } from "@/lib/blog";
 
 /* Footer brand colour — change here to retheme the whole footer. */
 const FOOTER_BG = "#b91c1c";
@@ -43,7 +42,9 @@ const BOTTOM_LINKS = [
 ];
 
 const phoneDisplay = CONTACT_INFO.find((c) => c.icon === "phone")?.value ?? SITE_PHONE;
-const MAP_EMBED_URL = `https://www.google.com/maps?q=${SITE_GEO.latitude},${SITE_GEO.longitude}&z=16&output=embed`;
+// Query by business name so the map (and a click through to Google Maps)
+// shows the named listing, not a bare coordinate pin.
+const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(SITE_MAP_QUERY)}&z=16&output=embed`;
 
 function FooterHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -63,7 +64,6 @@ function IconChip({ children }: { children: React.ReactNode }) {
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const guides = getAllPosts().slice(0, 5);
 
   return (
     <footer
@@ -85,9 +85,9 @@ export default function Footer() {
               <Image
                 src="/images/logo/dss_logo.png"
                 alt={`${SITE_NAME} logo`}
-                width={140}
-                height={56}
-                style={{ height: 48, width: "auto" }}
+                width={240}
+                height={96}
+                style={{ height: 80, width: "auto" }}
               />
             </Link>
             <p className="mt-5 text-[14px] leading-relaxed text-white/90">
@@ -239,25 +239,6 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-
-        {/* ── Guides (pill row, internal links) ── */}
-        {guides.length > 0 && (
-          <div className="mt-8">
-            <FooterHeading>Security Guides</FooterHeading>
-            <ul className="flex flex-wrap gap-2.5">
-              {guides.map((post) => (
-                <li key={post.slug}>
-                  <Link
-                    href={`/blogs/${post.slug}`}
-                    className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[13px] font-medium text-white! transition-colors hover:bg-white/20"
-                  >
-                    {post.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
 
         {/* ── Bottom bar ── */}
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/20 pt-6 md:flex-row">

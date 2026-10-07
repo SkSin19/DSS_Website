@@ -22,7 +22,6 @@ const hasAlreadySubmitted = () => {
 };
 
 const sanitizeName    = (v: string) => v.replace(/[\x00-\x1F<>]/g, "").slice(0, 100);
-const sanitizeEmail   = (v: string) => v.trim().toLowerCase().replace(/[^a-z0-9@._+\-]/g, "").slice(0, 254);
 const sanitizePhone   = (v: string) => v.replace(/\D/g, "").slice(0, 10);
 const sanitizeCity    = (v: string) => v.replace(/[\x00-\x1F<>]/g, "").slice(0, 100);
 const sanitizeMessage = (v: string) => v.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F<>]/g, "").slice(0, 2000);
@@ -32,7 +31,6 @@ const EnquiryPopup: React.FC = () => {
 
   const [formData, setFormData] = useState({
     fullName: "",
-    email: "",
     phone: "",
     city: "",
     message: "",
@@ -104,7 +102,6 @@ const EnquiryPopup: React.FC = () => {
   const sanitizeField = (name: string, raw: string) => {
     switch (name) {
       case "fullName": return sanitizeName(raw);
-      case "email":    return sanitizeEmail(raw);
       case "phone":    return sanitizePhone(raw);
       case "city":     return sanitizeCity(raw);
       case "message":  return sanitizeMessage(raw);
@@ -123,8 +120,6 @@ const EnquiryPopup: React.FC = () => {
     const errs: Record<string, string> = {};
     if (!formData.fullName || formData.fullName.trim().length < 2)
       errs.fullName = "Enter your full name (at least 2 characters).";
-    if (!formData.email || !/^\S+@\S+\.\S+$/.test(formData.email))
-      errs.email = "Enter a valid email address.";
     if (!formData.phone || !/^\d{10}$/.test(formData.phone))
       errs.phone = "Enter a valid 10-digit phone number.";
     if (!formData.city || formData.city.trim().length < 2)
@@ -152,7 +147,6 @@ const EnquiryPopup: React.FC = () => {
       await submitGeneralEnquiry({
         name: formData.fullName,
         company: "",
-        email: formData.email,
         phoneCountryCode: "+91",
         phoneNumber: formData.phone,
         city: formData.city,
@@ -162,7 +156,7 @@ const EnquiryPopup: React.FC = () => {
       });
 
       setSubmitted(true);
-      setFormData({ fullName: "", email: "", phone: "", city: "", message: "" });
+      setFormData({ fullName: "", phone: "", city: "", message: "" });
       setTurnstileToken("");
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.reset(widgetIdRef.current);
@@ -242,13 +236,6 @@ const EnquiryPopup: React.FC = () => {
                 <input type="text" name="fullName" placeholder="Full name *" value={formData.fullName} onChange={handleChange} maxLength={100}
                   className={inputClass(!!errors.fullName)} />
                 {errors.fullName && <p className="text-red-500 text-xs">{errors.fullName}</p>}
-              </div>
-
-              {/* Email */}
-              <div className="flex flex-col gap-1">
-                <input type="email" name="email" placeholder="Email address *" value={formData.email} onChange={handleChange} maxLength={254}
-                  className={inputClass(!!errors.email)} />
-                {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
               </div>
 
               {/* Phone */}

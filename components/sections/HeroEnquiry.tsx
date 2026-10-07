@@ -183,7 +183,7 @@ export default function HeroEnquiry() {
         </div>
 
         {/* ── RIGHT: enquiry form ── */}
-        <div id="enquiry" className="relative flex scroll-mt-36 items-center justify-center px-4 py-10 sm:px-6 md:py-14 lg:px-10 lg:py-16">
+        <div id="enquiry" className="relative hidden md:flex scroll-mt-36 items-center justify-center px-4 py-10 sm:px-6 md:py-14 lg:px-10 lg:py-16">
           <Image
             src="/images/hero/hero-security-showcase-business.webp"
             alt=""

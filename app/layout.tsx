@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import EnquiryPopup from "@/components/sections/EnquiryPopup";
+import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
@@ -282,6 +283,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <EnquiryPopup />
+        <WhatsAppFloat />
       </body>
     </html>
   );

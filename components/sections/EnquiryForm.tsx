@@ -3,6 +3,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { User, Phone, MapPin, Send } from "lucide-react";
 import { submitGeneralEnquiry } from "@/lib/enquiry-api";
 
 declare global {
@@ -35,12 +36,11 @@ export const ENQUIRY_SERVICES = [
 ] as const;
 
 const sanitizeName    = (v: string) => v.replace(/[\x00-\x1F<>]/g, "").slice(0, 100);
-const sanitizeEmail   = (v: string) => v.trim().toLowerCase().replace(/[^a-z0-9@._+\-]/g, "").slice(0, 254);
 const sanitizePhone   = (v: string) => v.replace(/\D/g, "").slice(0, 10);
 const sanitizeCity    = (v: string) => v.replace(/[\x00-\x1F<>]/g, "").slice(0, 100);
 const sanitizeMessage = (v: string) => v.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F<>]/g, "").slice(0, 1900);
 
-const EMPTY_FORM = { fullName: "", email: "", phone: "", service: "", city: "", message: "" };
+const EMPTY_FORM = { fullName: "", phone: "", service: "", city: "", message: "" };
 
 type EnquiryFormProps = {
   /** Unique prefix so label/input ids don't collide if two forms are on a page. */
@@ -48,6 +48,8 @@ type EnquiryFormProps = {
   /** Pre-selects a service id from ENQUIRY_SERVICES. */
   defaultService?: string;
   submitLabel?: string;
+  /** Put every field on its own row (for wider, standalone layouts). */
+  stacked?: boolean;
 };
 
 const inputClass = (hasError?: boolean) =>
@@ -56,11 +58,13 @@ const inputClass = (hasError?: boolean) =>
   }`;
 
 const labelClass = "text-gray-700 text-[13px] font-medium";
+const iconClass = "pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400";
 
 export default function EnquiryForm({
   idPrefix,
   defaultService = "",
   submitLabel = "Get Free Quote",
+  stacked = false,
 }: EnquiryFormProps) {
   const [formData, setFormData] = useState({ ...EMPTY_FORM, service: defaultService });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -112,7 +116,6 @@ export default function EnquiryForm({
   const sanitizeField = (name: string, raw: string) => {
     switch (name) {
       case "fullName": return sanitizeName(raw);
-      case "email":    return sanitizeEmail(raw);
       case "phone":    return sanitizePhone(raw);
       case "city":     return sanitizeCity(raw);
       case "message":  return sanitizeMessage(raw);
@@ -138,8 +141,6 @@ export default function EnquiryForm({
       errs.fullName = "Enter your full name.";
     if (!formData.phone || !/^\d{10}$/.test(formData.phone))
       errs.phone = "Enter a valid 10-digit mobile number.";
-    if (!formData.email || !/^\S+@\S+\.\S+$/.test(formData.email))
-      errs.email = "Enter a valid email address.";
     return errs;
   };
 
@@ -167,7 +168,6 @@ export default function EnquiryForm({
       await submitGeneralEnquiry({
         name: formData.fullName,
         company: "",
-        email: formData.email,
         phoneCountryCode: "+91",
         phoneNumber: formData.phone,
         city: formData.city,
@@ -229,11 +229,14 @@ export default function EnquiryForm({
         <label htmlFor={id("fullName")} className={labelClass}>
           Full Name <span className="text-red-600">*</span>
         </label>
-        <input
-          id={id("fullName")} type="text" name="fullName" autoComplete="name"
-          placeholder="e.g., Rahul Sharma" value={formData.fullName} onChange={handleChange} maxLength={100}
-          aria-invalid={!!errors.fullName} className={inputClass(!!errors.fullName)}
-        />
+        <div className="relative">
+          <User className={iconClass} aria-hidden="true" />
+          <input
+            id={id("fullName")} type="text" name="fullName" autoComplete="name"
+            placeholder="e.g., Rahul Sharma" value={formData.fullName} onChange={handleChange} maxLength={100}
+            aria-invalid={!!errors.fullName} className={`${inputClass(!!errors.fullName)} pl-10`}
+          />
+        </div>
         {errors.fullName && <p className="text-red-600 text-xs">{errors.fullName}</p>}
       </div>
 
@@ -243,28 +246,19 @@ export default function EnquiryForm({
         </label>
         <div className="flex gap-2">
           <span className="flex items-center rounded-lg border border-gray-300 bg-gray-50 px-3 text-sm text-gray-600">+91</span>
-          <input
-            id={id("phone")} type="tel" name="phone" autoComplete="tel-national" inputMode="numeric"
-            placeholder="10-digit mobile number" value={formData.phone} onChange={handleChange} maxLength={10}
-            aria-invalid={!!errors.phone} className={inputClass(!!errors.phone)}
-          />
+          <div className="relative flex-1">
+            <Phone className={iconClass} aria-hidden="true" />
+            <input
+              id={id("phone")} type="tel" name="phone" autoComplete="tel-national" inputMode="numeric"
+              placeholder="10-digit mobile number" value={formData.phone} onChange={handleChange} maxLength={10}
+              aria-invalid={!!errors.phone} className={`${inputClass(!!errors.phone)} pl-10`}
+            />
+          </div>
         </div>
         {errors.phone && <p className="text-red-600 text-xs">{errors.phone}</p>}
       </div>
 
-      <div className="flex flex-col gap-1.5">
-        <label htmlFor={id("email")} className={labelClass}>
-          Email Address <span className="text-red-600">*</span>
-        </label>
-        <input
-          id={id("email")} type="email" name="email" autoComplete="email"
-          placeholder="you@example.com" value={formData.email} onChange={handleChange} maxLength={254}
-          aria-invalid={!!errors.email} className={inputClass(!!errors.email)}
-        />
-        {errors.email && <p className="text-red-600 text-xs">{errors.email}</p>}
-      </div>
-
-      <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+      <div className={`grid grid-cols-1 gap-3.5 ${stacked ? "" : "sm:grid-cols-2"}`}>
         <div className="flex flex-col gap-1.5">
           <label htmlFor={id("service")} className={labelClass}>Required Service</label>
           <div className="relative">
@@ -285,11 +279,14 @@ export default function EnquiryForm({
 
         <div className="flex flex-col gap-1.5">
           <label htmlFor={id("city")} className={labelClass}>Location / Area</label>
-          <input
-            id={id("city")} type="text" name="city" autoComplete="address-level2"
-            placeholder="e.g., Laxmi Nagar, Noida" value={formData.city} onChange={handleChange} maxLength={100}
-            className={inputClass()}
-          />
+          <div className="relative">
+            <MapPin className={iconClass} aria-hidden="true" />
+            <input
+              id={id("city")} type="text" name="city" autoComplete="address-level2"
+              placeholder="e.g., Laxmi Nagar, Noida" value={formData.city} onChange={handleChange} maxLength={100}
+              className={`${inputClass()} pl-10`}
+            />
+          </div>
         </div>
       </div>
 
@@ -312,9 +309,10 @@ export default function EnquiryForm({
       <button
         type="submit"
         disabled={loading || !turnstileToken}
-        className="mt-1 w-full rounded-lg bg-red-600 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? "Submitting..." : submitLabel}
+        {!loading && <Send className="h-4 w-4" aria-hidden="true" />}
       </button>
       <p className="text-center text-[11px] text-gray-500">
         No spam. We only use your details to respond to this enquiry.

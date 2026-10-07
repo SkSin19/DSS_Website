@@ -73,7 +73,7 @@ function MarqueeRow({ clients, reverse = false }: { clients: Client[]; reverse?:
 }
 
 /** Home-page "Our Clients" section: sector breakdown + two scrolling logo rows. */
-export default function OurClients() {
+export default function OurClients({ ctaHref = "/enquiry" }: { ctaHref?: string } = {}) {
   // Interleave so each row mixes sectors instead of grouping them.
   const rowA = CLIENTS.filter((_, i) => i % 2 === 0);
   const rowB = CLIENTS.filter((_, i) => i % 2 === 1);
@@ -131,7 +131,7 @@ export default function OurClients() {
       <div className="mx-auto mt-12 flex w-full max-w-7xl flex-col items-center justify-center gap-4 px-4 text-center sm:flex-row sm:px-6 lg:px-8">
         <p className="text-gray-700!">Want the same reliability for your premises?</p>
         <Link
-          href="/enquiry"
+          href={ctaHref}
           className="group inline-flex items-center gap-2 rounded-lg bg-red-600 px-6 py-3 text-sm font-semibold text-white! shadow-sm transition-colors hover:bg-red-700"
         >
           Get a free Site Survey

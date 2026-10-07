@@ -8,7 +8,8 @@ export type SubmitEnquiryPayload = {
   productSlug: string;
   productModel: string;
   company: string;
-  email: string;
+  name: string;
+  email?: string;
   phoneCountryCode: string;
   phoneNumber: string;
   message: string;
@@ -43,7 +44,7 @@ export async function submitEnquiry(payload: SubmitEnquiryPayload): Promise<Subm
 export type SubmitGeneralEnquiryPayload = {
   name: string;
   company: string;
-  email: string;
+  email?: string;
   phoneCountryCode: string;
   phoneNumber: string;
   city: string;

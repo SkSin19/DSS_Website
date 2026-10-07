@@ -4,8 +4,8 @@ import DiscoverBrands from "@/components/sections/DiscoverBrands";
 import BrandMarquee from "@/components/sections/BrandMarquee";
 
 import ProductCategories from "@/components/sections/ProductCategories";
-import SmarterSecurity from "@/components/sections/SmarterSecurity";
-import PremiumDesign from "@/components/sections/PremiumDesign";
+// import SmarterSecurity from "@/components/sections/SmarterSecurity";
+// import PremiumDesign from "@/components/sections/PremiumDesign";
 import FeaturedProducts from "@/components/sections/FeaturedProducts";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import LatestBlogs from "@/components/sections/LatestBlogs";
@@ -43,13 +43,15 @@ export default function Home() {
         <DiscoverBrands />
         <BrandMarquee />
         <ProductCategories />
-        <SmarterSecurity />
+      </div>
+      <OurClients />
+      <div className="select-none">
+        {/* <SmarterSecurity /> */}
         {/* <Bestsellers /> */}
-        <PremiumDesign />
+        {/* <PremiumDesign /> */}
         <FeaturedProducts />
         <WhyChooseUs />
       </div>
-      <OurClients />
       <LatestBlogs />
     </div>
   );

@@ -14,6 +14,7 @@ import {
   SITE_EMAIL,
   CONTACT_INFO,
   FOUNDING_YEAR,
+  SITE_WHATSAPP_URL,
 } from "@/lib/constants";
 import { Phone, Mail, Clock, ShieldCheck } from "lucide-react";
 import { apiGet } from "@/utils/api";
@@ -21,6 +22,14 @@ import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import dynamic from "next/dynamic";
+
+function WhatsAppGlyph({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.4 9.4 0 0 1-1.44-5.01c0-5.2 4.24-9.43 9.44-9.43 2.52 0 4.89.98 6.67 2.77a9.37 9.37 0 0 1 2.76 6.67c0 5.2-4.24 9.43-9.44 9.43m8.03-17.46A11.27 11.27 0 0 0 12.05.72C5.8.72.7 5.8.7 12.07c0 2 .52 3.95 1.52 5.67L.6 23.28l5.68-1.49a11.3 11.3 0 0 0 5.43 1.38h.01c6.25 0 11.35-5.09 11.35-11.35 0-3.03-1.18-5.88-3.33-8.03" />
+    </svg>
+  );
+}
 
 const PHONE_DISPLAY =
   CONTACT_INFO.find((c) => c.icon === "phone")?.value ?? SITE_PHONE;
@@ -569,7 +578,7 @@ export default function Navbar() {
       </div>
 
       <nav
-        className="container-main flex items-center justify-between h-16 md:h-20"
+        className="container-main relative flex items-center justify-between h-16 md:h-20"
         aria-label="Main navigation"
       >
         {/* ── Logo ── */}
@@ -599,11 +608,11 @@ export default function Navbar() {
         </Link>
 
         {/* ── Desktop Nav Links ── */}
-        <ul className="hidden lg:flex items-center gap-1" role="list">
+        <ul className="hidden lg:flex items-stretch self-stretch gap-1 lg:ml-10 xl:ml-14" role="list">
           {NAV_LINKS.map((link) => {
             if (link.label === "Products") {
               return (
-                <li key={link.href} className="relative group">
+                <li key={link.href} className="group flex items-center">
                   <Link
                     href={link.href}
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
@@ -624,12 +633,12 @@ export default function Navbar() {
                       />
                     </svg>
                   </Link>
-                  <div className="absolute left-1/2 top-full z-50 w-150 -translate-x-1/2 pt-3 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
-                    <div className="rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-4">
+                  <div className="absolute left-1/2 top-full z-50 w-[min(37.5rem,calc(100vw-2rem))] -translate-x-1/2 pt-2 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                    <div className="max-h-[70vh] overflow-y-auto overscroll-contain rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-4">
                       <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">
                         Product Categories
                       </p>
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {categories.map((category) => (
                           <Link
                             key={category}
@@ -650,9 +659,9 @@ export default function Navbar() {
 
             if (link.label === "Brands") {
               return (
-                <li key={link.href} className="relative group">
+                <li key={link.href} className="group flex items-center">
                   <Link
-                    href=""
+                    href="/#clients"
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                     className="px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
                   >
@@ -671,12 +680,12 @@ export default function Navbar() {
                       />
                     </svg>
                   </Link>
-                  <div className="absolute left-1/2 top-full z-50 w-150 -translate-x-1/2 pt-3 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
-                    <div className="rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-4">
+                  <div className="absolute left-1/2 top-full z-50 w-[min(37.5rem,calc(100vw-2rem))] -translate-x-1/2 pt-2 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                    <div className="max-h-[70vh] overflow-y-auto overscroll-contain rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-4">
                       <p className="px-2 pb-3 text-xs tracking-[0.2em] uppercase text-gray-500">
                         Our Brands
                       </p>
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {BRANDS.map((brand) => (
                           <Link
                             key={brand.name}
@@ -705,7 +714,7 @@ export default function Navbar() {
             }
 
             return (
-              <li key={link.href}>
+              <li key={link.href} className="flex items-center">
                 <Link
                   href={link.href}
                   id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
@@ -728,15 +737,6 @@ export default function Navbar() {
             <Phone className="h-4 w-4" aria-hidden="true" />
             <span className="hidden xl:inline">{PHONE_DISPLAY}</span>
           </a>
-          <a
-            href={`mailto:${SITE_EMAIL}`}
-            aria-label={`Email ${SITE_EMAIL}`}
-            title={SITE_EMAIL}
-            className="inline-flex h-11 items-center gap-2 rounded-full border border-gray-300 bg-white px-3.5 text-sm font-semibold text-gray-900! shadow-sm transition-colors hover:border-red-600 hover:text-red-600! xl:px-5"
-          >
-            <Mail className="h-4 w-4" aria-hidden="true" />
-            <span className="hidden xl:inline">Email Us</span>
-          </a>
         </div>
 
         {/* ── Mobile quick-contact icons ── */}
@@ -748,26 +748,19 @@ export default function Navbar() {
           >
             <Phone className="h-4.5 w-4.5" aria-hidden="true" />
           </a>
-          <a
-            href={`mailto:${SITE_EMAIL}`}
-            aria-label={`Email ${SITE_EMAIL}`}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-900! shadow-sm"
-          >
-            <Mail className="h-4.5 w-4.5" aria-hidden="true" />
-          </a>
         </div>
 
-        {/* ── Desktop Enquire Button ── */}
-        <Link href="/enquiry" className="hidden md:block">
-          <button className="enq-btn enq-btn--lg">
-            <span className="enq-gloss" />
-            <span className="enq-ring" />
-            <span className="enq-shimmer" />
-            <span className="enq-liquid" />
-            <span className="enq-dot" />
-            <span style={{ position: "relative" }}>Enquire Now</span>
-          </button>
-        </Link>
+        {/* ── Desktop WhatsApp Button ── */}
+        <a
+          href={SITE_WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat with us on WhatsApp"
+          className="hidden md:inline-flex h-11 items-center gap-2 rounded-full bg-[#25D366] px-5 text-sm font-semibold text-white! shadow-[0_6px_18px_rgba(37,211,102,0.35)] transition-colors hover:bg-[#1fb457]"
+        >
+          <WhatsAppGlyph className="h-5 w-5" />
+          WhatsApp
+        </a>
 
         {/* ── Mobile Menu Toggle ── */}
         <button
@@ -863,6 +856,14 @@ export default function Navbar() {
                     aria-hidden={!isMobileBrandsOpen}
                   >
                     <div className="mx-2 mt-1 mb-2 rounded-xl border border-gray-200 bg-white overflow-hidden">
+                      <Link
+                        href="/#clients"
+                        onClick={closeMobileMenu}
+                        className="flex items-center justify-between border-b border-gray-100 px-4 py-3 text-sm font-semibold text-red-600!"
+                      >
+                        View our clients
+                        <span aria-hidden="true">→</span>
+                      </Link>
                       <p className="px-4 pt-3 pb-2 text-[10px] tracking-[0.2em] uppercase text-gray-400 font-semibold">
                         Our Brands
                       </p>
@@ -916,7 +917,7 @@ export default function Navbar() {
             );
           })}
 
-          <div className="grid grid-cols-2 gap-2 px-1 pt-3">
+          <div className="px-1 pt-3">
             <a
               href={`tel:${SITE_PHONE}`}
               className="flex items-center justify-center gap-2 rounded-xl bg-gray-900 px-3 py-3 text-sm font-semibold text-white!"
@@ -924,26 +925,19 @@ export default function Navbar() {
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call Now
             </a>
-            <a
-              href={`mailto:${SITE_EMAIL}`}
-              className="flex items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-3 py-3 text-sm font-semibold text-gray-900!"
-            >
-              <Mail className="h-4 w-4" aria-hidden="true" />
-              Email Us
-            </a>
           </div>
 
           <div className="pt-2 pb-1 px-1">
-            <Link href="/enquiry" onClick={closeMobileMenu}>
-              <button className="enq-btn enq-btn--sm w-full justify-center">
-                <span className="enq-gloss" />
-                <span className="enq-ring" />
-                <span className="enq-shimmer" />
-                <span className="enq-liquid" />
-                <span className="enq-dot" />
-                <span style={{ position: "relative" }}>Enquire Now</span>
-              </button>
-            </Link>
+            <a
+              href={SITE_WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMobileMenu}
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 text-sm font-semibold text-white!"
+            >
+              <WhatsAppGlyph className="h-5 w-5" />
+              Chat on WhatsApp
+            </a>
           </div>
         </div>
       </div>

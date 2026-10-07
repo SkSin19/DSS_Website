@@ -57,11 +57,18 @@ export const SITE_JUSTDIAL_URL =
   "https://www.justdial.com/Delhi/Digital-Security-Solutions-Near-Nirman-Vihar-Metro-Station-Shakarpur/011PXX11-XX11-141016154711-G2G1_BZDET";
 // Verified Google Maps geo coordinates for the shop
 export const SITE_GEO = { latitude: 28.635190833333, longitude: 77.285255277778 };
-export const SITE_MAP_URL =
-  "https://www.google.com/maps/search/?api=1&query=28.635190833333,77.285255277778";
+// Search by business name + locality so Maps opens the business listing
+// (name, reviews, hours) rather than a bare coordinate pin.
+export const SITE_MAP_QUERY = "Digital Security Solutions, Shakarpur, Delhi 110092";
+export const SITE_MAP_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE_MAP_QUERY)}`;
 // Primary public contact used in structured data
 export const SITE_PHONE = "+919999605550";
 export const SITE_EMAIL = "info@digitalsecurityindia.com";
+// Office landline (from company brochure)
+export const SITE_LANDLINE = "+911142420035";
+export const SITE_LANDLINE_DISPLAY = "011-42420035";
+// Opening hours shown on the contact page / header
+export const SITE_HOURS = "Monday – Sunday: 10:30 AM – 7:30 PM";
 // WhatsApp chat link (same number as SITE_PHONE; change here if WhatsApp differs)
 export const SITE_WHATSAPP_URL = `https://wa.me/${SITE_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(
   "Hi, I'd like a quote for a security system.",
@@ -77,12 +84,12 @@ export const SITE_ADDRESS =
    ───────────────────────────────────────────── */
 
 export const NAV_LINKS: NavLink[] = [
-  { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
   { label: "Brands", href: "/#brands" },
   { label: "Solutions", href: "/solutions" },
   { label: "Blogs", href: "/blogs" },
   { label: "About Us", href: "/about" },
+  { label: "Contact Us", href: "/enquiry" },
 ];
 
 /* ─────────────────────────────────────────────

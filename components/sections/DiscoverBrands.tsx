@@ -29,7 +29,7 @@ function BrandCard({ brand, priority }: { brand: (typeof BRANDS)[number]; priori
   return (
     <Link
       href={`/products?company=${encodeURIComponent(brand.name)}`}
-      className={`group relative aspect-9/16 w-60 sm:w-65 md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] xl:w-[calc(20%-20px)] snap-center shrink-0 rounded-2xl overflow-hidden  border transition-all duration-500 ${
+      className={`group relative aspect-9/16 w-44 sm:w-65 md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] xl:w-[calc(20%-20px)] snap-center shrink-0 rounded-2xl overflow-hidden  border transition-all duration-500 ${
         isPrama ? "border-gray-200/80" : "border-gray-200/30"
       }`}
       onMouseEnter={() => setIsHovered(true)}
@@ -233,9 +233,10 @@ export default function DiscoverBrands() {
   };
 
   return (
-    <section className="select-none bg-white section-padding pb-12 sm:pb-20 md:pb-24" id="brands">
+    <section className="select-none bg-white section-padding max-md:py-10 pb-12 sm:pb-20 md:pb-24" id="brands">
       <Container>
-        <div ref={headingRef}>
+        {/* Phones: tighter heading than the shared SectionHeading default */}
+        <div ref={headingRef} className="max-md:[&>div]:mb-6 max-md:[&>div]:gap-2 max-md:[&_h2]:text-2xl max-md:[&_p]:text-sm">
           <SectionHeading
             title="Our Partners"
             subtitle="We work with India's most trusted digital surveillance brands."
@@ -244,7 +245,7 @@ export default function DiscoverBrands() {
 
         <div 
           ref={carouselRevealRef} 
-          className="relative mt-8 sm:mt-12 lg:mt-16 max-w-7xl mx-auto"
+          className="relative mt-5 sm:mt-12 lg:mt-16 max-w-7xl mx-auto"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={() => setIsPaused(true)}
@@ -273,7 +274,7 @@ export default function DiscoverBrands() {
             // Phones: break out of the container padding so cards run to the
             // screen edge, and fade the partially visible neighbours instead of
             // clipping them abruptly.
-            className="flex flex-row flex-nowrap overflow-x-auto gap-4 md:gap-6 pt-2 pb-6 md:pb-16 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none max-md:mx-[calc(var(--section-padding-x)*-1)] max-md:[mask-image:linear-gradient(to_right,transparent,black_18%,black_82%,transparent)] max-md:[-webkit-mask-image:linear-gradient(to_right,transparent,black_18%,black_82%,transparent)]"
+            className="flex flex-row flex-nowrap overflow-x-auto gap-3 sm:gap-4 md:gap-6 pt-2 pb-4 sm:pb-6 md:pb-16 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none max-md:mx-[calc(var(--section-padding-x)*-1)] max-md:[mask-image:linear-gradient(to_right,transparent,black_18%,black_82%,transparent)] max-md:[-webkit-mask-image:linear-gradient(to_right,transparent,black_18%,black_82%,transparent)]"
             style={{
               display: "flex",
               flexDirection: "row",

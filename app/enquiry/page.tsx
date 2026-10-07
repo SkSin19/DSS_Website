@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import GetInTouch from "@/components/sections/GetInTouch";
+import ContactSection from "@/components/sections/ContactSection";
 import SecureToday from "@/components/sections/SecureToday";
+import OurClients from "@/components/sections/OurClients";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -13,7 +14,8 @@ export const metadata: Metadata = buildPageMetadata({
 export default function EnquiryPage() {
   return (
     <>
-      <GetInTouch />
+      <ContactSection />
+      <OurClients ctaHref="#contact-form" />
       <SecureToday />
     </>
   );

@@ -37,7 +37,7 @@ export default function BlogContent({ blocks }: { blocks: BlogBlock[] }) {
             return <p key={i} className="mt-5"><Inline text={block.text} /></p>;
           case "h2":
             return (
-              <h2 key={i} id={slugifyHeading(block.text)} className="mt-10 scroll-mt-28 text-2xl font-bold leading-snug text-gray-900!">
+              <h2 key={i} id={slugifyHeading(block.text)} className="mt-10 scroll-mt-36 text-2xl font-bold leading-snug text-gray-900!">
                 <Inline text={block.text} />
               </h2>
             );

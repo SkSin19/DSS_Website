@@ -137,7 +137,7 @@ export default function HeroEnquiry() {
         </div>
 
         {/* ── RIGHT: enquiry form ── */}
-        <div id="enquiry" className="scroll-mt-24 lg:self-center">
+        <div id="enquiry" className="scroll-mt-36 lg:self-center">
           <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-[0_20px_50px_rgba(17,24,39,0.08)] sm:p-7">
             <p className="inline-flex items-center gap-2 text-xs font-medium text-red-700!">
               <CalendarCheck className="h-4 w-4" aria-hidden="true" />

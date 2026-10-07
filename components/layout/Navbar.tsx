@@ -6,12 +6,24 @@
 import { useState, useEffect, useCallback, useRef, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BRANDS, NAV_LINKS, SITE_NAME } from "@/lib/constants";
+import {
+  BRANDS,
+  NAV_LINKS,
+  SITE_NAME,
+  SITE_PHONE,
+  SITE_EMAIL,
+  CONTACT_INFO,
+  FOUNDING_YEAR,
+} from "@/lib/constants";
+import { Phone, Mail, Clock, ShieldCheck } from "lucide-react";
 import { apiGet } from "@/utils/api";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import dynamic from "next/dynamic";
+
+const PHONE_DISPLAY =
+  CONTACT_INFO.find((c) => c.icon === "phone")?.value ?? SITE_PHONE;
 
 /* ─────────────────────────────────────────────────────────────────────────────
    TYPES
@@ -532,6 +544,30 @@ export default function Navbar() {
       }
       `}</style>
 
+      {/* ── Top contact strip ── */}
+      <div className="bg-red-700 text-white">
+        <div className="container-main flex h-9 items-center justify-between gap-4 text-xs sm:text-[13px]">
+          <p className="hidden sm:inline-flex items-center gap-1.5 font-medium">
+            <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+            Trusted Security Partner Since {FOUNDING_YEAR}
+          </p>
+          <div className="flex w-full items-center justify-between gap-5 sm:w-auto sm:justify-end">
+            <span className="hidden md:inline-flex items-center gap-1.5 text-white/90">
+              <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+              Mon–Sun 10:30 AM – 7:30 PM
+            </span>
+            <a href={`mailto:${SITE_EMAIL}`} className="inline-flex items-center gap-1.5 font-medium text-white! hover:underline!">
+              <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+              {SITE_EMAIL}
+            </a>
+            <a href={`tel:${SITE_PHONE}`} className="inline-flex items-center gap-1.5 font-semibold text-white! hover:underline!">
+              <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+              <span className="hidden sm:inline">Call:</span> {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </div>
+
       <nav
         className="container-main flex items-center justify-between h-16 md:h-20"
         aria-label="Main navigation"
@@ -681,6 +717,45 @@ export default function Navbar() {
             );
           })}
         </ul>
+
+        {/* ── Desktop contact + Enquire buttons ── */}
+        <div className="hidden md:flex items-center gap-2 lg:ml-auto lg:mr-3 xl:mr-4">
+          <a
+            href={`tel:${SITE_PHONE}`}
+            aria-label={`Call ${PHONE_DISPLAY}`}
+            className="inline-flex h-11 items-center gap-2 rounded-full bg-gray-900 px-3.5 text-sm font-semibold text-white! shadow-sm transition-colors hover:bg-gray-800 xl:px-5"
+          >
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            <span className="hidden xl:inline">{PHONE_DISPLAY}</span>
+          </a>
+          <a
+            href={`mailto:${SITE_EMAIL}`}
+            aria-label={`Email ${SITE_EMAIL}`}
+            title={SITE_EMAIL}
+            className="inline-flex h-11 items-center gap-2 rounded-full border border-gray-300 bg-white px-3.5 text-sm font-semibold text-gray-900! shadow-sm transition-colors hover:border-red-600 hover:text-red-600! xl:px-5"
+          >
+            <Mail className="h-4 w-4" aria-hidden="true" />
+            <span className="hidden xl:inline">Email Us</span>
+          </a>
+        </div>
+
+        {/* ── Mobile quick-contact icons ── */}
+        <div className="flex md:hidden items-center gap-2 ml-auto mr-2">
+          <a
+            href={`tel:${SITE_PHONE}`}
+            aria-label={`Call ${PHONE_DISPLAY}`}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-red-600 text-white! shadow-sm"
+          >
+            <Phone className="h-4.5 w-4.5" aria-hidden="true" />
+          </a>
+          <a
+            href={`mailto:${SITE_EMAIL}`}
+            aria-label={`Email ${SITE_EMAIL}`}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-900! shadow-sm"
+          >
+            <Mail className="h-4.5 w-4.5" aria-hidden="true" />
+          </a>
+        </div>
 
         {/* ── Desktop Enquire Button ── */}
         <Link href="/enquiry" className="hidden md:block">
@@ -840,6 +915,23 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          <div className="grid grid-cols-2 gap-2 px-1 pt-3">
+            <a
+              href={`tel:${SITE_PHONE}`}
+              className="flex items-center justify-center gap-2 rounded-xl bg-gray-900 px-3 py-3 text-sm font-semibold text-white!"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call Now
+            </a>
+            <a
+              href={`mailto:${SITE_EMAIL}`}
+              className="flex items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-3 py-3 text-sm font-semibold text-gray-900!"
+            >
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              Email Us
+            </a>
+          </div>
 
           <div className="pt-2 pb-1 px-1">
             <Link href="/enquiry" onClick={closeMobileMenu}>

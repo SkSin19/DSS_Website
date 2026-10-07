@@ -187,7 +187,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </article>
 
         {/* Sidebar */}
-        <aside className="lg:sticky lg:top-28 lg:self-start">
+        <aside className="lg:sticky lg:top-36 lg:self-start">
           {headings.length > 0 && (
             <nav aria-label="Table of contents" className="rounded-2xl border border-gray-200 p-5">
               <p className="text-sm font-semibold uppercase tracking-wide text-gray-900!">In this article</p>

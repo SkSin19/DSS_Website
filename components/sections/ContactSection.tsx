@@ -8,6 +8,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import EnquiryForm from "@/components/sections/EnquiryForm";
+import AskAiButton from "@/components/chat/AskAiButton";
 import {
   CONTACT_INFO,
   OFFICE_LOCATIONS,
@@ -148,6 +149,10 @@ export default function ContactSection() {
               requirement or problem, and help you choose the right security solution or service.
             </p>
             <EnquiryForm idPrefix="contact-enquiry" submitLabel="Book Free Site Survey" stacked />
+            <div className="mt-5 flex flex-col items-center gap-2 border-t border-gray-100 pt-5 text-center">
+              <p className="text-sm text-gray-600!">Just have a quick question?</p>
+              <AskAiButton className="inline-flex items-center justify-center gap-2 rounded-full border border-red-600 bg-white px-4 py-2 text-sm font-semibold text-red-600 transition-colors hover:bg-red-50" />
+            </div>
           </div>
         </div>
       </div>

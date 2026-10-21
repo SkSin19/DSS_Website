@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight, MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
+import AskAiButton from "@/components/chat/AskAiButton";
 import {
   SITE_NAME,
   SITE_ADDRESS,
@@ -118,6 +119,10 @@ export default function Footer() {
               >
                 WhatsApp Us
               </a>
+              <AskAiButton
+                label="Ask AI"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-white/60 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              />
             </div>
           </div>
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AskAiButton from "@/components/chat/AskAiButton";
 import Image from "next/image";
 import {
   ShieldCheck,
@@ -140,6 +141,13 @@ export default function HeroEnquiry() {
               WhatsApp Us
             </a>
           </div>
+          <p className="mt-3 text-sm text-gray-600">
+            Not sure what you need?{" "}
+            <AskAiButton
+              label="Ask our AI assistant"
+              className="inline-flex items-center gap-1 font-semibold text-red-600 underline underline-offset-2 hover:text-red-700"
+            />
+          </p>
 
           {/* credentials */}
           <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">

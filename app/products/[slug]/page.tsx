@@ -7,6 +7,7 @@ import PremiumDesign from "@/components/sections/PremiumDesign";
 import { getProductBySlugFromApi, getProductsFromApi, type BackendProduct } from "@/lib/products-api";
 import ProductImageGallery from "@/components/ui/ProductImageGallery";
 import ProductEnquiryDialog from "@/components/sections/ProductEnquiryDialog";
+import AskAiButton from "@/components/chat/AskAiButton";
 import { breadcrumbJsonLd, buildPageMetadata } from "@/lib/seo";
 import { SERVICE_AREAS, SITE_URL, whatsappUrl } from "@/lib/constants";
 
@@ -229,6 +230,12 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                   View specs
                 </Link>
               </div>
+              <AskAiButton
+                label="Ask AI about this product"
+                prompt={`Tell me about the ${product.name} (${product.model}). What is it best suited for?`}
+                send
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-600 underline underline-offset-2 hover:text-red-700"
+              />
               <p className="mt-4 text-xs leading-relaxed text-gray-600">
                 <span className="font-semibold text-gray-800">Installation available:</span>{" "}
                 professional installation, warranty support and AMC across {SERVICE_AREAS.join(", ")}.

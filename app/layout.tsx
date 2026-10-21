@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import EnquiryPopup from "@/components/sections/EnquiryPopup";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import Analytics from "@/components/layout/Analytics";
+import ChatAssistant from "@/components/chat/ChatAssistant";
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
@@ -286,6 +287,7 @@ export default function RootLayout({
         <Footer />
         <EnquiryPopup />
         <WhatsAppFloat />
+        <ChatAssistant />
         <Analytics />
       </body>
     </html>

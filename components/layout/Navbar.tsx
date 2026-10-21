@@ -16,7 +16,8 @@ import {
   FOUNDING_YEAR,
   SITE_WHATSAPP_URL,
 } from "@/lib/constants";
-import { Phone, Mail, Clock, ShieldCheck } from "lucide-react";
+import { Phone, Mail, Clock, ShieldCheck, Sparkles } from "lucide-react";
+import { openChat } from "@/lib/chat-api";
 import { apiGet } from "@/utils/api";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
@@ -755,6 +756,15 @@ export default function Navbar() {
 
         {/* ── Desktop contact + Enquire buttons ── */}
         <div className="hidden md:flex items-center gap-2 lg:ml-auto lg:mr-3 xl:mr-4">
+          <button
+            type="button"
+            onClick={() => openChat()}
+            aria-label="Ask our AI assistant"
+            className="inline-flex h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-red-600 bg-white px-3.5 text-sm font-semibold text-red-600 shadow-sm transition-colors hover:bg-red-50 xl:px-4"
+          >
+            <Sparkles className="h-4 w-4" aria-hidden="true" />
+            <span>Ask AI</span>
+          </button>
           <a
             href={`tel:${SITE_PHONE}`}
             aria-label={`Call ${PHONE_DISPLAY}`}
@@ -944,6 +954,17 @@ export default function Navbar() {
           })}
 
           <div className="px-1 pt-3">
+            <button
+              type="button"
+              onClick={() => {
+                closeMobileMenu();
+                openChat();
+              }}
+              className="mb-2 flex w-full items-center justify-center gap-2 rounded-xl border border-red-600 bg-white px-3 py-3 text-sm font-semibold text-red-600"
+            >
+              <Sparkles className="h-4 w-4" aria-hidden="true" />
+              Ask AI Assistant
+            </button>
             <a
               href={`tel:${SITE_PHONE}`}
               className="flex items-center justify-center gap-2 rounded-xl bg-gray-900 px-3 py-3 text-sm font-semibold text-white!"

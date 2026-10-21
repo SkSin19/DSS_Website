@@ -6,6 +6,7 @@ import { Clock, Phone, CalendarDays } from "lucide-react";
 import BlogCard from "@/components/blog/BlogCard";
 import BlogContent from "@/components/blog/BlogContent";
 import EnquiryForm from "@/components/sections/EnquiryForm";
+import AskAiButton from "@/components/chat/AskAiButton";
 import {
   BLOG_POSTS,
   formatPostDate,
@@ -213,6 +214,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <Phone className="h-4 w-4" aria-hidden="true" />
               {phoneDisplay}
             </a>
+            <AskAiButton
+              label="Ask AI about this guide"
+              prompt={`I'm reading "${post.title}". `}
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-white/30 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            />
             <a
               href={SITE_WHATSAPP_URL}
               target="_blank"

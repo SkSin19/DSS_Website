@@ -4,7 +4,7 @@
    Turns a few questions about a property into a recommended IP CCTV setup
    (cameras, NVR, storage, PoE, cabling, installation) with an indicative
    price range. The prices below are typical Delhi NCR market ranges in INR
-   (Oct 2026) — replace them with your own rates. Every figure shown to
+   (Oct 2026) - replace them with your own rates. Every figure shown to
    customers comes from PRICES, so this table is the only place to edit.
    ───────────────────────────────────────────── */
 

@@ -64,8 +64,8 @@ export default function CctvCostCalculatorPage() {
         <Container className="space-y-10">
           <ToolHero name={NAME} path={PATH} eyebrow="Free tool" title={<>CCTV Cost <span className="text-red-600">Calculator</span></>}>
             <p>
-              Answer a few questions about your property and get a recommended CCTV system — how many cameras, which
-              recorder, how much storage — with an indicative installed price. Built from the setups we have installed
+              Answer a few questions about your property and get a recommended CCTV system - how many cameras, which
+              recorder, how much storage - with an indicative installed price. Built from the setups we have installed
               across Delhi NCR since 2008.
             </p>
           </ToolHero>

@@ -158,7 +158,7 @@ export default function ProductCompare() {
   }, [products]);
 
   const isDifferent = (row: Row) =>
-    new Set(row.values.map((v) => (v ? v.map(normalise).join("|") : "—"))).size > 1;
+    new Set(row.values.map((v) => (v ? v.map(normalise).join("|") : "-"))).size > 1;
   const shownRows = onlyDifferences && products.length > 1 ? rows.filter(isDifferent) : rows;
 
   const comparisonText = products.map((p) => `${p.name} (${p.model})`).join(" vs ");
@@ -324,7 +324,7 @@ export default function ProductCompare() {
                     {row.values.map((value, j) => (
                       <td key={products[j].slug} className="border-l border-gray-100 p-3 text-gray-800">
                         {!value || value.length === 0 ? (
-                          <span className="text-gray-400">—</span>
+                          <span className="text-gray-400">-</span>
                         ) : value.length === 1 ? (
                           value[0]
                         ) : (

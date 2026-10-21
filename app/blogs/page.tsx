@@ -68,7 +68,7 @@ export default function BlogsPage() {
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600! md:text-lg">
             Straightforward advice on CCTV cameras, access control, biometric attendance and alarm
-            systems — written by the team that has been installing them across Delhi NCR since 2008.
+            systems - written by the team that has been installing them across Delhi NCR since 2008.
           </p>
         </div>
       </header>

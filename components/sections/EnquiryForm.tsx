@@ -37,7 +37,7 @@ export const ENQUIRY_SERVICES = [
   { id: "other", label: "Other", apiValue: "other" },
 ] as const;
 
-/** Qualification options — sent to the backend as lines in the message. */
+/** Qualification options - sent to the backend as lines in the message. */
 export const PROPERTY_TYPES = [
   "Home / Flat",
   "Residential Society",

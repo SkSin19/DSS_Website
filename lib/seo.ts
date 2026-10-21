@@ -25,8 +25,8 @@ type PageMetadataInput = {
 
 /**
  * Builds per-page metadata. Page-level `openGraph`/`twitter` objects replace
- * (not merge with) the layout's, so this re-applies the shared defaults —
- * most importantly the share image — on every page.
+ * (not merge with) the layout's, so this re-applies the shared defaults -
+ * most importantly the share image - on every page.
  */
 export function buildPageMetadata({
   title,

@@ -1,6 +1,6 @@
 import { SITE_NAME, SITE_WHATSAPP_URL } from "@/lib/constants";
 
-/** Floating WhatsApp chat button — phones only (hidden from md up). */
+/** Floating WhatsApp chat button - phones only (hidden from md up). */
 export default function WhatsAppFloat() {
   return (
     <a

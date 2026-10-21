@@ -61,7 +61,7 @@ export default function CompareProductsPage() {
           <ToolHero name={NAME} path={PATH} eyebrow="Free tool" title={<>Compare Security <span className="text-red-600">Products</span></>}>
             <p>
               Put up to four CCTV cameras, NVRs, biometric or access control devices side by side and see exactly how
-              their specifications differ — so you can pick the right one for your home or business.
+              their specifications differ - so you can pick the right one for your home or business.
             </p>
           </ToolHero>
 

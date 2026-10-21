@@ -18,7 +18,7 @@ import {
   SERVICE_AREAS,
 } from "@/lib/constants";
 
-/* Footer brand colour — change here to retheme the whole footer. */
+/* Footer brand colour - change here to retheme the whole footer. */
 const FOOTER_BG = "#b91c1c";
 
 const SERVICE_LINKS = [

@@ -166,7 +166,7 @@ export default function CctvCalculator() {
   }, [input]);
 
   const nvrItem = result.items.find((i) => i.label.endsWith("NVR"));
-  const nvrSummary = nvrItem ? `${nvrItem.qty > 1 ? `${nvrItem.qty}×` : ""}${nvrItem.label.split("-")[0]}-ch` : "—";
+  const nvrSummary = nvrItem ? `${nvrItem.qty > 1 ? `${nvrItem.qty}×` : ""}${nvrItem.label.split("-")[0]}-ch` : "-";
 
   const areaLabel =
     input.propertyType === "society"

@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import EnquiryPopup from "@/components/sections/EnquiryPopup";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
+import Analytics from "@/components/layout/Analytics";
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
@@ -16,6 +17,7 @@ import {
   SITE_PHONE,
   SITE_EMAIL,
   OFFICE_LOCATIONS,
+  SERVICE_AREAS,
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { Playfair_Display, Inter, Poppins } from "next/font/google";
@@ -193,7 +195,7 @@ export default function RootLayout({
           { "@type": "State", name: "Delhi" },
           { "@type": "State", name: "Uttar Pradesh" },
           { "@type": "State", name: "Bihar" },
-          { "@type": "City", name: "New Delhi" },
+          ...SERVICE_AREAS.map((name) => ({ "@type": "City", name })),
         ],
         description: SITE_DESCRIPTION,
         knowsAbout: [
@@ -284,6 +286,7 @@ export default function RootLayout({
         <Footer />
         <EnquiryPopup />
         <WhatsAppFloat />
+        <Analytics />
       </body>
     </html>
   );

@@ -73,11 +73,16 @@ export const SITE_HOURS = "Monday – Sunday: 10:30 AM – 7:30 PM";
 export const SITE_WHATSAPP_URL = `https://wa.me/${SITE_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(
   "Hi, I'd like a quote for a security system.",
 )}`;
+// WhatsApp link with a custom pre-filled message (e.g. naming a product)
+export const whatsappUrl = (text: string) =>
+  `https://wa.me/${SITE_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
+// Cities we install and service in (footer, product pages, structured data)
+export const SERVICE_AREAS = ["New Delhi", "Noida", "Greater Noida", "Ghaziabad", "Gurgaon"];
 // Year the business was established (drives "N+ years" copy)
 export const FOUNDING_YEAR = 2008;
 // Full postal address (used in footer, contact and structured data)
 export const SITE_ADDRESS =
-  "Shop Number-34 & 35, Near Nirman Vihar Metro Station, Vikas Marg, Shakarpur, Delhi-110092";
+  "Shop No. 5, Ground Floor, Vinayak Complex, Veer Savarkar Block, Shakarpur, Delhi-110092";
 
 /* ─────────────────────────────────────────────
    Navigation

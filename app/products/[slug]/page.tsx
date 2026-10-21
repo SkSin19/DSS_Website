@@ -8,7 +8,7 @@ import { getProductBySlugFromApi, getProductsFromApi, type BackendProduct } from
 import ProductImageGallery from "@/components/ui/ProductImageGallery";
 import ProductEnquiryDialog from "@/components/sections/ProductEnquiryDialog";
 import { breadcrumbJsonLd, buildPageMetadata } from "@/lib/seo";
-import { SITE_URL } from "@/lib/constants";
+import { SERVICE_AREAS, SITE_URL, whatsappUrl } from "@/lib/constants";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -196,7 +196,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                 </div>
               ) : null}
 
-              <div className="mt-6 flex flex-col sm:flex-row gap-3">
+              <div className="mt-6 flex flex-col sm:flex-row sm:flex-wrap gap-3">
                 <ProductEnquiryDialog
                   product={{
                     id: product._id,
@@ -206,19 +206,33 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                     company: product.company,
                   }}
                 />
+                <a
+                  href={whatsappUrl(
+                    `Hi, I'd like the price and installation details for ${product.name} ${product.model}`.trim(),
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white! hover:bg-[#1da851] transition-colors"
+                >
+                  WhatsApp Expert
+                </a>
+                <Link
+                  href="/enquiry#contact-form"
+                  className="inline-flex items-center justify-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white! hover:bg-red-800 transition-colors"
+                >
+                  Request Installation
+                </Link>
                 <Link
                   href="#specs"
                   className="inline-flex items-center justify-center rounded-full border border-red-600 bg-transparent px-4 py-2 text-sm font-semibold text-black! hover:bg-red-600 hover:text-white! transition-colors"
                 >
                   View specs
                 </Link>
-                <Link
-                  href="#browse-more"
-                  className="inline-flex items-center justify-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white! hover:bg-red-800 transition-colors"
-                >
-                  Similar products
-                </Link>
               </div>
+              <p className="mt-4 text-xs leading-relaxed text-gray-600">
+                <span className="font-semibold text-gray-800">Installation available:</span>{" "}
+                professional installation, warranty support and AMC across {SERVICE_AREAS.join(", ")}.
+              </p>
             </div>
           </div>
         </Container>
@@ -291,7 +305,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600 select-none">Browse More</p>
               <h2 className="mt-3 text-3xl md:text-4xl font-bold text-white select-none">Similar products</h2>
             </div>
-            <Link href="/products" className="text-sm font-medium text-red-400 hover:text-red-300 transition-colors border-2 py-3 px-5 border-red-600 rounded-3xl hover:bg-red-200 select-none">
+            <Link href="/products" className="text-sm font-medium text-red-400 hover:text-white! transition-colors border-2 py-3 px-5 border-red-600 rounded-3xl hover:bg-red-600 select-none">
               Browse all products →
             </Link>
           </div>

@@ -16,7 +16,7 @@ export default function EnquiryPage() {
     <>
       <ContactSection />
       <OurClients ctaHref="#contact-form" />
-      <SecureToday />
+      <SecureToday ctaHref="#contact-form" />
     </>
   );
 }

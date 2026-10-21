@@ -4,7 +4,12 @@ import React from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import Link from "next/link";
 
-const SecureToday: React.FC = () => {
+type SecureTodayProps = {
+  /** Where the "Schedule Free Consultation" button points. */
+  ctaHref?: string;
+};
+
+const SecureToday: React.FC<SecureTodayProps> = ({ ctaHref = "/enquiry" }) => {
   const shieldRef    = useScrollReveal<HTMLDivElement>({ animation: "up", delay: 150 });
   const headlineRef  = useScrollReveal<HTMLHeadingElement>({ animation: "up", delay: 300 });
   const subtitleRef  = useScrollReveal<HTMLParagraphElement>({ animation: "up", delay: 450 });
@@ -58,13 +63,13 @@ const SecureToday: React.FC = () => {
           people, property and peace of mind.
         </p>
 
-        {/* CTA link */}
+        {/* CTA */}
         <Link
-          href="/products"
+          href={ctaHref}
           ref={ctaRef}
-          className="group inline-flex items-center gap-1 text-sm font-medium transition-colors duration-200 text-red-600!"
+          className="group inline-flex items-center gap-2 rounded-full bg-red-600 px-6 py-3 text-sm font-semibold transition-colors duration-200 hover:bg-red-700 text-white!"
         >
-          <span>Explore our security solutions</span>
+          <span>Schedule Free Consultation</span>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="transition-transform duration-200 group-hover:translate-x-0.5">
             <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

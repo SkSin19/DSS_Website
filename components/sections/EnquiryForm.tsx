@@ -5,6 +5,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { User, Phone, MapPin, Send } from "lucide-react";
 import { submitGeneralEnquiry } from "@/lib/enquiry-api";
+import { trackEvent } from "@/lib/analytics";
 
 declare global {
   interface Window {
@@ -32,7 +33,28 @@ export const ENQUIRY_SERVICES = [
   { id: "alarm", label: "Intrusion / Fire Alarm", apiValue: "alarm" },
   { id: "automation", label: "Home / Gate Automation", apiValue: "smart" },
   { id: "pa-av", label: "PA System & AV", apiValue: "other" },
+  { id: "security-audit", label: "Free Security Audit (Society / Builder)", apiValue: "other" },
   { id: "other", label: "Other", apiValue: "other" },
+] as const;
+
+/** Qualification options — sent to the backend as lines in the message. */
+export const PROPERTY_TYPES = [
+  "Home / Flat",
+  "Residential Society",
+  "Shop / Showroom",
+  "Office",
+  "Factory / Warehouse",
+  "School / Hospital",
+  "Builder Project",
+  "Other",
+] as const;
+
+export const BUDGET_RANGES = [
+  "Under ₹25,000",
+  "₹25,000 – ₹1 lakh",
+  "₹1 – 5 lakh",
+  "Above ₹5 lakh",
+  "Not sure yet",
 ] as const;
 
 const sanitizeName    = (v: string) => v.replace(/[\x00-\x1F<>]/g, "").slice(0, 100);
@@ -40,7 +62,7 @@ const sanitizePhone   = (v: string) => v.replace(/\D/g, "").slice(0, 10);
 const sanitizeCity    = (v: string) => v.replace(/[\x00-\x1F<>]/g, "").slice(0, 100);
 const sanitizeMessage = (v: string) => v.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F<>]/g, "").slice(0, 1900);
 
-const EMPTY_FORM = { fullName: "", phone: "", service: "", city: "", message: "" };
+const EMPTY_FORM = { fullName: "", phone: "", service: "", propertyType: "", budget: "", city: "", message: "" };
 
 type EnquiryFormProps = {
   /** Unique prefix so label/input ids don't collide if two forms are on a page. */
@@ -56,6 +78,14 @@ const inputClass = (hasError?: boolean) =>
   `w-full bg-white border rounded-lg px-3.5 py-2.5 text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-colors ${
     hasError ? "border-red-500" : "border-gray-300"
   }`;
+
+function SelectChevron() {
+  return (
+    <svg className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+      <path d="M1 1L6 6L11 1" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 const labelClass = "text-gray-700 text-[13px] font-medium";
 const iconClass = "pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400";
@@ -119,7 +149,7 @@ export default function EnquiryForm({
       case "phone":    return sanitizePhone(raw);
       case "city":     return sanitizeCity(raw);
       case "message":  return sanitizeMessage(raw);
-      default:         return raw; // service is a controlled select
+      default:         return raw; // service, propertyType, budget are controlled selects
     }
   };
 
@@ -159,7 +189,12 @@ export default function EnquiryForm({
     }
 
     const service = ENQUIRY_SERVICES.find((s) => s.id === formData.service);
-    const message = [service ? `Service: ${service.label}` : "", formData.message.trim()]
+    const message = [
+      service ? `Service: ${service.label}` : "",
+      formData.propertyType ? `Property: ${formData.propertyType}` : "",
+      formData.budget ? `Budget: ${formData.budget}` : "",
+      formData.message.trim(),
+    ]
       .filter(Boolean)
       .join("\n");
 
@@ -180,6 +215,11 @@ export default function EnquiryForm({
       } catch {
         /* storage unavailable */
       }
+      trackEvent("generate_lead", {
+        form: idPrefix,
+        service: service?.label ?? "",
+        property_type: formData.propertyType,
+      });
       setSubmitted(true);
       setFormData({ ...EMPTY_FORM, service: defaultService });
       setTurnstileToken("");
@@ -271,9 +311,39 @@ export default function EnquiryForm({
                 <option key={s.id} value={s.id}>{s.label}</option>
               ))}
             </select>
-            <svg className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
-              <path d="M1 1L6 6L11 1" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
+            <SelectChevron />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor={id("propertyType")} className={labelClass}>Property Type</label>
+          <div className="relative">
+            <select
+              id={id("propertyType")} name="propertyType" value={formData.propertyType} onChange={handleChange}
+              className={`${inputClass()} appearance-none cursor-pointer pr-8`}
+            >
+              <option value="">Select property type</option>
+              {PROPERTY_TYPES.map((p) => (
+                <option key={p} value={p}>{p}</option>
+              ))}
+            </select>
+            <SelectChevron />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor={id("budget")} className={labelClass}>Approx. Budget</label>
+          <div className="relative">
+            <select
+              id={id("budget")} name="budget" value={formData.budget} onChange={handleChange}
+              className={`${inputClass()} appearance-none cursor-pointer pr-8`}
+            >
+              <option value="">Select budget</option>
+              {BUDGET_RANGES.map((b) => (
+                <option key={b} value={b}>{b}</option>
+              ))}
+            </select>
+            <SelectChevron />
           </div>
         </div>
 

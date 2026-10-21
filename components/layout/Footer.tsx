@@ -14,6 +14,7 @@ import {
   CONTACT_INFO,
   OFFICE_LOCATIONS,
   FOUNDING_YEAR,
+  SERVICE_AREAS,
 } from "@/lib/constants";
 
 /* Footer brand colour — change here to retheme the whole footer. */
@@ -94,6 +95,9 @@ export default function Footer() {
               {SITE_NAME}{" "}provides CCTV camera installation, repair &amp; AMC, access control,
               biometric attendance and alarm systems across Delhi NCR. Serving homes and businesses
               since {FOUNDING_YEAR} with genuine, warranty-backed brands.
+            </p>
+            <p className="mt-3 text-[13px] leading-relaxed text-white/90">
+              <span className="font-semibold text-white">Service area:</span> {SERVICE_AREAS.join(" · ")}
             </p>
 
             <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-white">

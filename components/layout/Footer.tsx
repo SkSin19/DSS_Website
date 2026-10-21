@@ -31,6 +31,8 @@ const SERVICE_LINKS = [
   { label: "Gate & Home Automation", href: "/solutions" },
   { label: "PA System & AV", href: "/products?category=PA%20SYSTEM%20%26%20AV" },
   { label: "Products Catalog", href: "/products" },
+  { label: "CCTV Cost Calculator", href: "/tools/cctv-cost-calculator" },
+  { label: "Compare Products", href: "/tools/compare-products" },
 ];
 
 const BOTTOM_LINKS = [
@@ -38,6 +40,7 @@ const BOTTOM_LINKS = [
   { label: "About", href: "/about" },
   { label: "Products", href: "/products" },
   { label: "Solutions", href: "/solutions" },
+  { label: "Tools", href: "/tools" },
   { label: "Blogs", href: "/blogs" },
   { label: "Contact", href: "/enquiry" },
   { label: "XML Sitemap", href: "/sitemap.xml" },

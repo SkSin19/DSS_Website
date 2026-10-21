@@ -55,6 +55,11 @@ Panasonic, Matrix, Zicom, Seagate, eSSL, PRAMA, Bose Professional, JBL Professio
 - JustDial: https://www.justdial.com/Delhi/Digital-Security-Solutions-Near-Nirman-Vihar-Metro-Station-Shakarpur/011PXX11-XX11-141016154711-G2G1_BZDET
 - Blog / security guides: https://digitalsecurityindia.com/blogs
 
+## Free tools
+
+- [CCTV Cost Calculator](https://digitalsecurityindia.com/tools/cctv-cost-calculator): recommends cameras, NVR and storage for a property and gives an indicative installed price
+- [Compare Products](https://digitalsecurityindia.com/tools/compare-products): side-by-side specifications for up to four cameras, NVRs or security devices
+
 ## Guides (blog)
 
 - [CCTV Camera Installation Cost in Delhi: What Really Decides the Price](https://digitalsecurityindia.com/blogs/cctv-camera-installation-cost-delhi)

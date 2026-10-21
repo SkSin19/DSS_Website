@@ -18,6 +18,8 @@ import {
 } from "@/lib/constants";
 import { Phone, Mail, Clock, ShieldCheck, Sparkles } from "lucide-react";
 import { openChat } from "@/lib/chat-api";
+import { TOOLS } from "@/lib/tools";
+import ToolIcon from "@/components/tools/ToolIcon";
 import { apiGet } from "@/utils/api";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
@@ -625,7 +627,7 @@ export default function Navbar() {
         </Link>
 
         {/* ── Desktop Nav Links ── */}
-        <ul className="hidden lg:flex items-stretch self-stretch gap-1 lg:ml-10 xl:ml-14" role="list">
+        <ul className="hidden lg:flex items-stretch self-stretch gap-0.5 lg:ml-4 xl:ml-14" role="list">
           {NAV_LINKS.map((link) => {
             if (link.label === "Products") {
               return (
@@ -638,7 +640,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
+                    className="px-2.5 xl:px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
                   >
                     {link.label}
                     <svg
@@ -679,6 +681,60 @@ export default function Navbar() {
               );
             }
 
+            if (link.label === "Tools") {
+              return (
+                <li
+                  key={link.href}
+                  className="group relative flex items-center"
+                  onMouseEnter={fitDropdownToViewport}
+                  onFocus={fitDropdownToViewport}
+                >
+                  <Link
+                    href={link.href}
+                    id="nav-link-tools"
+                    className="px-2.5 xl:px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
+                  >
+                    {link.label}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </Link>
+                  <div data-nav-dropdown className="absolute left-0 top-full z-50 w-[min(24rem,calc(100vw-2rem))] translate-x-[var(--dd-shift,0px)] pt-2 opacity-0 invisible translate-y-2 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                    <div className="rounded-2xl border border-gray-300 bg-gray-50 backdrop-blur-xl shadow-2xl p-3">
+                      <p className="px-2 pt-1 pb-2 text-xs tracking-[0.2em] uppercase text-gray-500">
+                        Free Tools
+                      </p>
+                      {TOOLS.map((tool) => (
+                        <Link
+                          key={tool.href}
+                          href={tool.href}
+                          className="flex items-start gap-3 rounded-xl p-3 transition-colors duration-200 hover:bg-red-200/50 focus-ring"
+                        >
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-600 text-white">
+                            <ToolIcon icon={tool.icon} className="h-4.5 w-4.5" />
+                          </span>
+                          <span>
+                            <span className="block text-sm font-semibold text-gray-900">{tool.title}</span>
+                            <span className="block text-xs text-gray-600">{tool.summary}</span>
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </li>
+              );
+            }
+
             if (link.label === "Brands") {
               return (
                 <li
@@ -690,7 +746,7 @@ export default function Navbar() {
                   <Link
                     href="/#clients"
                     id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
+                    className="px-2.5 xl:px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring inline-flex items-center gap-1"
                   >
                     {link.label}
                     <svg
@@ -745,7 +801,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                  className="px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring"
+                  className="whitespace-nowrap px-2.5 xl:px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-600! rounded-lg transition-colors duration-200 focus-ring"
                 >
                   {link.label}
                 </Link>
@@ -792,10 +848,10 @@ export default function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat with us on WhatsApp"
-          className="hidden md:inline-flex h-11 items-center gap-2 rounded-full bg-[#25D366] px-5 text-sm font-semibold text-white! shadow-[0_6px_18px_rgba(37,211,102,0.35)] transition-colors hover:bg-[#1fb457]"
+          className="hidden md:inline-flex h-11 items-center gap-2 rounded-full bg-[#25D366] px-5 lg:px-3 xl:px-5 text-sm font-semibold text-white! shadow-[0_6px_18px_rgba(37,211,102,0.35)] transition-colors hover:bg-[#1fb457]"
         >
           <WhatsAppGlyph className="h-5 w-5" />
-          WhatsApp
+          <span className="lg:hidden xl:inline">WhatsApp</span>
         </a>
 
         {/* ── Mobile Menu Toggle ── */}
@@ -936,6 +992,28 @@ export default function Navbar() {
                       </div>
                     </div>
                   </div>
+                </div>
+              );
+            }
+
+            // ── Tools: both tools listed directly ──
+            if (link.label === "Tools") {
+              return (
+                <div key={link.href} className="px-1 py-1">
+                  <p className="px-3 pt-2 pb-1 text-[10px] tracking-[0.2em] uppercase text-gray-400 font-semibold">
+                    Free Tools
+                  </p>
+                  {TOOLS.map((tool) => (
+                    <Link
+                      key={tool.href}
+                      href={tool.href}
+                      onClick={closeMobileMenu}
+                      className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-base font-medium text-gray-700 hover:bg-gray-200 hover:text-red-600"
+                    >
+                      <ToolIcon icon={tool.icon} className="h-4.5 w-4.5 text-red-600" />
+                      {tool.title}
+                    </Link>
+                  ))}
                 </div>
               );
             }

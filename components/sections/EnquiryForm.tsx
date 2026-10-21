@@ -72,6 +72,8 @@ type EnquiryFormProps = {
   submitLabel?: string;
   /** Put every field on its own row (for wider, standalone layouts). */
   stacked?: boolean;
+  /** Extra context sent with the enquiry (e.g. a calculator configuration). */
+  attachment?: string;
 };
 
 const inputClass = (hasError?: boolean) =>
@@ -95,6 +97,7 @@ export default function EnquiryForm({
   defaultService = "",
   submitLabel = "Get Free Quote",
   stacked = false,
+  attachment = "",
 }: EnquiryFormProps) {
   const [formData, setFormData] = useState({ ...EMPTY_FORM, service: defaultService });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -193,6 +196,7 @@ export default function EnquiryForm({
       service ? `Service: ${service.label}` : "",
       formData.propertyType ? `Property: ${formData.propertyType}` : "",
       formData.budget ? `Budget: ${formData.budget}` : "",
+      attachment,
       formData.message.trim(),
     ]
       .filter(Boolean)

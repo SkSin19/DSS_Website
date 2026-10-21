@@ -229,6 +229,12 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                 >
                   View specs
                 </Link>
+                <Link
+                  href={`/tools/compare-products?products=${encodeURIComponent(product.slug)}`}
+                  className="inline-flex items-center justify-center rounded-full border border-gray-300 bg-transparent px-4 py-2 text-sm font-semibold text-black! hover:border-red-600 transition-colors"
+                >
+                  Compare
+                </Link>
               </div>
               <AskAiButton
                 label="Ask AI about this product"

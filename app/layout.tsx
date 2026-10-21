@@ -21,27 +21,23 @@ import {
   SERVICE_AREAS,
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { Playfair_Display, Inter, Poppins } from "next/font/google";
+import { Playfair_Display, Poppins } from "next/font/google";
 
+// Only used for section titles (font-semibold); load just that weight.
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["600"],
   variable: "--font-playfair",
   display: "swap",
 });
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-poppins",
   display: "swap",
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 // Robust SEO metadata
@@ -150,10 +146,10 @@ export default function RootLayout({
         legalName: SITE_NAME,
         alternateName: "DSS",
         slogan: "Surety of Security",
-        image: `${SITE_URL}/images/logo/dss_logo.png`,
+        image: `${SITE_URL}/images/logo/dss_logo.webp`,
         logo: {
           "@type": "ImageObject",
-          url: `${SITE_URL}/images/logo/dss_logo.png`,
+          url: `${SITE_URL}/images/logo/dss_logo.webp`,
         },
         url: SITE_URL,
         telephone: SITE_PHONE,
@@ -272,7 +268,6 @@ export default function RootLayout({
           "min-h-screen flex flex-col bg-white text-gray-900 overflow-x-hidden selection:bg-red-100 selection:text-gray-900",
           geist.variable,
           playfair.variable,
-          inter.variable,
           poppins.variable,
         )}
         suppressHydrationWarning

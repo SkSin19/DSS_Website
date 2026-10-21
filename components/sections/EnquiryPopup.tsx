@@ -68,10 +68,14 @@ const EnquiryPopup: React.FC = () => {
     };
   }, []);
 
-  // Load the Turnstile script once (shared id with the rest of the site).
+  // Load the Turnstile script the first time the popup opens (shared id with
+  // the rest of the site), not on every page load.
   useEffect(() => {
-    if (document.getElementById("cf-turnstile-script")) {
-      setTurnstileReady(true);
+    if (!open) return;
+    const existing = document.getElementById("cf-turnstile-script");
+    if (existing) {
+      if (window.turnstile) setTurnstileReady(true);
+      else existing.addEventListener("load", () => setTurnstileReady(true), { once: true });
       return;
     }
     const script = document.createElement("script");
@@ -81,7 +85,7 @@ const EnquiryPopup: React.FC = () => {
     script.defer = true;
     script.onload = () => setTurnstileReady(true);
     document.head.appendChild(script);
-  }, []);
+  }, [open]);
 
   // Render the widget only while the popup is open (and not on the success screen).
   useEffect(() => {

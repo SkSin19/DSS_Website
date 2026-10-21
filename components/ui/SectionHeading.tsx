@@ -37,7 +37,7 @@ export default function SectionHeading({
       </h2>
 
       <p
-        className={`font-inter text-base md:text-lg font-medium leading-relaxed max-w-2xl ${subtitleColor}`}
+        className={`font-sans text-base md:text-lg font-medium leading-relaxed max-w-2xl ${subtitleColor}`}
       >
         {subtitle}
       </p>

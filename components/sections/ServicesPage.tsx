@@ -55,7 +55,7 @@ const SERVICES: ServiceItem[] = [
     description: "Secure door controllers, locks and credentials for access management.",
     backDescription: "Regulate and monitor entry to your premises. From single doors to complex multi-site business facilities using advanced digital credentials.",
     highlights: ["Keycard & PIN entry", "Electromagnetic locks", "Time-based access rules", "Detailed entry logs"],
-    imageSrc: "/images/categories/access-control-smart-entry.png",
+    imageSrc: "/images/categories/access-control-smart-entry.webp",
     imageAlt: "Access Control entry systems",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
@@ -71,7 +71,7 @@ const SERVICES: ServiceItem[] = [
     description: "Accurate identification for secure access and attendance logs.",
     backDescription: "Streamline workforce management with cutting-edge biometric systems. Ensure accurate attendance tracking and access control.",
     highlights: ["Fingerprint & face recognition", "Cloud-based attendance logs", "Multi-location support", "Payroll integration ready"],
-    imageSrc: "/images/services/biometric-attendance.png",
+    imageSrc: "/images/services/biometric-attendance.webp",
     imageAlt: "Biometric attendance machine",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
@@ -87,7 +87,7 @@ const SERVICES: ServiceItem[] = [
     description: "Advanced CCTV systems for complete surveillance and peace of mind.",
     backDescription: "Keep a watchful eye on your home or business with high-definition CCTV systems. Enjoy remote viewing, motion notifications, and secure local or cloud storage.",
     highlights: ["High-definition cameras (4K)", "Night vision & infrared", "Remote mobile view 24/7", "Smart search & playback"],
-    imageSrc: "/images/categories/video-security-cctv-systems.png",
+    imageSrc: "/images/categories/video-security-cctv-systems.webp",
     imageAlt: "Video Security Systems setup",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
@@ -103,7 +103,7 @@ const SERVICES: ServiceItem[] = [
     description: "Automate your gates for secure and convenient access.",
     backDescription: "Upgrade your entry with motorized gate systems. Sliding, swing, or boom barriers with remote and sensor controls.",
     highlights: ["Sliding & swing motors", "Remote & sensor operation", "Vehicle detection systems", "Emergency manual override"],
-    imageSrc: "/images/services/gate-automation.png",
+    imageSrc: "/images/services/gate-automation.webp",
     imageAlt: "Gate automation system with remote",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
@@ -119,7 +119,7 @@ const SERVICES: ServiceItem[] = [
     description: "Smart detection, instant alerts and reliable protection.",
     backDescription: "Intelligent intrusion detection with motion sensors, door contacts, and smart hubs for 24/7 real-time monitoring.",
     highlights: ["Motion & door sensors", "24/7 real-time monitoring", "Wireless smart alarm hubs", "Instant push notifications"],
-    imageSrc: "/images/services/intrusion-alarm.png",
+    imageSrc: "/images/services/intrusion-alarm.webp",
     imageAlt: "Intrusion alarm security system",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
@@ -138,7 +138,7 @@ const OTHER_SERVICES: ServiceItem[] = [
     description: "EPABX, IPABX & FTTH solutions, Cat6 cabling, UPS backups and solar power.",
     backDescription: "Build a resilient data backbone, telecom system, and backup power system. We integrate EPABX/IPABX, FTTH fiber networks, structured cabling, UPS backups, and solar power.",
     highlights: ["EPABX, IPABX & FTTH systems", "UPS battery backup systems", "Solar power integration", "Fiber optic ring networks"],
-    imageSrc: "/images/services/networking-and-power.png",
+    imageSrc: "/images/services/networking-and-power.webp",
     imageAlt: "Server wires and solar power inverter setup",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
@@ -170,7 +170,7 @@ const OTHER_SERVICES: ServiceItem[] = [
     description: "See, speak and unlock from anywhere with a connected intercom.",
     backDescription: "Identify visitors before opening the door. Engage in high-clarity two-way audio and view live video, all managed from a sleek indoor monitor or your phone.",
     highlights: ["Two-way audio & HD video", "Remote door unlock", "Missed call logs & photos", "Mobile app integration"],
-    imageSrc: "/images/categories/intercom-communication-solutions.png",
+    imageSrc: "/images/categories/intercom-communication-solutions.webp",
     imageAlt: "Video door phone indoor station",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
@@ -186,7 +186,7 @@ const OTHER_SERVICES: ServiceItem[] = [
     description: "Professional audio-visual and public address setups for clear communication.",
     backDescription: "High-fidelity public address systems, mixers, wall speakers, amplifiers, and AV controls tailored for corporate workspaces, venues, and classrooms.",
     highlights: ["PA speakers & audio mixers", "Clear voice amplification", "Integrated AV controls", "Wireless microphones"],
-    imageSrc: "/images/services/pa-systems-and-av.png",
+    imageSrc: "/images/services/pa-systems-and-av.webp",
     imageAlt: "PA System and AV equipment setup",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
@@ -675,7 +675,7 @@ export default function ServicesPage() {
             {/* Right side image */}
             <div className="flex-1 relative min-h-75 md:min-h-100">
               <Image
-                src="/images/general/technicians_installing_camera.png"
+                src="/images/general/technicians_installing_camera.webp"
                 alt="Professional technicians installing dome security camera"
                 fill
                 className="object-cover"

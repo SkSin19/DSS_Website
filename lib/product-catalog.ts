@@ -38,7 +38,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "360° surveillance with smart tracking, night vision and real-time alerts.",
     description:
       "A placeholder product detail page for a high-mobility PTZ camera. Replace the copy, specs, and media later with backend data.",
-    heroImageSrc: "/images/hero/cctv-cameras-surveillance-systems-slide-1.png",
+    heroImageSrc: "/images/hero/cctv-cameras-surveillance-systems-slide-1.webp",
     heroImageAlt: "Smart PTZ Camera placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -49,7 +49,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "See, speak and unlock from anywhere with a connected door phone system.",
     description:
       "Placeholder details for a modern video door phone. This layout is ready to receive live product data later.",
-    heroImageSrc: "/images/categories/intercom-communication-solutions.png",
+    heroImageSrc: "/images/categories/intercom-communication-solutions.webp",
     heroImageAlt: "Video Door Phone placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -60,7 +60,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "Advanced access solutions with PIN, card and biometric options.",
     description:
       "Placeholder content for an access control product. Use this route as the template for backend-driven product detail pages.",
-    heroImageSrc: "/images/categories/access-control-smart-entry.png",
+    heroImageSrc: "/images/categories/access-control-smart-entry.webp",
     heroImageAlt: "Access Control System placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -71,7 +71,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "Easy to install, always connected and built to protect what matters most.",
     description:
       "Placeholder alarm kit detail content. This page structure matches the final backend-fed product layout.",
-    heroImageSrc: "/images/categories/intrusion-alarm-detection.png",
+    heroImageSrc: "/images/categories/intrusion-alarm-detection.webp",
     heroImageAlt: "Wireless Alarm Kit placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -82,7 +82,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "Control lights, appliances, security and more from anywhere.",
     description:
       "Placeholder home automation page with a product-first layout, ready to connect to the backend later.",
-    heroImageSrc: "/images/hero/advanced-digital-security-cameras-slide-2.png",
+    heroImageSrc: "/images/hero/advanced-digital-security-cameras-slide-2.webp",
     heroImageAlt: "Home Automation placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -93,7 +93,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "Accurate identification for secure access and attendance.",
     description:
       "Placeholder biometric attendance detail screen. Replace the section content with live fields later.",
-    heroImageSrc: "/images/categories/access-control-smart-entry.png",
+    heroImageSrc: "/images/categories/access-control-smart-entry.webp",
     heroImageAlt: "Biometric Attendance placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -104,7 +104,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "Automate your gates for seamless and secure entry.",
     description:
       "Placeholder gate automation detail page with the same product flow and section order you requested.",
-    heroImageSrc: "/images/banners/godrej_banner.png",
+    heroImageSrc: "/images/banners/godrej_banner.webp",
     heroImageAlt: "Gate Automation placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -115,7 +115,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "Modern access control with secure, convenient smart locking.",
     description:
       "Placeholder smart lock page with a clean structure that can later be fed directly from the backend.",
-    heroImageSrc: "/images/categories/access-control-smart-entry.png",
+    heroImageSrc: "/images/categories/access-control-smart-entry.webp",
     heroImageAlt: "Smart Lock System placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -126,7 +126,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "Smart detection, instant alerts and reliable protection.",
     description:
       "Placeholder intrusion alarm page. Replace the text, specs and images later from the backend.",
-    heroImageSrc: "/images/categories/intrusion-alarm-detection.png",
+    heroImageSrc: "/images/categories/intrusion-alarm-detection.webp",
     heroImageAlt: "Intrusion Alarm placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -137,7 +137,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "Advanced CCTV systems for complete surveillance and peace of mind.",
     description:
       "Placeholder category page for video security products, built to support backend product data later.",
-    heroImageSrc: "/images/categories/video-security-cctv-systems.png",
+    heroImageSrc: "/images/categories/video-security-cctv-systems.webp",
     heroImageAlt: "Video Security placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -148,7 +148,7 @@ const productDefinitions: Record<string, Omit<ProductPageData, "slug">> = {
     summary: "Smart intercoms for clear communication and enhanced security.",
     description:
       "Placeholder intercom solutions page. This content will be swapped with live data from the backend later.",
-    heroImageSrc: "/images/categories/intercom-communication-solutions.png",
+    heroImageSrc: "/images/categories/intercom-communication-solutions.webp",
     heroImageAlt: "Intercom Solutions placeholder",
     highlights: sharedHighlights,
     specs: sharedSpecSet,
@@ -179,7 +179,7 @@ export function getProductPageData(slug: string): ProductPageData {
     summary: "Placeholder product summary awaiting backend content.",
     description:
       "This dynamic route is ready for future backend-driven product details and specifications.",
-    heroImageSrc: "/images/hero/cctv-cameras-surveillance-systems-slide-1.png",
+    heroImageSrc: "/images/hero/cctv-cameras-surveillance-systems-slide-1.webp",
     heroImageAlt: `${friendlyTitle} placeholder`,
     highlights: sharedHighlights,
     specs: sharedSpecSet,

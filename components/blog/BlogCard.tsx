@@ -21,7 +21,7 @@ export default function BlogCard({ post, headingLevel = "h2", priority = false }
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-          priority={priority}
+          preload={priority}
         />
       </Link>
       <div className="flex flex-1 flex-col p-5">

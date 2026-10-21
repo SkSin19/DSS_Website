@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AskAiButton from "@/components/chat/AskAiButton";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
+import { preload } from "react-dom";
 import {
   ShieldCheck,
   Phone,
@@ -15,6 +16,18 @@ import {
   SITE_WHATSAPP_URL,
 } from "@/lib/constants";
 
+// Desktop-only backdrop behind the form. Phones get a 1px blank via <picture>
+// so they never download it; desktops preload it because it's the LCP image.
+const HERO_IMAGE = "/images/hero/hero-security-showcase-business.webp";
+const BLANK_PIXEL = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+const { props: heroImageProps } = getImageProps({
+  src: HERO_IMAGE,
+  alt: "",
+  fill: true,
+  sizes: "(max-width: 1024px) 100vw, 45vw",
+  loading: "eager",
+});
+
 const yearsExperience = new Date().getFullYear() - FOUNDING_YEAR;
 const phoneDisplay = CONTACT_INFO.find((c) => c.icon === "phone")?.value ?? SITE_PHONE;
 
@@ -28,22 +41,22 @@ const SERVICES = [
   {
     label: "CCTV & Surveillance",
     href: "/products?category=Surveillance",
-    image: "/images/categories/video-security-cctv-systems.png",
+    image: "/images/categories/video-security-cctv-systems.webp",
   },
   {
     label: "Access Control",
     href: "/products?category=Access%20Control",
-    image: "/images/categories/access-control-smart-entry.png",
+    image: "/images/categories/access-control-smart-entry.webp",
   },
   {
     label: "Biometric Attendance",
     href: "/products?category=Biometric%20%26%20Identity",
-    image: "/images/services/biometric-attendance.png",
+    image: "/images/services/biometric-attendance.webp",
   },
   {
     label: "Gate Automation",
     href: "/solutions",
-    image: "/images/services/gate-automation.png",
+    image: "/images/services/gate-automation.webp",
   },
 ];
 
@@ -67,6 +80,8 @@ function WhatsAppIcon({ className }: { className?: string }) {
  * server so the H1 and copy are in the initial HTML for search engines.
  */
 export default function HeroEnquiry() {
+  preload(HERO_IMAGE, { as: "image", fetchPriority: "high", media: "(min-width: 768px)" });
+
   return (
     <section
       aria-labelledby="hero-heading"
@@ -192,14 +207,11 @@ export default function HeroEnquiry() {
 
         {/* ── RIGHT: enquiry form ── */}
         <div id="enquiry" className="relative hidden md:flex scroll-mt-36 items-center justify-center px-4 py-10 sm:px-6 md:py-14 lg:px-10 lg:py-16">
-          <Image
-            src="/images/hero/hero-security-showcase-business.webp"
-            alt=""
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 45vw"
-            className="object-cover object-center"
-          />
+          <picture>
+            <source media="(max-width: 767px)" srcSet={BLANK_PIXEL} />
+            {/* eslint-disable-next-line jsx-a11y/alt-text -- alt comes from getImageProps */}
+            <img {...heroImageProps} fetchPriority="high" className="object-cover object-center" />
+          </picture>
           <div aria-hidden="true" className="absolute inset-0 bg-gray-950/30" />
           <div aria-hidden="true" className="absolute inset-0 bg-linear-to-br from-red-900/20 via-transparent to-gray-950/25" />
           <div className="relative w-full max-w-[480px] rounded-2xl border border-gray-200 bg-white p-5 shadow-[0_24px_60px_rgba(17,24,39,0.18)] sm:p-7 lg:border-white/60">

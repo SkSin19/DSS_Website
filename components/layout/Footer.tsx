@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight, MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
 import AskAiButton from "@/components/chat/AskAiButton";
+import LazyMap from "@/components/layout/LazyMap";
 import {
   SITE_NAME,
   SITE_ADDRESS,
@@ -88,7 +89,7 @@ export default function Footer() {
               className="inline-flex rounded-xl bg-white px-3 py-2 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <Image
-                src="/images/logo/dss_logo.png"
+                src="/images/logo/dss_logo.webp"
                 alt={`${SITE_NAME} logo`}
                 width={240}
                 height={96}
@@ -180,13 +181,7 @@ export default function Footer() {
           <div>
             <FooterHeading>Office Location</FooterHeading>
             <div className="overflow-hidden rounded-xl border border-white/20 bg-white/10">
-              <iframe
-                src={MAP_EMBED_URL}
-                title={`${SITE_NAME} location on Google Maps`}
-                className="block h-40 w-full"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              <LazyMap src={MAP_EMBED_URL} title={`${SITE_NAME} location on Google Maps`} className="h-40 w-full" />
             </div>
             <a
               href={SITE_MAP_URL}

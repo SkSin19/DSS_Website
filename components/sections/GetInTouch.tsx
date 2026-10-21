@@ -22,8 +22,8 @@ declare global {
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 const IMAGES = [
-  { src: "/images/general/PUBLIC_NEXT_GET_IN_TOUCH.png", alt: "Smart security home", showOverlay: true },
-  { src: "/images/general/PUBLIC_NEXT_GET_IN_TOUCH_BUSINESS.jpg", alt: "Smart security business", showOverlay: false },
+  { src: "/images/general/PUBLIC_NEXT_GET_IN_TOUCH.webp", alt: "Smart security home", showOverlay: true },
+  { src: "/images/general/PUBLIC_NEXT_GET_IN_TOUCH_BUSINESS.webp", alt: "Smart security business", showOverlay: false },
 ];
 
 const sanitizeName    = (v: string) => v.replace(/[\x00-\x1F<>]/g, "").slice(0, 100);
@@ -173,7 +173,7 @@ const GetInTouch: React.FC = () => {
               key={img.src}
               className={`absolute inset-0 transition-opacity duration-1000 ${currentImageIndex === idx ? "opacity-100 z-10" : "opacity-0 z-0"}`}
             >
-              <Image src={img.src} alt={img.alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-center" unoptimized priority={idx === 0} />
+              <Image src={img.src} alt={img.alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-center" unoptimized preload={idx === 0} />
             </div>
           ))}
         </div>

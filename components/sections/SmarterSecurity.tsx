@@ -109,7 +109,7 @@ export default function SmarterSecurity() {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-red-100 via-gray-50 to-gray-100 -z-10"></div>
 
                 <Image
-                  src="/images/hero/cctv-cameras-surveillance-systems-slide-1.png"
+                  src="/images/hero/cctv-cameras-surveillance-systems-slide-1.webp"
                   alt="Security showcase"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"

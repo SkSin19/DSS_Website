@@ -110,9 +110,14 @@ export default function EnquiryForm({
   const [turnstileReady, setTurnstileReady] = useState(false);
   const turnstileRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  // Turnstile is only fetched once the visitor starts using the form, so pages
+  // with a form don't pay for Cloudflare's script on every load.
+  const [wantsTurnstile, setWantsTurnstile] = useState(false);
+  const startTurnstile = () => setWantsTurnstile(true);
 
   // Load script once (shared with any other form on the page)
   useEffect(() => {
+    if (!wantsTurnstile) return;
     const existing = document.getElementById("cf-turnstile-script");
     if (existing) {
       if (window.turnstile) setTurnstileReady(true);
@@ -126,7 +131,7 @@ export default function EnquiryForm({
     script.defer = true;
     script.onload = () => setTurnstileReady(true);
     document.head.appendChild(script);
-  }, []);
+  }, [wantsTurnstile]);
 
   // Render widget when ready (and again after "Submit another")
   useEffect(() => {
@@ -268,7 +273,13 @@ export default function EnquiryForm({
   const id = (name: string) => `${idPrefix}-${name}`;
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3.5">
+    <form
+      onSubmit={handleSubmit}
+      onFocus={startTurnstile}
+      onPointerDown={startTurnstile}
+      noValidate
+      className="flex flex-col gap-3.5"
+    >
       <div className="flex flex-col gap-1.5">
         <label htmlFor={id("fullName")} className={labelClass}>
           Full Name <span className="text-red-600">*</span>

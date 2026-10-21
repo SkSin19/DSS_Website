@@ -119,7 +119,7 @@ export default function PremiumDesign() {
             {/* Product Composition */}
             <div className="absolute inset-0 z-0">
               <Image
-                src="/images/general/premium_design_card_bg_image.png"
+                src="/images/general/premium_design_card_bg_image.webp"
                 alt="Premium Security Composition"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

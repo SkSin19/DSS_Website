@@ -195,7 +195,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                             fill
                             sizes="112px"
                             quality={58}
-                            priority={getProductImagePriority(index)}
+                            preload={getProductImagePriority(index)}
                             className="object-contain drop-shadow-lg"
                           />
                         </div>
@@ -237,7 +237,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                               fill
                               sizes="(max-width: 1279px) 50vw, 33vw"
                               quality={58}
-                              priority={getProductImagePriority(index)}
+                              preload={getProductImagePriority(index)}
                               className="object-contain drop-shadow-lg"
                             />
                           </div>

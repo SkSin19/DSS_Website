@@ -53,7 +53,7 @@ function BrandCard({ brand, priority }: { brand: (typeof BRANDS)[number]; priori
               fill
               sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 25vw"
               className="object-cover object-center"
-              priority={priority}
+              preload={priority}
             />
           </div>
           {/* Subtle dark overlay on hover */}

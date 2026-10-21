@@ -30,7 +30,7 @@ export default function ProductImageGallery({ images, alt = "product image", int
 
   const goTo = (i: number) => setIndex(((i % images.length) + images.length) % images.length);
 
-  const mainImage = images[index] || images[0] || "/images/placeholder.png";
+  const mainImage = images[index] || images[0] || "/images/logo/dss_logo_bg_removed.webp";
 
   const thumbnailItems = images.map((src, i) => ({ src, i })).filter((it) => it.i !== index);
   const visibleThumbnails = thumbnailItems.slice(0, 3);

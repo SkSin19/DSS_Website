@@ -130,7 +130,7 @@ export default function AboutUs() {
           {/* Background image on the right */}
           <div className="absolute right-0 top-0 bottom-0 w-full md:w-[55%] z-0 h-full min-h-62.5 md:min-h-auto">
             <Image
-              src="/images/general/PUBLIC_NEXT_GET_IN_TOUCH.png"
+              src="/images/general/PUBLIC_NEXT_GET_IN_TOUCH.webp"
               alt="Trusted security solutions"
               fill
               className="object-cover object-center"

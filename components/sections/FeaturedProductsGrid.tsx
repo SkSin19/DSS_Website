@@ -19,7 +19,7 @@ const getProductImage = (product: BackendProduct) => {
   if (isValidImage(product.featuredImage)) return product.featuredImage!;
   const first = product.images?.find((img) => isValidImage(img?.url));
   if (first?.url) return first.url;
-  return "/images/hero/cctv-cameras-surveillance-systems-slide-1.png";
+  return "/images/hero/cctv-cameras-surveillance-systems-slide-1.webp";
 };
 
 function ProductCard({
@@ -61,7 +61,7 @@ function ProductCard({
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             className="object-contain mix-blend-multiply"
-            priority={index < 3}
+            preload={index < 3}
           />
         </div>
       </div>

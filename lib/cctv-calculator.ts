@@ -92,6 +92,26 @@ export const PROPERTY_DEFAULTS: Record<PropertyType, Partial<CalculatorInput>> =
   factory: { areaPerFloor: 20000, floors: 1, gates: 2, parking: true, perimeter: "full" },
 };
 
+/** Starting answers for a property type (4MP, IR night vision, 30 days, no extras). */
+export function defaultInputFor(propertyType: PropertyType): CalculatorInput {
+  return {
+    propertyType,
+    areaPerFloor: 1500,
+    floors: 1,
+    gates: 1,
+    parking: false,
+    perimeter: "none",
+    resolution: "4MP",
+    nightVision: "ir",
+    recordingDays: 30,
+    faceRecognition: false,
+    anpr: false,
+    vehicleGates: 1,
+    powerBackup: false,
+    ...PROPERTY_DEFAULTS[propertyType],
+  };
+}
+
 // Floor area one indoor camera covers, and average cable run per camera.
 const COVERAGE_SQFT: Record<PropertyType, number> = {
   flat: 450, house: 500, shop: 350, office: 600, school: 700, society: 900, factory: 1500,

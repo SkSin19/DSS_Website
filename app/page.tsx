@@ -11,6 +11,7 @@ import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import LatestBlogs from "@/components/sections/LatestBlogs";
 import OurClients from "@/components/sections/OurClients";
 import SecureToday from "@/components/sections/SecureToday";
+import PlanningTools from "@/components/sections/PlanningTools";
 import { buildPageMetadata } from "@/lib/seo";
 
 // The home page is the site's primary/canonical entry point. An explicit
@@ -46,6 +47,7 @@ export default function Home() {
         <ProductCategories />
       </div>
       <OurClients />
+      <PlanningTools />
       <div className="select-none">
         {/* <SmarterSecurity /> */}
         {/* <Bestsellers /> */}
